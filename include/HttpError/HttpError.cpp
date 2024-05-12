@@ -99,7 +99,7 @@ errorinfo    HttpError::initInfo(int id)
         case 416:
             return((errorinfo){416, "Requested Range Not Satisfiable", "", ""});
         case 417:
-            return((errorinfo){417, "Expectations Failed", "Header requests field could not be met."});
+            return((errorinfo){417, "Expectations Failed", "Header requests field could not be met.", ""});
         case 500:
             return((errorinfo){500, "Internal Server Error", "The server encountered an unexpected condition which prevented it from fulfilling the request.", ""});
         case 501:

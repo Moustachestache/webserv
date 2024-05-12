@@ -20,6 +20,7 @@ SRC =		source/main.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
 			include/Route/Route.cpp \
+			include/HttpError/HttpError.cpp \
 			include/Exception/Exception.cpp
 
 
