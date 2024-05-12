@@ -8,6 +8,7 @@
 # include <fstream>
 # include <sstream>
 # include <exception>
+# include <algorithm>
 
 /*		CLASSES		*/
 
@@ -15,5 +16,4 @@
 # include "Server/Server.hpp"
 # include "Route/Route.hpp"
 # include "Exception/Exception.hpp"
-//# include "confKeywords.hpp"
-
+# include "confKeywords.hpp"

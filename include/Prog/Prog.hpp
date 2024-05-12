@@ -15,8 +15,6 @@ class Prog
 
 		void	parseFile( char *filePath );
 
-
-
 	private:
 
 		std::vector < Server * >	_servers;
