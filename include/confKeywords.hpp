@@ -1,5 +1,7 @@
 
-char	*SERVER_KW[] = {
+#pragma once
+
+const char	*SERVER_KW[] = {
 							"SERVER_NAME",
 							"ROOT",
 							"REQUEST_SIZE",
@@ -7,7 +9,7 @@ char	*SERVER_KW[] = {
 							"ERROR_STATUS",
 							"ERROR_LOG"		};
 
-char	*ROUTE_KW[] = {
+const char	*ROUTE_KW[] = {
 							"PATH",
 							"METHOD",
 							"REDIRECTION",
@@ -18,4 +20,3 @@ char	*ROUTE_KW[] = {
 							"SESSION_TIMEOUT",
 							"CGI"
 											};
-
