@@ -4,6 +4,14 @@
 #include <iostream>
 #include <vector>
 
+struct Cgi
+{
+	std::string					name;
+	std::string					path;
+	std::vector < std::string >	extention;
+};
+
+
 class Route
 {
 	public:
@@ -13,14 +21,15 @@ class Route
 
 	private:
 
-		std::string					path;
-		std::vector < std::string >	methods;
-		std::string					redirection;
-		std::string					listing;
-		std::vector < std::string >	defaultPages;
-		bool						allowUpload;
-		std::string					uploadPath;
-		int							sessionTimeout;
+		std::string					_path;
+		std::vector < std::string >	_methods;
+		std::string					_redirection;
+		std::string					_listing;
+		std::vector < std::string >	_defaultPages;
+		bool						_allowUpload;
+		std::string					_uploadPath;
+		int							_sessionTimeout;
+		std::vector < Cgi >			_cgi;
 
 };
 
