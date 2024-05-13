@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/05/13 09:09:45 by gbricot          ###   ########.fr        #
+#    Updated: 2024/05/13 16:23:20 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-unused
 
 SRC =		source/main.cpp \
+			source/parsing.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp
+			
 
 
 OBJ = $(SRC:.cpp=.o)

@@ -1,5 +1,7 @@
 #pragma once
-# include "../main.hpp"
+
+#include <iostream>
+#include <map>
 
 struct  errorinfo {
     int         code;
@@ -20,7 +22,7 @@ class   HttpError
         errorinfo   initInfo(int id);
 
         //      getters and setters
-        const errorinfo &getInfo(int id);
+        const errorinfo getInfo(int id);
         void            addErrorPage(int id, std::string page);
 
     protected:

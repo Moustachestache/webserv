@@ -26,10 +26,10 @@ HttpError   &HttpError::operator=(HttpError &obj)
 
 HttpError::~HttpError()
 {
-    for (std::map < int, errorinfo >::iterator itr = _errorList.begin(); itr != _errorList.end(); itr++)
+/*     for (std::map < int, errorinfo >::iterator itr = _errorList.begin(); itr != _errorList.end(); itr++)
     {
         std::cout << "DEBUG -- " << itr->second.type << "--" << itr->second.file  << std::endl;
-    }
+    } */
 }
 
 void    HttpError::addErrorPage(int id, std::string page)
@@ -37,9 +37,15 @@ void    HttpError::addErrorPage(int id, std::string page)
     _errorList[id].file = page;
 }
 
-const errorinfo   &HttpError::getInfo(int id)
+const errorinfo   HttpError::getInfo(int id)
 {
-    return  (_errorList[id]);
+    
+    for (std::map<int, errorinfo >::iterator it = _errorList.begin(); it != _errorList.end(); it++)
+    {
+        if (it->second.code == id)
+            return (it->second);
+    }
+    return  (initInfo(-1));
 }
 
 errorinfo    HttpError::initInfo(int id)
@@ -89,7 +95,7 @@ errorinfo    HttpError::initInfo(int id)
         case 403:
             return((errorinfo){403, "Forbidden", "The server understood the request, but is refusing to fulfill it.", ""});
         case 404:
-            return((errorinfo){404, "Not Found", "The server has not found anything matching the reauest-URI.", ""});
+            return((errorinfo){404, "Not Found", "The server has not found anything matching the request-URI.", ""});
         case 405:
             return((errorinfo){405, "Method Not Allowed", "The method specified in the Request-Line is not allowed for the resource identified by the Request-URI.", ""});
         case 406:
