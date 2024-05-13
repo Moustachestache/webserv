@@ -9,13 +9,9 @@
 /*   Updated: 2024/05/12 15:51:49 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #pragma once
 
 # include "../main.hpp"
-
-# include <iostream>
-# include <vector>
 
 class	Route;
 
@@ -25,10 +21,10 @@ class	Server
 
 		Server( void );
 		~Server();
-
+		std::string	outputErrorPage(int id, std::string host, std::string server);
 	
 	private:
-
+		HttpError				_httpError;
 		std::string				_host;
 		int						_port;
 		std::string				_serverName;

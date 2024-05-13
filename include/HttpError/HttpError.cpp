@@ -1,15 +1,22 @@
 #include "HttpError.hpp"
 
+int HttpError::ErrNumArray[] = { 100, 101, \
+                            200, 201, 202, 203, 203, 205, 206, \
+                            300, 301, 302, 303, 304, 305, 306, 307, \
+                            400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, \
+                            500, 501, 502, 503, 504, 505, -1};
+
 HttpError::HttpError()
 {
-    for (int i = 0; HTTP_ERR_NUM[i]; i++)
+    for (int i = 0; ErrNumArray[i] != -1; i++)
     {
-        _errorList[HTTP_ERR_NUM[i]] = initInfo(HTTP_ERR_NUM[i]);
+        _errorList[ErrNumArray[i]] = initInfo(ErrNumArray[i]);
     }
 }
 
 HttpError::HttpError(HttpError &obj)
 {
+    (void) obj;
 }
 
 HttpError   &HttpError::operator=(HttpError &obj)
@@ -19,11 +26,20 @@ HttpError   &HttpError::operator=(HttpError &obj)
 
 HttpError::~HttpError()
 {
+    for (std::map < int, errorinfo >::iterator itr = _errorList.begin(); itr != _errorList.end(); itr++)
+    {
+        std::cout << "DEBUG -- " << itr->second.type << "--" << itr->second.file  << std::endl;
+    }
 }
 
-errorinfo   HttpError::getInfo(int)
+void    HttpError::addErrorPage(int id, std::string page)
 {
+    _errorList[id].file = page;
+}
 
+const errorinfo   &HttpError::getInfo(int id)
+{
+    return  (_errorList[id]);
 }
 
 errorinfo    HttpError::initInfo(int id)
@@ -113,5 +129,6 @@ errorinfo    HttpError::initInfo(int id)
         case 505:
             return((errorinfo){505, "HTTP Version Not Supported", "The server does not support the requested HTTP protocol version.", ""});
         default:
-            return ((errorinfo){0, "woops", "this should not happen", ""});
+            return ((errorinfo){0, "woopsie", "this should not have happened", ""});
+    }
 }
