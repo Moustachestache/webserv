@@ -17,3 +17,7 @@
 # include "Route/Route.hpp"
 # include "Exception/Exception.hpp"
 # include "confKeywords.hpp"
+
+/*		FUNCTIONS		*/
+
+std::string	returnFileStr( std::string fileName );
