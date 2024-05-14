@@ -24,12 +24,13 @@ class	Server
 		Server( void );
 		Server( std::string &serverStr );
 		~Server();
-		std::string	outputErrorPage(int id, std::string host, std::string server);
+		std::string	outputErrorPage(int id);
 	
 	private:
 
 		HttpError				_httpError;
 		std::string				_host;
+		std::string				_contact;
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;

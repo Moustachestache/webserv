@@ -38,7 +38,7 @@ void	Prog::getServerStr( std::string &fileContent )
 		fileContent.erase(startPos, endPos);
 		std::cout << "[DEBUG]" << serverStr;
 		Server	*nServer = new Server(serverStr);
-		std::cout << nServer->outputErrorPage(404, "ui", "oue") << std::endl;
+		std::cout << nServer->outputErrorPage(500) << std::endl;
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server");

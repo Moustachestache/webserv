@@ -10,6 +10,7 @@
 # include <exception>
 # include <algorithm>
 # include <map>
+# include <cstdlib>
 
 /*		CLASSES		*/
 
