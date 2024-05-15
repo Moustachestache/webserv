@@ -1,4 +1,5 @@
 #include "HttpError.hpp"
+#include "../Exception/Exception.hpp"
 
 int HttpError::ErrNumArray[] = { 100, 101, \
                             200, 201, 202, 203, 203, 205, 206, \
@@ -34,7 +35,15 @@ HttpError::~HttpError()
 
 void    HttpError::addErrorPage(int id, std::string page)
 {
-    _errorList[id].file = page;
+    for (size_t i = 0; ErrNumArray[i] != -1; i++)
+    {
+        if (id == ErrNumArray[i])
+        {
+            _errorList[id].file = page;
+            return ;
+        }
+    }
+    throw WrongHttpErrorNumber();
 }
 
 const errorinfo   HttpError::getInfo(int id)

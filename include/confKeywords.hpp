@@ -8,7 +8,8 @@ static const char *SERVER_KW[] = {	"SERVER_NAME", \
 									"REQUEST_SIZE", \
 									"ROUTE", \
 									"ERROR_STATUS", \
-									"ERROR_LOG"	};
+									"ERROR_LOG", \
+									"CONTACT"	};
 
 # define NB_ROUTE_KW	9
 

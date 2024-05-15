@@ -19,6 +19,7 @@ class Route
 	public:
 
 		Route( void );
+		Route( std::string &routeStr );
 		~Route();
 
 	private:

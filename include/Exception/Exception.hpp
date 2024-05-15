@@ -35,6 +35,29 @@ class	BracketsError : public std::exception
 			virtual const char* what( void ) const throw();
 };
 
+class	WrongHeader : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	WrongVariableAssignment : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	WrongHttpErrorNumber : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
 
 
 

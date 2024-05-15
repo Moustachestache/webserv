@@ -33,12 +33,12 @@ void	Prog::getServerStr( std::string &fileContent )
 	while (startPos != std::string::npos)
 	{
 		size_t	endPos = getChunkEnd(fileContent, startPos);
-		std::cout << "[DEBUG]" << startPos << " - " << endPos << std::endl;
+		//std::cout << "[DEBUG]" << startPos << " - " << endPos << std::endl;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
 		std::cout << "[DEBUG]" << serverStr;
 		Server	*nServer = new Server(serverStr);
-		std::cout << nServer->outputErrorPage(500) << std::endl;
+		std::cout << nServer->outputErrorPage(404) << std::endl;
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server");
@@ -51,5 +51,6 @@ void	Prog::parseFile( char *filePath )
 
 	removeComment( fileContent );
 	getServerStr( fileContent );
-	
+	if (!_servers.size())
+		throw NoServerFound();
 }
