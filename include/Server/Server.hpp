@@ -14,6 +14,7 @@
 
 # include "../main.hpp"
 # include "../HttpError/HttpError.hpp"
+# include "../TcpServer/TcpServer.hpp"
 
 class	Route;
 
@@ -25,16 +26,19 @@ class	Server
 		Server( std::string &serverStr );
 		~Server();
 		std::string	outputErrorPage(int id);
+		void	ServerListen();
+		void	ServerAnswer();
 	
-	private:
-
+	protected:
+		TcpServer				_tcpServer;
 		HttpError				_httpError;
-		std::string				_host;
+		std::string				_ip;
 		std::string				_contact;
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
 		int						_requestSize;
+		int						_maxConnections;
 		std::vector< Route >	_route;
 
 };

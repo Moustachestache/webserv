@@ -35,6 +35,50 @@ class	BracketsError : public std::exception
 			virtual const char* what( void ) const throw();
 };
 
+class	SocketError : public std::exception
+{
 
+		public:
 
+			virtual const char* what( void ) const throw();
+};
 
+class	ConnectError : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	ListenFailed : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	NewSocketError : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	IncomingBytesFailed : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	AnswerFailure : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
