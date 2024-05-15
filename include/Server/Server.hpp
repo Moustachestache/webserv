@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/15 14:09:36 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/15 14:27:50 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,25 @@
 # include <fstream>
 # include <sstream>
 
-std::string	returnFileStr( std::string fileName );
-
-
-size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
-size_t	getNextBracket( std::string &fileContent, size_t pos);
-size_t	getChunkEnd( std::string &fileContent, size_t pos );
+//# include "../main.hpp"
 
 # include "../HttpError/HttpError.hpp"
 # include "../Exception/Exception.hpp"
 # include "../Route/Route.hpp"
+
+template < typename V >
+void	assignSingleValue( std::istringstream &iss, V &to_assign )
+{
+	std::string	sep;
+	V word;
+	if (!(iss >> sep))
+		throw WrongVariableAssignment();
+	else if (sep.compare("="))
+		throw WrongVariableAssignment();
+	else if (!(iss >> word))
+		throw WrongVariableAssignment();
+	to_assign = word;
+}
 
 class	Route;
 
@@ -65,3 +74,4 @@ class	Server
 		std::string				_errorLog; //lol
 
 };
+

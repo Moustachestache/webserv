@@ -4,6 +4,12 @@
 #include <iostream>
 #include <vector>
 
+std::string	returnFileStr( std::string fileName );
+
+size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
+size_t	getNextBracket( std::string &fileContent, size_t pos);
+size_t	getChunkEnd( std::string &fileContent, size_t pos );
+
 struct Cgi
 {
 	std::string					name;
