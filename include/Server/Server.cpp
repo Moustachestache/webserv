@@ -154,7 +154,7 @@ void	Server::getAllVariables( std::string &serverStr )
 }
 
 std::string Server::outputErrorPage(int id)
-{
+{std::cout << "test" << returnFileStr(_httpError.getInfo(id).file.c_str()) << std::endl;
 	std::string strFile = returnFileStr(_httpError.getInfo(id).file.c_str());
 	if (strFile.empty())
 	{
@@ -172,5 +172,6 @@ std::string Server::outputErrorPage(int id)
 		strFile.append(_contact);
 		strFile.append("</body></html>");
 	}
+	std::cout << strFile << std::endl;
 	return strFile;
 }
