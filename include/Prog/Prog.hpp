@@ -3,7 +3,7 @@
 
 # include "../main.hpp"
 
-class	Server;
+class	TcpServer;
 
 class Prog
 {
@@ -21,6 +21,6 @@ class Prog
 		void	removeComment( std::string &fileContent );
 		void	getServerStr( std::string &fileContent );
 
-		std::vector < Server * >	_servers;
+		std::vector < TcpServer * >	_servers;
 
 };

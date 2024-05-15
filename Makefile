@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/05/14 09:23:17 by gbricot          ###   ########.fr        #
+#    Updated: 2024/05/15 13:49:02 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC =		source/main.cpp \
 			source/parsing.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
+			include/TcpServer/TcpServer.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp

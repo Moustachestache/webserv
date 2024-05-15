@@ -8,14 +8,14 @@ Prog::Prog( void )
 
 Prog::~Prog()
 {
-	for (std::vector< Server * >::iterator it = _servers.begin(); it != _servers.end(); it++)
+	for (std::vector< TcpServer * >::iterator it = _servers.begin(); it != _servers.end(); it++)
 		delete *it;
 }
 
 std::string	Prog::getServerStrDebug( void )
 {
 	std::string	res;
-	for (std::vector< Server * >::iterator it = _servers.begin(); it != _servers.end(); it++)
+	for (std::vector< TcpServer * >::iterator it = _servers.begin(); it != _servers.end(); it++)
 		res.append((*it)->getVarStr());
 	return (res);
 	
@@ -45,7 +45,7 @@ void	Prog::getServerStr( std::string &fileContent )
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
 		//std::cout << "[DEBUG]" << serverStr;
-		Server	*nServer = new Server(serverStr);
+		TcpServer	*nServer = new TcpServer(serverStr);
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server");

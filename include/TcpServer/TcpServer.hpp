@@ -1,4 +1,7 @@
-#include "../main.hpp"
+
+#pragma once
+
+# include "../main.hpp"
 # include "../Server/Server.hpp"
 
 /*
@@ -16,13 +19,16 @@ struct in_addr {
 };
 */
 
-
 class TcpServer : public Server
 {
     public:
-        TcpServer();
-        TcpServer(unsigned long ip, int port);
+        //TcpServer();
+        TcpServer( std::string &serverStr );
         ~TcpServer();
+
+        void	ServerListen();
+		void	ServerAnswer();
+
         int                 _socket;
         int                 _newSocket;
         struct sockaddr_in  _address;
