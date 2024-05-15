@@ -36,3 +36,17 @@ std::string	returnFileStr( std::string fileName );
 size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
 size_t	getNextBracket( std::string &fileContent, size_t pos);
 size_t	getChunkEnd( std::string &fileContent, size_t pos );
+
+template < typename V >
+void	assignSingleValue( std::istringstream &iss, V &to_assign )
+{
+	std::string	sep;
+	V word;
+	if (!(iss >> sep))
+		throw WrongVariableAssignment();
+	else if (sep.compare("="))
+		throw WrongVariableAssignment();
+	else if (!(iss >> word))
+		throw WrongVariableAssignment();
+	to_assign = word;
+}

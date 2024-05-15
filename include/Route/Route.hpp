@@ -24,6 +24,8 @@ class Route
 
 	private:
 
+	void	getAllCgi( std::string &routeStr );
+
 		std::string					_path;
 		std::vector < std::string >	_methods;
 		std::string					_redirection;

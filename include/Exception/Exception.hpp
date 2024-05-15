@@ -1,7 +1,7 @@
 
 #pragma once
 
-# include "../main.hpp"
+# include <exception>
 
 class	UnableToOpenFile : public std::exception
 {

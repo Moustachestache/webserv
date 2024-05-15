@@ -12,6 +12,15 @@ Prog::~Prog()
 		delete *it;
 }
 
+std::string	Prog::getServerStrDebug( void )
+{
+	std::string	res;
+	for (std::vector< Server * >::iterator it = _servers.begin(); it != _servers.end(); it++)
+		res.append((*it)->getVarStr());
+	return (res);
+	
+}
+
 void	Prog::removeComment( std::string &fileContent )
 {
 	size_t	end = 0;

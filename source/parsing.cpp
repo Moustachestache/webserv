@@ -65,3 +65,4 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos )
 		throw BracketsError();
 	return (pos);
 }
+

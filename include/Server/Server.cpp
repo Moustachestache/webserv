@@ -1,6 +1,9 @@
 
 #include "Server.hpp"
 
+template < typename V >
+void	assignSingleValue( std::istringstream &iss, V &to_assign );
+
 Server::Server( void )
 {
 	
@@ -17,6 +20,25 @@ Server::Server( std::string &serverStr )
 Server::~Server( )
 {
 
+}
+
+std::string	Server::getVarStr( void )
+{
+	std::string res;
+	std::string buffer;
+	res.append("\n_ipStr = ");
+	res.append(_ipStr);
+	res.append("\n_contact = ");
+	res.append(_contact);
+	res.append("\n_serverName = ");
+	res.append(_serverName);
+	res.append("\n_root = ");
+	res.append(_root);
+	//res.append("_route = ");
+	//res.append(_route);
+	res.append("\n_errorLog = ");
+	res.append(_errorLog);
+	return (res);
 }
 
 void	Server::assignError( std::istringstream &iss )
@@ -80,7 +102,7 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 		routeStr.resize(endPos);
 		//std::cout << routeStr << std::endl;
 		_route.push_back( Route(routeStr) );
-		serverStr.erase(startPos, routeStr.size());
+		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
 	}
 }
@@ -102,20 +124,6 @@ void	Server::checkServerHeader( std::string &serverStr )
 	serverStr.erase(0, (serverStr.find("{") + 1));
 }
 
-template < typename V >
-void	assignSingleValue( std::istringstream &iss, V &to_assign )
-{
-	std::string	sep;
-	V word;
-	if (!(iss >> sep))
-		throw WrongVariableAssignment();
-	else if (sep.compare("="))
-		throw WrongVariableAssignment();
-	else if (!(iss >> word))
-		throw WrongVariableAssignment();
-	to_assign = word;
-}
-
 void	Server::getVarContent( std::string &buffer, std::istringstream &iss )
 {
 	if (!buffer.compare("SERVER_NAME"))
@@ -128,6 +136,8 @@ void	Server::getVarContent( std::string &buffer, std::istringstream &iss )
 		assignSingleValue(iss, _contact);
 	else if (!buffer.compare("REQUEST_SIZE"))
 		assignSingleValue(iss, _requestSize);
+	else if (!buffer.compare("MAX_CONNECTIONS"))
+		assignSingleValue(iss, _maxConnections);
 	else if (!buffer.compare("ERROR_LOG"))
 		assignSingleValue(iss, _errorLog);
 	else if (!buffer.compare("}"))
@@ -138,6 +148,7 @@ void	Server::getVarContent( std::string &buffer, std::istringstream &iss )
 
 void	Server::getAllVariables( std::string &serverStr )
 {
+	std::cout << serverStr;
 	std::istringstream	iss(serverStr);
 	std::string	buffer;
 	while (iss >> buffer)

@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/15 11:23:37 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/15 13:04:27 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ class	Server
 		Server( std::string &serverStr );
 		~Server();
 		std::string	outputErrorPage(int id);
+
+		/*		DEBUG		*/
+		std::string	getVarStr( void );
 	
 	private:
 
@@ -45,8 +48,7 @@ class	Server
 		std::string				_root;
 		int						_requestSize;
 		std::vector< Route >	_route;
+		int						_maxConnections;
 		std::string				_errorLog; //lol
-
-		
 
 };

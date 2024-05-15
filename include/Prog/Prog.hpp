@@ -14,6 +14,8 @@ class Prog
 
 		void	parseFile( char *filePath );
 
+		std::string	getServerStrDebug( void );
+
 	private:
 
 		void	removeComment( std::string &fileContent );
