@@ -4,6 +4,8 @@
 ##	Exploratory Qs
 what does a default .conf look like? what do we expect from it?
 
+hows an HTTP request built. how do we process it?
+
 what path does data take from A to Z.
 
 how is data uploaded? how do you send a form?
@@ -27,6 +29,9 @@ CGI specification document: https://www.rfc-editor.org/info/rfc3875
 
 ##	links
 C++ http server writeup:    https://osasazamegbe.medium.com/showing-building-an-http-server-from-scratch-in-c-2da7c0db6cb7
+-> regarding sockaddr_in:   https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html and http://www.ccplusplus.com/2011/10/struct-sockaddrin.html
+
+Diagrams to look smart: https://users.cs.fiu.edu/~czhang/teaching/cen4500/slides/TCP.pdf
 
 CGI on Wikipedia: https://en.wikipedia.org/wiki/Common_Gateway_Interface
 
@@ -45,7 +50,7 @@ get and post: https://www.ionos.fr/digitalguide/sites-internet/developpement-web
 - Setup server name or not.
 - first server for a host:port is the default. it answers all requests that are undefined.
 - setup default error pages.
-- (?) limit client body size
+- limit client body size
 setup routes with one or more of the following rules:
     - Define a list of accepted HTTP methods.
     - Define a HTTP redirection

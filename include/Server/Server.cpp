@@ -6,7 +6,6 @@ void	assignSingleValue( std::istringstream &iss, V &to_assign );
 
 Server::Server( void )
 {
-	
 }
 
 Server::Server( std::string &serverStr )
@@ -19,7 +18,48 @@ Server::Server( std::string &serverStr )
 
 Server::~Server( )
 {
+}
 
+void	Server::ServerListen()
+{
+	if (listen(_tcpServer._socket, _maxConnections) < 0)
+		throw ListenFailed();
+    std::ostringstream	stream;
+	int	bytesReceived = 0;
+	while (bytesReceived >= 0)
+	{
+		//	accept connection
+		_tcpServer._newSocket = accept(_tcpServer._socket, (sockaddr *)&_tcpServer._address, &_tcpServer._addressLen);
+		//	errcheck
+		if (_tcpServer._newSocket < 0)
+			throw NewSocketError();
+//	dogshit buffer
+		char buffer[155555] = {0};
+        bytesReceived = read(_tcpServer._newSocket, buffer, 155555);
+		//	errcheck
+		if (bytesReceived < 0)
+			throw IncomingBytesFailed();
+		//	debug: show incoming request:
+		std::cout << buffer << std::endl;
+		//	answer
+		ServerAnswer();
+        close(_tcpServer._newSocket);
+	}
+}
+
+void	Server::ServerAnswer()
+{
+	long		sent;
+
+	std::string	header = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: " + outputErrorPage(500).size();
+
+	header.append("\n\n");
+	
+	std::string	answer = header + outputErrorPage(500);
+
+	sent = write(_tcpServer._newSocket, answer.c_str(), answer.size());
+	if (sent != answer.size())
+		throw	AnswerFailure();
 }
 
 std::string	Server::getVarStr( void )
@@ -176,14 +216,3 @@ std::string Server::outputErrorPage(int id)
 	}
 	return strFile;
 }
-/*
-<!DOCTYPE html><html style="background-color: black; color: white; text-align: center;font-family: system-ui;"><head><title>
-error
-</title><img src="https://i.imgur.com/qWMCwWS.gif"/><h1>
-error
-</h1><h3>
-this is the error text
-</h3>contact your local admin at 
-$var@$var
-</body></html>
-*/

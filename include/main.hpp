@@ -12,10 +12,18 @@
 # include <map>
 # include <cstdlib>
 
+/*		C	LIBRAIRIES		*/
+# include <sys/socket.h>
+# include <arpa/inet.h>
+# include <netinet/in.h>
+# include <unistd.h>
+# include <stdio.h>
+
 /*		CLASSES		*/
 
 # include "Prog/Prog.hpp"
 # include "Exception/Exception.hpp"
+# include "TcpServer/TcpServer.hpp"
 # include "Server/Server.hpp"
 # include "Route/Route.hpp"
 # include "confKeywords.hpp"
