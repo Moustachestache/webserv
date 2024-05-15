@@ -22,14 +22,14 @@ TcpServer::TcpServer( std::string &serverStr) : Server(serverStr), _newSocket(),
 	ServerListen();
 }
 
-void	TcpServer::ServerAnswer()
+void	TcpServer::ServerAnswer(std::string incoming)
 {
 	unsigned long		sent;
 	
 	std::string	header = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ";
 
 	std::stringstream itoa;
-	itoa << outputErrorPage(69).size();
+	itoa << outputErrorPage(500).size();
 	header.append(itoa.str());
 
 	header.append("\n\n");
@@ -43,32 +43,26 @@ void	TcpServer::ServerAnswer()
 
 void	TcpServer::ServerListen()
 {
-	std::cout << "1" << std::endl;
 	if (listen(_socket, _maxConnections) < 0)
 		throw ListenFailed();
     std::ostringstream	stream;
 	int	bytesReceived = 0;
 	while (bytesReceived >= 0)
 	{
-		std::cout << "2" << std::endl;
-std::cout << _ip << _port << _address.sin_port << _address.sin_addr.s_addr << std::endl;
-		//	accept connection
 		_newSocket = accept(_socket, (sockaddr *)&_address, &_addressLen);
-	std::cout << "3" << std::endl;
 		//	errcheck
 		if (_newSocket < 0)
 			throw NewSocketError();
 //	dogshit buffer
-		char buffer[155555] = {0};
+//	must find way for clean buffer
+char buffer[155555] = {0};
         bytesReceived = read(_newSocket, buffer, 155555);
-		//	errcheck
 		if (bytesReceived < 0)
 			throw IncomingBytesFailed();
-		//	debug: show incoming request:
-		std::cout << buffer << std::endl;
+//	debug: show incoming request:
+std::cout << "debug: incoming request:\n"<< buffer << std::endl;
 		//	answer
-		ServerAnswer();
-	std::cout << "4" << std::endl;
+		ServerAnswer(buffer);
         close(_newSocket);
 	}
 }
