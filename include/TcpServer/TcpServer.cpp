@@ -23,9 +23,13 @@ TcpServer::TcpServer( std::string &serverStr) : Server(serverStr), _newSocket()
 
 void	TcpServer::ServerAnswer()
 {
-	long		sent;
+	unsigned long		sent;
+	
+	std::string	header = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ";
 
-	std::string	header = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: " + outputErrorPage(500).size();
+	std::stringstream itoa;
+	itoa << outputErrorPage(500).size();
+	header.append(itoa.str());
 
 	header.append("\n\n");
 	
