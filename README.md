@@ -1,6 +1,13 @@
 # webserv
 ## a C++98 standard http server
 
+# TODO
+- [ ] refactor Errorinfo array creation / init
+- [ ] build httpheader object
+- [ ] implement "inet_addr()" and "ntohs()" as our own functions
+- [ ] why double-up message in answer message?
+# DOING
+
 ##	Exploratory Qs
 what does a default .conf look like? what do we expect from it?
 
