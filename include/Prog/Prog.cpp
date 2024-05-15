@@ -10,7 +10,6 @@ Prog::~Prog()
 {
 	for (std::vector< Server * >::iterator it = _servers.begin(); it != _servers.end(); it++)
 		delete *it;
-
 }
 
 void	Prog::removeComment( std::string &fileContent )
@@ -36,9 +35,8 @@ void	Prog::getServerStr( std::string &fileContent )
 		//std::cout << "[DEBUG]" << startPos << " - " << endPos << std::endl;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
-		std::cout << "[DEBUG]" << serverStr;
+		//std::cout << "[DEBUG]" << serverStr;
 		Server	*nServer = new Server(serverStr);
-		std::cout << nServer->outputErrorPage(404) << std::endl;
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server");

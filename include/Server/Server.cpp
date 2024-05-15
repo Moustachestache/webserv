@@ -16,8 +16,7 @@ Server::Server( std::string &serverStr )
 
 Server::~Server( )
 {
-	for (std::vector< Route * >::iterator it = _route.begin(); it != _route.end(); it++)
-		delete *it;
+
 }
 
 void	Server::assignError( std::istringstream &iss )
@@ -64,7 +63,7 @@ void	Server::getAllErrors( std::string &serverStr, std::string name )
 		std::string	errorStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(errorStr, 0);
 		errorStr.resize(endPos);
-		std::cout << errorStr << std::endl;
+		//std::cout << errorStr << std::endl;
 		addError(errorStr);
 		serverStr.erase(startPos, errorStr.size());
 		startPos = serverStr.find(name);
@@ -79,9 +78,8 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 		std::string	routeStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(routeStr, 0);
 		routeStr.resize(endPos);
-		std::cout << routeStr << std::endl;
-		Route	*nRoute = new Route(routeStr);
-		_route.push_back( nRoute );
+		//std::cout << routeStr << std::endl;
+		_route.push_back( Route(routeStr) );
 		serverStr.erase(startPos, routeStr.size());
 		startPos = serverStr.find(name);
 	}
