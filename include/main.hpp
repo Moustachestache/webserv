@@ -49,3 +49,5 @@ std::string	returnFileStr( std::string fileName );
 size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
 size_t	getNextBracket( std::string &fileContent, size_t pos);
 size_t	getChunkEnd( std::string &fileContent, size_t pos );
+
+std::string	getHeaderStr( std::string &chunkStr );
