@@ -155,6 +155,5 @@ std::string Server::outputErrorPage(int id)
 		strFile.append(_contact);
 		strFile.append("</body></html>");
 	}
-	std::cout << strFile << std::endl;
 	return strFile;
 }
