@@ -18,25 +18,7 @@ Server::Server( std::string &serverStr )
 
 Server::~Server( )
 {
-}
-
-std::string	Server::getVarStr( void )
-{
-	std::string res;
-	std::string buffer;
-	res.append("\n_ipStr = ");
-	res.append(_ipStr);
-	res.append("\n_contact = ");
-	res.append(_contact);
-	res.append("\n_serverName = ");
-	res.append(_serverName);
-	res.append("\n_root = ");
-	res.append(_root);
-	//res.append("_route = ");
-	//res.append(_route);
-	res.append("\n_errorLog = ");
-	res.append(_errorLog);
-	return (res);
+	
 }
 
 void	Server::assignError( std::istringstream &iss )
@@ -128,6 +110,8 @@ void	Server::getVarContentServer( std::string &buffer, std::istringstream &iss )
 		assignSingleValue(iss, _serverName);
 	else if (!buffer.compare("ROOT"))
 		assignSingleValue(iss, _root);
+	else if (!buffer.compare("MAX_HEADER_SIZE"))
+		assignSingleValue(iss, _maxHeaderSize);
 	else if (!buffer.compare("REQUEST_SIZE"))
 		assignSingleValue(iss, _requestSize);
 	else if (!buffer.compare("CONTACT"))
@@ -146,7 +130,6 @@ void	Server::getVarContentServer( std::string &buffer, std::istringstream &iss )
 
 void	Server::getAllVariables( std::string &serverStr )
 {
-	//std::cout << serverStr;
 	std::istringstream	iss(serverStr);
 	std::string	buffer;
 	while (iss >> buffer)

@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/16 12:49:23 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:08:12 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
+		int						_maxHeaderSize;
 		int						_requestSize;
 		std::vector< Route >	_route;
 		int						_maxConnections;

@@ -1,6 +1,26 @@
 
 #include "../include/main.hpp"
 
+std::string	ft_itoa( int val )
+{
+	std::stringstream	ss;
+	ss << val;
+	std::string	res;
+	ss >> res;
+	return (res);
+}
+
+std::string	getHeaderStr( std::string &chunkStr ) /*	get chunk header returns it as a std::string,
+													and delete it in the base str		*/
+{
+	size_t	startPos = chunkStr.find("[");
+	size_t	endPos = chunkStr.find("]");
+	std::string res = chunkStr.substr(startPos + 1, endPos - startPos - 1);
+	startPos = chunkStr.find("{") + 1;
+	chunkStr.erase(0, startPos);
+	return (res);
+}
+
 size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName )
 {
 	std::string	word;
