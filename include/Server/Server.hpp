@@ -60,7 +60,6 @@ class	Server
 		std::string	getVarStr( void );
 	
 	protected:
-
 		HttpError				_httpError;
 		std::string				_ipStr;
 		long int				_ip;
@@ -68,10 +67,10 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
+		int						_maxHeaderSize;
 		int						_requestSize;
 		std::vector< Route >	_route;
 		int						_maxConnections;
 		std::string				_errorLog; //lol
-
 };
 

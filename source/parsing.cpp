@@ -1,6 +1,15 @@
 
 #include "../include/main.hpp"
 
+std::string ft_itoa( int val )
+{
+    std::stringstream   ss;
+    ss << val;
+    std::string res;
+    ss >> res;
+    return (res);
+}
+
 size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName )
 {
 	std::string	word;

@@ -19,7 +19,7 @@ class   HttpError
         HttpError &operator=(HttpError &obj);
         ~HttpError();
         //      "database" of http errors. used to setup ErrNumArray.
-        errorinfo   initInfo(int id);
+        static errorinfo   initInfo(int id);
 
         //      getters and setters
         const errorinfo getInfo(int id);
