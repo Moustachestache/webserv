@@ -1,6 +1,14 @@
 # webserv
 ## a C++98 standard http server
 
+# TODO
+- [ ] how to get a good, clean, scalable buffer for request reception?
+- [ ] refactor Errorinfo array creation / init
+- [ ] build httpheader object
+- [ ] implement "inet_addr()" and "ntohs()" as our own functions
+- [ ] why double-up message in answer message?
+# DOING
+
 ##	Exploratory Qs
 what does a default .conf look like? what do we expect from it?
 
@@ -17,6 +25,10 @@ who is EOF
 what is chunked request? How to unchunk?
 
 ##	RFC / Documentation
+HTTP Headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+
+HTTP response headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages#http_responses
+
 HTTP/1.1 reference:	https://datatracker.ietf.org/doc/html/rfc9112
 
 HTTP caching (2022):	https://datatracker.ietf.org/doc/html/rfc9111

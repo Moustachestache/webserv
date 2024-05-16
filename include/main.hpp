@@ -27,6 +27,7 @@
 # include "TcpServer/TcpServer.hpp"
 # include "Server/Server.hpp"
 # include "Route/Route.hpp"
+# include "HttpHeader/HttpHeader.hpp"
 # include "confKeywords.hpp"
 
 /*		TEMPLATES		*/
@@ -51,3 +52,4 @@ size_t	getNextBracket( std::string &fileContent, size_t pos);
 size_t	getChunkEnd( std::string &fileContent, size_t pos );
 
 std::string	getHeaderStr( std::string &chunkStr );
+std::string ft_itoa( int val );
