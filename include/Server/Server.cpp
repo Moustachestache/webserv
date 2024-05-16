@@ -122,7 +122,7 @@ void	Server::checkServerHeader( std::string &serverStr )
 	serverStr.erase(0, (serverStr.find("{") + 1));
 }
 
-void	Server::getVarContent( std::string &buffer, std::istringstream &iss )
+void	Server::getVarContentServer( std::string &buffer, std::istringstream &iss )
 {
 	if (!buffer.compare("SERVER_NAME"))
 		assignSingleValue(iss, _serverName);
@@ -146,11 +146,11 @@ void	Server::getVarContent( std::string &buffer, std::istringstream &iss )
 
 void	Server::getAllVariables( std::string &serverStr )
 {
-	std::cout << serverStr;
+	//std::cout << serverStr;
 	std::istringstream	iss(serverStr);
 	std::string	buffer;
 	while (iss >> buffer)
-		getVarContent(buffer, iss);
+		getVarContentServer(buffer, iss);
 }
 
 std::string Server::outputErrorPage(int id)

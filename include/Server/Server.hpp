@@ -6,20 +6,13 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/16 11:31:12 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/16 12:49:23 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include <iostream>
-# include <vector>
-# include <fstream>
-# include <sstream>
-
-# include "../../source/assignSingleValue.tpp"
 # include "../HttpError/HttpError.hpp"
-# include "../Exception/Exception.hpp"
 # include "../Route/Route.hpp"
 
 class	Route;
@@ -33,7 +26,7 @@ class	Server
 		~Server();
 		std::string	outputErrorPage(int id);
 
-		void	getVarContent( std::string &buffer, std::istringstream &iss );
+		void	getVarContentServer( std::string &buffer, std::istringstream &iss );
 		void	getAllVariables( std::string &serverStr );
 		void	checkServerHeader( std::string &serverStr );
 		void	getAllRoutes( std::string &serverStr, std::string name );

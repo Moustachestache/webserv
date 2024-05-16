@@ -1,8 +1,14 @@
 
 #pragma once
 
-#include <iostream>
-#include <vector>
+# include <vector>
+# include <fstream>
+# include <sstream>
+# include <iostream>
+# include <vector>
+
+# include "../Exception/Exception.hpp"
+# include "../../source/assignSingleValue.tpp"
 
 std::string	returnFileStr( std::string fileName );
 
@@ -28,6 +34,9 @@ class Route
 
 	private:
 
+	void	processCgi( std::string &cgi );
+	void	getVarContentRoute( std::string &buffer, std::istringstream &iss, Cgi &nCgi );
+	void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );
 	void	getAllCgi( std::string &routeStr );
 
 		std::string					_path;
