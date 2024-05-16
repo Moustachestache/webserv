@@ -11,14 +11,16 @@
 TcpServer::TcpServer( std::string &serverStr) : Server(serverStr), _newSocket(), _addressLen(sizeof(_address))
 {
     _socket = socket(AF_INET, SOCK_STREAM, 0);
-    if (_socket < 0)
-        throw SocketError();
+	if (_socket < 0)
+		throw SocketError();
+	_ipStr = "0.0.0.0";
+	_port = 8081;
     _address.sin_family = AF_INET;
-    _address.sin_port = ntohs(8081);
-    _address.sin_addr.s_addr = inet_addr("0.0.0.0");
+    _address.sin_port = ntohs(_port);
+    _address.sin_addr.s_addr = inet_addr(_ipStr.c_str());
     if (bind(_socket, (sockaddr *)&_address, _addressLen) < 0)
         throw ConnectError();
-    std::cout << "Starting Server at " << _ip << " on port " << _port << std::endl;
+    std::cout << "Starting Server at " << _ipStr << " on port " << _port << std::endl;
 	ServerListen();
 }
 

@@ -2,6 +2,7 @@
 ## a C++98 standard http server
 
 # TODO
+- [ ] how to get a good, clean, scalable buffer for request reception?
 - [ ] refactor Errorinfo array creation / init
 - [ ] build httpheader object
 - [ ] implement "inet_addr()" and "ntohs()" as our own functions
