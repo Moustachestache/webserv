@@ -17,6 +17,8 @@ who is EOF
 what is chunked request? How to unchunk?
 
 ##	RFC / Documentation
+HTTP Headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+
 HTTP/1.1 reference:	https://datatracker.ietf.org/doc/html/rfc9112
 
 HTTP caching (2022):	https://datatracker.ietf.org/doc/html/rfc9111
