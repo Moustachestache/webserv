@@ -14,8 +14,6 @@ TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket()
 	if (_socket < 0)
 		throw SocketError();
 //	default for testing
-	_ipStr = "0.0.0.0";
-	_port = 8081;
 	_maxHeaderSize = 14;
 //	end default
     _address.sin_family = AF_INET;
@@ -46,6 +44,7 @@ void	TcpServer::ServerAnswerError(int id)
 	std::string			output;
 
 	output.append(header.buildHeader());
+	output.append("\n\n");
 	output.append(outputErrorPage(id));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
@@ -63,20 +62,23 @@ void	TcpServer::ServerListen()
 		//	errcheck
 		if (_newSocket < 0)
 			throw NewSocketError();
-		char buffer[_maxHeaderSize];
+		char buffer[_maxHeaderSize + 2];
 		std::string		incoming;
-		int				readed = 1;
-		while (readed >= 0)
+		bytesReceived = read(_newSocket, buffer, _maxHeaderSize + 1);
+		incoming.append(buffer);
+
+/* 		while (readed > 0)
 		{
 			readed = read(_newSocket, buffer, _maxHeaderSize);
 			incoming.append(buffer);
-		}
-		std::cout << incoming;
+		} */
+		std::cout << incoming << std::endl;
 		if (bytesReceived < 0)
 			throw IncomingBytesFailed();
 		if (bytesReceived > _maxHeaderSize)
 			ServerAnswerError(203);
-		ServerAnswer(incoming);
+		else
+			ServerAnswer(incoming);
         close(_newSocket);
 	}
 }

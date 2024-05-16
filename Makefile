@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/05/16 17:03:00 by gbricot          ###   ########.fr        #
+#    Updated: 2024/05/16 17:42:21 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = webserv
 
 CXX = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-unused -O0
+CPPFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-unused -O0 -fstandalone-debug
 
 SRC =		source/main.cpp \
 			source/parsing.cpp \
