@@ -76,7 +76,7 @@ void	TcpServer::ServerListen()
 		if (bytesReceived < 0)
 			throw IncomingBytesFailed();
 		if (bytesReceived > _maxHeaderSize)
-			ServerAnswerError(203);
+			ServerAnswerError(413);
 		else
 			ServerAnswer(incoming);
         close(_newSocket);
