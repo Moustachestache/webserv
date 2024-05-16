@@ -25,7 +25,7 @@ void	Route::getAllCgi( std::string &routeStr )
 		std::string	cgiStr = routeStr.substr(startPos);
 		size_t	endPos = getChunkEnd(cgiStr, 0);
 		cgiStr.resize(endPos);
-		//std::cout << errorStr << std::endl;
+		std::cout << cgiStr << std::endl;
 		
 		routeStr.erase(startPos, cgiStr.size());
 		startPos = routeStr.find("CGI");
