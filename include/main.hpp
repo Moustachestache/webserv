@@ -13,6 +13,7 @@
 # include <cstdlib>
 
 /*		C	LIBRAIRIES		*/
+
 # include <sys/socket.h>
 # include <arpa/inet.h>
 # include <netinet/in.h>
@@ -27,6 +28,11 @@
 # include "Server/Server.hpp"
 # include "Route/Route.hpp"
 # include "confKeywords.hpp"
+
+/*		TEMPLATES		*/
+
+# include "../source/assignSingleValue.tpp"
+
 
 /*		STRUCTURE		*/
 

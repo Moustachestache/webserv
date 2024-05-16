@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/15 14:27:50 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/16 11:31:12 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,10 @@
 # include <fstream>
 # include <sstream>
 
-//# include "../main.hpp"
-
+# include "../../source/assignSingleValue.tpp"
 # include "../HttpError/HttpError.hpp"
 # include "../Exception/Exception.hpp"
 # include "../Route/Route.hpp"
-
-template < typename V >
-void	assignSingleValue( std::istringstream &iss, V &to_assign )
-{
-	std::string	sep;
-	V word;
-	if (!(iss >> sep))
-		throw WrongVariableAssignment();
-	else if (sep.compare("="))
-		throw WrongVariableAssignment();
-	else if (!(iss >> word))
-		throw WrongVariableAssignment();
-	to_assign = word;
-}
 
 class	Route;
 
