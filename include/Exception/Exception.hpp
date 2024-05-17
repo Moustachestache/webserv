@@ -105,3 +105,11 @@ class	AnswerFailure : public std::exception
 
 			virtual const char* what( void ) const throw();
 };
+
+class	FileNameError : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};

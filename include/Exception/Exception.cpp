@@ -65,3 +65,8 @@ const char	*AnswerFailure::what( void ) const throw()
 {
 	return ("Error: failed to send response to client.");
 }
+
+const char	*FileNameError::what( void ) const throw()
+{
+	return ("Error: config file name must have '.conf' extention.");
+}

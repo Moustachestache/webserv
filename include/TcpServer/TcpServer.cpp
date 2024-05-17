@@ -10,7 +10,7 @@
 
 TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket(), _addressLen(sizeof(_address))
 {
-    _socket = socket(AF_INET, SOCK_STREAM, 0);
+/*     _socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (_socket < 0)
 		throw SocketError();
 //	default for testing
@@ -22,7 +22,7 @@ TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket()
     if (bind(_socket, (sockaddr *)&_address, _addressLen) < 0)
         throw ConnectError();
     std::cout << std::endl << "Starting Server at " << _ipStr << " on port " << _port << std::endl;
-	ServerListen();
+	ServerListen(); */
 }
 
 void	TcpServer::ServerAnswer(std::string incoming)

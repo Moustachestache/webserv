@@ -18,7 +18,6 @@ std::string	Prog::getServerStrDebug( void )
 	for (std::vector< TcpServer * >::iterator it = _servers.begin(); it != _servers.end(); it++)
 		res.append((*it)->getVarStr());
 	return (res);
-	
 }
 
 void	Prog::removeComment( std::string &fileContent )
@@ -41,10 +40,8 @@ void	Prog::getServerStr( std::string &fileContent )
 	while (startPos != std::string::npos)
 	{
 		size_t	endPos = getChunkEnd(fileContent, startPos);
-		//std::cout << "[DEBUG]" << startPos << " - " << endPos << std::endl;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
-		//std::cout << "[DEBUG]" << serverStr;
 		TcpServer	*nServer = new TcpServer(serverStr);
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
@@ -54,8 +51,11 @@ void	Prog::getServerStr( std::string &fileContent )
 
 void	Prog::parseFile( char *filePath )
 {
+	std::string	strFilePath(filePath);
+	if (strFilePath.find(".conf") == std::string::npos) /*	Prevent processing random files	*/
+		throw FileNameError();
 	std::string fileContent = returnFileStr( filePath );
-
+	/*	if processing huge files here can be very long...	*/
 	removeComment( fileContent );
 	getServerStr( fileContent );
 	if (!_servers.size())

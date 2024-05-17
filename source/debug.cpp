@@ -7,7 +7,7 @@ std::string	Route::getVarStr( void )	/*	DEBUG PRINT FUNCTION	*/
 	std::string res;
 	res.append("\n\n\tROUTE[");
 	res.append(_path);
-	res.append("]\n\t{\tMETHOD =");
+	res.append("]\n\t{\n\t\tMETHOD =");
 	for (std::vector< std::string >::iterator it = _methods.begin(); it != _methods.end(); it++ )
 	{
 		res.append(" ");
@@ -35,20 +35,20 @@ std::string	Route::getVarStr( void )	/*	DEBUG PRINT FUNCTION	*/
 	res.append(_uploadPath);
 	res.append("\n\t\tSESSION_TIMEOUT = ");
 	res.append(ft_itoa(_sessionTimeout));
-/* 	for (std::vector< Cgi >::iterator it = _cgi.begin(); it != _cgi.end(); it++ )
+	for (std::vector< Cgi >::iterator it = _cgi.begin(); it != _cgi.end(); it++ )
 	{
-		res.append("\n\tCGI[");
-		res.append(*it->name);
-		res.append("]\n\t{\n\t\tPATH = ");
-		res.append(*it->path);
-		res.append("\n\t{\n\t\tEXTENSION = ");
-		for (std::vector< std::string >::iterator it2 = *it->extention.begin(); it2 != *it->extention.end(); it2++ )
+		res.append("\n\n\t\tCGI[");
+		res.append((it)->name);
+		res.append("]\n\t\t{\n\t\t\tPATH = ");
+		res.append((it)->path);
+		res.append("\n\t\t\tEXTENSION = ");
+		for (std::vector< std::string >::iterator it2 = it->extention.begin(); it2 != it->extention.end(); it2++ )
 		{
-		res.append(" ");
-		res.append(*it2);
+			res.append(" ");
+			res.append(*it2);
 		}
-		res.append("\n\t}");
-	} */
+		res.append("\n\t\t}");
+	}
 	res.append("\n\t}\n");
 	return (res);
 
@@ -77,6 +77,6 @@ std::string	Server::getVarStr( void )	/*	DEBUG PRINT FUNCTION	*/
 	res.append(ft_itoa(_maxConnections));
 	res.append("\n\tERROR_LOG = ");
 	res.append(_errorLog);
-	res.append("\n}\n\n");
+	res.append("\n}\n");
 	return (res);
 }

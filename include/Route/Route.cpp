@@ -114,7 +114,7 @@ void	Route::getAllCgi( std::string &routeStr )
 		cgiStr.resize(endPos);
 		//std::cout << cgiStr << std::endl;
 		processCgi(cgiStr);
-		routeStr.erase(startPos, endPos - startPos);
+		routeStr.erase(startPos, endPos);
 		startPos = routeStr.find("CGI");
 	}
 }
