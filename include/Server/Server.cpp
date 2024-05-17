@@ -1,14 +1,16 @@
 
 #include "Server.hpp"
 
-template < typename V >
-void	assignSingleValue( std::istringstream &iss, V &to_assign );
-
 Server::Server( void )
 {
 }
 
-Server::Server( std::string &serverStr )
+Server::Server( std::string &serverStr ) :	_contact(""), _serverName(""), _root(""), \
+											_maxHeaderSize(8192), _requestSize(0), \
+											_maxConnections(0), _errorLog("")
+					/*	Init all members to avoid memory errors while reading them.
+
+	!! Need to check with the team wich value we set in default for each !!	*/
 {
 	checkServerHeader( serverStr );
 	getAllRoutes( serverStr, "ROUTE" );

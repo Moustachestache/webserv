@@ -6,7 +6,11 @@ Route::Route( void )
 	
 }
 
-Route::Route( std::string &routeStr )
+Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), \
+										_allowUpload(false), _sessionTimeout(600)
+					/*	Init all members to avoid memory errors while reading them.
+
+	!! Need to check with the team wich value we set in default for each !!	*/
 {
 	//std::cout << routeStr;
 	_path = getHeaderStr(routeStr);

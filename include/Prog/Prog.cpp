@@ -55,6 +55,8 @@ void	Prog::parseFile( char *filePath )
 	if (strFilePath.find(".conf") == std::string::npos) /*	Prevent processing random files	*/
 		throw FileNameError();
 	std::string fileContent = returnFileStr( filePath );
+	if (fileContent.empty())
+		throw UnableToOpenFile();
 	/*	if processing huge files here can be very long...	*/
 	removeComment( fileContent );
 	getServerStr( fileContent );

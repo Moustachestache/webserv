@@ -85,5 +85,5 @@ void	TcpServer::ServerListen()
 
 TcpServer::~TcpServer()
 {
-    close(_socket);
+    //close(_socket);
 }
