@@ -106,25 +106,29 @@ void	Server::checkServerHeader( std::string &serverStr )
 	serverStr.erase(0, (serverStr.find("{") + 1));
 }
 
-void	Server::getVarContentServer( std::string &buffer, std::istringstream &iss )
+void	Server::getVarContentServer( std::string &line )
 {
-	if (!buffer.compare("SERVER_NAME"))
+	std::istringstream	iss(line);
+	std::string	word;
+	if (!(iss >> word))
+		return ;
+	if (!word.compare("SERVER_NAME"))
 		assignSingleValue(iss, _serverName);
-	else if (!buffer.compare("ROOT"))
+	else if (!word.compare("ROOT"))
 		assignSingleValue(iss, _root);
-	else if (!buffer.compare("MAX_HEADER_SIZE"))
+	else if (!word.compare("MAX_HEADER_SIZE"))
 		assignSingleValue(iss, _maxHeaderSize);
-	else if (!buffer.compare("REQUEST_SIZE"))
+	else if (!word.compare("REQUEST_SIZE"))
 		assignSingleValue(iss, _requestSize);
-	else if (!buffer.compare("CONTACT"))
+	else if (!word.compare("CONTACT"))
 		assignSingleValue(iss, _contact);
-	else if (!buffer.compare("REQUEST_SIZE"))
+	else if (!word.compare("REQUEST_SIZE"))
 		assignSingleValue(iss, _requestSize);
-	else if (!buffer.compare("MAX_CONNECTIONS"))
+	else if (!word.compare("MAX_CONNECTIONS"))
 		assignSingleValue(iss, _maxConnections);
-	else if (!buffer.compare("ERROR_LOG"))
+	else if (!word.compare("ERROR_LOG"))
 		assignSingleValue(iss, _errorLog);
-	else if (!buffer.compare("}"))
+	else if (!word.compare("}"))
 		return ;
 	else
 		throw WrongVariableAssignment();
@@ -133,9 +137,9 @@ void	Server::getVarContentServer( std::string &buffer, std::istringstream &iss )
 void	Server::getAllVariables( std::string &serverStr )
 {
 	std::istringstream	iss(serverStr);
-	std::string	buffer;
-	while (iss >> buffer)
-		getVarContentServer(buffer, iss);
+	std::string	line;
+	while (std::getline(iss, line))
+		getVarContentServer(line);
 }
 
 std::string Server::outputErrorPage(int id)

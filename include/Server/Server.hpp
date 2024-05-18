@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/16 15:08:12 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/18 09:40:55 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class	Server
 		~Server();
 		std::string	outputErrorPage(int id);
 
-		void	getVarContentServer( std::string &buffer, std::istringstream &iss );
+		void	getVarContentServer( std::string &line );
 		void	getAllVariables( std::string &serverStr );
 		void	checkServerHeader( std::string &serverStr );
 		void	getAllRoutes( std::string &serverStr, std::string name );

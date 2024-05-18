@@ -6,8 +6,8 @@ Route::Route( void )
 	
 }
 
-Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), \
-										_allowUpload(false), _sessionTimeout(600)
+Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), _allowUpload(false), \
+										_uploadPath(""), _sessionTimeout(600)
 					/*	Init all members to avoid memory errors while reading them.
 
 	!! Need to check with the team wich value we set in default for each !!	*/
@@ -62,7 +62,6 @@ void	Route::getVarContentRoute( std::string &line )
 		return ;
 	else
 		throw WrongVariableAssignment();
-	
 }
 
 void	Route::getAllVariables( std::string &routeStr )
