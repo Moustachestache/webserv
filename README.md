@@ -47,6 +47,8 @@ Diagrams to look smart: https://users.cs.fiu.edu/~czhang/teaching/cen4500/slides
 
 CGI on Wikipedia: https://en.wikipedia.org/wiki/Common_Gateway_Interface
 
+More on CGI:    http://www.mnuwer.dbasedeveloper.co.uk/dlearn/web/session01.htm
+
 NGINX default .conf:    https://www.nginx.com/resources/wiki/start/topics/examples/full/
 
 apache server Documentation:    https://httpd.apache.org/docs/current/
