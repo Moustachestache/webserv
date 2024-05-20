@@ -39,23 +39,36 @@ void	Server::assignError( std::istringstream &iss )
 	_httpError.addErrorPage(id, word);
 }
 
+void	Server::processError( std::string &line )
+{
+	std::string	id;
+	std::string	word;
+	std::istringstream	iss(line);
+	if (!(iss >> id))
+		throw WrongVariableAssignment();
+	if (!id.compare("}"))
+		return ;
+	if (!(iss >> word))
+		throw WrongVariableAssignment();
+	else if (word.compare("="))
+		throw WrongVariableAssignment();
+	else if (!(iss >> word))
+		throw WrongVariableAssignment();
+	_httpError.addErrorPage(ft_atoi(id), word);
+	if (iss >> word)
+		throw WrongVariableAssignment();
+}
+
 void	Server::addError( std::string &errorStr )
 {
 	std::istringstream	iss(errorStr);
-	int	id;
-	std::string	sep;
-	std::string word;
-	while (sep.find("{"))
-		iss >> sep;
-	while ((iss >> id))
+	std::string	line;
+	while (line.find("{"))
+		iss >> line;
+	while (std::getline(iss, line))
 	{
-		if (!(iss >> sep))
-			throw WrongVariableAssignment();
-		else if (sep.compare("="))
-			throw WrongVariableAssignment();
-		else if (!(iss >> word))
-			throw WrongVariableAssignment();
-		_httpError.addErrorPage(id, word);
+		if (!line.empty())
+			processError(line);
 	}
 }
 

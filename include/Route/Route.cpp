@@ -84,13 +84,17 @@ void	Route::assignMultipleValue( std::istringstream &iss, std::vector< std::stri
 		vec.push_back(str);
 }
 
-void	Route::getVarContentRoute( std::string &buffer, std::istringstream &iss, Cgi &nCgi )
+void	Route::getVarContentRoute( std::string &line, Cgi &nCgi )
 {
-	if (!buffer.compare("PATH"))
-		assignSingleValue(iss, nCgi.path);
-	else if (!buffer.compare("EXTENSION"))
-		assignMultipleValue(iss, nCgi.extention);
-	else if (!buffer.compare("}"))
+	std::istringstream	iss(line);
+	std::string	word;
+	if (!(iss >> word))
+		return ;
+	if (!word.compare("PATH"))
+		assignSingleValue( iss, nCgi.path);
+	else if (!word.compare("EXTENSION"))
+		assignMultipleValue( iss, nCgi.extention);
+	else if (!word.compare("}"))
 		return ;
 	else
 		throw WrongVariableAssignment();
@@ -101,9 +105,9 @@ void	Route::processCgi( std::string &cgiStr )
 	Cgi	nCgi;
 	nCgi.name = getHeaderStr(cgiStr);
 	std::istringstream	iss(cgiStr);
-	std::string	buffer;
-	while (iss >> buffer)
-		getVarContentRoute(buffer, iss, nCgi);
+	std::string	line;
+	while (std::getline(iss, line))
+		getVarContentRoute(line, nCgi);
 	_cgi.push_back(nCgi);
 }
 

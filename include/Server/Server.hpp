@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/18 09:40:55 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/20 11:53:16 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class	Server
 
 		/*		DEBUG		*/
 		std::string	getVarStr( void );
+		void	processError( std::string &line );
 	
 	protected:
 		HttpError				_httpError;
