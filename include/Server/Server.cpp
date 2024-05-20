@@ -45,7 +45,7 @@ void	Server::processError( std::string &line )
 	std::string	word;
 	std::istringstream	iss(line);
 	if (!(iss >> id))
-		throw WrongVariableAssignment();
+		return ;
 	if (!id.compare("}"))
 		return ;
 	if (!(iss >> word))
@@ -55,21 +55,18 @@ void	Server::processError( std::string &line )
 	else if (!(iss >> word))
 		throw WrongVariableAssignment();
 	_httpError.addErrorPage(ft_atoi(id), word);
+	std::cout << "[DEBUG] Custom error page added : id=" << id << " - path=" << word << std::endl; /*	DEBUG	*/
 	if (iss >> word)
 		throw WrongVariableAssignment();
 }
 
 void	Server::addError( std::string &errorStr )
 {
+	getHeaderStr( errorStr );
 	std::istringstream	iss(errorStr);
 	std::string	line;
-	while (line.find("{"))
-		iss >> line;
 	while (std::getline(iss, line))
-	{
-		if (!line.empty())
-			processError(line);
-	}
+		processError(line);
 }
 
 void	Server::getAllErrors( std::string &serverStr, std::string name )
@@ -82,7 +79,7 @@ void	Server::getAllErrors( std::string &serverStr, std::string name )
 		errorStr.resize(endPos);
 		//std::cout << errorStr << std::endl;
 		addError(errorStr);
-		serverStr.erase(startPos, errorStr.size());
+		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
 	}
 }
