@@ -2,11 +2,17 @@
 ## a C++98 standard http server
 
 # TODO
+
+[MAX]
 - [ ] how to get a good, clean, scalable buffer for request reception?
 - [ ] refactor Errorinfo array creation / init
 - [ ] build httpheader object
 - [ ] implement "inet_addr()" and "ntohs()" as our own functions
 - [ ] why double-up message in answer message?
+
+[GREG]
+- [ ] decide in team the default values for each unset variable (see Server and Route constructors)
+- [ ] Implement a check function after the parsing
 # DOING
 
 ##	Exploratory Qs
