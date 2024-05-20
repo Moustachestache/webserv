@@ -104,6 +104,6 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos )
 	}
 	if (pos == std::string::npos)
 		throw BracketsError();
-	return (pos);
+	return (pos - 1);
 }
 
