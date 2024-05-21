@@ -40,6 +40,8 @@ void	Prog::getServerStr( std::string &fileContent )
 	while (startPos != std::string::npos)
 	{
 		size_t	endPos = getChunkEnd(fileContent, startPos);
+		if (startPos == 0)
+			endPos++;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
 		TcpServer	*nServer = new TcpServer(serverStr);
