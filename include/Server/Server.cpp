@@ -16,11 +16,18 @@ Server::Server( std::string &serverStr ) :	_contact(""), _serverName(""), _root(
 	getAllRoutes( serverStr, "ROUTE" );
 	getAllErrors( serverStr, "ERROR_STATUS" );
 	getAllVariables( serverStr );
+	checkInfo();
 }
 
 Server::~Server( )
 {
 	
+}
+
+void	Server::checkInfo( void )
+{
+	/*	Implement all the variable checks here	
+		if wrong throw an exception	*/
 }
 
 void	Server::assignError( std::istringstream &iss )

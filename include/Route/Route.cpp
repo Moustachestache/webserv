@@ -16,11 +16,18 @@ Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), _allo
 	_path = getHeaderStr(routeStr);
 	getAllCgi( routeStr );
 	getAllVariables( routeStr );
+	checkInfo();
 }
 
 Route::~Route( )
 {
 	
+}
+
+void	Route::checkInfo( void )
+{
+	/*	Implement all the variable checks here	
+		if wrong throw an exception	*/
 }
 
 void	assignAllowUpload( std::istringstream &iss, bool &to_assign )

@@ -40,6 +40,8 @@ class Route
 
 	private:
 
+	void	checkInfo( void );
+
 	void	processCgi( std::string &cgi );
 	void	getVarContentRoute( std::string &line, Cgi &nCgi );
 	void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );

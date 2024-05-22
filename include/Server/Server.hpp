@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/20 11:53:16 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/22 10:42:50 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,22 @@ class	Server
 {
 	public:
 
+		/*		CONSTRUCTORS/DESTRUCTOR		*/
+
 		Server( void );
 		Server( std::string &serverStr );
 		~Server();
+
+
 		std::string	outputErrorPage(int id);
+
+		/*		DEBUG		*/
+		std::string	getVarStr( void );
+		void	processError( std::string &line );
+	
+	protected:
+
+		/*		PARSING		*/
 
 		void	getVarContentServer( std::string &line );
 		void	getAllVariables( std::string &serverStr );
@@ -34,11 +46,10 @@ class	Server
 		void	addError( std::string &errorStr );
 		void	assignError( std::istringstream &iss );
 
-		/*		DEBUG		*/
-		std::string	getVarStr( void );
-		void	processError( std::string &line );
-	
-	protected:
+		void	checkInfo( void );
+
+		/*		PROTECTED MEMBERS		*/
+
 		HttpError				_httpError;
 		std::string				_ipStr;
 		long int				_ip;
