@@ -26,6 +26,10 @@ how is data uploaded? how do you send a form?
 
 where does CGI fit into this? what even is it?
 
+why do we use select() or poll()?
+
+Pipelining? What is it? why? Do we need to implement it?
+
 who is EOF
 
 what is chunked request? How to unchunk?
