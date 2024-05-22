@@ -38,7 +38,7 @@ size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::st
 	if (!(iss >> word))
 		return (std::string::npos);
 	size_t	pos = word.find(chunkName);
-	if (pos == std::string::npos)
+	if (pos != 0)
 		return (std::string::npos);
 	return (fileContent.find(word));
 }

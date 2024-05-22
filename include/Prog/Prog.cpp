@@ -36,7 +36,7 @@ void	Prog::removeComment( std::string &fileContent )
 void	Prog::getServerStr( std::string &fileContent )
 {
 	std::istringstream	iss(fileContent);
-	size_t	startPos = getChunkStart(iss, fileContent, "server");
+	size_t	startPos = getChunkStart(iss, fileContent, "server[");
 	while (startPos != std::string::npos)
 	{
 		size_t	endPos = getChunkEnd(fileContent, startPos);
@@ -47,7 +47,7 @@ void	Prog::getServerStr( std::string &fileContent )
 		TcpServer	*nServer = new TcpServer(serverStr);
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
-		startPos = getChunkStart(niss, fileContent, "server");
+		startPos = getChunkStart(niss, fileContent, "server[");
 	}
 }
 
