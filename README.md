@@ -51,6 +51,8 @@ C++ http server writeup:    https://osasazamegbe.medium.com/showing-building-an-
 
 Sockets (Juliusz Chroboczek, Universite Paris Diderot):    https://www.pps.jussieu.fr/~jch/enseignement/sockets.pdf
 
+regarding select():    https://www.lowtek.com/sockets/select.html
+
 http:    https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
 
 Diagrams to look smart: https://users.cs.fiu.edu/~czhang/teaching/cen4500/slides/TCP.pdf
