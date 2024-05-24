@@ -16,7 +16,6 @@ class   HttpError
     public:
         HttpError();
         HttpError(HttpError &obj);
-        HttpError &operator=(HttpError &obj);
         ~HttpError();
         //      "database" of http errors. used to setup ErrNumArray.
         static errorinfo   initInfo(int id);

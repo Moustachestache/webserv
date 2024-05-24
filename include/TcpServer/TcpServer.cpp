@@ -28,8 +28,14 @@ TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket()
 void	TcpServer::ServerAnswer(std::string incoming)
 {
 	unsigned long		sent;
-	HttpHeader			header(incoming);
 	std::string			output;
+
+    //  build output answer
+
+    //  build header based on answer
+	HttpHeader			header(output);
+	output.insert(0, "\n\n");
+	output.insert(0, header.buildHeader());
 
 
 	sent = write(_newSocket, output.c_str(), output.size());
@@ -40,12 +46,11 @@ void	TcpServer::ServerAnswer(std::string incoming)
 void	TcpServer::ServerAnswerError(int id)
 {
 	unsigned long		sent;
-	HttpHeader			header(id);
-	std::string			output;
+	std::string			output(outputErrorPage(id));
+    HttpHeader          header(output, id);
 
-	output.append(header.buildHeader());
-	output.append("\n\n");
-	output.append(outputErrorPage(id));
+	output.insert(0, "\n\n");
+	output.insert(0, header.buildHeader());
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();

@@ -1,13 +1,13 @@
 # include "HttpHeader.hpp"
 
-HttpHeader::HttpHeader( std::string incoming )
+HttpHeader::HttpHeader( std::string body )    :   _errorcode(200), _protocol("HTTP/1.1 ")
 {
-    (void) incoming;
+    _contentSize = body.size();
 }
 
-HttpHeader::HttpHeader( int id )    :   _errorcode(id), _protocol("HTTP/1.1 ")
+HttpHeader::HttpHeader( std::string body, int id )    :   _errorcode(id), _protocol("HTTP/1.1 ")
 {
-
+    _contentSize = body.size();
 }
 
 HttpHeader::~HttpHeader()
@@ -18,15 +18,13 @@ HttpHeader::~HttpHeader()
 std::string     HttpHeader::buildHeader()
 {
     std::string returnStr(_protocol);
-    if (_errorcode > 0)
-    {
-        returnStr.append(" " + ft_itoa(_errorcode));
-        returnStr.append(" " + HttpError::initInfo(_errorcode).type);
-    }
-    else
-    {
-        //  returnstr is normal no error
-    }
+
+    returnStr.append(" " + ft_itoa(_errorcode));
+    returnStr.append(" " + HttpError::initInfo(_errorcode).type);
+    returnStr.append("\n");
+    returnStr.append("content-type: " + _contentType + "\n");
+    returnStr.append("content-length: " + ft_itoa(_contentSize) + "\n");
+
     return returnStr;
 }
 /*
