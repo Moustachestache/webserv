@@ -10,14 +10,24 @@ std::string	ft_itoa( int val )
 	return (res);
 }
 
+int	ft_atoi( std::string &nb )	/*	if no number found it will return 0	*/
+{
+	int res = 0;
+	std::istringstream	iss(nb);
+	iss >> res;
+	return (res);
+}
+
 std::string	getHeaderStr( std::string &chunkStr ) /*	get chunk header returns it as a std::string,
 													and delete it in the base str		*/
 {
 	size_t	startPos = chunkStr.find("[");
 	size_t	endPos = chunkStr.find("]");
 	std::string res = chunkStr.substr(startPos + 1, endPos - startPos - 1);
-	startPos = chunkStr.find("{") + 1;
-	chunkStr.erase(0, startPos);
+	startPos = chunkStr.find("{");
+	if (startPos == std::string::npos)
+		throw WrongHeader();
+	chunkStr.erase(0, startPos + 1);
 	return (res);
 }
 
@@ -28,7 +38,7 @@ size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::st
 	if (!(iss >> word))
 		return (std::string::npos);
 	size_t	pos = word.find(chunkName);
-	if (pos == std::string::npos)
+	if (pos != 0)
 		return (std::string::npos);
 	return (fileContent.find(word));
 }
@@ -47,15 +57,26 @@ size_t	getFirstBracket( std::string &fileContent, size_t pos )
 	std::istringstream	iss(fileContent);
 	std::string	chunkName;
 	iss >> chunkName;
-	if (chunkName.at(chunkName.size() - 1) == '{')
+	if (chunkName.at(chunkName.size() - 1) == '{')/*	case: CHUNK_NAME[var]{
+															VAR=VAR
+															}	*/
 		return (fileContent.find('{', pos));
-	else if (chunkName.at(chunkName.size() - 1) == ']')
+	else if (chunkName.at(chunkName.size() - 1) == ']') /*	case: CHUNK_NAME[var]
+																	{VAR=VAR
+																	}	*/
 	{
 		if (iss >> chunkName)
 		{
 			if (chunkName.at(0) == '{')
 				return (fileContent.find('{', pos));
 		}
+	}
+	size_t	res = chunkName.find('{', pos);
+	if (res != std::string::npos) /*	case: CHUNK_NAME[var]{VAR=VAR
+																	}	*/
+	{
+		if (chunkName.at(res - 1) == ']')
+			return (res + pos);
 	}
 	throw BracketsError();
 }
@@ -83,6 +104,6 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos )
 	}
 	if (pos == std::string::npos)
 		throw BracketsError();
-	return (pos);
+	return (pos - 1);
 }
 

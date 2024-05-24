@@ -28,7 +28,7 @@ const char	*WrongHeader::what( void ) const throw()
 
 const char	*WrongVariableAssignment::what( void ) const throw()
 {
-	return ("Error: variable cannot be empty.");
+	return ("Error: wrong variable assignation.");
 }
 
 const char	*WrongHttpErrorNumber::what( void ) const throw()
@@ -64,4 +64,9 @@ const char	*IncomingBytesFailed::what( void ) const throw()
 const char	*AnswerFailure::what( void ) const throw()
 {
 	return ("Error: failed to send response to client.");
+}
+
+const char	*FileNameError::what( void ) const throw()
+{
+	return ("Error: config file name must have '.conf' extention.");
 }

@@ -18,6 +18,7 @@ size_t	getNextBracket( std::string &fileContent, size_t pos);
 size_t	getChunkEnd( std::string &fileContent, size_t pos );
 std::string	getHeaderStr( std::string &chunkStr );
 std::string	ft_itoa( int val );
+int	ft_atoi( std::string &nb );
 
 struct Cgi
 {
@@ -39,8 +40,10 @@ class Route
 
 	private:
 
+	void	checkInfo( void );
+
 	void	processCgi( std::string &cgi );
-	void	getVarContentRoute( std::string &buffer, std::istringstream &iss, Cgi &nCgi );
+	void	getVarContentRoute( std::string &line, Cgi &nCgi );
 	void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );
 	void	getAllCgi( std::string &routeStr );
 	void	getAllVariables( std::string &routeStr );

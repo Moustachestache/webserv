@@ -6,17 +6,28 @@ Route::Route( void )
 	
 }
 
-Route::Route( std::string &routeStr )
+Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), _allowUpload(false), \
+										_uploadPath(""), _sessionTimeout(600)
+					/*	Init all members to avoid memory errors while reading them.
+
+	!! Need to check with the team wich value we set in default for each !!	*/
 {
 	//std::cout << routeStr;
 	_path = getHeaderStr(routeStr);
 	getAllCgi( routeStr );
 	getAllVariables( routeStr );
+	checkInfo();
 }
 
 Route::~Route( )
 {
 	
+}
+
+void	Route::checkInfo( void )
+{
+	/*	Implement all the variable checks here	
+		if wrong throw an exception	*/
 }
 
 void	assignAllowUpload( std::istringstream &iss, bool &to_assign )
@@ -58,7 +69,6 @@ void	Route::getVarContentRoute( std::string &line )
 		return ;
 	else
 		throw WrongVariableAssignment();
-	
 }
 
 void	Route::getAllVariables( std::string &routeStr )
@@ -81,13 +91,17 @@ void	Route::assignMultipleValue( std::istringstream &iss, std::vector< std::stri
 		vec.push_back(str);
 }
 
-void	Route::getVarContentRoute( std::string &buffer, std::istringstream &iss, Cgi &nCgi )
+void	Route::getVarContentRoute( std::string &line, Cgi &nCgi )
 {
-	if (!buffer.compare("PATH"))
-		assignSingleValue(iss, nCgi.path);
-	else if (!buffer.compare("EXTENSION"))
-		assignMultipleValue(iss, nCgi.extention);
-	else if (!buffer.compare("}"))
+	std::istringstream	iss(line);
+	std::string	word;
+	if (!(iss >> word))
+		return ;
+	if (!word.compare("PATH"))
+		assignSingleValue( iss, nCgi.path);
+	else if (!word.compare("EXTENSION"))
+		assignMultipleValue( iss, nCgi.extention);
+	else if (!word.compare("}"))
 		return ;
 	else
 		throw WrongVariableAssignment();
@@ -98,9 +112,9 @@ void	Route::processCgi( std::string &cgiStr )
 	Cgi	nCgi;
 	nCgi.name = getHeaderStr(cgiStr);
 	std::istringstream	iss(cgiStr);
-	std::string	buffer;
-	while (iss >> buffer)
-		getVarContentRoute(buffer, iss, nCgi);
+	std::string	line;
+	while (std::getline(iss, line))
+		getVarContentRoute(line, nCgi);
 	_cgi.push_back(nCgi);
 }
 
@@ -114,7 +128,7 @@ void	Route::getAllCgi( std::string &routeStr )
 		cgiStr.resize(endPos);
 		//std::cout << cgiStr << std::endl;
 		processCgi(cgiStr);
-		routeStr.erase(startPos, endPos - startPos);
+		routeStr.erase(startPos, endPos);
 		startPos = routeStr.find("CGI");
 	}
 }

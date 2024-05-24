@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:05 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/15 13:29:16 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/16 21:29:28 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	main( int ac, char **av)
 	{
 		data.parseFile( av[1] );
 		std::cout << "Parsing OK" << std::endl;
-		std::cout << data.getServerStrDebug() << std::endl;
-		
+		std::cout << data.getServerStrDebug() << std::flush;
 	}
 	catch(const std::exception& e)
 	{
