@@ -10,6 +10,10 @@
 - [x] implement "inet_addr()" and "ntohs()" as our own functions
 - [x] why double-up message in answer message?
 - [ ] change all "\n" in http headers to "\r\n" when newline?
+- [ ] create meaningful socket / connection.
+- [ ] make server send back info
+- [ ] make server answer any GET request
+- [ ] process other requests
 
 [GREG]
 - [ ] decide in team the default values for each unset variable (see Server and Route constructors)
