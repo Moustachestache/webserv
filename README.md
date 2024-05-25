@@ -9,6 +9,7 @@
 - [ ] build httpheader object
 - [x] implement "inet_addr()" and "ntohs()" as our own functions
 - [x] why double-up message in answer message?
+- [ ] change all "\n" in http headers to "\r\n" when newline?
 
 [GREG]
 - [ ] decide in team the default values for each unset variable (see Server and Route constructors)
