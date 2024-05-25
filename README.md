@@ -11,6 +11,9 @@
 - [x] why double-up message in answer message?
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
+- [ ] what to do with the keepalive header?
+
+
 - [ ] make server send back info
 - [ ] make server answer any GET request
 - [ ] process other requests
