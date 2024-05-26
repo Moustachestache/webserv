@@ -12,10 +12,12 @@
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
 - [ ] what to do with the keepalive / persistent connection header?
+      
 easy todo
 - [ ] make server send back info
 - [ ] make server answer any GET request
 - [ ] process other requests
+      
 from HTTP The definitive guide by Oreilly:
 - [ ] 1. Set up connection—accept a client connection, or close if the client is unwanted.
 - [ ] 2. Receive request—read an HTTP request message from the network.
