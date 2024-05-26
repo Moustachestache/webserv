@@ -12,6 +12,7 @@
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
 - [ ] what to do with the keepalive / persistent connection header?
+- [ ] setup full docroot path at parsing
       
 easy todo
 - [ ] make server send back info
