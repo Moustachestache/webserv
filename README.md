@@ -12,11 +12,18 @@
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
 - [ ] what to do with the keepalive / persistent connection header?
-
-
+easy todo
 - [ ] make server send back info
 - [ ] make server answer any GET request
 - [ ] process other requests
+from HTTP The definitive guide by Oreilly:
+- [ ] 1. Set up connection—accept a client connection, or close if the client is unwanted.
+- [ ] 2. Receive request—read an HTTP request message from the network.
+- [ ] 3. Process request—interpret the request message and take action.
+- [ ] 4. Access resource—access the resource specified in the message.
+- [ ] 5. Construct response—create the HTTP response message with the right headers.
+- [ ] 6. Send response—send the response back to the client.
+- [ ] 7. Log transaction—place notes about the completed transaction in a log file.
 
 [GREG]
 - [ ] decide in team the default values for each unset variable (see Server and Route constructors)
