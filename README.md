@@ -14,6 +14,7 @@
 - [ ] what to do with the keepalive / persistent connection header?
 - [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [ ] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
+- [ ] refactor httheader build function from object to single function.
       
 easy todo
 - [ ] make server send back info
