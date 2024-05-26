@@ -12,7 +12,7 @@
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
 - [ ] what to do with the keepalive / persistent connection header?
-- [ ] setup full docroot path at parsing
+- [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
       
 easy todo
 - [ ] make server send back info
