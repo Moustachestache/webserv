@@ -52,7 +52,7 @@ class	Server
 
 		HttpError				_httpError;
 		std::string				_ipStr;
-		long int				_ip;
+		unsigned int			_ip;
 		std::string				_contact;
 		int						_port;
 		std::string				_serverName;
