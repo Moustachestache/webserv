@@ -105,6 +105,7 @@ void	TcpServer::ServerListen()
 				readed = read(_newSocket, buffer, _maxHeaderSize);
 				incoming.append(buffer);
 			} */
+			HttpHeader		header(buffer);
 			std::cout << incoming << std::endl;
 			if (bytesReceived < 0)
 				throw IncomingBytesFailed();

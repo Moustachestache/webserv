@@ -1,13 +1,7 @@
 # include "HttpHeader.hpp"
 
-HttpHeader::HttpHeader( std::string body )    :   _errorcode(200), _protocol("HTTP/1.1 ")
+HttpHeader::HttpHeader( std::string body )
 {
-    _contentSize = body.size();
-}
-
-HttpHeader::HttpHeader( std::string body, int id )    :   _errorcode(id), _protocol("HTTP/1.1 ")
-{
-    _contentSize = body.size();
 }
 
 HttpHeader::~HttpHeader()
@@ -15,7 +9,22 @@ HttpHeader::~HttpHeader()
 
 }
 
-std::string     HttpHeader::buildHeader()
+std::string &HttpHeader::getMethod()
+{
+    return _method;
+}
+
+std::string &HttpHeader::getFile()
+{
+    return _file;
+}
+
+std::vector < std::string > &HttpHeader::getArgs()
+{
+    return _args;
+}
+
+/*std::string     HttpHeader::buildHeader()
 {
     std::string returnStr(_protocol);
     HttpError       error;
@@ -28,7 +37,6 @@ std::string     HttpHeader::buildHeader()
 
     return returnStr;
 }
-/*
     private:
     //  "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ";
     //  STATUS LINE DATA (eg:   HTTP/1.1 404 Not Found)
