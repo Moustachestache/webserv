@@ -25,7 +25,9 @@ class TcpServer : public Server
 
         void	ServerListen();
 		void	ServerAnswer(std::string incoming);
+        void    ServerAnswerGet(std::string incoming);
         void	ServerAnswerError(int id);
+        void	ServerStart();
 
         int                 _socket;
         int                 _newSocket;

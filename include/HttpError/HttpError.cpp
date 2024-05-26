@@ -87,5 +87,5 @@ const errorinfo   HttpError::getInfo(int id)
         if (it->second.code == id)
             return (it->second);
     }
-    return  (initInfo(-1));
+    return  (getInfo(0));
 }

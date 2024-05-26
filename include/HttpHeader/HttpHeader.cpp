@@ -18,9 +18,10 @@ HttpHeader::~HttpHeader()
 std::string     HttpHeader::buildHeader()
 {
     std::string returnStr(_protocol);
+    HttpError       error;
 
     returnStr.append(" " + ft_itoa(_errorcode));
-    returnStr.append(" " + HttpError::initInfo(_errorcode).type);
+    returnStr.append(" " + error.getInfo(_errorcode).type);
     returnStr.append("\n");
     returnStr.append("content-type: " + _contentType + "\n");
     returnStr.append("content-length: " + ft_itoa(_contentSize) + "\n");
