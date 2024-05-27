@@ -19,6 +19,9 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos );
 std::string	getHeaderStr( std::string &chunkStr );
 std::string	ft_itoa( int val );
 int	ft_atoi( std::string &nb );
+void	checkValidIp( std::string &ip );
+bool	isPathRelative( std::string &path );
+std::string	BuildRelativePath( std::string first, std::string second, std::string third );
 
 struct Cgi
 {
@@ -36,18 +39,24 @@ class Route
 		Route( std::string &routeStr );
 		~Route();
 
-	std::string	getVarStr( void );
+		/*		DEBUG		*/
+		std::string	getVarStr( void );
+
+		/*		GETTERS		*/
+		std::vector< std::string >	&getMethods( void );
+		std::string	&getPath( void );
+		std::string	&getRedirection( void );
 
 	private:
 
-	void	checkInfo( void );
+		void	checkInfo( void );
 
-	void	processCgi( std::string &cgi );
-	void	getVarContentRoute( std::string &line, Cgi &nCgi );
-	void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );
-	void	getAllCgi( std::string &routeStr );
-	void	getAllVariables( std::string &routeStr );
-	void	getVarContentRoute( std::string &line );
+		void	processCgi( std::string &cgi );
+		void	getVarContentRoute( std::string &line, Cgi &nCgi );
+		void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );
+		void	getAllCgi( std::string &routeStr );
+		void	getAllVariables( std::string &routeStr );
+		void	getVarContentRoute( std::string &line );
 
 	
 

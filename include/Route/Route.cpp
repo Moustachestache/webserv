@@ -24,10 +24,28 @@ Route::~Route( )
 	
 }
 
+std::vector< std::string >	&Route::getMethods( void )
+{
+	return (_methods);
+}
+
+std::string	&Route::getPath( void )
+{
+	return (_path);
+}
+
+std::string	&Route::getRedirection( void )
+{
+	return (_redirection);
+}
+
 void	Route::checkInfo( void )
 {
-	/*	Implement all the variable checks here	
+	/*	Implement all the variable checks here
 		if wrong throw an exception	*/
+	if (_methods.empty())
+		throw NoMethod();
+	// maybe check if the methods are correct HTTP ones
 }
 
 void	assignAllowUpload( std::istringstream &iss, bool &to_assign )

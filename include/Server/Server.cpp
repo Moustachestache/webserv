@@ -5,17 +5,18 @@ Server::Server( void )
 {
 }
 
-Server::Server( std::string &serverStr ) :	_contact(""), _serverName(""), _root(""), \
-											_maxHeaderSize(8192), _requestSize(0), \
-											_maxConnections(0), _errorLog("")
+Server::Server( std::string &serverStr ) :	_contact("postmaster@"), _port(80), _serverName(""), _root(""), \
+											_maxHeaderSize(8192), _requestSize(128), \
+											_maxConnections(48), _errorLog("log/errorlog.txt")
 					/*	Init all members to avoid memory errors while reading them.
 
 	!! Need to check with the team wich value we set in default for each !!	*/
 {
-	checkServerHeader( serverStr );
+	checkServerHeader( serverStr ); // if not port set 80
 	getAllRoutes( serverStr, "ROUTE" );
 	getAllErrors( serverStr, "ERROR_STATUS" );
 	getAllVariables( serverStr );
+	_contact.append(_serverName);
 	checkInfo();
 }
 
@@ -24,10 +25,19 @@ Server::~Server( )
 	
 }
 
+std::vector< Route >	&Server::getRoute( void )
+{
+	return (_route);
+}
+
 void	Server::checkInfo( void )
 {
 	/*	Implement all the variable checks here	
 		if wrong throw an exception	*/
+	if (!isPathRelative(_root))
+		throw WrongPath();
+	//IP 
+	//Port //done in the checkHeaderServer()
 }
 
 void	Server::assignError( std::istringstream &iss )
@@ -116,10 +126,11 @@ void	Server::checkServerHeader( std::string &serverStr )
 	if (pos == std::string::npos)
 		throw	WrongHeader();
 	_ipStr = serverStr.substr(0, pos);
+	checkValidIp(_ipStr);
 	serverStr.erase(0, pos + 1);
 	std::istringstream	iss(serverStr);
 	if (!(iss >> _port))
-		WrongHeader();
+		throw WrongHeader();
 	serverStr.erase(0, (serverStr.find("{") + 1));
 }
 

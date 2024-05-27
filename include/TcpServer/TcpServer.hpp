@@ -23,9 +23,11 @@ class TcpServer : public Server
         TcpServer( std::string &serverStr );
         ~TcpServer();
 
+        bool    checkValidRoute( std::string &method, std::string &path, Route &route, bool is_end);
+
         void	ServerListen();
-		void	ServerAnswer(std::string incoming);
-        void    ServerAnswerGet(std::string incoming);
+/* 		void	ServerAnswer(std::string incoming); */
+        void    ServerAnswerGet(std::string method, std::string path);
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(std::string incoming, std::string path);
         void	ServerStart();
