@@ -8,24 +8,6 @@
 //  but really this should never happen lol
 } */
 
-
-std::string     buildHeader(std::string extension, int errorcode, int contentSize)
-{
-    HttpError   error;
-    std::string returnStr("HTTP/1.1 ");
-
-	(void) extension;
-    returnStr.append(" " + ft_itoa(errorcode));
-    returnStr.append(" " + error.getInfo(errorcode).type);
-    returnStr.append("\r\n");
-    returnStr.append("content-type: text/html\r\n"); // "content-type: " + getMimeType(extension) + "\r\n"
-    returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
-    returnStr.append("connection: close\r\n");
-    returnStr.append("\n");
-
-    return returnStr;
-}
-
 TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket(), _addressLen(sizeof(_address))
 {
 }
@@ -56,7 +38,7 @@ void	TcpServer::ServerStart()
     //  build header based on answer
 	HttpHeader			header(output);
 	output.insert(0, "\n\n");
-	output.insert(0, buildHeader());
+	output.insert(0, header.buildHeader());
 
 
 	sent = write(_newSocket, output.c_str(), output.size());
@@ -64,15 +46,14 @@ void	TcpServer::ServerStart()
 		throw	AnswerFailure();
 } */
 
-bool	TcpServer::checkValidRoute( std::string &method, std::string &path, Route &route, bool is_end)
+bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end)
 {
-	(void) path;
-	if (std::find(route.getMethods().begin(), route.getMethods().end(), method) != route.getMethods().end())
+	if (std::find(route.getMethods().begin(), route.getMethods().end(), header.getMethod()) != route.getMethods().end())
 	{
 		std::string	filename;
 		if (route.getRedirection().empty())
 		{
-			filename = path;
+			filename = header.getFile();
 			if (filename.find(route.getPath()) == std::string::npos)
 				return (false);
 			filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
@@ -101,6 +82,8 @@ void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
 	unsigned long		sent;
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
+
+	(void) incoming;
 	if (openDir == NULL)
 		ServerAnswerError(500);
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
@@ -128,14 +111,14 @@ void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
 //		throw	AnswerFailure();
 }
 
-void	TcpServer::ServerAnswerGet(std::string method, std::string path)/* in the future &HttpHeader 
+void	TcpServer::ServerAnswerGet( HttpHeader &header )/* in the future &HttpHeader 
 																		with all the infos inside */
 {
 	std::vector< Route >	route = getRoute();
 
 	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
 	{
-		if (checkValidRoute(method, path, *it, (it + 1 == route.end())))
+		if (checkValidRoute(header, *it, (it + 1 == route.end())))
 			return ;
 	}
 }
@@ -186,7 +169,7 @@ void	TcpServer::ServerListen()
 			else if (bytesReceived > _maxHeaderSize)
 				ServerAnswerError(413);
 			else 
-				ServerAnswerGet("GET", "test/rien.htm");
+				ServerAnswerGet(header);
 			close(_newSocket);
 			exit(0);
 		}

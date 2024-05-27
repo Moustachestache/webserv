@@ -6,22 +6,18 @@ struct mimeType
     std::string                     extension;
 };
 
-//    (mimeType){"", ""},
+//    (mimeType){"", ""}, No without the "(mimeType)" it's working lol c con :)
 static  mimeType    mimetable[] = {
-        (mimeType){"image/jpeg", ".jpg"},
-        (mimeType){"image/jpeg", ".jpeg"},
-        (mimeType){"image/png", ".png"},
-        (mimeType){"image/gif", ".gif"},
-
-        (mimeType){"text/html", ",htm"},
-        (mimeType){"text/html", ".html"},
-
-        (mimeType){"text/css", ".css"},
-
-        (mimeType){"text/plain", ".c"},
-        (mimeType){"text/plain", ".cpp"},
-        (mimeType){"", ""}
-    };
+        {"image/jpeg", ".jpg"},
+        {"image/jpeg", ".jpeg"},
+        {"image/png", ".png"},
+        {"image/gif", ".gif"},
+        {"text/html", ".htm"}, // lol ,htm ce koi 7 extention
+        {"text/html", ".html"},
+        {"text/css", ".css"},
+        {"text/plain", ".c"},
+        {"text/plain", ".cpp"},
+        {"", ""} };
 
 
 std::string     getMimeType(std::string extension)
@@ -33,6 +29,7 @@ std::string     getMimeType(std::string extension)
         if (!extension.compare(mimetable[i].extension))
             return mimetable[i].type;
     }
+
     //  massive security breach LOL
     return "text/plain";
 }

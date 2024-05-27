@@ -2,6 +2,7 @@
 
 # include "../main.hpp"
 # include "../Server/Server.hpp"
+# include "../HttpHeader/HttpHeader.hpp"
 
 /*#include <netinet/in.h>
 
@@ -16,6 +17,8 @@ struct in_addr {
     unsigned long s_addr;  // load with inet_aton()
 };*/
 
+class   HttpHeader;
+
 class TcpServer : public Server
 {
     public:
@@ -23,11 +26,11 @@ class TcpServer : public Server
         TcpServer( std::string &serverStr );
         ~TcpServer();
 
-        bool    checkValidRoute( std::string &method, std::string &path, Route &route, bool is_end);
+        bool    checkValidRoute( HttpHeader &header, Route &route, bool is_end);
 
         void	ServerListen();
 /* 		void	ServerAnswer(std::string incoming); */
-        void    ServerAnswerGet(std::string method, std::string path);
+        void    ServerAnswerGet( HttpHeader &header );
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(std::string incoming, std::string path);
         void	ServerStart();

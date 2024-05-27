@@ -5,6 +5,7 @@ std::string     buildHeader(std::string extension, int errorcode, int contentSiz
     HttpError   error;
     std::string returnStr("HTTP/1.1 ");
 
+    std::cout << extension << getMimeType(extension) << std::endl;
     returnStr.append(" " + ft_itoa(errorcode));
     returnStr.append(" " + error.getInfo(errorcode).type);
     returnStr.append("\r\n");
