@@ -19,6 +19,8 @@
 # include <netinet/in.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 /*		CLASSES		*/
 
@@ -53,3 +55,7 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos );
 
 std::string	getHeaderStr( std::string &chunkStr );
 std::string ft_itoa( int val );
+
+std::string     getMimeType(std::string extension);
+
+std::string     buildHeader(std::string extension, int errorcode, int contentSize);

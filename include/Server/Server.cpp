@@ -164,9 +164,9 @@ std::string Server::outputErrorPage(int id)
 	std::string strFile = returnFileStr(_httpError.getInfo(id).file.c_str());
 	if (strFile.empty())
 	{
-		strFile.append("<!DOCTYPE html><html style=\"background-color: black; color: white; text-align: center;font-family: system-ui;\"><head><title>");
+		strFile.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><title>");
 		strFile.append(_httpError.getInfo(id).type);
-		strFile.append("</title><img src=\"https://i.imgur.com/qWMCwWS.gif\"/><h1>");
+		strFile.append("</title><body><div class=\"container\"><img src=\"https://i.imgur.com/qWMCwWS.gif\"/><h1>");
 		std::stringstream itoa;
 		itoa << id;
 		strFile.append(itoa.str());
@@ -176,7 +176,7 @@ std::string Server::outputErrorPage(int id)
 		strFile.append(_httpError.getInfo(id).info);
 		strFile.append("</h3>contact your local admin at ");
 		strFile.append(_contact);
-		strFile.append("</body></html>");
+		strFile.append("</div></body></html>");
 	}
 	return strFile;
 }

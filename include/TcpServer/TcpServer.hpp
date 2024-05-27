@@ -27,8 +27,9 @@ class TcpServer : public Server
 		void	ServerAnswer(std::string incoming);
         void    ServerAnswerGet(std::string incoming);
         void	ServerAnswerError(int id);
+        void    ServerAnswerLs(std::string incoming, std::string path);
         void	ServerStart();
-
+    private:
         int                 _socket;
         int                 _newSocket;
         struct sockaddr_in  _address;

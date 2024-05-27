@@ -33,17 +33,11 @@ void	TcpServer::ServerAnswer(std::string incoming)
 	unsigned long		sent;
 	std::string			output;
 
-    //  build output answer
-
-    //  build header based on answer
-	HttpHeader			header(output);
-	output.insert(0, "\n\n");
-	output.insert(0, header.buildHeader());
-
-
-	sent = write(_newSocket, output.c_str(), output.size());
-	if (sent != output.size())
-		throw	AnswerFailure();
+	(void) sent;
+	(void) incoming;
+	(void) output;
+//	if (sent != output.size())
+//		throw	AnswerFailure();
 }
 
 void	TcpServer::ServerAnswerGet(std::string incoming)
@@ -51,27 +45,54 @@ void	TcpServer::ServerAnswerGet(std::string incoming)
 	unsigned long		sent;
 	std::string			output;
 
-    //  build output answer
+	(void) sent;
+	(void) incoming;
+	(void) output;
 
-    //  build header based on answer
-	HttpHeader			header(output);
-	output.insert(0, "\n\n");
-	output.insert(0, header.buildHeader());
+//	if (sent != output.size())
+//		throw	AnswerFailure();
+}
 
+//	build webpage that lists folder
+//	struct dirent *readdir(DIR *dirp);
+void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
+{
+	unsigned long		sent;
+	std::string			output;
+	DIR					*openDir = opendir(path.c_str());
+	if (openDir == NULL)
+		ServerAnswerError(500);
+	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><title>");
+	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\">");
+	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
+	{
+		output.append("<div class=\"grid\">");
+		if (folderScan->d_type == DT_DIR)
+			output.append("<div>folder</div>");
+		else if (folderScan->d_type == DT_REG)
+			output.append("<div>file</div>");
+		else if (folderScan->d_type == DT_UNKNOWN)
+			output.append("<div>thingamajig</div>");
+		output.append("<div><a href=\"./");
+		output.append(folderScan->d_name);
+		output.append("\">");
+		output.append(folderScan->d_name);
+		output.append("</a></div><div>" + getMimeType(folderScan->d_name) + "</div>");
+		output.append("</div>");
+	}
+	output.append("</div></body>");
+	closedir(openDir);
 
-	sent = write(_newSocket, output.c_str(), output.size());
-	if (sent != output.size())
-		throw	AnswerFailure();
+//	if (sent != output.size())
+//		throw	AnswerFailure();
 }
 
 void	TcpServer::ServerAnswerError(int id)
 {
 	unsigned long		sent;
 	std::string			output(outputErrorPage(id));
-    HttpHeader          header(output, id);
 
-	output.insert(0, "\n\n");
-	output.insert(0, header.buildHeader());
+	output.insert(0, buildHeader(".html", id, output.size()));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
@@ -106,6 +127,8 @@ void	TcpServer::ServerListen()
 				incoming.append(buffer);
 			} */
 			HttpHeader		header(buffer);
+			if (header.getError() > 0)
+				ServerAnswerError(header.getError());
 			std::cout << incoming << std::endl;
 			if (bytesReceived < 0)
 				throw IncomingBytesFailed();

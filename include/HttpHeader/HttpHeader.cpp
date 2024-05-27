@@ -1,7 +1,16 @@
 # include "HttpHeader.hpp"
 
-HttpHeader::HttpHeader( std::string body )
+HttpHeader::HttpHeader( std::string body ) : _error(0)
 {
+//  GET /specials/saw-blade.gif HTTP/1.0
+//  Host: www.joes-hardware.com
+    std::istringstream      ss;
+
+    ss.str(body);
+    if (!(ss >> _method))
+        _error = 400;
+    if (!(ss >> _file))
+        _error = 400;
 }
 
 HttpHeader::~HttpHeader()
@@ -11,40 +20,20 @@ HttpHeader::~HttpHeader()
 
 std::string &HttpHeader::getMethod()
 {
-    return _method;
+    return  _method;
+}
+
+int &HttpHeader::getError()
+{
+    return  _error;
 }
 
 std::string &HttpHeader::getFile()
 {
-    return _file;
+    return  _file;
 }
 
 std::vector < std::string > &HttpHeader::getArgs()
 {
-    return _args;
+    return  _args;
 }
-
-/*std::string     HttpHeader::buildHeader()
-{
-    std::string returnStr(_protocol);
-    HttpError       error;
-
-    returnStr.append(" " + ft_itoa(_errorcode));
-    returnStr.append(" " + error.getInfo(_errorcode).type);
-    returnStr.append("\n");
-    returnStr.append("content-type: " + _contentType + "\n");
-    returnStr.append("content-length: " + ft_itoa(_contentSize) + "\n");
-
-    return returnStr;
-}
-    private:
-    //  "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ";
-    //  STATUS LINE DATA (eg:   HTTP/1.1 404 Not Found)
-        int             _errorcode;
-        std::string     _protocol;
-        std::string     _status;
-    //  MORE DATA:
-        std::string     _connetion;
-        std::string     _contentType;
-        std::string     _date;
-*/

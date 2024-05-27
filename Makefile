@@ -19,6 +19,8 @@ CPPFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-unused -O0 #-fstand
 SRC =		source/main.cpp \
 			source/parsing.cpp \
 			source/debug.cpp \
+			source/getMimeType.cpp \
+			source/buildHeader.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
 			include/TcpServer/TcpServer.cpp \
