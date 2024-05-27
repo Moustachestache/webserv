@@ -62,17 +62,17 @@ void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
 	DIR					*openDir = opendir(path.c_str());
 	if (openDir == NULL)
 		ServerAnswerError(500);
-	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><title>");
+	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
 	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\">");
 	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
 	{
-		output.append("<div class=\"grid\">");
+		output.append("<div class=\"grid\" background-color=\"pico-background-slate-900\">");
 		if (folderScan->d_type == DT_DIR)
-			output.append("<div>folder</div>");
+			output.append("<div><i class=\"bx bx-folder\"></i></div>");
 		else if (folderScan->d_type == DT_REG)
-			output.append("<div>file</div>");
+			output.append("<div><i class=\"bx bxs-file\"></i></div>");
 		else if (folderScan->d_type == DT_UNKNOWN)
-			output.append("<div>thingamajig</div>");
+			output.append("<div><i class=\"bx bx-meh-blank\"></i></div>");
 		output.append("<div><a href=\"./");
 		output.append(folderScan->d_name);
 		output.append("\">");
