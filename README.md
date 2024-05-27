@@ -4,20 +4,20 @@
 # TODO
 
 [MAX]
-- [ ] how to get a good, clean, scalable buffer for request reception?
+- [x] how to get a good, clean, scalable buffer for request reception?
 - [x] refactor Errorinfo array creation / init
-- [ ] build httpheader object
 - [x] implement "inet_addr()" and "ntohs()" as our own functions
 - [x] why double-up message in answer message?
-- [ ] change all "\n" in http headers to "\r\n" when newline?
+- [x] change all "\n" in http headers to "\r\n" when newline?
+- [x] refactor httheader build function from object to single function.
 - [ ] create meaningful socket / connection.
 - [ ] what to do with the keepalive / persistent connection header?
 - [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [ ] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
-- [ ] refactor httheader build function from object to single function.
+- [ ] re-build httpheader object that parses incoming header
       
 easy todo
-- [ ] make server send back info
+- [x] make server send back info
 - [ ] make server answer any GET request
 - [ ] process other requests
       
