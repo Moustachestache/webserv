@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/22 10:42:50 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/26 15:13:37 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ class	Server
 
 
 		std::string	outputErrorPage(int id);
+
+		std::vector< Route >	&getRoute( void );
 
 		/*		DEBUG		*/
 		std::string	getVarStr( void );

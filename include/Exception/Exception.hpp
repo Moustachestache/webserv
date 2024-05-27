@@ -113,3 +113,19 @@ class	FileNameError : public std::exception
 
 			virtual const char* what( void ) const throw();
 };
+
+class	WrongPath : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	NoMethod : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};

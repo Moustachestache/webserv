@@ -12,6 +12,12 @@ Prog::~Prog()
 		delete *it;
 }
 
+void	Prog::startAllServers( void )
+{
+	for (std::vector<TcpServer *>::iterator it = _servers.begin(); it != _servers.end(); it++)
+		(*it)->ServerStart();
+}
+
 std::string	Prog::getServerStrDebug( void )
 {
 	std::string	res;

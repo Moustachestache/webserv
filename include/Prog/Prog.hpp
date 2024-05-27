@@ -16,6 +16,8 @@ class Prog
 
 		std::string	getServerStrDebug( void );
 
+		void	startAllServers( void );
+
 	private:
 
 		void	removeComment( std::string &fileContent );

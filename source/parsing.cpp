@@ -107,3 +107,49 @@ size_t	getChunkEnd( std::string &fileContent, size_t pos )
 	return (pos - 1);
 }
 
+bool	isPathRelative( std::string &path )
+{
+	if (path.empty())
+		return (false);
+	if (path.at(0) == '/')
+		return (false);
+	if (path.find(".") != std::string::npos || path.find("//") != std::string::npos)
+		return (false);
+	return (true);
+}
+
+void	checkValidIp( std::string &ip )
+{
+	std::istringstream	iss(ip);
+	char	dot;
+	int		val;
+	for (int i = 0; i < 4; ++i)
+	{
+		if (!(iss >> val))
+			throw WrongHeader();
+		if (val < 0 || val > 255)
+			throw WrongHeader();
+		if (i < 3)
+		{
+			if (!(iss >> dot))
+				throw WrongHeader();
+			if (dot != '.')
+				throw WrongHeader();
+		}
+	}
+}
+
+std::string	BuildRelativePath( std::string first, std::string second, std::string third )
+{
+	if (first.empty() && second.empty() && third.empty())
+		return ("");
+	std::string	res = "./";
+	res.append(first);
+	res.append("/");
+	res.append(second);
+	res.append("/");
+	res.append(third);
+	while (res.find("//") != std::string::npos)
+		res.replace( res.find("//"), sizeof("//") - 1, "/");
+	return (res);
+}

@@ -70,3 +70,13 @@ const char	*FileNameError::what( void ) const throw()
 {
 	return ("Error: config file name must have '.conf' extention.");
 }
+
+const char	*WrongPath::what( void ) const throw()
+{
+	return ("Error: wrong path found, make sure they are relative.");
+}
+
+const char	*NoMethod::what( void ) const throw()
+{
+	return ("Error: server route must have at least one HTTP method.");
+}
