@@ -106,7 +106,9 @@ void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
 	}
 	output.append("</div></body>");
 	closedir(openDir);
-
+	send(_newSocket, output.c_str(), output.size(), 0);
+	close (_newSocket);
+	exit(0);
 //	if (sent != output.size())
 //		throw	AnswerFailure();
 }
