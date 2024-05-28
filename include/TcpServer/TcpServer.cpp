@@ -52,6 +52,7 @@ void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 	for (std::vector < std::string >::iterator it = pages.begin(); it != pages.end(); it++)
 	{
 		std::cout << "Fullpath:" << fullPath << std::endl;
+		fullPath.append("/");
 		fullPath.append(*it);
 		std::cout << "to search: " << fullPath << "filename:" << *it << std::endl;
 		if (!access( fullPath.c_str() , R_OK))
@@ -62,10 +63,9 @@ void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 			close (_newSocket);
 			exit(0);
 		}
-		fullPath.erase(fullPath.find_last_of(*it), (*it).size() - 1);
+		fullPath.resize(fullPath.size() - ((*it).size() + 1));
 		std::cout << "supposed to be the sameFullpath:" << fullPath << std::endl;
 	}
-	
 }
 
 void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header )

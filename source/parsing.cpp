@@ -143,7 +143,7 @@ std::string	BuildRelativePath( std::string first, std::string second, std::strin
 {
 	if (first.empty() && second.empty() && third.empty())
 		return ("");
-	std::string	res = "./";
+	std::string	res = ""; // removed the ./ cause useless
 	res.append(first);
 	res.append("/");
 	res.append(second);
