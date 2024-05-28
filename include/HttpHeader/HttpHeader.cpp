@@ -12,23 +12,12 @@ HttpHeader::HttpHeader( std::string body ) : _error(0)
     iss.str(body);
     if (!(iss >> _method))
         _error = 400;
-    std::istringstream  stream(_method);
-/*     for (std::string buffer; !stream.eof(); stream.getline(buffer, '&'))
-    {
-        std::cout << "HttpHeader debug: - " << buffer << std::endl;
-    } */
     if (!(iss >> _file))
         _error = 400;
     if (!(iss >> _version))
         _error = 400;
-    if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0"))
-        _error = 505;   //  HTTP version not supported - we only work with 1.1 and 1.0
-    //  do post if post
-    //  to fetch if need
-    /* for (std::string    buffer; !iss.eof(); std::getline(iss, buffer))
-    {
-        std::cout << "HttpHeader debug: - " << buffer << std::endl;
-    } */
+    if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0") && _error == 0)
+        _error = 505;
 }
 
 HttpHeader::~HttpHeader()
