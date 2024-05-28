@@ -11,6 +11,7 @@
 - [x] why double-up message in answer message?
 - [ ] change all "\n" in http headers to "\r\n" when newline?
 - [ ] create meaningful socket / connection.
+- [ ] How do we handle closing server? graceful? hard stop? how to be sure there are no leaks?
 - [ ] what to do with the keepalive / persistent connection header?
 - [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [ ] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
