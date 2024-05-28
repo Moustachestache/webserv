@@ -32,7 +32,7 @@ class TcpServer : public Server
 /* 		void	ServerAnswer(std::string incoming); */
         void    ServerAnswerGet( HttpHeader &header );
         void	ServerAnswerError(int id);
-        void    ServerAnswerLs(std::string incoming, std::string path);
+        void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
     private:
         int                 _socket;

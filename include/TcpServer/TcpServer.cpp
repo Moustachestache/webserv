@@ -77,40 +77,43 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end)
 
 //	build webpage that lists folder
 //	struct dirent *readdir(DIR *dirp);
-void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
+void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 {
 	unsigned long		sent;
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
 
-	(void) incoming;
 	if (openDir == NULL)
 		ServerAnswerError(500);
-	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
-	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\">");
+	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
+	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\"><h1 class=\"grid\">index of " + path + "/</h1><table><th></th><th>type</th><th>name</th><th>mime/type</th>");
 	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
 	{
-		output.append("<div class=\"grid\" background-color=\"pico-background-slate-900\">");
+		output.append("<tr class=\"pico-background-grey-850\">");
 		if (folderScan->d_type == DT_DIR)
-			output.append("<div><i class=\"bx bx-folder\"></i></div>");
+			output.append("<td><i class=\"bx bx-folder\"></i></td><td>folder</td>");
 		else if (folderScan->d_type == DT_REG)
-			output.append("<div><i class=\"bx bxs-file\"></i></div>");
+			output.append("<td><i class=\"bx bxs-file\"></i></td><td>file</td>");
 		else if (folderScan->d_type == DT_UNKNOWN)
-			output.append("<div><i class=\"bx bx-meh-blank\"></i></div>");
-		output.append("<div><a href=\"./");
+			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
+		output.append("<td><a href=\"./");
 		output.append(folderScan->d_name);
 		output.append("\">");
 		output.append(folderScan->d_name);
-		output.append("</a></div><div>" + getMimeType(folderScan->d_name) + "</div>");
-		output.append("</div>");
+		output.append("</a></td><td>");
+		if (folderScan->d_type == DT_DIR)
+			output.append("folder");
+		else
+			output.append(getMimeType(folderScan->d_name));
+		output.append("</td>");
+		output.append("</tr>");
 	}
-	output.append("</div></body>");
+	output.append("</table></div></body>");
 	closedir(openDir);
+	output.insert(0, buildHeader(".html", 200, output.size()));
 	send(_newSocket, output.c_str(), output.size(), 0);
 	close (_newSocket);
 	exit(0);
-//	if (sent != output.size())
-//		throw	AnswerFailure();
 }
 
 void	TcpServer::ServerAnswerGet( HttpHeader &header )/* in the future &HttpHeader 
@@ -155,17 +158,14 @@ void	TcpServer::ServerListen()
 			std::string		incoming;
 			bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
 			incoming.append(buffer);
-			//	parse received http header
-			/*while (readed > 0)
-			{
-				readed = read(_newSocket, buffer, _maxHeaderSize);
-				incoming.append(buffer);
-			} */
+
 			HttpHeader		header(buffer);
+
 			if (header.getError() > 0)
 				ServerAnswerError(header.getError());
 			std::cout << incoming << std::endl;
-
+//	caca
+ServerAnswerLs(header, getenv("PWD"));
 			if (bytesReceived < 0)
 				throw IncomingBytesFailed();
 			else if (bytesReceived > _maxHeaderSize)

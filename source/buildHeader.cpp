@@ -5,7 +5,7 @@ std::string     buildHeader(std::string extension, int errorcode, int contentSiz
     HttpError   error;
     std::string returnStr("HTTP/1.1 ");
 
-    std::cout << extension << getMimeType(extension) << std::endl;
+    std::cout << extension << "\n" << getMimeType(extension) << "\n" << std::endl;
     returnStr.append(" " + ft_itoa(errorcode));
     returnStr.append(" " + error.getInfo(errorcode).type);
     returnStr.append("\r\n");
@@ -13,6 +13,7 @@ std::string     buildHeader(std::string extension, int errorcode, int contentSiz
     returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
     returnStr.append("connection: close\r\n");
     returnStr.append("\n");
-
+//  debug
+//    std::cout << "[DEBUG] return HTTP HEADER:" << returnStr << std::endl;
     return returnStr;
 }
