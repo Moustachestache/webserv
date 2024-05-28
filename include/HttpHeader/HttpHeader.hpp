@@ -13,5 +13,6 @@ class HttpHeader {
         int                             _error;
         std::string                     _method;
         std::string                     _file;
+        std::string                     _version;
         std::vector < std::string >     _args;
 };
