@@ -129,3 +129,11 @@ class	NoMethod : public std::exception
 
 			virtual const char* what( void ) const throw();
 };
+
+class	NoRouteDefined : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};

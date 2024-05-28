@@ -46,6 +46,7 @@ class Route
 		std::vector< std::string >	&getMethods( void );
 		std::string	&getPath( void );
 		std::string	&getRedirection( void );
+		std::vector<std::string>	&getDefaultPages( void );
 
 	private:
 
