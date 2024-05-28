@@ -40,7 +40,9 @@ std::string &HttpHeader::getFile()
     return  _file;
 }
 
-std::vector < std::string > &HttpHeader::getArgs()
+std::string &getHeaderByName(std::string name)
 {
-    return  _args;
+    std::string hehehehe;
+    return hehehehe;
+    // later
 }

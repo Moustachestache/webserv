@@ -14,7 +14,7 @@ NAME = webserv
 
 CXX = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-unused -O0 -fstandalone-debug 
+CPPFLAGS = -Wall -Wextra -g -std=c++98 -Wshadow -Wno-unused -O0 
 
 SRC =		source/main.cpp \
 			source/parsing.cpp \
