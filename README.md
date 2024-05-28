@@ -95,6 +95,8 @@ some other video: https://www.youtube.com/watch?v=eFCiNdY8CS4&ab_channel=Control
 
 get and post: https://www.ionos.fr/digitalguide/sites-internet/developpement-web/get-vs-post/
 
+practical to fetch mime types:      https://mimetype.io/all-types
+
 ##  .conf file components
 - Chose port and host of each server.
 - Setup server name or not.
