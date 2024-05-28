@@ -68,12 +68,12 @@ const char	*AnswerFailure::what( void ) const throw()
 
 const char	*FileNameError::what( void ) const throw()
 {
-	return ("Error: config file name must have '.conf' extention.");
+	return ("Error: config file name must have '.conf' extension.");
 }
 
 const char	*WrongPath::what( void ) const throw()
 {
-	return ("Error: wrong path found, make sure they are relative.");
+	return ("Error: root path cannot start with a \"/\"");
 }
 
 const char	*NoMethod::what( void ) const throw()

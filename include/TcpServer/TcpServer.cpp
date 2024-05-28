@@ -132,6 +132,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	DIR					*openDir = opendir(path.c_str());
 
 	(void) header;
+	path.erase(0, _root.size());
 	std::cout << "Path :" << path << std::endl;
 	if (openDir == NULL)
 		ServerAnswerError(500);
