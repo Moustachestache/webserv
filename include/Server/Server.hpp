@@ -65,4 +65,3 @@ class	Server
 		int						_maxConnections;
 		std::string				_errorLog; //lol
 };
-

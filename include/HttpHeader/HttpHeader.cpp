@@ -4,6 +4,9 @@ HttpHeader::HttpHeader( std::string body ) : _error(0)
 {
 //  GET /specials/saw-blade.gif HTTP/1.0
 //  Host: www.joes-hardware.com
+
+//  todo create KVP in a vector ? for get and post
+//  key = value (.htm?key=value)
     std::istringstream      ss;
 
     ss.str(body);
