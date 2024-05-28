@@ -68,10 +68,11 @@ void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 	
 }
 
-void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end )
+void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header )
 {
 	std::cout << filename << std::endl; // debug
 	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
+	// add check of "../"
 	std::cout << "Full path:" << fullPath << std::endl; //debug
 	DIR					*openDir = opendir(fullPath.c_str());
 	
@@ -80,7 +81,7 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end )
 		if (!route.getDefaultPages().empty())
 			checkAllDefaultPages(route.getDefaultPages(), fullPath);
 		std::cout << "ServerAnswerLs()" << std::endl;
-		ServerAnswerLs("", fullPath);
+		ServerAnswerLs(header, fullPath);
 	}
 	else if (!access( fullPath.c_str() , R_OK))
 	{
@@ -104,7 +105,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) 
 			if (filename.find(route.getPath()) == std::string::npos)
 				return (false);
 			filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
-			ifExistSend( route, filename, is_end );
+			ifExistSend( route, filename, is_end, header );
 			return (false);
 		}
 		else
@@ -113,7 +114,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) 
 			if (filename.find(route.getRedirection()) == std::string::npos)
 				return (false);
 			filename.erase(filename.find(route.getRedirection()), route.getRedirection().size() - 1);
-			ifExistSend( route, filename, is_end );
+			ifExistSend( route, filename, is_end, header );
 			return (false);
 		}
 	}
@@ -130,6 +131,8 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
 
+	(void) header;
+	std::cout << "Path :" << path << std::endl;
 	if (openDir == NULL)
 		ServerAnswerError(500);
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
@@ -211,8 +214,6 @@ void	TcpServer::ServerListen()
 			if (header.getError() > 0)
 				ServerAnswerError(header.getError());
 			std::cout << incoming << std::endl;
-//	caca
-ServerAnswerLs(header, getenv("PWD"));
 			if (bytesReceived < 0)
 				throw IncomingBytesFailed();
 			else if (bytesReceived > _maxHeaderSize)
