@@ -10,6 +10,7 @@
 
 TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket(), _addressLen(sizeof(_address))
 {
+
 }
 
 void	TcpServer::ServerStart()
@@ -46,29 +47,75 @@ void	TcpServer::ServerStart()
 		throw	AnswerFailure();
 } */
 
-bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end)
+void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath )
+{
+	for (std::vector < std::string >::iterator it = pages.begin(); it != pages.end(); it++)
+	{
+		std::cout << "Fullpath:" << fullPath << std::endl;
+		fullPath.append(*it);
+		std::cout << "to search: " << fullPath << "filename:" << *it << std::endl;
+		if (!access( fullPath.c_str() , R_OK))
+		{
+			std::string	awnser = returnFileStr(fullPath);
+			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos), 200, awnser.size()));
+			send(_newSocket, awnser.c_str(), awnser.size(), 0);
+			close (_newSocket);
+			exit(0);
+		}
+		fullPath.erase(fullPath.find_last_of(*it), (*it).size() - 1);
+		std::cout << "supposed to be the sameFullpath:" << fullPath << std::endl;
+	}
+	
+}
+
+void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end )
+{
+	std::cout << filename << std::endl; // debug
+	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
+	std::cout << "Full path:" << fullPath << std::endl; //debug
+	DIR					*openDir = opendir(fullPath.c_str());
+	
+	if (openDir)
+	{
+		if (!route.getDefaultPages().empty())
+			checkAllDefaultPages(route.getDefaultPages(), fullPath);
+		std::cout << "ServerAnswerLs()" << std::endl;
+		ServerAnswerLs("", fullPath);
+	}
+	else if (!access( fullPath.c_str() , R_OK))
+	{
+		std::string	awnser = returnFileStr(fullPath);
+		awnser.insert(0,  buildHeader(filename.substr(filename.find_last_of("."), std::string::npos), 200, awnser.size()));
+		send(_newSocket, awnser.c_str(), awnser.size(), 0);
+		close (_newSocket);
+		exit(0);
+	}
+	else if (is_end)
+		ServerAnswerError(404);
+}
+
+bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) // 
 {
 	if (std::find(route.getMethods().begin(), route.getMethods().end(), header.getMethod()) != route.getMethods().end())
 	{
-		std::string	filename;
 		if (route.getRedirection().empty())
 		{
-			filename = header.getFile();
+			std::string filename = header.getFile();
 			if (filename.find(route.getPath()) == std::string::npos)
 				return (false);
 			filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
-			std::cout << filename << std::endl;
-			std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
-			if (!access( fullPath.c_str() , R_OK))
-			{
-				std::string	awnser = returnFileStr(fullPath);
-				awnser.insert(0,  buildHeader(filename.substr(filename.find_last_of("."), std::string::npos), 200, awnser.size()));
-				send(_newSocket, awnser.c_str(), awnser.size(), 0);
-				close (_newSocket);
-				exit(0);
-			}
+			ifExistSend( route, filename, is_end );
+			return (false);
 		}
-		return (true);
+		else
+		{
+			std::string filename = header.getFile();
+			if (filename.find(route.getRedirection()) == std::string::npos)
+				return (false);
+			filename.erase(filename.find(route.getRedirection()), route.getRedirection().size() - 1);
+			ifExistSend( route, filename, is_end );
+			return (false);
+		}
 	}
 	else if (is_end)
 		ServerAnswerError(405);
@@ -77,7 +124,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end)
 
 //	build webpage that lists folder
 //	struct dirent *readdir(DIR *dirp);
-void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
+void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)/*	Do we remove incoming ?	*/
 {
 	unsigned long		sent;
 	std::string			output;
@@ -113,8 +160,7 @@ void	TcpServer::ServerAnswerLs(std::string incoming, std::string path)
 //		throw	AnswerFailure();
 }
 
-void	TcpServer::ServerAnswerGet( HttpHeader &header )/* in the future &HttpHeader 
-																		with all the infos inside */
+void	TcpServer::ServerAnswerGet( HttpHeader &header )
 {
 	std::vector< Route >	route = getRoute();
 
@@ -123,6 +169,7 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )/* in the future &HttpHeade
 		if (checkValidRoute(header, *it, (it + 1 == route.end())))
 			return ;
 	}
+	ServerAnswerError(404);
 }
 
 void	TcpServer::ServerAnswerError(int id)
@@ -134,7 +181,7 @@ void	TcpServer::ServerAnswerError(int id)
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
-    close(_newSocket);
+	close(_newSocket);
 	exit(1);
 }
 

@@ -39,6 +39,11 @@ std::string	&Route::getRedirection( void )
 	return (_redirection);
 }
 
+std::vector< std::string >	&Route::getDefaultPages( void )
+{
+	return (_defaultPages);
+}
+
 void	Route::checkInfo( void )
 {
 	/*	Implement all the variable checks here

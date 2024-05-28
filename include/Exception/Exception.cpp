@@ -80,3 +80,8 @@ const char	*NoMethod::what( void ) const throw()
 {
 	return ("Error: server route must have at least one HTTP method.");
 }
+
+const char	*NoRouteDefined::what( void ) const throw()
+{
+	return ("Error: server must have at least one route.");
+}
