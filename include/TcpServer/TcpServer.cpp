@@ -145,7 +145,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 			output.append("<td><i class=\"bx bxs-file\"></i></td><td>file</td>");
 		else if (folderScan->d_type == DT_UNKNOWN)
 			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
-		output.append("<td><a href=\"./");
+		output.append("<td><a href=\"./" + path + "/");
 		output.append(folderScan->d_name);
 		output.append("\">");
 		output.append(folderScan->d_name);

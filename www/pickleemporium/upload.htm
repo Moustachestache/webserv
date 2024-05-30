@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light"/>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" href="pico.green.css">
+        <link rel="stylesheet" href="style.css">
+    <title>upload - pickle emporium</title>
+</head>
+<body class="container">
+<nav>
+    <ul>
+        <li style="text-transform: uppercase; background-image: url(pickleman.png); background-size:contain; padding-left: 5em; background-position: left center;">the Pickle Emporium</li>
+    </ul>
+    <ul>
+        <li><a class="pickle button" href="./index.htm">< Go Back</a></li>
+    </ul>
+</nav>
+    <header>
+    </header>
+    <article>
+        <header>
+            This form is to collect pictures of your pickles.
+        </header>
+        <form action="./upload.htm" method="POST">
+            <fieldset class="grid">
+                <label>Pickle Name
+                    <input
+                    name="picklename"
+                    placeholder="steve"
+                    />
+                    <small>Choose appropriate name.</small>
+                </label>
+                <label>Sound
+                    <select name="noise" id="noise">
+                        <option value="1">gnoosh</option>
+                        <option value="2">squeek</option>
+                        <option value="3">urkurk</option>
+                        <option value="4">sploosh</option>
+                        <option value="5">sploosh but *more* wet</option>
+                        <option value="6">cronch</option>
+                    </select>
+                    <small>Make sure to double check the sound.</small>
+                </label>
+                <label>Pickle Colour
+                    <input
+                    type="color"
+                    value="#338613"
+                    aria-label="Color picker"
+                    />
+                    <small>Colour will be checked with our super advanced AI.</small>
+                </label>
+            </fieldset>
+            <section>
+            <fieldset>
+
+            </fieldset>
+            </section>
+            <fieldset class="grid">
+                <label for="picture">
+                    <input type="file" id="picture" name="picture" accept="image/png, image/jpeg, image/gif" />
+                    <small>Pick a pickle picture.</small>
+                </label>
+                <input
+                    type="submit"
+                    action="submit"
+                    value="send"
+                />
+                <input
+                    class="disabled"
+                    type="reset"
+                    value="🥒"
+                />
+            </fieldset>
+        </form>
+        <footer>
+            Please remember this is a good christian website.
+            <br />God is watching, act accordingly.
+        </footer>
+    </article>
+</body>
+</html>

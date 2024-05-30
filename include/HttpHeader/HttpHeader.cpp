@@ -4,31 +4,36 @@ HttpHeader::HttpHeader( std::string body ) : _error(0)
 {
 //  GET /specials/saw-blade.gif HTTP/1.0
 //  Host: www.joes-hardware.com
-
-//  todo create KVP in a vector ? for get and post
-//  key = value (.htm?key=value)
     std::istringstream      iss;
 
     iss.str(body);
     if (!(iss >> _method))
         _error = 400;
-    std::istringstream  stream(_method);
-/*     for (std::string buffer; !stream.eof(); stream.getline(buffer, '&'))
-    {
-        std::cout << "HttpHeader debug: - " << buffer << std::endl;
-    } */
-    if (!(iss >> _file))
+    if (!(iss >> _ressource))
         _error = 400;
     if (!(iss >> _version))
         _error = 400;
-    if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0"))
-        _error = 505;   //  HTTP version not supported - we only work with 1.1 and 1.0
-    //  do post if post
-    //  to fetch if need
-    /* for (std::string    buffer; !iss.eof(); std::getline(iss, buffer))
+    if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0") && _error == 0)
+        _error = 505;
+    //  parse all headers
+    std::string buffer;
+    std::string index;
+    int i = 0;
+    while (std::getline(iss, buffer))
     {
-        std::cout << "HttpHeader debug: - " << buffer << std::endl;
-    } */
+        i = buffer.find_first_of(":");
+        index = buffer.substr(0, i - 1);
+        _args[index] = buffer.substr(i + 1, std::string::npos);
+        if (!index.compare("multipart/form-data"))  //not handled yet
+            _error = 501;
+        else if (!index.compare("application/x-www-form-urlencoded"))
+        {
+        //    _filePath = savePostFile(iss, _args[index]);
+        }
+    }
+    //  parse all get
+
+    //  parse all post
 }
 
 HttpHeader::~HttpHeader()
@@ -48,10 +53,5 @@ int &HttpHeader::getError()
 
 std::string &HttpHeader::getFile()
 {
-    return  _file;
-}
-
-std::vector < std::string > &HttpHeader::getArgs()
-{
-    return  _args;
+    return  _ressource;
 }

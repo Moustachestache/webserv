@@ -10,9 +10,11 @@ class HttpHeader {
         int &getError();
         std::vector < std::string > &getArgs();
     private:
-        int                             _error;
-        std::string                     _method;
-        std::string                     _file;
-        std::string                     _version;
-        std::vector < std::string >     _args;
+        int             _error;
+        std::string     _method;
+        std::string     _ressource;
+        //  path = cgi-bin/file-id.temp
+        std::string     _filePath;
+        std::string     _version;
+        std::map < std::string, std::string >    _args;
 };

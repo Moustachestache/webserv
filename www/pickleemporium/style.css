@@ -1,0 +1,77 @@
+html
+{
+    background-image: url(pickles.gif);
+    background-repeat: repeat;
+    height: 100%;
+}
+main
+{
+    background-position: top right;
+    height: 100%;
+}
+nav
+{
+    border-radius: 3px;
+    padding: 1em;
+    opacity: 90%;
+    background-color: white;
+}
+body
+{
+    background-blend-mode: normal;
+}
+article img
+{
+    border: 3px black;
+    margin: 1em 0;
+    opacity: 100%;
+    border-radius: 8px;
+    border: 1px solid #00000073;
+}
+article header
+{
+    font-weight: bold;
+}
+article footer
+{
+    font-weight: 300;
+}
+article footer article
+{
+    font-weight: normal;
+}
+.pickle
+{
+    background-size: cover;
+    text-align: center;
+}
+.pickle:hover
+{
+    background-image: url(picklehover.gif);
+    box-shadow: inset 0px -5px  rgba(21, 255, 0, 0.158);
+    text-shadow: 0px 0px 3px rgb(12, 163, 37);
+    color: white;
+    transition: 0s;
+}
+ul
+{
+    padding-left: 3em;
+}
+.inlineimgleft
+{
+    margin: 0;
+    margin-right: 1em;
+    display: inline;
+    float: left;
+    width: 20%;
+    border-radius: 8px;
+}
+.inlineimgright
+{
+    margin: 0;
+    margin-left: 1em;
+    display: inline;
+    float: right;
+    width: 20%;
+    border-radius: 8px;
+}
