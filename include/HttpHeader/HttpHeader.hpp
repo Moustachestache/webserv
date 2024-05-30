@@ -12,7 +12,9 @@ class HttpHeader {
     private:
         int             _error;
         std::string     _method;
-        std::string     _file;
+        std::string     _ressource;
+        //  path = cgi-bin/file-id.temp
+        std::string     _filePath;
         std::string     _version;
         std::map < std::string, std::string >    _args;
 };
