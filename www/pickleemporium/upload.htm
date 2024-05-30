@@ -24,7 +24,7 @@
         <header>
             This form is to collect pictures of your pickles.
         </header>
-        <form action="./sending.htm" enctype="multipart/form-data" method="POST">
+        <form action="sending.htm" method="post" enctype="multipart/form-data">
             <fieldset class="grid">
                 <label>Pickle Name
                     <input
@@ -46,17 +46,14 @@
                 </label>
                 <label>Pickle Colour
                     <input
+                    name="color"
                     type="color"
                     value="#338613"
-                    aria-label="Color picker"
                     />
                     <small>Colour will be checked with our super advanced AI.</small>
                 </label>
             </fieldset>
             <section>
-            <fieldset>
-
-            </fieldset>
             </section>
             <fieldset class="grid">
                 <label for="picture">

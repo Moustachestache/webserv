@@ -131,7 +131,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	DIR					*openDir = opendir(path.c_str());
 
 	(void) header;
-	path.erase(0, _root.size());
+	path.erase(0, _root.size() + 1);
 	if (openDir == NULL)
 		ServerAnswerError(500);
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
@@ -145,7 +145,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 			output.append("<td><i class=\"bx bxs-file\"></i></td><td>file</td>");
 		else if (folderScan->d_type == DT_UNKNOWN)
 			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
-		output.append("<td><a href=\"./" + path + "/");
+		output.append("<td><a href=\"" + path);
 		output.append(folderScan->d_name);
 		output.append("\">");
 		output.append(folderScan->d_name);

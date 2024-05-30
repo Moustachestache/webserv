@@ -29,6 +29,7 @@ static  mimeType    mimetable[] = {
         {"text/plain", ".c"},
         {"text/plain", ".cpp"},
         {"text/markdown", ".md"},
+        {"text/javascript", ".js"}, //  sisi ca me permet de .js le rat
         {"text/gitignore", ".gitignore"},   // this one is made up LOL
         {"", ""} };
 
