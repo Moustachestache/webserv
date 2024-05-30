@@ -6,11 +6,13 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:05 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/26 15:01:47 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/05/30 12:15:10 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.hpp"
+
+bool	ServerRunning = 1;
 
 std::string	returnFileStr( std::string fileName )
 {
@@ -24,6 +26,13 @@ std::string	returnFileStr( std::string fileName )
 	return (fileContent);
 }
 
+void	stopServer( int sig )
+{
+	(void) sig;
+	std::cout << "\r" << "Stoping server..." << std::endl;
+	ServerRunning = 0;
+}
+
 int	main( int ac, char **av)
 {
 	if (ac != 2)
@@ -31,7 +40,8 @@ int	main( int ac, char **av)
 		std::cerr << "Wrong number of argument. Usage: ./webserv [configuration file]" << std::endl;
 		return (1);
 	}
-	Prog	data;
+	signal(SIGINT, stopServer);
+	Prog	data( ServerRunning );
 	try
 	{
 		data.parseFile( av[1] );

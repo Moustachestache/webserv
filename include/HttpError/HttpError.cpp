@@ -58,6 +58,11 @@ HttpError::HttpError()
 }*/
 }
 
+HttpError::HttpError( HttpError &val ) : _errorList(val._errorList)
+{
+
+}
+
 HttpError::~HttpError()
 {
 /*     for (std::map < int, errorinfo >::iterator itr = _errorList.begin(); itr != _errorList.end(); itr++)

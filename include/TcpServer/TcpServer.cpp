@@ -8,24 +8,26 @@
 //  but really this should never happen lol
 } */
 
-TcpServer::TcpServer( std::string &serverStr ) : Server(serverStr), _newSocket(), _addressLen(sizeof(_address))
+TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
+													Socket(_ipStr, _port), \
+													_newSocket(), \
+													_addressLen(sizeof(_address))
+{
+	std::cout << "Starting server: " << _serverName <<  " at " << _ipStr << " on port " << _port << std::endl;
+}
+
+// Copy constructor
+TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
+											Socket(val), \
+											_newSocket(val._newSocket), \
+											_address(val._address), \
+											_addressLen(val._addressLen)
 {
 
 }
 
 void	TcpServer::ServerStart()
 {
-	_socket = socket(AF_INET, SOCK_STREAM, 0);
-	if (_socket < 0)
-		throw SocketError();
-	//	end default
-	_address.sin_family = AF_INET;
-	_address.sin_port = ntohs(_port);
-		_address.sin_addr.s_addr = inet_addr(_ipStr.c_str());
-	//_address.sin_addr.s_addr = ntohl(_ip);
-	if (bind(_socket, (sockaddr *)&_address, _addressLen) < 0)
-		throw ConnectError();
-	std::cout << "Starting server: " << _serverName <<  " at " << _ipStr << " on port " << _port << std::endl;
 	ServerListen();
 }
 
@@ -47,7 +49,7 @@ void	TcpServer::ServerStart()
 		throw	AnswerFailure();
 } */
 
-void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath )
+bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath )
 {
 	for (std::vector < std::string >::iterator it = pages.begin(); it != pages.end(); it++)
 	{
@@ -60,12 +62,12 @@ void	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 			std::string	awnser = returnFileStr(fullPath);
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos), 200, awnser.size()));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
-			close (_newSocket);
-			exit(0);
+			return (true);
 		}
 		fullPath.resize(fullPath.size() - ((*it).size() + 1));
 		std::cout << "supposed to be the sameFullpath:" << fullPath << std::endl;
 	}
+	return (false);
 }
 
 void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header )
@@ -78,8 +80,12 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, H
 	
 	if (openDir)
 	{
+		closedir(openDir);
 		if (!route.getDefaultPages().empty())
-			checkAllDefaultPages(route.getDefaultPages(), fullPath);
+		{
+			if (checkAllDefaultPages(route.getDefaultPages(), fullPath))
+				return ;
+		}
 		std::cout << "ServerAnswerLs()" << std::endl;
 		ServerAnswerLs(header, fullPath);
 	}
@@ -88,8 +94,7 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, H
 		std::string	awnser = returnFileStr(fullPath);
 		awnser.insert(0,  buildHeader(filename.substr(filename.find_last_of("."), std::string::npos), 200, awnser.size()));
 		send(_newSocket, awnser.c_str(), awnser.size(), 0);
-		close (_newSocket);
-		exit(0);
+		return ;
 	}
 	else if (is_end)
 		ServerAnswerError(404);
@@ -127,7 +132,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) 
 //	struct dirent *readdir(DIR *dirp);
 void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 {
-	unsigned long		sent;
+	//unsigned long		sent;
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
 
@@ -163,8 +168,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	closedir(openDir);
 	output.insert(0, buildHeader(".html", 200, output.size()));
 	send(_newSocket, output.c_str(), output.size(), 0);
-	close (_newSocket);
-	exit(0);
+	return ;
 }
 
 void	TcpServer::ServerAnswerGet( HttpHeader &header )
@@ -188,43 +192,31 @@ void	TcpServer::ServerAnswerError(int id)
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
-	close(_newSocket);
-	exit(1);
+	return ;
 }
 
 void	TcpServer::ServerListen()
 {
-	if (listen(_socket, _maxConnections) < 0)
-		throw ListenFailed();
 	int	bytesReceived = 0;
-	while (bytesReceived >= 0 && bytesReceived <= _maxConnections)
-	{
-		_newSocket = accept(_socket, (sockaddr *)&_address, &_addressLen);
-		int pid = fork();
-		if (!pid)
-		{
-			if (_newSocket < 0)
-				throw NewSocketError();
-			char buffer[_maxHeaderSize + 2];
-			std::string		incoming;
-			bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
-			incoming.append(buffer);
-
-			HttpHeader		header(buffer);
-
-			if (header.getError() > 0)
-				ServerAnswerError(header.getError());
-			std::cout << incoming << std::endl;
-			if (bytesReceived < 0)
-				throw IncomingBytesFailed();
-			else if (bytesReceived > _maxHeaderSize)
-				ServerAnswerError(413);
-			else 
-				ServerAnswerGet(header);
-			close(_newSocket);
-			exit(0);
-		}
-	}
+	_newSocket = accept(_socket, (sockaddr *)&_address, &_addressLen);
+	if (_newSocket < 0)
+		throw NewSocketError();
+	char buffer[_maxHeaderSize + 2];
+	std::string		incoming;
+	bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
+	incoming.append(buffer);
+		HttpHeader		header(buffer);
+		if (header.getError() > 0)
+		ServerAnswerError(header.getError());
+	std::cout << incoming << std::endl;
+	if (bytesReceived < 0)
+		throw IncomingBytesFailed();
+	else if (bytesReceived > _maxHeaderSize)
+		ServerAnswerError(413);
+	else 
+		ServerAnswerGet(header);
+	std::cout << "Server awnser end closing client socket..." << std::endl;
+	close(_newSocket);
 }
 
 TcpServer::~TcpServer()

@@ -2,6 +2,7 @@
 
 # include "../main.hpp"
 # include "../Server/Server.hpp"
+# include "../Socket/Socket.hpp"
 # include "../HttpHeader/HttpHeader.hpp"
 
 /*#include <netinet/in.h>
@@ -19,16 +20,18 @@ struct in_addr {
 
 class   HttpHeader;
 
-class TcpServer : public Server
+class TcpServer : public Server, public Socket
 {
     public:
+
         //TcpServer();
         TcpServer( std::string &serverStr );
+        TcpServer( TcpServer &val );
         ~TcpServer();
 
         bool    checkValidRoute( HttpHeader &header, Route &route, bool is_end);
         void	ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header );
-        void    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
+        bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
 
         void	ServerListen();
 /* 		void	ServerAnswer(std::string incoming); */
@@ -36,8 +39,9 @@ class TcpServer : public Server
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
+
     private:
-        int                 _socket;
+
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;

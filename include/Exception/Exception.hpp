@@ -137,3 +137,19 @@ class	NoRouteDefined : public std::exception
 
 			virtual const char* what( void ) const throw();
 };
+
+class	TooMuchServers : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};
+
+class	SelectFailed : public std::exception
+{
+
+		public:
+
+			virtual const char* what( void ) const throw();
+};

@@ -85,3 +85,13 @@ const char	*NoRouteDefined::what( void ) const throw()
 {
 	return ("Error: server must have at least one route.");
 }
+
+const char	*TooMuchServers::what( void ) const throw()
+{
+	return ("Error: please make sure you have less than FD_SETSIZE servers.");
+}
+
+const char	*SelectFailed::what( void ) const throw()
+{
+	return ("Error: select call failed.");
+}

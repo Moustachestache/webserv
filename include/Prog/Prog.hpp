@@ -9,7 +9,7 @@ class Prog
 {
 	public:
 
-		Prog( void );
+		Prog( bool &ServerRunning );
 		~Prog();
 
 		void	parseFile( char *filePath );
@@ -22,7 +22,12 @@ class Prog
 
 		void	removeComment( std::string &fileContent );
 		void	getServerStr( std::string &fileContent );
+		void	ServerRoutine( void );
 
 		std::vector < TcpServer * >	_servers;
+
+		fd_set	fdSet;
+
+		bool	&_serverRunning;
 
 };

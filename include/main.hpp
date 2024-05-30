@@ -21,6 +21,11 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <dirent.h>
+# include <sys/time.h>
+# include <sys/select.h>
+# include <stdlib.h>
+# include <signal.h>
+
 
 /*		CLASSES		*/
 

@@ -1,7 +1,7 @@
 
 #include "Prog.hpp"
 
-Prog::Prog( void )
+Prog::Prog( bool &serverRunning ) : _serverRunning(serverRunning)
 {
 
 }
@@ -14,8 +14,36 @@ Prog::~Prog()
 
 void	Prog::startAllServers( void )
 {
+	if (_servers.size() > FD_SETSIZE) /* FD_SETSIZE is the limit set by select, see man select -> DESCRIPTION */
+		throw TooMuchServers();
 	for (std::vector<TcpServer *>::iterator it = _servers.begin(); it != _servers.end(); it++)
-		(*it)->ServerStart();
+	{
+		if (listen((*it)->getSocket(), _servers.size()) < 0)
+			throw ListenFailed();
+	}
+	ServerRoutine();
+}
+
+void	Prog::ServerRoutine( void )
+{
+	while (_serverRunning)
+	{
+		FD_ZERO(&fdSet);
+		for (std::vector<TcpServer *>::iterator it = _servers.begin(); it != _servers.end(); it++)
+			FD_SET((*it)->getSocket(), &fdSet);
+		if (select(_servers.back()->getSocket() + 1, &fdSet, 0, 0, 0) < 0)
+		{
+			if (_serverRunning)
+				throw SelectFailed();
+			return ;
+		}
+		for (std::vector<TcpServer *>::iterator it = _servers.begin(); it != _servers.end(); it++)
+		{
+			if (FD_ISSET((*it)->getSocket(), &fdSet))
+				(*it)->ServerListen();
+		}
+	}
+	FD_ZERO(&fdSet);
 }
 
 std::string	Prog::getServerStrDebug( void )
