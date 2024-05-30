@@ -53,10 +53,8 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 {
 	for (std::vector < std::string >::iterator it = pages.begin(); it != pages.end(); it++)
 	{
-		std::cout << "Fullpath:" << fullPath << std::endl;
 		fullPath.append("/");
 		fullPath.append(*it);
-		std::cout << "to search: " << fullPath << "filename:" << *it << std::endl;
 		if (!access( fullPath.c_str() , R_OK))
 		{
 			std::string	awnser = returnFileStr(fullPath);
@@ -65,17 +63,14 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 			return (true);
 		}
 		fullPath.resize(fullPath.size() - ((*it).size() + 1));
-		std::cout << "supposed to be the sameFullpath:" << fullPath << std::endl;
 	}
 	return (false);
 }
 
 void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header )
 {
-	std::cout << filename << std::endl; // debug
 	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
 	// add check of "../"
-	std::cout << "Full path:" << fullPath << std::endl; //debug
 	DIR					*openDir = opendir(fullPath.c_str());
 	
 	if (openDir)
@@ -86,7 +81,6 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, H
 			if (checkAllDefaultPages(route.getDefaultPages(), fullPath))
 				return ;
 		}
-		std::cout << "ServerAnswerLs()" << std::endl;
 		ServerAnswerLs(header, fullPath);
 	}
 	else if (!access( fullPath.c_str() , R_OK))
@@ -138,7 +132,6 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 
 	(void) header;
 	path.erase(0, _root.size());
-	std::cout << "Path :" << path << std::endl;
 	if (openDir == NULL)
 		ServerAnswerError(500);
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
@@ -205,21 +198,22 @@ void	TcpServer::ServerListen()
 	std::string		incoming;
 	bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
 	incoming.append(buffer);
+	std::cout << "--HEADER_START--" << incoming << "--HEADER_END--" << std::flush; /* debug */
 		HttpHeader		header(buffer);
 		if (header.getError() > 0)
 		ServerAnswerError(header.getError());
-	std::cout << incoming << std::endl;
 	if (bytesReceived < 0)
 		throw IncomingBytesFailed();
 	else if (bytesReceived > _maxHeaderSize)
 		ServerAnswerError(413);
 	else 
 		ServerAnswerGet(header);
-	std::cout << "Server awnser end closing client socket..." << std::endl;
 	close(_newSocket);
+	_newSocket = 0;
 }
 
 TcpServer::~TcpServer()
 {
-    //close(_socket);
+	if (_newSocket)
+		close(_newSocket);
 }

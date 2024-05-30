@@ -1,3 +1,5 @@
 *.o
 webserv
 .vscode
+PostData.txt
+test

@@ -74,7 +74,7 @@ void	Server::processError( std::string &line )
 	else if (!(iss >> word))
 		throw WrongVariableAssignment();
 	_httpError.addErrorPage(ft_atoi(id), word);
-	std::cout << "[DEBUG] Custom error page added : id=" << id << " - path=" << word << std::endl; /*	DEBUG	*/
+	//std::cout << "[DEBUG] Custom error page added : id=" << id << " - path=" << word << std::endl; /*	DEBUG	*/
 	if (iss >> word)
 		throw WrongVariableAssignment();
 }
