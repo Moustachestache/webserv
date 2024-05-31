@@ -3,13 +3,14 @@
 
 class HttpHeader {
     public:
-        HttpHeader( std::string body );
+        HttpHeader( int socket, Server &ptrServer );
         ~HttpHeader();
         std::string &getMethod();
         std::string &getFile();
         int &getError();
         std::vector < std::string > &getArgs();
     private:
+        static int      _bufferSize;
         int             _error;
         std::string     _method;
         std::string     _ressource;
