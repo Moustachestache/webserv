@@ -9,7 +9,7 @@
 } */
 
 TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
-													Socket(_ipStr, _port), \
+													_socket(_ipStr, _port), \
 													_newSocket(), \
 													_addressLen(sizeof(_address))
 {
@@ -18,7 +18,7 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 
 // Copy constructor
 TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
-											Socket(val), \
+											_socket(_ipStr, _port), \
 											_newSocket(val._newSocket), \
 											_address(val._address), \
 											_addressLen(val._addressLen)
@@ -191,7 +191,7 @@ void	TcpServer::ServerAnswerError(int id)
 void	TcpServer::ServerListen()
 {
 	int	bytesReceived = 0;
-	_newSocket = accept(_socket, (sockaddr *)&_address, &_addressLen);
+	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
 	char buffer[_maxHeaderSize + 2];

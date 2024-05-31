@@ -20,7 +20,7 @@ struct in_addr {
 
 class   HttpHeader;
 
-class TcpServer : public Server, public Socket
+class TcpServer : public Server
 {
     public:
 
@@ -39,9 +39,11 @@ class TcpServer : public Server, public Socket
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
+        int     getSocket( void ) { return _socket.getSocket(); }
 
     private:
 
+        Socket              _socket;
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;
