@@ -71,6 +71,8 @@ Additional HTTP status codes: https://datatracker.ietf.org/doc/html/rfc6585
 CGI specification document: https://www.rfc-editor.org/info/rfc3875
 
 ##	links
+the bible:           https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf
+
 C++ http server writeup:    https://osasazamegbe.medium.com/showing-building-an-http-server-from-scratch-in-c-2da7c0db6cb7
 -> regarding sockaddr_in:   https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html and http://www.ccplusplus.com/2011/10/struct-sockaddrin.html
 
