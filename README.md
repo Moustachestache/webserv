@@ -16,6 +16,8 @@
 - [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [ ] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
 - [ ] re-build httpheader object that parses incoming header
+- [ ] add Allow header to response that lists allowed ehaders
+- [ ] add error 411 see httpHeader object
       
 easy todo
 - [x] make server send back info
