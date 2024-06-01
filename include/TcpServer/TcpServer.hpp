@@ -29,13 +29,14 @@ class TcpServer : public Server
         TcpServer( TcpServer &val );
         ~TcpServer();
 
-        bool    checkValidRoute( HttpHeader &header, Route &route, bool is_end);
-        void	ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header );
+        void    checkValidRoute( HttpHeader &header, Route &route, std::string &res );
+        void	ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res );
         bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
 
         void	ServerListen();
 /* 		void	ServerAnswer(std::string incoming); */
         void    ServerAnswerGet( HttpHeader &header );
+        void    ServerAnswerDelete( HttpHeader &header );
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
@@ -44,6 +45,7 @@ class TcpServer : public Server
     private:
 
         Socket              _socket;
+        char                **_env;
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;

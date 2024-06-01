@@ -1,7 +1,7 @@
 
 #include "Prog.hpp"
 
-Prog::Prog( bool &serverRunning ) : _serverRunning(serverRunning)
+Prog::Prog( bool &serverRunning, char **env ) : _serverRunning(serverRunning), _env(env)
 {
 
 }
