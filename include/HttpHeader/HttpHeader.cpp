@@ -1,34 +1,29 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-int HttpHeader::_bufferSize = 512;
+int HttpHeader::_bufferSize = 69;
 
 HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
 {
     (void) ptrServer;
-    std::string headerData;
     char    buffer[_bufferSize + 1];
-    int bytesReceived = read(socket, buffer, 512);
 
-    //  read header untuil body
-    while (headerData.find("\r\n\r\n") == std::string::npos)
+    //  read header until body
+    int bytesReceived = recv(socket, buffer, _bufferSize, 0);
+    std::string headerData(buffer);
+    while (headerData.find("\r\n\r\n") == std::string::npos /* && bytesReceived > 0 */)
     {
-        std::cout << buffer << std::endl;
-        bytesReceived = read(socket, buffer, 512);
+        bytesReceived = recv(socket, buffer, _bufferSize, 0);
         headerData.append(buffer);
     }
     //  stash leftover body info
-    std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), std::string::npos);
-    headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
-    while (bodyData.find("\r\n\r\n") == std::string::npos)
-    {
-        bytesReceived = read(socket, buffer, 512);
-        bodyData.append(buffer);
-    }
+    //  please change or kill me
+    std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
 
-    std::cout << "header:" << std::endl << headerData << std::endl;
-    std::cout << "body:" << std::endl << bodyData << std::endl;
-
+    //  process header 1st phrase
+    //  note:
+    //  this is only the header
+    //  -> possible body info left to be recv'd
     std::istringstream      iss;
     iss.str(headerData);
     if (!(iss >> _method))
@@ -39,21 +34,54 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
         _error = 400;
     if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0") && _error == 0)
         _error = 505;
-
+    //  https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/431
+    //  huh
+    if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
+        _error = 431;
+    //  stash each header into the map
+    unsigned int i;
     std::string line;
     std::string index;
-    for (int i = 0; !iss.eof() && _error == 0; std::getline(iss, line))
+    std::string strBuffer;
+    std::getline(iss, line);
+    while (iss.good() && _error == 0)
     {
+        stringSanitize(line);
         i = line.find_first_of(":");
-        index = line.substr(0, i - 1);
-        _args[index] = line.substr(i + 1, std::string::npos);
-        if (!index.compare("multipart/form-data"))  //not handled yet
-            std::cout << "lol" << std::endl;
-        else if (!index.compare("application/x-www-form-urlencoded"))
+        if (!line.empty() && line.size() != 0 && i != std::string::npos)
         {
-            _error = 501;
+            index = line.substr(0, i);
+            strBuffer = line.substr(i + 2, line.size() - i);
+            _args[index] = strBuffer;
+            std::cout << "index :" << index << std::endl;
+            std::cout << "data  :" << strBuffer << std::endl;
         }
+        std::getline(iss, line);
     }
+    //do:
+    //if "content-length" undefined or empty as a fiel (0 and above accepted)
+    //return error 411
+
+    //  check request size and body size
+    //  if body size too big output error 413
+    //  process body if need (get or post and content length)
+
+    //  must process every single kvp
+    //  and file too!!
+}
+
+void    HttpHeader::stringSanitize(std::string &str)
+{
+    int begin = 0;
+    while (isspace(str[begin]))
+        begin++;
+    int end = str.size();
+    while (isspace(str[end]))
+        end--;
+    if (begin >= end)
+        str = "";
+    else
+        str = str.substr(begin, end);
 }
 
 HttpHeader::~HttpHeader()

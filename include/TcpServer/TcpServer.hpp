@@ -40,8 +40,6 @@ class TcpServer : public Server, public Socket
         void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
 
-        int     getMaxHeaderSize();
-
     private:
 
         int                 _newSocket;

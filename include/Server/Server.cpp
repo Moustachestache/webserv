@@ -194,3 +194,13 @@ std::string Server::outputErrorPage(int id)
 	}
 	return strFile;
 }
+
+int     Server::getMaxHeaderSize()
+{
+	return _maxHeaderSize;       
+}
+
+int     Server::getMaxRequestSize()
+{
+	return _requestSize;
+}

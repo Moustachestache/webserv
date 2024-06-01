@@ -9,6 +9,7 @@ class HttpHeader {
         std::string &getFile();
         int &getError();
         std::vector < std::string > &getArgs();
+        void    stringSanitize(std::string &str);
     private:
         static int      _bufferSize;
         int             _error;

@@ -215,11 +215,6 @@ void	TcpServer::ServerListen()
 	_newSocket = 0;
 }
 
-int     TcpServer::getMaxHeaderSize()
-{
-	return _maxHeaderSize;       
-}
-
 TcpServer::~TcpServer()
 {
 	if (_newSocket)
