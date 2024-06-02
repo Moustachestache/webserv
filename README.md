@@ -56,6 +56,8 @@ who is EOF
 what is chunked request? How to unchunk?
 
 ##	RFC / Documentation
+HTTP:            https://datatracker.ietf.org/doc/html/rfc2616
+
 HTTP Headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 
 HTTP response headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages#http_responses
