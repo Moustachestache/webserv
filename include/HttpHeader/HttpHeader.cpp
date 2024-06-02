@@ -37,13 +37,14 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
         _error = 431;
 
     //  process Header Fields
-    unsigned int i;
+    size_t i;
     std::string line;
     std::string index;
     std::string strBuffer;
     std::getline(iss, line);
     while (iss.good() && _error == 0)
     {
+        // rm this sanitize?
         stringSanitize(line);
         i = line.find_first_of(":");
         if (!line.empty() && line.size() != 0 && i != std::string::npos)
@@ -53,6 +54,9 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
+            std::cout << "index     :" << index << std::endl;
+            std::cout << "buffer    :" << strBuffer << std::endl;
+            std::cout << "mapdata   :" << _args[index] << std::endl;
         }
         std::getline(iss, line);
     }
@@ -69,7 +73,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
         if (_args["Content-Length"].size() == 0)
             _error = 411;
         //  only working with data/multipart
-        if (_args["Content-Type"].find("multipart/form-data") != std::string::npos)
+        else if (_args["Content-Type"].find("multipart/form-data") == std::string::npos)
             _error = 501;
         else    //retrieve boundary
         {
@@ -88,6 +92,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
             bzero(buffer, _bufferSize);
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
         }
+        std::cout << bodyData << std::endl;
     }
     else if (!_method.compare("GET") && _error == 0)
     {
