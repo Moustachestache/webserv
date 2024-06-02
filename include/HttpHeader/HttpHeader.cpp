@@ -1,12 +1,13 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-int HttpHeader::_bufferSize = 69;
+/* int HttpHeader::_bufferSize = 69; */
+int HttpHeader::_bufferSize = 70;
 
-HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
+HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
 {
     (void) ptrServer;
-    char    buffer[_bufferSize + 1];
+    char    buffer[_bufferSize];
 
     //  read header until body
     int bytesReceived = recv(socket, buffer, _bufferSize, 0);
@@ -15,6 +16,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
     {
         bytesReceived = recv(socket, buffer, _bufferSize, 0);
         headerData.append(buffer);
+        bzero(buffer, _bufferSize);
     }
     //  stash leftover body info
     std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
@@ -84,19 +86,22 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
             else
                 _boundary = _args["Content-Type"].substr(i + 1, _args["Content-Type"].size());
         }
-
         bytesReceived = recv(socket, buffer, _bufferSize, 0);
-        while (bytesReceived == _bufferSize)
+        i = bytesReceived;
+        while (bytesReceived == _bufferSize && bytesReceived < ptrServer.getMaxRequestSize())
         {
             bodyData.append(buffer);
             bzero(buffer, _bufferSize);
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
+            i += bytesReceived;
         }
+        if (i < (size_t)ptrServer.getMaxRequestSize())
+            processBodyPost(bodyData, headerData);
         std::cout << bodyData << std::endl;
     }
     else if (!_method.compare("GET") && _error == 0)
     {
-        
+        processBodyGet(bodyData, headerData);
     }
     //  process boundary 
     //  process body if need (get or post and content length)
@@ -104,6 +109,29 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
     //  must process every single kvp
     //  and file too!!
     std::cout << "debug dump: " << _method << _ressource << _boundary << std::endl;
+}
+
+int     HttpHeader::processBodyPost(std::string &body, std::string &header)
+{
+    std::cout << "processbody" << std::endl;
+    (void) header;
+    std::string index;
+    std::string value;
+    size_t i = body.find(_boundary);
+    for (std::string buffer; i != std::string::npos; i = body.find(_boundary, i))
+    {
+        buffer = body.substr(i, buffer.find(_boundary, i + 1));
+        std::cout << "aaaa!!!" << buffer << "aaaaaaaaaaaaahhhh!!" << std::endl;
+    }
+    return 0;
+}
+
+
+int     HttpHeader::processBodyGet(std::string &body, std::string &header)
+{
+    (void) body;
+    (void) header;
+    return 1;
 }
 
 void    HttpHeader::stringSanitize(std::string &str)
