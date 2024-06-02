@@ -16,7 +16,7 @@ CXX = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused -O0
 
-CPPFLAGS_DEBUG = -Wall -Wextra -Werror -std=c++98 -g -fstandalone-debug
+CPPFLAGS_DEBUG = -Wall -Wextra -Werror -g -fstandalone-debug
 
 SRC =		source/main.cpp \
 			source/parsing.cpp \

@@ -35,6 +35,10 @@ class	Server
 		/*		DEBUG		*/
 		std::string	getVarStr( void );
 		void	processError( std::string &line );
+		
+		//	accessors
+		int		getMaxHeaderSize();
+		int		getMaxRequestSize();
 	
 	protected:
 

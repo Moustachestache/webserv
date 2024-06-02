@@ -194,20 +194,23 @@ void	TcpServer::ServerListen()
 	_newSocket = accept(_socket, (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
-	char buffer[_maxHeaderSize + 2];
+/* 	char buffer[_maxHeaderSize + 2];
 	std::string		incoming;
-	bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
+	//	bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
+	bytesReceived = read(_newSocket, buffer, _maxHeaderSize + 1);
+	std::cout << buffer << std::endl;
 	incoming.append(buffer);
-	std::cout << "--HEADER_START--" << incoming << "--HEADER_END--" << std::flush; /* debug */
-		HttpHeader		header(buffer);
-		if (header.getError() > 0)
-		ServerAnswerError(header.getError());
+	HttpHeader		header(buffer); */
+	HttpHeader		header(_newSocket, *this);
 	if (bytesReceived < 0)
 		throw IncomingBytesFailed();
+	else if (header.getError() > 0)
+		ServerAnswerError(header.getError());
 	else if (bytesReceived > _maxHeaderSize)
 		ServerAnswerError(413);
 	else 
 		ServerAnswerGet(header);
+	//	here post answer (ServerAnswerPost())
 	close(_newSocket);
 	_newSocket = 0;
 }

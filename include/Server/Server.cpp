@@ -180,7 +180,7 @@ std::string Server::outputErrorPage(int id)
 	{
 		strFile.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><title>");
 		strFile.append(_httpError.getInfo(id).type);
-		strFile.append("</title><body><div class=\"container\"><img src=\"https://i.imgur.com/qWMCwWS.gif\"/><h1>");
+		strFile.append("</title><body><div class=\"container\"><img src=\"https://i.imgur.com/KWmFnBP.gif\"/><h1>");
 		std::stringstream itoa;
 		itoa << id;
 		strFile.append(itoa.str());
@@ -193,4 +193,14 @@ std::string Server::outputErrorPage(int id)
 		strFile.append("</div></body></html>");
 	}
 	return strFile;
+}
+
+int     Server::getMaxHeaderSize()
+{
+	return _maxHeaderSize;       
+}
+
+int     Server::getMaxRequestSize()
+{
+	return _requestSize;
 }
