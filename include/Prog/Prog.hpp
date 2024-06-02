@@ -9,7 +9,7 @@ class Prog
 {
 	public:
 
-		Prog( bool &ServerRunning );
+		Prog( bool &ServerRunning, char **env );
 		~Prog();
 
 		void	parseFile( char *filePath );
@@ -27,7 +27,7 @@ class Prog
 		std::vector < TcpServer * >	_servers;
 
 		fd_set	fdSet;
-
 		bool	&_serverRunning;
+		char	**_env;
 
 };
