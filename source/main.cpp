@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:05 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/31 14:20:06 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/06/02 12:53:39 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ std::string	returnFileStr( std::string fileName )
 void	stopServer( int sig )
 {
 	(void) sig;
-	std::cout << "\r" << "Stoping server..." << std::endl;
+	std::cout << "\nStoping server..." << std::endl;
 	ServerRunning = 0;
 }
 

@@ -198,30 +198,59 @@ void	TcpServer::ServerAnswerError(int id)
 	return ;
 }
 
-void	TcpServer::ServerAnswerDelete( HttpHeader &header )
+void	TcpServer::deleteFile( std::string &res )
 {
 	int	err = 0;
-	char **args = new char*[2];
+	char **args = new char*[3];
 	args[0] = new char[4];
 	args[0][0] = '-';
 	args[0][0] = 'r';
 	args[0][0] = 'f';
 	args[0][0] = '\0';
-	args[1] = new char[header.getFile().size()];
-	for (size_t i = 0; i < header.getFile().size(); i++)
-		args[1][i] = header.getFile().at(i);
+	args[1] = new char[res.size()];
+	for (size_t i = 0; i < res.size(); i++)
+		args[1][i] = res.at(i);
+	args[2] = NULL;
 	int pid = fork();
 	if (!pid)
 		exit (execve("/bin/rm", args ,_env));
-	std::cout << "Deleting: " << header.getFile() << std::endl;
+	std::cout << "Deleting: " << res << std::endl;
 	waitpid(pid, &err, 0);
 	err >>= 8;
 	if (!err)
 		ServerAnswerError(200);
 	else
 		ServerAnswerError(204);
+	std::cout << "Err: " << err << std::endl;
 	delete args[0], args[1];
 	delete[] args;
+}
+
+void	TcpServer::ServerAnswerDelete( HttpHeader &header )
+{
+	std::vector< Route >	route = getRoute();
+	std::string	res;
+
+	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
+	{
+		if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), header.getMethod())\
+			!= (*it).getMethods().end())
+		{
+			checkValidRoute(header, *it, res);
+			if (!res.empty())
+			{
+				deleteFile( res);
+				return ;
+			}
+			std::cout << res << std::endl;
+		}
+		else if (it + 1 == route.end())
+		{
+			ServerAnswerError(405);
+			return ;
+		}
+	}
+	ServerAnswerError(404);
 }
 
 void	TcpServer::ServerListen()
