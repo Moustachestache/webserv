@@ -52,18 +52,22 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
         {
             index = line.substr(0, i);
             strBuffer = line.substr(i + 2, line.size() - i);
+            stringSanitize(index);
+            stringSanitize(strBuffer);
             _args[index] = strBuffer;
             std::cout << "index :" << index << std::endl;
             std::cout << "data  :" << strBuffer << std::endl;
         }
         std::getline(iss, line);
     }
-    //do:
-    //if "content-length" undefined or empty as a fiel (0 and above accepted)
-    //return error 411
+    //  if "content-length" undefined or empty as a fiel (0 and above accepted)
+    //  return error 411
+    if (_args["Content-Length"].size == "")
+        _error = 411;
 
-    //  check request size and body size
     //  if body size too big output error 413
+    if (std::atoi(_args["Content-Size"].c_str) > ptrServer->getMaxRequestSize())
+        _error = 413;
     //  process body if need (get or post and content length)
 
     //  must process every single kvp
@@ -73,10 +77,10 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
 void    HttpHeader::stringSanitize(std::string &str)
 {
     int begin = 0;
-    while (isspace(str[begin]))
+    while (str[begin] && isspace(str[begin]))
         begin++;
     int end = str.size();
-    while (isspace(str[end]))
+    while (str[end] && isspace(str[end]))
         end--;
     if (begin >= end)
         str = "";
