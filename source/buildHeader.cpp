@@ -1,6 +1,6 @@
 #include "../include/main.hpp"
 
-std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
+static std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
 {
 	std::string res;
 	for (std::vector< Route >::iterator it = allRoutes.begin(); it  != allRoutes.end(); it++ )
@@ -9,9 +9,11 @@ std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
 					itMethods != (*it).getMethods().end(); itMethods++ )
 		{
 			if (res.find(*itMethods) == std::string::npos)
-				res.append(" " + *itMethods);
+				res.append(" " + *itMethods + ",");
 		}
 	}
+	if (res.rfind(",") != std::string::npos)
+		res.erase(res.rfind(","), 1);
 	res.append("\r\n");
 	return (res);
 }
