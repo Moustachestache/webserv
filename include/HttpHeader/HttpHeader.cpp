@@ -99,8 +99,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
         processBodyGet(bodyData);
     }
     std::cout << "debug     method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
-    std::cout << headerData << std::endl;
-    std::cout << bodyData << std::endl;
 }
 
 int     HttpHeader::processBodyPost(std::string &body)
@@ -108,18 +106,25 @@ int     HttpHeader::processBodyPost(std::string &body)
     std::string buffer;
     std::string key;
     std::string value;
-    _boundary.insert(0, "--");  //helps normalize boundary
+    size_t  j;
+    _boundary.insert(0, "--");  //  helps normalize boundary
     for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
     {
         buffer = body.substr(i, std::string::npos);
         body.erase(i, std::string::npos);
-        if (buffer.find("filename") != std::string::npos)
+        j = buffer.find("filename");
+        if (j != std::string::npos)
         {
-            std::cout << "DOCUMENT!: " << buffer << std::endl;
+            
         }
         else
         {
-            std::cout << "VARIABLES!: " << buffer << std::endl;
+            j = buffer.find("name=\"") + 6;
+            buffer.erase(0, j);
+            j = buffer.find("\'");
+            key = buffer.substr(0, j - 1);
+            std::cout << "buffer:   " << buffer << "::end" << std::endl;
+            std::cout << "key:      " << key << "::end" << std::endl;
         }
         //  i = find string "", if not regualr data pair.
         //  extract name and data
