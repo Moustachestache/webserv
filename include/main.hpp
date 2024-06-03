@@ -20,11 +20,13 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <dirent.h>
 # include <sys/time.h>
 # include <sys/select.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <string.h>
 
 
 /*		CLASSES		*/
@@ -36,6 +38,7 @@
 # include "Route/Route.hpp"
 # include "HttpHeader/HttpHeader.hpp"
 # include "confKeywords.hpp"
+# include  "Cgi/Cgi.hpp"
 
 /*		TEMPLATES		*/
 

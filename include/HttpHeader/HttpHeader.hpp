@@ -8,7 +8,7 @@ class HttpHeader {
         std::string &getMethod();
         std::string &getFile();
         int &getError();
-        std::vector < std::string > &getArgs();
+        std::map<std::string , std::string> &getArgs();
     private:
         int             _error;
         std::string     _method;

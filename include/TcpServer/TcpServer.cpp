@@ -67,6 +67,8 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 	return (false);
 }
 
+/*Uranium*/
+
 void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, HttpHeader &header )
 {
 	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
@@ -82,6 +84,15 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, bool is_end, H
 				return ;
 		}
 		ServerAnswerLs(header, fullPath);
+	}
+	else if (!access( fullPath.c_str() , R_OK) && isCgi(route, filename) == true)
+	{
+
+		std::cout <<"C'est bien un CGI TKT bo gosse" << std::endl;
+		execCgi(header);
+		std::string	awnser = returnFileStr(fullPath);
+		awnser.insert(0,  buildHeader(filename.substr(filename.find_last_of("."), std::string::npos), 200, awnser.size()));
+		send(_newSocket, awnser.c_str(), awnser.size(), 0);
 	}
 	else if (!access( fullPath.c_str() , R_OK))
 	{
@@ -100,6 +111,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) 
 	{
 		if (route.getRedirection().empty())
 		{
+			printf("Rubis\n");
 			std::string filename = header.getFile();
 			if (filename.find(route.getPath()) == std::string::npos)
 				return (false);
@@ -109,6 +121,7 @@ bool	TcpServer::checkValidRoute( HttpHeader &header, Route &route, bool is_end) 
 		}
 		else
 		{
+			std::cout << " Saphir " << header.getFile() << std::endl;
 			std::string filename = header.getFile();
 			if (filename.find(route.getRedirection()) == std::string::npos)
 				return (false);

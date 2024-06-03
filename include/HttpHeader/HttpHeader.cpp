@@ -55,3 +55,9 @@ std::string &HttpHeader::getFile()
 {
     return  _ressource;
 }
+
+
+std::map<std::string , std::string> &HttpHeader::getArgs()
+{
+    return _args;
+}
