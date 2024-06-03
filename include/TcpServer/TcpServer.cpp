@@ -204,24 +204,27 @@ void	TcpServer::deleteFile( std::string &res )
 	char **args = new char*[3];
 	args[0] = new char[4];
 	args[0][0] = '-';
-	args[0][0] = 'r';
-	args[0][0] = 'f';
-	args[0][0] = '\0';
-	args[1] = new char[res.size()];
+	args[0][1] = 'r';
+	args[0][2] = 'f';
+	args[0][3] = '\0';
+	args[1] = new char[res.size() + 1];
 	for (size_t i = 0; i < res.size(); i++)
 		args[1][i] = res.at(i);
+	args[1][res.size() + 1] = '\0';
 	args[2] = NULL;
 	int pid = fork();
 	if (!pid)
-		exit (execve("/bin/rm", args ,_env));
-	std::cout << "Deleting: " << res << std::endl;
+	{
+		int retVal = execve("/bin/rm", args, NULL); /*	no env apparently useless with rm	*/
+		exit (retVal);
+	}
+	std::cout << "Deleting: " << args[1] << std::endl;
 	waitpid(pid, &err, 0);
 	err >>= 8;
 	if (!err)
 		ServerAnswerError(200);
 	else
 		ServerAnswerError(204);
-	std::cout << "Err: " << err << std::endl;
 	delete args[0], args[1];
 	delete[] args;
 }

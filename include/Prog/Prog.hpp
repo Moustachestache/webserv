@@ -9,7 +9,7 @@ class Prog
 {
 	public:
 
-		Prog( bool &ServerRunning, char **env );
+		Prog( bool &ServerRunning );
 		~Prog();
 
 		void	parseFile( char *filePath );
@@ -28,6 +28,5 @@ class Prog
 
 		fd_set	fdSet;
 		bool	&_serverRunning;
-		char	**_env;
 
 };

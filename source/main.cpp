@@ -6,7 +6,7 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:05 by gbricot           #+#    #+#             */
-/*   Updated: 2024/06/02 12:53:39 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:48:50 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	stopServer( int sig )
 	ServerRunning = 0;
 }
 
-int	main( int ac, char **av, char **env )
+int	main( int ac, char **av )
 {
 	if (ac != 2)
 	{
@@ -41,7 +41,7 @@ int	main( int ac, char **av, char **env )
 		return (1);
 	}
 	signal(SIGINT, stopServer);
-	Prog	data( ServerRunning, env );
+	Prog	data( ServerRunning );
 	try
 	{
 		data.parseFile( av[1] );

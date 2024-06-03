@@ -46,7 +46,6 @@ class TcpServer : public Server
     private:
 
         Socket              _socket;
-        char                **_env;
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;
