@@ -98,22 +98,30 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
     {
         processBodyGet(bodyData);
     }
-    //  process boundary 
-    //  process body if need (get or post and content length)
-
-    //  must process every single kvp
-    //  and file too!!
-    std::cout << _boundary << std::endl;
+    std::cout << "debug     method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
+    std::cout << headerData << std::endl;
+    std::cout << bodyData << std::endl;
 }
 
 int     HttpHeader::processBodyPost(std::string &body)
 {
     std::string buffer;
+    std::string key;
+    std::string value;
+    _boundary.insert(0, "--");  //helps normalize boundary
     for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
     {
         buffer = body.substr(i, std::string::npos);
         body.erase(i, std::string::npos);
-        std::cout << "start:" << buffer << ":end" << std::endl;
+        if (buffer.find("filename") != std::string::npos)
+        {
+            std::cout << "DOCUMENT!: " << buffer << std::endl;
+        }
+        else
+        {
+            std::cout << "VARIABLES!: " << buffer << std::endl;
+        }
+        //  i = find string "", if not regualr data pair.
         //  extract name and data
         //  and we gucci
     }
