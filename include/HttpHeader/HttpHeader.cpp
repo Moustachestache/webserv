@@ -56,9 +56,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
-            std::cout << "index     :" << index << std::endl;
-            std::cout << "buffer    :" << strBuffer << std::endl;
-            std::cout << "mapdata   :" << _args[index] << std::endl;
         }
         std::getline(iss, line);
     }
@@ -95,42 +92,39 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
             i += bytesReceived;
         }
-        if (i < (size_t)ptrServer.getMaxRequestSize())
-            processBodyPost(bodyData, headerData);
-        std::cout << bodyData << std::endl;
+        processBodyPost(bodyData);
     }
     else if (!_method.compare("GET") && _error == 0)
     {
-        processBodyGet(bodyData, headerData);
+        processBodyGet(bodyData);
     }
     //  process boundary 
     //  process body if need (get or post and content length)
 
     //  must process every single kvp
     //  and file too!!
-    std::cout << "debug dump: " << _method << _ressource << _boundary << std::endl;
+    std::cout << bodyData << std::endl;
 }
 
-int     HttpHeader::processBodyPost(std::string &body, std::string &header)
+int     HttpHeader::processBodyPost(std::string &body)
 {
-    std::cout << "processbody" << std::endl;
-    (void) header;
-    std::string index;
-    std::string value;
-    size_t i = body.find(_boundary);
-    for (std::string buffer; i != std::string::npos; i = body.find(_boundary, i))
+    std::string buffer;
+    size_t  i = body.find_last_of(_boundary);
+    while (i != std::string::npos)
     {
-        buffer = body.substr(i, buffer.find(_boundary, i + 1));
-        std::cout << "aaaa!!!" << buffer << "aaaaaaaaaaaaahhhh!!" << std::endl;
+        buffer = body.substr(i, body.size());
+        body.erase(i, body.size());
+        i = body.find_last_of(_boundary);
+        std::cout << buffer << std::cout;
     }
+    
     return 0;
 }
 
 
-int     HttpHeader::processBodyGet(std::string &body, std::string &header)
+int     HttpHeader::processBodyGet(std::string &body)
 {
     (void) body;
-    (void) header;
     return 1;
 }
 

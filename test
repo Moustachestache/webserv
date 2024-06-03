@@ -1,12 +1,30 @@
-Starting server: localhost at 0.0.0.0 on port 8080
-Starting server: localhost at 0.0.0.0 on port 8181
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
-Stoping server...
+Starting server: CAT at 0.0.0.0 on port 8080
+Starting server: pickleemporium at 0.0.0.0 on port 8181
+------WebKitFormBoundary8kqkMNJl1w2nQGDI
+Content-Disposition: form-data; name="file"; filename="WrongAnimal.hpp"
+Content-Type: text/x-c++hdr
+
+#pragma once
+#include <iostream>
+
+class WrongAnimal
+{
+    public:
+        WrongAnimal();
+        WrongAnimal( const WrongAnimal &obj );
+        WrongAnimal          &operator=( const WrongAnimal &obj );
+        virtual ~WrongAnimal();
+        std::string     getType( void ) const;
+        void    makeSound( void ) const;
+    protected:
+        std::string     type;
+};
+------WebKitFormBoundary8kqkMNJl1w2nQGDI
+Content-Disposition: form-data; name="text"
+
+sd
+------WebKitFormBoundary8kqkMNJl1w2nQGDI
+Content-Disposition: form-data; name="color"
+0x55d457ea2908hello we post
+
+Stoping server...

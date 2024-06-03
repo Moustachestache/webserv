@@ -17,8 +17,8 @@ class HttpHeader {
         int &getError();
         std::vector < std::string > &getArgs();
         void    stringSanitize(std::string &str);
-        int     processBodyPost(std::string &body, std::string &header);
-        int     processBodyGet(std::string &body, std::string &header);
+        int     processBodyPost(std::string &body);
+        int     processBodyGet(std::string &body);
 
     //  interactions with POST or GET data
         std::string &getMethodValue(std::string key);
