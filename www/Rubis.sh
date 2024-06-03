@@ -2,6 +2,7 @@
 
 # Envoyer l'en-tête de type de contenu
 echo "Content-Type: text/html"
+
 echo ""# Début du contenu HTML
 echo "<html>"
 echo "<head><title>CGI Script</title></head>"
