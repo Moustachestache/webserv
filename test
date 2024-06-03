@@ -1,5 +1,3 @@
-Starting server: CAT at 0.0.0.0 on port 8080
-Starting server: pickleemporium at 0.0.0.0 on port 8181
 ------WebKitFormBoundary8kqkMNJl1w2nQGDI
 Content-Disposition: form-data; name="file"; filename="WrongAnimal.hpp"
 Content-Type: text/x-c++hdr
@@ -25,6 +23,5 @@ Content-Disposition: form-data; name="text"
 sd
 ------WebKitFormBoundary8kqkMNJl1w2nQGDI
 Content-Disposition: form-data; name="color"
-0x55d457ea2908hello we post
 
-Stoping server...
+0x55d457ea2908hello

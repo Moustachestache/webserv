@@ -103,21 +103,20 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
 
     //  must process every single kvp
     //  and file too!!
-    std::cout << bodyData << std::endl;
+    std::cout << _boundary << std::endl;
 }
 
 int     HttpHeader::processBodyPost(std::string &body)
 {
     std::string buffer;
-    size_t  i = body.find_last_of(_boundary);
-    while (i != std::string::npos)
+    for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
     {
-        buffer = body.substr(i, body.size());
-        body.erase(i, body.size());
-        i = body.find_last_of(_boundary);
-        std::cout << buffer << std::cout;
+        buffer = body.substr(i, std::string::npos);
+        body.erase(i, std::string::npos);
+        std::cout << "start:" << buffer << ":end" << std::endl;
+        //  extract name and data
+        //  and we gucci
     }
-    
     return 0;
 }
 
