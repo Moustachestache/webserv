@@ -10,7 +10,12 @@ std::string     buildHeader(std::string extension, int errorcode, int contentSiz
     returnStr.append("\r\n");
     returnStr.append("content-type: " + getMimeType(extension) + "\r\n");
     returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
-    returnStr.append("connection: close\r\n");
+    if (errorcode == 413)
+    {
+        returnStr.append("Allow: ");
+            // work in progress
+    }
+    returnStr.append("connection: keep-alive\r\n");
     returnStr.append("\n");
     return returnStr;
 }

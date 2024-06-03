@@ -27,7 +27,6 @@ class Prog
 		std::vector < TcpServer * >	_servers;
 
 		fd_set	fdSet;
-
 		bool	&_serverRunning;
 
 };

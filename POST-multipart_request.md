@@ -61,11 +61,3 @@ Content-Disposition: form-data; name="options"
 
 {"options":{},"url":"https://test.url.com","sslVersion":"TLS 1.2","password":xxxxxxxxxx,"userId":xxxxxxxxxx,"displayName":"Pedro","jobName":"pedro_test_job","batchsize":1000,"waitTimeoutms":10000}
 --------------------------bcc2cc6e692c067c--
-
-/
-Full path:www/
-ServerAnswerLs()
-Path :
-.html
-text/html
-

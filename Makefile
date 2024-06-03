@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/05/30 09:11:32 by gbricot          ###   ########.fr        #
+#    Updated: 2024/06/02 14:20:51 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = webserv
 
 CXX = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused -O0
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused -o3
 
-CPPFLAGS_DEBUG = -Wall -Wextra -Werror -std=c++98 -g -fstandalone-debug
+CPPFLAGS_DEBUG =  -std=c++98 -g -fstandalone-debug
 
 CPPFLAGS_YOSHI = -Wall -Wextra -std=c++98 -g
 

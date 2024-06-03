@@ -1,14 +1,9 @@
-Starting server: localhost at 0.0.0.0 on port 8080
-Starting server: localhost at 0.0.0.0 on port 8181
---HEADER_START--POST / HTTP/1.1
-Host: 0.0.0.0:8181
-User-Agent: curl/7.88.1
-Accept: */*
-Content-Length: 189586
-Content-Type: multipart/form-data; boundary=------------------------9227ffa017b664ea
+Starting server: CAT at 0.0.0.0 on port 8080
+Starting server: pickleemporium at 0.0.0.0 on port 8181
+Disposition: form-data; name="picklename"
 
---------------------------9227ffa017b664ea
-Content-Disposition: form-data; name="upload"; filename="image.jpg"
-Content-Type: image/jpeg
+steve
+--
+hello we post
 
-ÿØÿá¿Exif--HEADER_END--Stoping server...
+Stoping server...
