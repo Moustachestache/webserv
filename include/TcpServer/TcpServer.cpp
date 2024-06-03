@@ -57,7 +57,8 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 		if (!access( fullPath.c_str() , R_OK))
 		{
 			std::string	awnser = returnFileStr(fullPath);
-			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos), 200, awnser.size()));
+			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
+				200, awnser.size(), getRoute()));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
 			return (true);
 		}
@@ -144,7 +145,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	}
 	output.append("</table></div></body>");
 	closedir(openDir);
-	output.insert(0, buildHeader(".html", 200, output.size()));
+	output.insert(0, buildHeader(".html", 200, output.size(), getRoute()));
 	send(_newSocket, output.c_str(), output.size(), 0);
 	return ;
 }
@@ -170,7 +171,8 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				else // path is file
 				{
 					std::string	awnser = returnFileStr(res);
-					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos), 200, awnser.size()));
+					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
+						200, awnser.size(), getRoute()));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
 				}
 				return ;
@@ -191,7 +193,7 @@ void	TcpServer::ServerAnswerError(int id)
 	unsigned long		sent;
 	std::string			output(outputErrorPage(id));
 
-	output.insert(0, buildHeader(".html", id, output.size()));
+	output.insert(0, buildHeader(".html", id, output.size(), getRoute()));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
