@@ -26,6 +26,7 @@ if [ "$REQUEST_METHOD" == "GET" ]; then
         echo "<li>$param</li>"
     done
     echo "</ul>"
-fi# Fin du contenu HTML
+fi # Fin du contenu HTML
 echo "</body>"
 echo "</html>"
+

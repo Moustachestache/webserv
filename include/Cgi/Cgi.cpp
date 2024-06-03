@@ -1,7 +1,7 @@
 #include "Cgi.hpp"
 
 
-char **make_arg(HttpHeader _header)
+/*char **make_arg(HttpHeader _header)
 {
 	char *arg[_header.getArgs().size() + 2];
 	arg[0] = strdup(_header.getFile().c_str());
@@ -11,7 +11,7 @@ char **make_arg(HttpHeader _header)
 	}
 	arg[_header.getArgs().size() + 1] = NULL;
 	return arg;
-}
+}*/
 
 
 bool isCgi(Route route, std::string filename)
@@ -35,28 +35,30 @@ bool isCgi(Route route, std::string filename)
 }
 
 
-void execCgi(HttpHeader _header)
+std::string execCgi(HttpHeader _header)
 {
+	/*std::cout << std::endl << "Lapis Lazuli" << std::endl;
 	std::cout << std::endl << "Method : " << _header.getMethod() << std::endl;
-	for (std::map<std::string, std::string >::iterator it  = _header.getArgs().begin(); it != _herder.getArgs().end(); ++it)
+	for (std::map<std::string, std::string >::iterator it  = _header.getArgs().begin(); it != _header.getArgs().end(); ++it)
 	{
 		std::cout << it->first << " => " << it->second << std::endl;
 	}	
-	return ;
-	if (_header.getMethod() == "POST")
+	std::cout << "Fin Lapis Lazuli" << std::endl;
+	return ;*/
+	/*if (_header.getMethod() == "POST")
 	{
 		std::cout << std::endl << "Granit" << std::endl;
 		execCgiPost(_header);
 
 	}
-	else if (_header.getMethod() == "GET")
+	else*/ if (_header.getMethod() == "GET")
 	{
-		std::cout << std::endl << "Granit" << std::endl;
-		execCgiGet(_header);
+		return (execCgiGet(_header));
 	}
+	return (0);
 }
 
-void execCgiPost(HttpHeader _header)
+/*void execCgiPost(HttpHeader _header)
 {
 	//executé le fichier sh via la http request
 	int pipe_fd[2];
@@ -90,16 +92,19 @@ void execCgiPost(HttpHeader _header)
 			write(STDOUT_FILENO, buffer, ret);
 		}
 	}
-}
+}*/
 
-void execCgiGet(HttpHeader _header)
+std::string execCgiGet(HttpHeader _header)
 {
-		//executé le fichier sh via la http request
 	int pipe_fd[2];
 	pid_t pid;
 
-	pipe(pipe_fd);
-	dup2(STDOUT_FILENO, pipe_fd[1]);
+	
+	if (pipe(pipe_fd) == -1) {
+        std::cerr << "pipe failed" << std::endl;
+        exit(1);
+    }
+
 	std::cout << "Lapis Lazuli" << std::endl;
 	pid = fork();
 
@@ -111,22 +116,39 @@ void execCgiGet(HttpHeader _header)
 
 	else if (pid == 0)
 	{
-		//on execute le cgi
-		char **argv = make_arg(_header);
-		execve(_header.getFile().c_str(), argv, NULL);
-		std::cerr << "execve failed" << std::endl;
+		
+		close(pipe_fd[0]);
+        dup2(pipe_fd[1], STDOUT_FILENO); 
+        close(pipe_fd[1]);
+		
+		
+		std::string file = _header.getFile().insert(0, "./www");
+		char *script_path = const_cast<char *>(file.c_str());
+		char *argv[] = { script_path, NULL };
+		char *envp[] = { NULL };
+
+		if (execve(script_path, argv, envp) == -1)
+			std::cerr << "execve failed" << std::endl;
 		exit(0);
 	}
 	else
 	{
+		close(pipe_fd[1]);
 		waitpid(pid, NULL, 0);
-		//on recupere le resultat
+
 		char buffer[1024];
 		int ret;
+
+		std::string answer;	
+
 		while ((ret = read(pipe_fd[0], buffer, 1024)) > 0)
 		{
-			std::cout <<"Aigue marine" << std::endl;
-			write(STDOUT_FILENO, buffer, ret);
+			answer.append(buffer, ret);
 		}
+		close(pipe_fd[0]);
+		
+		std::cout << "Aigue Marine 2 " << answer << "Fin Aigue Marine " <<std::endl ;
+		
+		return (answer);
 	}
 }

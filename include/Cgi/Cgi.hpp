@@ -4,8 +4,8 @@
 
 bool isCgi(Route route, std::string filename);
 
-void    execCgiPost(HttpHeader _header);
-void    execCgiGet(HttpHeader _header);
-void    execCgi(HttpHeader _header);
+std::string    execCgiPost(HttpHeader _header);
+std::string    execCgiGet(HttpHeader _header);
+std::string    execCgi(HttpHeader _header);
 
 
