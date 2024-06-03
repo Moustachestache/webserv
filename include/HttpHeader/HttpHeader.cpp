@@ -1,12 +1,13 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-int HttpHeader::_bufferSize = 69;
+/* int HttpHeader::_bufferSize = 69; */
+int HttpHeader::_bufferSize = 70;
 
-HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
+HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
 {
     (void) ptrServer;
-    char    buffer[_bufferSize + 1];
+    char    buffer[_bufferSize];
 
     //  read header until body
     int bytesReceived = recv(socket, buffer, _bufferSize, 0);
@@ -15,6 +16,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
     {
         bytesReceived = recv(socket, buffer, _bufferSize, 0);
         headerData.append(buffer);
+        bzero(buffer, _bufferSize);
     }
     //  stash leftover body info
     std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
@@ -54,9 +56,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
-            std::cout << "index     :" << index << std::endl;
-            std::cout << "buffer    :" << strBuffer << std::endl;
-            std::cout << "mapdata   :" << _args[index] << std::endl;
         }
         std::getline(iss, line);
     }
@@ -84,26 +83,56 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0), _data(NULL)
             else
                 _boundary = _args["Content-Type"].substr(i + 1, _args["Content-Type"].size());
         }
-
         bytesReceived = recv(socket, buffer, _bufferSize, 0);
-        while (bytesReceived == _bufferSize)
+        i = bytesReceived;
+        while (bytesReceived == _bufferSize && bytesReceived < ptrServer.getMaxRequestSize())
         {
             bodyData.append(buffer);
             bzero(buffer, _bufferSize);
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
+            i += bytesReceived;
         }
-        std::cout << bodyData << std::endl;
+        processBodyPost(bodyData);
     }
     else if (!_method.compare("GET") && _error == 0)
     {
-        
+        processBodyGet(bodyData);
     }
-    //  process boundary 
-    //  process body if need (get or post and content length)
+    std::cout << "debug     method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
+    std::cout << headerData << std::endl;
+    std::cout << bodyData << std::endl;
+}
 
-    //  must process every single kvp
-    //  and file too!!
-    std::cout << "debug dump: " << _method << _ressource << _boundary << std::endl;
+int     HttpHeader::processBodyPost(std::string &body)
+{
+    std::string buffer;
+    std::string key;
+    std::string value;
+    _boundary.insert(0, "--");  //helps normalize boundary
+    for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
+    {
+        buffer = body.substr(i, std::string::npos);
+        body.erase(i, std::string::npos);
+        if (buffer.find("filename") != std::string::npos)
+        {
+            std::cout << "DOCUMENT!: " << buffer << std::endl;
+        }
+        else
+        {
+            std::cout << "VARIABLES!: " << buffer << std::endl;
+        }
+        //  i = find string "", if not regualr data pair.
+        //  extract name and data
+        //  and we gucci
+    }
+    return 0;
+}
+
+
+int     HttpHeader::processBodyGet(std::string &body)
+{
+    (void) body;
+    return 1;
 }
 
 void    HttpHeader::stringSanitize(std::string &str)
