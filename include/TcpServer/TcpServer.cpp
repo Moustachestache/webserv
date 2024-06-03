@@ -256,19 +256,20 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 	ServerAnswerError(404);
 }
 
+void	TcpServer::ServerAnswerPost( HttpHeader &header )
+{
+		(void) header;
+	std::cout << "hello we post" << std::endl;
+	
+		ServerAnswerError(200);
+}
+
 void	TcpServer::ServerListen()
 {
 	int	bytesReceived = 0;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
-/* 	char buffer[_maxHeaderSize + 2];
-	std::string		incoming;
-	//	bytesReceived = recv(_newSocket, buffer, _maxHeaderSize + 1, 0);
-	bytesReceived = read(_newSocket, buffer, _maxHeaderSize + 1);
-	std::cout << buffer << std::endl;
-	incoming.append(buffer);
-	HttpHeader		header(buffer); */
 	HttpHeader		header(_newSocket, *this);
 	if (bytesReceived < 0)
 		throw IncomingBytesFailed();
@@ -276,10 +277,14 @@ void	TcpServer::ServerListen()
 		ServerAnswerError(header.getError());
 	else if (bytesReceived > _maxHeaderSize)
 		ServerAnswerError(413);
-	else if (header.getMethod() == "GET")
+	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
-	else if (header.getMethod() == "DELETE")
+	else if (!header.getMethod().compare("DELETE"))
 		ServerAnswerDelete(header);
+	else if (!header.getMethod().compare("POST"))
+		ServerAnswerPost(header);
+	else
+		ServerAnswerError(405);	// !! add header that lists allowed as answer (bc err 405)
 	close(_newSocket);
 	_newSocket = 0;
 }

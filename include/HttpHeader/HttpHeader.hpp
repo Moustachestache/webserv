@@ -17,11 +17,12 @@ class HttpHeader {
         int &getError();
         std::vector < std::string > &getArgs();
         void    stringSanitize(std::string &str);
+        int     processBodyPost(std::string &body);
+        int     processBodyGet(std::string &body);
 
     //  interactions with POST or GET data
-        kvp *initData();
         std::string &getMethodValue(std::string key);
-        std::string &getMethodKvp(std::string key);
+        kvp &getMethodKvp(std::string key);
 
     private:
         static int      _bufferSize;

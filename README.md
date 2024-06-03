@@ -10,23 +10,23 @@
 - [x] why double-up message in answer message?
 - [x] change all "\n" in http headers to "\r\n" when newline?
 - [x] refactor httheader build function from object to single function.
-- [ ] create meaningful socket / connection.
-- [ ] How do we handle closing server? graceful? hard stop? how to be sure there are no leaks?
-- [ ] what to do with the keepalive / persistent connection header?
-- [ ] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
-- [ ] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
+- [x] create meaningful socket / connection.
+- [x] How do we handle closing server? graceful? hard stop? how to be sure there are no leaks?
+- [x] what to do with the keepalive / persistent connection header?
+- [x] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
+- [x] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
 - [ ] re-build httpheader object that parses incoming header
 - [ ] add Allow header to response that lists allowed ehaders
-- [ ] add error 411 see httpHeader object
+- [x] add error 411 see httpHeader object
       
 easy todo
 - [x] make server send back info
-- [ ] make server answer any GET request
+- [x] make server answer any GET request
 - [ ] process other requests
       
 from HTTP The definitive guide by Oreilly:
-- [ ] 1. Set up connection—accept a client connection, or close if the client is unwanted.
-- [ ] 2. Receive request—read an HTTP request message from the network.
+- [x] 1. Set up connection—accept a client connection, or close if the client is unwanted.
+- [x] 2. Receive request—read an HTTP request message from the network.
 - [ ] 3. Process request—interpret the request message and take action.
 - [ ] 4. Access resource—access the resource specified in the message.
 - [ ] 5. Construct response—create the HTTP response message with the right headers.
@@ -34,8 +34,8 @@ from HTTP The definitive guide by Oreilly:
 - [ ] 7. Log transaction—place notes about the completed transaction in a log file.
 
 [GREG]
-- [ ] decide in team the default values for each unset variable (see Server and Route constructors)
-- [ ] Implement a check function after the parsing
+- [x] decide in team the default values for each unset variable (see Server and Route constructors)
+- [x] Implement a check function after the parsing
 # DOING
 
 ##	Exploratory Qs

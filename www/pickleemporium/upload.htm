@@ -27,10 +27,7 @@
         <form action="sending.htm" method="post" enctype="multipart/form-data">
             <fieldset class="grid">
                 <label>Pickle Name
-                    <input
-                    name="picklename"
-                    placeholder="steve"
-                    />
+                    <input id="picklename" name="picklename" placeholder="steve" />
                     <small>Choose appropriate name.</small>
                 </label>
                 <label>Sound
@@ -46,6 +43,7 @@
                 </label>
                 <label>Pickle Colour
                     <input
+                    id="color"
                     name="color"
                     type="color"
                     value="#338613"
@@ -54,22 +52,17 @@
                 </label>
             </fieldset>
             <section>
+                <label>Tell us about the story of your pickle</label>
+                <textarea id="textarea" name="textarea" rows="4">Born in a small town in east Texas, Jeremy The Pickle was not what you would call a gifted child, instead he ...
+                </textarea>
             </section>
             <fieldset class="grid">
                 <label for="picture">
                     <input type="file" id="picture" name="picture"/>
                     <small>Pick a pickle picture.</small>
                 </label>
-                <input
-                    type="submit"
-                    action="submit"
-                    value="send"
-                />
-                <input
-                    class="disabled"
-                    type="reset"
-                    value="🥒"
-                />
+                <button action="send">Send</button>
+                <button action="reset" class="secondary" >🥒</button>
             </fieldset>
         </form>
         <footer>

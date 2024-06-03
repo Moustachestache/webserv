@@ -37,6 +37,7 @@ class TcpServer : public Server
 /* 		void	ServerAnswer(std::string incoming); */
         void    ServerAnswerGet( HttpHeader &header );
         void    ServerAnswerDelete( HttpHeader &header );
+        void    ServerAnswerPost( HttpHeader &header );
         void    deleteFile( std::string &res );
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
