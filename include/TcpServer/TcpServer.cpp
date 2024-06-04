@@ -266,17 +266,12 @@ void	TcpServer::ServerAnswerPost( HttpHeader &header )
 
 void	TcpServer::ServerListen()
 {
-	int	bytesReceived = 0;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
-	if (bytesReceived < 0)
-		throw IncomingBytesFailed();
-	else if (header.getError() > 0)
+	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
-	else if (bytesReceived > _maxHeaderSize)
-		ServerAnswerError(413);
 	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
 	else if (!header.getMethod().compare("DELETE"))

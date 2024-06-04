@@ -37,8 +37,8 @@ class	Server
 		void	processError( std::string &line );
 		
 		//	accessors
-		int		getMaxHeaderSize();
-		int		getMaxRequestSize();
+		size_t		getMaxHeaderSize();
+		size_t		getMaxRequestSize();
 	
 	protected:
 
@@ -63,8 +63,8 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
-		int						_maxHeaderSize;
-		int						_requestSize;
+		size_t					_maxHeaderSize;
+		size_t					_requestSize;
 		std::vector< Route >	_route;
 		int						_maxConnections;
 		std::string				_errorLog; //lol
