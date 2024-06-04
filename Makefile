@@ -18,6 +18,8 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused -o3
 
 CPPFLAGS_DEBUG =  -std=c++98 -g -fstandalone-debug
 
+CPPFLAGS_YOSHI = -Wall -Wextra -std=c++98 -g
+
 SRC =		source/main.cpp \
 			source/parsing.cpp \
 			source/debug.cpp \
@@ -30,7 +32,8 @@ SRC =		source/main.cpp \
 			include/TcpServer/TcpServer.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
-			include/HttpError/HttpError.cpp
+			include/HttpError/HttpError.cpp \
+			include/Cgi/Cgi.cpp
 			
 
 OBJ = $(SRC:.cpp=.o)
@@ -60,3 +63,6 @@ fclean: clean
 	@echo $(RED)Program deleted$(WHITE)
 
 re: fclean all
+
+yoshi:
+	$(CXX) $(CPPFLAGS_YOSHI) $(SRC) -o $(NAME)

@@ -155,3 +155,9 @@ void	Route::getAllCgi( std::string &routeStr )
 		startPos = routeStr.find("CGI");
 	}
 }
+
+
+std::vector< Cgi >			&Route::getCgi( void )
+{
+	return (_cgi);
+}

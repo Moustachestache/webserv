@@ -47,7 +47,7 @@ class Route
 		std::string	&getPath( void );
 		std::string	&getRedirection( void );
 		std::vector<std::string>	&getDefaultPages( void );
-
+		std::vector< Cgi >			&getCgi( void );
 	private:
 
 		void	checkInfo( void );
