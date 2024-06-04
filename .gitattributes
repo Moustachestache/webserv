@@ -4,19 +4,19 @@ www/** linguist-vendored=false
 *.js linguist-detectable=true
 *.js  export-ignore
 
-*.csslinguist-generated=true
+*.css linguist-generated=true
 www/** linguist-vendored=false
 www/** linguist-vendored=false
 *.css linguist-detectable=true
 *.css  export-ignore
 
-*.htmllinguist-generated=true
+*.html linguist-generated=true
 www/** linguist-vendored=false
 www/** linguist-vendored=false
 *.html linguist-detectable=true
 *.html  export-ignore
 
-*.htmlinguist-generated=true
+*.html inguist-generated=true
 www/** linguist-vendored=false
 www/** linguist-vendored=false
 *.htm linguist-detectable=true
