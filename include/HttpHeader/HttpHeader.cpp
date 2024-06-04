@@ -92,13 +92,16 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
             i += bytesReceived;
         }
+        bodyData.append(buffer);
         processBodyPost(bodyData);
     }
-    else if (!_method.compare("GET") && _error == 0)
+
+    //  process GET variables
+    else if (_ressource.find("?") != std::string::npos)
     {
         processBodyGet(bodyData);
     }
-    std::cout << "debug     method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
+    std::cout << "[debug - httheader.cpp]   method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
 }
 
 int     HttpHeader::processBodyPost(std::string &body)
@@ -115,20 +118,39 @@ int     HttpHeader::processBodyPost(std::string &body)
         j = buffer.find("filename");
         if (j != std::string::npos)
         {
-            
+            j = buffer.find("name=\"") + 6;
+            buffer.erase(0, j);
+            key = buffer.substr(0, buffer.find("\""));
+            stringSanitize(key);
+            //
+            j = buffer.find("filename=\"") + 10;
+            buffer.erase(0, j);
+            std::string fileName = buffer.substr(0, buffer.find("\""));
+            stringSanitize(fileName);
+            //
+            j = buffer.find("Content-Type:") + 14;
+            buffer.erase(0, j);
+            std::string mimeType = buffer.substr(0, buffer.find("\n"));
+            stringSanitize(mimeType);
+            //  
+            j = buffer.find("\r\n\r\n") + 4;
+            buffer.erase(0, j);
+            _postFiles[key].rawData = buffer.substr(0, buffer.find(_boundary));
+            _postFiles[key].mimeType = mimeType;
+            _postFiles[key].fileName = fileName;
+        //    std::cout << key << " " << _postFiles[key].mimeType << " " << _postFiles[key].fileName << std::endl;
+        //    std::cout << "rawdata: [" << _postFiles[key].rawData << "]" << std::endl;
         }
         else
         {
             j = buffer.find("name=\"") + 6;
             buffer.erase(0, j);
-            j = buffer.find("\'");
-            key = buffer.substr(0, j - 1);
-            std::cout << "buffer:   " << buffer << "::end" << std::endl;
-            std::cout << "key:      " << key << "::end" << std::endl;
+            j = buffer.find("\"");
+            key = buffer.substr(0, j);
+            value = buffer.substr(buffer.find("\r\n\r\n"), buffer.rfind("\r\n"));
+            stringSanitize(value);
+            _post[key] = value;
         }
-        //  i = find string "", if not regualr data pair.
-        //  extract name and data
-        //  and we gucci
     }
     return 0;
 }
@@ -145,13 +167,13 @@ void    HttpHeader::stringSanitize(std::string &str)
     int begin = 0;
     while (str[begin] && isspace(str[begin]))
         begin++;
-    int end = str.size();
+    int end = str.size() - 1;
     while (str[end] && isspace(str[end]))
         end--;
     if (begin >= end)
         str = "";
     else
-        str = str.substr(begin, end);
+        str = str.substr(begin, end - begin + 1);
 }
 
 HttpHeader::~HttpHeader()
