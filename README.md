@@ -18,6 +18,7 @@
 - [ ] re-build httpheader object that parses incoming header
 - [ ] add Allow header to response that lists allowed ehaders
 - [x] add error 411 see httpHeader object
+- [ ] if it crashes in the header initialisation its the math at line 52 -> 58 but if it dont disregard
       
 easy todo
 - [x] make server send back info
