@@ -46,8 +46,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
     std::getline(iss, line);
     while (iss.good() && _error == 0)
     {
-        // rm this sanitize?
-        stringSanitize(line);
         i = line.find_first_of(":");
         if (!line.empty() && line.size() != 0 && i != std::string::npos)
         {
@@ -92,38 +90,68 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
             bytesReceived = recv(socket, buffer, _bufferSize, 0);
             i += bytesReceived;
         }
+        bodyData.append(buffer);
         processBodyPost(bodyData);
     }
-    else if (!_method.compare("GET") && _error == 0)
+
+    //  process GET variables
+    else if (_ressource.find("?") != std::string::npos)
     {
         processBodyGet(bodyData);
     }
-    std::cout << "debug     method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
-    std::cout << headerData << std::endl;
-    std::cout << bodyData << std::endl;
-}
+ }
 
 int     HttpHeader::processBodyPost(std::string &body)
 {
     std::string buffer;
     std::string key;
     std::string value;
-    _boundary.insert(0, "--");  //helps normalize boundary
+    size_t  j;
+    _boundary.insert(0, "--");  //  helps normalize boundary
+
+    //  delete last iteration of _boundary
+    j = body.rfind(_boundary);
+    body.erase(j, std::string::npos);
+    //  anyway ...
+    
     for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
     {
         buffer = body.substr(i, std::string::npos);
         body.erase(i, std::string::npos);
-        if (buffer.find("filename") != std::string::npos)
+        j = buffer.find("filename");
+        if (j != std::string::npos)
         {
-            std::cout << "DOCUMENT!: " << buffer << std::endl;
+            j = buffer.find("name=\"") + 6;
+            buffer.erase(0, j);
+            key = buffer.substr(0, buffer.find("\""));
+            stringSanitize(key);
+            //
+            j = buffer.find("filename=\"") + 10;
+            buffer.erase(0, j);
+            std::string fileName = buffer.substr(0, buffer.find("\""));
+            stringSanitize(fileName);
+            //
+            j = buffer.find("Content-Type:") + 14;
+            buffer.erase(0, j);
+            std::string mimeType = buffer.substr(0, buffer.find("\n"));
+            stringSanitize(mimeType);
+            //  
+            j = buffer.find("\r\n\r\n") + 4;
+            buffer.erase(0, j);
+            _postFiles[key].rawData = buffer.substr(0, buffer.size() - 2);
+            _postFiles[key].mimeType = mimeType;
+            _postFiles[key].fileName = fileName;
         }
-        else
+        else if (buffer.size())
         {
-            std::cout << "VARIABLES!: " << buffer << std::endl;
+            j = buffer.find("name=\"") + 6;
+            buffer.erase(0, j);
+            j = buffer.find("\"");
+            key = buffer.substr(0, j);
+            value = buffer.substr(buffer.find("\r\n\r\n"), buffer.rfind("\r\n"));
+            stringSanitize(value);
+            _post[key] = value;
         }
-        //  i = find string "", if not regualr data pair.
-        //  extract name and data
-        //  and we gucci
     }
     return 0;
 }
@@ -140,13 +168,13 @@ void    HttpHeader::stringSanitize(std::string &str)
     int begin = 0;
     while (str[begin] && isspace(str[begin]))
         begin++;
-    int end = str.size();
+    int end = str.size() - 1;
     while (str[end] && isspace(str[end]))
         end--;
-    if (begin >= end)
+    if (begin > end)
         str = "";
     else
-        str = str.substr(begin, end);
+        str = str.substr(begin, end - begin + 1);
 }
 
 HttpHeader::~HttpHeader()
@@ -167,3 +195,26 @@ std::string &HttpHeader::getFile()
 {
     return  _ressource;
 }
+
+std::map < std::string, std::string >    &HttpHeader::getArgs()
+{
+    return _args;
+}
+
+std::map < std::string, std::string >    &HttpHeader::getPost()
+{
+    return _post;
+}
+
+
+std::map < std::string, fileInfo >    &HttpHeader::getFiles()
+{
+    return _postFiles;
+}
+
+
+std::map < std::string, std::string >    &HttpHeader::getGet()
+{
+    return _get;
+}
+

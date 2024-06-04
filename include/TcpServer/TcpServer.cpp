@@ -261,8 +261,6 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
 		(void) header;
-	std::cout << "hello we post" << std::endl;
-	
 		ServerAnswerError(200);
 }
 
