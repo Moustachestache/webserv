@@ -16,7 +16,7 @@ www/** linguist-vendored=false
 *.html linguist-detectable=true
 *.html  export-ignore
 
-*.htm inguist-generated=true
+*.htm linguist-generated=true
 www/** linguist-vendored=false
 www/** linguist-vendored=false
 *.htm linguist-detectable=true
