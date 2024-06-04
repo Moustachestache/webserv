@@ -6,12 +6,14 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/26 15:13:37 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:04:59 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+# include <ctime>
+# include <fstream>
 # include "../HttpError/HttpError.hpp"
 # include "../Route/Route.hpp"
 
@@ -53,6 +55,8 @@ class	Server
 		void	assignError( std::istringstream &iss );
 
 		void	checkInfo( void );
+
+		void	addLog( std::string text );
 
 		/*		PROTECTED MEMBERS		*/
 
