@@ -195,6 +195,24 @@ std::string Server::outputErrorPage(int id)
 	return strFile;
 }
 
+void	Server::addLog( std::string text )
+{
+	std::fstream file(_errorLog.c_str(), std::ios::app);
+	if (!file.is_open())
+	{
+		std::cerr << "Error: the log file: " << _errorLog << "can't be opened." << std::endl;
+		return ;
+	}
+	std::time_t currentTime = std::time(NULL);
+	std::tm* timeinfo = std::localtime(&currentTime);
+	char str[22];
+	std::sprintf(str, "%04d/%02d/%02d %02d:%02d:%02d",
+		timeinfo->tm_year + 1900, timeinfo->tm_mon + 1, timeinfo->tm_mday,
+		timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	file << "[" << str << "] " << text << "\n";
+	file.close();
+}
+
 size_t     Server::getMaxHeaderSize()
 {
 	return _maxHeaderSize;       
