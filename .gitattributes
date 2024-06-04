@@ -1,2 +1,6 @@
 *.js linguist-generated=true
+www/** linguist-vendored=false
+www/** linguist-vendored=false
+*.js linguist-detectable=true
+*.js  export-ignore
 
