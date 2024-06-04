@@ -3,6 +3,9 @@
 
 # TODO
 
+[les nous du futur]
+- [ ] Server &ptrServer into _ptrServer;
+
 [MAX]
 - [x] how to get a good, clean, scalable buffer for request reception?
 - [x] refactor Errorinfo array creation / init
