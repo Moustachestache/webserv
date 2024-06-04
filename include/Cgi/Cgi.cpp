@@ -16,22 +16,34 @@
 
 bool isCgi(Route route, std::string filename)
 {
-    if (!route.getCgi().empty())
-    {
-        for(std::size_t i = 0; i < route.getCgi().size(); i++ )
-        {
-            for (std::size_t j = 0; j < route.getCgi()[i].extention.size(); j++)
-            {
-                if(filename.substr(filename.find_last_of(".")) == route.getCgi()[i].extention[j])
-                    return true;
-            }
-        }
-        return false;
-    }
-    else
-    {
-        return false;
-    }
+	DIR		*openDir = opendir(filename.c_str());
+	if(openDir ==NULL)
+	{
+		if (!access())
+		if (!route.getCgi().empty())
+		{
+			for(std::size_t i = 0; i < route.getCgi().size(); i++ )
+			{
+				for (std::size_t j = 0; j < route.getCgi()[i].extention.size(); j++)
+				{
+					if(filename.substr(filename.find_last_of(".")) == route.getCgi()[i].extention[j])
+						return true;
+				}
+			}
+			return false;
+		}
+		else
+		{
+			addLog("CGI Not implemented")
+			return false;
+		}
+	}
+	else
+	{
+		closedir(openDir);
+		addLog("Is a directory");
+		return false;
+	}
 }
 
 
