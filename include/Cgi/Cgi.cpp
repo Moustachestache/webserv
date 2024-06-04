@@ -47,9 +47,7 @@ std::string execCgi(HttpHeader _header)
 	return ;*/
 	/*if (_header.getMethod() == "POST")
 	{
-		std::cout << std::endl << "Granit" << std::endl;
 		execCgiPost(_header);
-
 	}
 	else*/ if (_header.getMethod() == "GET")
 	{
@@ -113,7 +111,6 @@ std::string execCgiGet(HttpHeader _header)
 		std::cerr << "fork failed" << std::endl;
 		exit(1);
 	}
-
 	else if (pid == 0)
 	{
 		

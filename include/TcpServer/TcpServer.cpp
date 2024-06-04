@@ -14,6 +14,7 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 													_addressLen(sizeof(_address))
 {
 	std::cout << "Starting server: " << _serverName <<  " at " << _ipStr << " on port " << _port << std::endl;
+	addLog("test");
 }
 
 // Copy constructor
@@ -57,11 +58,12 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 		if (!access( fullPath.c_str() , R_OK))
 		{
 			std::string	awnser = returnFileStr(fullPath);
-			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos), 200, awnser.size()));
+			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
+				200, awnser.size(), getRoute()));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
 			return (true);
 		}
-		fullPath.resize(fullPath.size() - ((*it).size() + 1));
+		fullPath.resize(fullPath.size() - ((*it).size()));
 	}
 	return (false);
 }
@@ -71,17 +73,17 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &he
 	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
 	// add check of "../"
 	DIR					*openDir = opendir(fullPath.c_str());
+
 	(void) header;
-	
+	if ((!fullPath.empty() && fullPath.at(fullPath.size() - 1) == '/')\
+				&& openDir) /* Make sure there is a '/' and the folder is open */
+		res = fullPath;
+	else if ((!fullPath.empty() && fullPath.at(fullPath.size() - 1) != '/')\
+				&& !openDir && !access( fullPath.c_str() , R_OK)) /* make sure there is no '/'
+							and make sure no dir got the same name and the file is accessible */
+		res = fullPath;
 	if (openDir)
-	{
 		closedir(openDir);
-		if (fullPath.at(fullPath.size() - 1) != '/')
-			fullPath.append("/");
-		res = fullPath;
-	}
-	else if (!access( fullPath.c_str() , R_OK))
-		res = fullPath;
 }
 
 void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &res ) // 
@@ -115,10 +117,11 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	(void) header;
 	//path.erase(0, _root.size() + 1); // do not remove + 1 risk to delete one more char
 	path.erase(0, _root.size());
-	if (!path.empty() && path.at(path.length() - 1) != '/')
-		path.append("/");
 	if (openDir == NULL)
+	{
 		ServerAnswerError(500);
+		return ;
+	}
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
 	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\"><h1 class=\"grid\">index of " + path + "</h1><table><th></th><th>type</th><th>name</th><th>mime/type</th>");
 	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
@@ -132,6 +135,8 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
 		output.append("<td><a href=\"" + path);
 		output.append(folderScan->d_name);
+		if (folderScan->d_type == DT_DIR)
+			output.append("/");
 		output.append("\">");
 		output.append(folderScan->d_name);
 		output.append("</a></td><td>");
@@ -144,9 +149,8 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	}
 	output.append("</table></div></body>");
 	closedir(openDir);
-	output.insert(0, buildHeader(".html", 200, output.size()));
+	output.insert(0, buildHeader(".html", 200, output.size(), getRoute()));
 	send(_newSocket, output.c_str(), output.size(), 0);
-	return ;
 }
 
 void	TcpServer::ServerAnswerGet( HttpHeader &header )
@@ -170,12 +174,12 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				else // path is file
 				{
 					std::string	awnser = returnFileStr(res);
-					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos), 200, awnser.size()));
+					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
+						200, awnser.size(), getRoute()));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
 				}
 				return ;
 			}
-			std::cout << res << std::endl;
 		}
 		else if (it + 1 == route.end())
 		{
@@ -191,7 +195,7 @@ void	TcpServer::ServerAnswerError(int id)
 	unsigned long		sent;
 	std::string			output(outputErrorPage(id));
 
-	output.insert(0, buildHeader(".html", id, output.size()));
+	output.insert(0, buildHeader(".html", id, output.size(), getRoute()));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
@@ -218,7 +222,7 @@ void	TcpServer::deleteFile( std::string &res )
 		int retVal = execve("/bin/rm", args, NULL); /*	no env apparently useless with rm	*/
 		exit (retVal);
 	}
-	std::cout << "Deleting: " << args[1] << std::endl;
+	//std::cout << "Deleting: " << args[1] << std::endl; // debug
 	waitpid(pid, &err, 0);
 	err >>= 8;
 	if (!err)
@@ -245,7 +249,6 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 				deleteFile( res);
 				return ;
 			}
-			std::cout << res << std::endl;
 		}
 		else if (it + 1 == route.end())
 		{
@@ -259,24 +262,17 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
 		(void) header;
-	std::cout << "hello we post" << std::endl;
-	
 		ServerAnswerError(200);
 }
 
 void	TcpServer::ServerListen()
 {
-	int	bytesReceived = 0;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
-	if (bytesReceived < 0)
-		throw IncomingBytesFailed();
-	else if (header.getError() > 0)
+	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
-	else if (bytesReceived > _maxHeaderSize)
-		ServerAnswerError(413);
 	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
 	else if (!header.getMethod().compare("DELETE"))

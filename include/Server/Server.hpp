@@ -6,12 +6,14 @@
 /*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:03:43 by gbricot           #+#    #+#             */
-/*   Updated: 2024/05/26 15:13:37 by gbricot          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:04:59 by gbricot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+# include <ctime>
+# include <fstream>
 # include "../HttpError/HttpError.hpp"
 # include "../Route/Route.hpp"
 
@@ -37,8 +39,8 @@ class	Server
 		void	processError( std::string &line );
 		
 		//	accessors
-		int		getMaxHeaderSize();
-		int		getMaxRequestSize();
+		size_t		getMaxHeaderSize();
+		size_t		getMaxRequestSize();
 	
 	protected:
 
@@ -54,6 +56,8 @@ class	Server
 
 		void	checkInfo( void );
 
+		void	addLog( std::string text );
+
 		/*		PROTECTED MEMBERS		*/
 
 		HttpError				_httpError;
@@ -63,8 +67,8 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
-		int						_maxHeaderSize;
-		int						_requestSize;
+		size_t					_maxHeaderSize;
+		size_t					_requestSize;
 		std::vector< Route >	_route;
 		int						_maxConnections;
 		std::string				_errorLog; //lol

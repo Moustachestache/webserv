@@ -11,6 +11,8 @@
 # include <algorithm>
 # include <map>
 # include <cstdlib>
+/* # include <chrono> */
+
 
 /*		C	LIBRAIRIES		*/
 
@@ -67,4 +69,4 @@ std::string ft_itoa( int val );
 
 std::string     getMimeType(std::string extension);
 
-std::string     buildHeader(std::string extension, int errorcode, int contentSize);
+std::string     buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
