@@ -276,9 +276,7 @@ void	TcpServer::ServerListen()
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
-	if (bytesReceived < 0)
-		throw IncomingBytesFailed();
-	else if (header.getError() > 0)
+	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
 	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
