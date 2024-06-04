@@ -101,6 +101,11 @@ int     HttpHeader::processBodyPost(std::string &body)
 int     HttpHeader::processBodyGet(std::string &body)
 {
     (void) body;
+    size_t i = _ressource.find("?");
+    std::string buffer(_ressource.substr(i, _ressource.size() - i));
+
+    _ressource.erase(i, std::string::npos);
+    std::cout << _ressource << " : " << buffer << std::endl;
     return 1;
 }
 
