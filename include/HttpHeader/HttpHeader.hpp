@@ -23,6 +23,7 @@ class HttpHeader {
         std::string &getFile();
         int &getError();
         void    stringSanitize(std::string &str);
+        void    processHeader(std::istringstream &iss, std::string &bodyData);
         int     processBodyPost(std::string &body);
         int     processBodyGet(std::string &body);
 
@@ -33,7 +34,10 @@ class HttpHeader {
         std::map < std::string, std::string >   &getGet();
 
     private:
-        static int      _bufferSize;
+        int             _socket;
+        Server&         _ptrServer;
+        static size_t   _bufferSize;
+        size_t          _bytesReceived;
         int             _error;
         std::string     _method;
         std::string     _ressource;

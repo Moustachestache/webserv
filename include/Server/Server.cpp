@@ -195,12 +195,12 @@ std::string Server::outputErrorPage(int id)
 	return strFile;
 }
 
-int     Server::getMaxHeaderSize()
+size_t     Server::getMaxHeaderSize()
 {
 	return _maxHeaderSize;       
 }
 
-int     Server::getMaxRequestSize()
+size_t     Server::getMaxRequestSize()
 {
 	return _requestSize;
 }
