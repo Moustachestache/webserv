@@ -22,10 +22,15 @@ class HttpHeader {
         std::string &getMethod();
         std::string &getFile();
         int &getError();
-        std::vector < std::string > &getArgs();
         void    stringSanitize(std::string &str);
         int     processBodyPost(std::string &body);
         int     processBodyGet(std::string &body);
+
+        //  map getters
+        std::map < std::string, std::string >   &getArgs();
+        std::map < std::string, std::string >   &getPost();
+        std::map < std::string, fileInfo >   &getFiles();
+        std::map < std::string, std::string >   &getGet();
 
     private:
         static int      _bufferSize;

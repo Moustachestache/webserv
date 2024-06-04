@@ -46,8 +46,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
     std::getline(iss, line);
     while (iss.good() && _error == 0)
     {
-        // rm this sanitize?
-        stringSanitize(line);
         i = line.find_first_of(":");
         if (!line.empty() && line.size() != 0 && i != std::string::npos)
         {
@@ -101,8 +99,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _error(0)
     {
         processBodyGet(bodyData);
     }
-    std::cout << "[debug - httheader.cpp]   method: " << _method << " file requested: " << _ressource << " version: " << _version << std::endl;
-}
+ }
 
 int     HttpHeader::processBodyPost(std::string &body)
 {
@@ -111,6 +108,12 @@ int     HttpHeader::processBodyPost(std::string &body)
     std::string value;
     size_t  j;
     _boundary.insert(0, "--");  //  helps normalize boundary
+
+    //  delete last iteration of _boundary
+    j = body.rfind(_boundary);
+    body.erase(j, std::string::npos);
+    //  anyway ...
+    
     for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
     {
         buffer = body.substr(i, std::string::npos);
@@ -135,13 +138,11 @@ int     HttpHeader::processBodyPost(std::string &body)
             //  
             j = buffer.find("\r\n\r\n") + 4;
             buffer.erase(0, j);
-            _postFiles[key].rawData = buffer.substr(0, buffer.find(_boundary));
+            _postFiles[key].rawData = buffer.substr(0, buffer.size() - 2);
             _postFiles[key].mimeType = mimeType;
             _postFiles[key].fileName = fileName;
-        //    std::cout << key << " " << _postFiles[key].mimeType << " " << _postFiles[key].fileName << std::endl;
-        //    std::cout << "rawdata: [" << _postFiles[key].rawData << "]" << std::endl;
         }
-        else
+        else if (buffer.size())
         {
             j = buffer.find("name=\"") + 6;
             buffer.erase(0, j);
@@ -170,7 +171,7 @@ void    HttpHeader::stringSanitize(std::string &str)
     int end = str.size() - 1;
     while (str[end] && isspace(str[end]))
         end--;
-    if (begin >= end)
+    if (begin > end)
         str = "";
     else
         str = str.substr(begin, end - begin + 1);
@@ -194,3 +195,26 @@ std::string &HttpHeader::getFile()
 {
     return  _ressource;
 }
+
+std::map < std::string, std::string >    &HttpHeader::getArgs()
+{
+    return _args;
+}
+
+std::map < std::string, std::string >    &HttpHeader::getPost()
+{
+    return _post;
+}
+
+
+std::map < std::string, fileInfo >    &HttpHeader::getFiles()
+{
+    return _postFiles;
+}
+
+
+std::map < std::string, std::string >    &HttpHeader::getGet()
+{
+    return _get;
+}
+
