@@ -269,3 +269,23 @@
 [2024/06/05 10:47:28 UTC+2] Server answer: 200
 [2024/06/05 10:47:28 UTC+2] New incoming connection on server pickleemporium.pkl: GET /favicon.ico
 [2024/06/05 10:47:28 UTC+2] Server answer: 200
+[2024/06/05 11:07:34 UTC+2] Closing server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 11:07:34 UTC+2] Closing server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 11:07:38 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 11:07:38 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 11:07:42 UTC+2] New incoming connection on server pickleemporium.pkl: GET /sending.htm
+[2024/06/05 11:07:42 UTC+2] Server answer: 200
+[2024/06/05 11:07:42 UTC+2] New incoming connection on server pickleemporium.pkl: GET /favicon.ico
+[2024/06/05 11:07:42 UTC+2] Server answer: 200
+[2024/06/05 11:14:22 UTC+2] Closing server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 11:14:22 UTC+2] Closing server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 11:14:24 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 11:14:24 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 11:14:28 UTC+2] New incoming connection on server pickleemporium.pkl: GET /sending.htm
+[2024/06/05 11:14:28 UTC+2] Server answer: 200
+[2024/06/05 11:14:28 UTC+2] New incoming connection on server pickleemporium.pkl: GET /favicon.ico
+[2024/06/05 11:14:28 UTC+2] Server answer: 200
+[2024/06/05 11:14:29 UTC+2] New incoming connection on server pickleemporium.pkl: GET /sending.htm
+[2024/06/05 11:14:29 UTC+2] Server answer: 200
+[2024/06/05 11:14:29 UTC+2] New incoming connection on server pickleemporium.pkl: GET /favicon.ico
+[2024/06/05 11:14:29 UTC+2] Server answer: 200
