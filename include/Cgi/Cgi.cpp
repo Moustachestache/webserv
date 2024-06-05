@@ -19,7 +19,7 @@ std::string	TcpServer::true_path(std::vector<Route> _routes, HttpHeader _header)
 	for (std::vector<Route>::iterator it = _routes.begin(); it != _routes.end(); ++it)
 	{
 		checkValidRoute(_header, *it, file_verif);
-		if(file_verif.empty())
+		if(!file_verif.empty())
 			return file_verif;
 	}
 	return 0;
@@ -86,7 +86,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path)
 	int pipe_fd[2];
 	pid_t pid;
 
-	
+	(void) _header;
 	if (pipe(pipe_fd) == -1) {
         std::cerr << "pipe failed" << std::endl;
         exit(1);
