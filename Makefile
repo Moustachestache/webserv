@@ -33,7 +33,7 @@ SRC =		source/main.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp \
-			include/Cgi/Cgi.cpp
+			include/Cgi/Cgi.cpp 
 			
 
 OBJ = $(SRC:.cpp=.o)

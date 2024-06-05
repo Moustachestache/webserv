@@ -4,7 +4,7 @@
 # include "../Server/Server.hpp"
 # include "../Socket/Socket.hpp"
 # include "../HttpHeader/HttpHeader.hpp"
-
+# include "../Cgi/Cgi.hpp"
 /*#include <netinet/in.h>
 
 struct sockaddr_in {
@@ -43,6 +43,12 @@ class TcpServer : public Server
         void    ServerAnswerLs(HttpHeader &header, std::string path);
         void	ServerStart();
         int     getSocket( void ) { return _socket.getSocket(); }
+
+
+        std::string	true_path(std::vector<Route> _routes, HttpHeader _header);
+        bool isCgi(std::vector<Route> route, HttpHeader &_header);
+        std::string execCgi(HttpHeader _header, std::string true_path);
+        std::string execCgiGet(HttpHeader _header, std::string true_path);
 
     private:
 

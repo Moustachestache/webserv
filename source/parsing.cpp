@@ -153,3 +153,7 @@ std::string	BuildRelativePath( std::string first, std::string second, std::strin
 		res.replace( res.find("//"), sizeof("//") - 1, "/");
 	return (res);
 }
+
+
+
+

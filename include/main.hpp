@@ -70,3 +70,12 @@ std::string ft_itoa( int val );
 std::string     getMimeType(std::string extension);
 
 std::string     buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
+
+
+/*          CGI          */
+bool            isCgi(Route route, std::string filename);
+std::string	    true_path(std::vector<Route> _routes, HttpHeader _header);
+
+std::string    execCgiPost(HttpHeader _header);
+std::string    execCgiGet(HttpHeader _header);
+std::string    execCgi(HttpHeader _header);

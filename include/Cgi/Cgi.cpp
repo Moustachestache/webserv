@@ -1,6 +1,6 @@
-#include "Cgi.hpp"
+//#include "Cgi.hpp"
 
-
+#include "../TcpServer/TcpServer.hpp"
 /*char **make_arg(HttpHeader _header)
 {
 	char *arg[_header.getArgs().size() + 2];
@@ -13,29 +13,54 @@
 	return arg;
 }*/
 
-
-bool isCgi(Route route, std::string filename)
+std::string	TcpServer::true_path(std::vector<Route> _routes, HttpHeader _header)
 {
-    if (!route.getCgi().empty())
-    {
-        for(std::size_t i = 0; i < route.getCgi().size(); i++ )
-        {
-            for (std::size_t j = 0; j < route.getCgi()[i].extention.size(); j++)
-            {
-                if(filename.substr(filename.find_last_of(".")) == route.getCgi()[i].extention[j])
-                    return true;
-            }
-        }
-        return false;
-    }
-    else
-    {
-        return false;
-    }
+	std::string file_verif;
+	for (std::vector<Route>::iterator it = _routes.begin(); it != _routes.end(); ++it)
+	{
+		checkValidRoute(_header, *it, file_verif);
+		if(!file_verif.empty())
+			return file_verif;
+	}
+	return 0;
 }
 
 
-std::string execCgi(HttpHeader _header)
+bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
+{
+		std::string file_verif;
+		for (std::vector<Route>::iterator it = route.begin(); it != route.end(); ++it)
+		{
+			checkValidRoute(_header, *it, file_verif);
+			if (!file_verif.empty())
+			{
+				if (file_verif.at(file_verif.size() -1) != '/')
+				{
+					if (!(*it).getCgi().empty())
+					{
+						for(std::size_t i = 0; i < (*it).getCgi().size(); i++ )
+						{
+							for (std::size_t j = 0; j < (*it).getCgi()[i].extention.size(); j++)
+							{
+								if(file_verif.substr(file_verif.find_last_of(".")) == (*it).getCgi()[i].extention[j])
+									return true;
+							}
+						}
+						return false;
+					}
+					else
+					{
+						addLog("CGI Not implemented");
+						return false;
+					}
+				}
+			}
+		}
+		return false;
+}
+
+
+std::string TcpServer::execCgi(HttpHeader _header, std::string true_path)
 {
 	/*std::cout << std::endl << "Lapis Lazuli" << std::endl;
 	std::cout << std::endl << "Method : " << _header.getMethod() << std::endl;
@@ -51,53 +76,17 @@ std::string execCgi(HttpHeader _header)
 	}
 	else*/ if (_header.getMethod() == "GET")
 	{
-		return (execCgiGet(_header));
+		return (execCgiGet(_header, true_path));
 	}
 	return (0);
 }
 
-/*void execCgiPost(HttpHeader _header)
-{
-	//executé le fichier sh via la http request
-	int pipe_fd[2];
-	pid_t pid;
-
-	pipe(pipe_fd);
-	dup2(STDOUT_FILENO, pipe_fd[1]);
-	pid = fork();
-
-	if (pid == -1)
-	{
-		std::cerr << "fork failed" << std::endl;
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		//on execute le cgi
-		char **argv = make_arg(_header);
-		execve(_header.getFile().c_str(), argv, NULL);
-		std::cerr << "execve failed" << std::endl;
-		exit(0);
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-		//on recupere le resultat
-		char buffer[1024];
-		int ret;
-		while ((ret = read(pipe_fd[0], buffer, 1024)) > 0)
-		{
-			write(STDOUT_FILENO, buffer, ret);
-		}
-	}
-}*/
-
-std::string execCgiGet(HttpHeader _header)
+std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path)
 {
 	int pipe_fd[2];
 	pid_t pid;
 
-	
+	(void) _header;
 	if (pipe(pipe_fd) == -1) {
         std::cerr << "pipe failed" << std::endl;
         exit(1);
@@ -119,7 +108,7 @@ std::string execCgiGet(HttpHeader _header)
         close(pipe_fd[1]);
 		
 		
-		std::string file = _header.getFile().insert(0, "./www");
+		std::string file = true_path; //// faire un getteur pour la Root
 		char *script_path = const_cast<char *>(file.c_str());
 		char *argv[] = { script_path, NULL };
 		char *envp[] = { NULL };
@@ -143,8 +132,6 @@ std::string execCgiGet(HttpHeader _header)
 			answer.append(buffer, ret);
 		}
 		close(pipe_fd[0]);
-		
-		std::cout << "Aigue Marine 2 " << answer << "Fin Aigue Marine " <<std::endl ;
 		
 		return (answer);
 	}

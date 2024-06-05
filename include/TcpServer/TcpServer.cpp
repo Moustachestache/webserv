@@ -275,6 +275,8 @@ void	TcpServer::ServerListen()
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
+	else if (isCgi(getRoute(), header) == true)
+		execCgi(header, true_path(getRoute(), header));
 	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
 	else if (!header.getMethod().compare("DELETE"))
