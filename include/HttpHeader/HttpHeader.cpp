@@ -102,7 +102,21 @@ int     HttpHeader::processBodyGet(std::string &body)
 {
     (void) body;
     size_t i = _ressource.find("?");
+    std::string key;
+    std::string data;
     std::string buffer(_ressource.substr(i, _ressource.size() - i));
+    while (!buffer.empty())
+    {
+        i = buffer.find('&') + 1;
+        key = buffer.substr(0, i);
+        buffer.erase(0, i);
+        // set
+        std::cout << "key       :" << key << std::endl;
+        std::cout << "buffer    :" << buffer << std::endl;
+/*         key = ;     //  before =
+        data = ;    //  after = */
+        // delete
+    }
 
     _ressource.erase(i, std::string::npos);
     std::cout << _ressource << " : " << buffer << std::endl;
