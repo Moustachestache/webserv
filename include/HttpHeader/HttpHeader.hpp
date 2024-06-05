@@ -1,6 +1,9 @@
 #pragma once
 #include "../main.hpp"
+//#include "../Server/Server.hpp"
 
+
+class Server;
 //  note:
 //  this structure is contained in _postFiles
 //  the map is accessed with the name of the field as key.
