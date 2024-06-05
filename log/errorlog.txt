@@ -12,3 +12,5 @@
 [2024/06/04 16:10:42] test
 [2024/06/05 14:30:51] test
 [2024/06/05 14:30:51] test
+[2024/06/05 16:47:55 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 16:47:55 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181

@@ -279,7 +279,7 @@ void	TcpServer::ServerListen()
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
 	else if (isCgi(getRoute(), header) == true)
-		execCgi(header, true_path(getRoute(), header), );
+		execCgi(header, true_path(getRoute(), header), getRoute() );
 	else if (!header.getMethod().compare("GET"))
 		ServerAnswerGet(header);
 	else if (!header.getMethod().compare("DELETE"))

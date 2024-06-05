@@ -15,10 +15,10 @@
 
 
 
-std::string cgiPath(std::vector<Route> routes, HttpHeader header)
+std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
 {
 	std::string file_verif;
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); ++it)
+	for (std::vector<Route>::iterator it = routes.begin(); it != routes.end(); ++it)
 	{
 		checkValidRoute(_header, *it, file_verif);
 		if (!file_verif.empty())
@@ -39,7 +39,7 @@ std::string cgiPath(std::vector<Route> routes, HttpHeader header)
 			}
 		}
 	}
-	addLog("Not Path implemented for this extension")
+	addLog("Not Path implemented for this extension");
 	return 0;
 } 
 
@@ -96,7 +96,7 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 	std::string answer;
 	std::string _path;
 
-	path = cgiPath(routes, _header);
+	_path = cgiPath(routes, _header);
 
 	
 	if (_header.getMethod() == "GET"  || _header.getMethod() == "POST") 
@@ -104,10 +104,10 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 		answer = (execCgiGet(_header, true_path, _path));
 	}
 
-	if (!answer.empty() && !path == 0)
+	if (!answer.empty())
 	{
-		answer.insert(0,  buildHeader(".html" , 200, awnser.size()));
-		send(_newSocket, awnser.c_str(), awnser.size(), 0);
+		answer.insert(0,  buildHeader(".html" , 200, answer.size(), routes));
+		send(_newSocket, answer.c_str(), answer.size(), 0);
 	}
 	else
 	{
@@ -147,10 +147,12 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		
 		std::string file = true_path; //// faire un getteur pour la Root
 		char *script_path = const_cast<char *>(file.c_str());
-		char *argv[] = { path, script_path, NULL };
+		char *_pat = const_cast<char *>(_path.c_str());
+
+		char *argv[] = { _pat, script_path, NULL };
 		char *envp[] = { NULL };
 
-		if (execve(path, argv, envp) == -1)
+		if (execve(_pat, argv, envp) == -1)
 			std::cerr << "execve failed" << std::endl;
 		exit(0);
 	}

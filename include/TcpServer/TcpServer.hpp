@@ -45,10 +45,11 @@ class TcpServer : public Server
         int     getSocket( void ) { return _socket.getSocket(); }
 
 
-        std::string	true_path(std::vector<Route> _routes, HttpHeader _header);
-        bool isCgi(std::vector<Route> route, HttpHeader &_header);
-        std::string execCgi(HttpHeader _header, std::string true_path);
-        std::string execCgiGet(HttpHeader _header, std::string true_path);
+        std::string	    true_path(std::vector<Route> _routes, HttpHeader _header);
+        bool            isCgi(std::vector<Route> route, HttpHeader &_header);
+        void            execCgi(HttpHeader _header, std::string true_path, std::vector<Route> routes);
+        std::string     execCgiGet(HttpHeader _header, std::string true_path, std::string _path);
+        std::string     cgiPath(std::vector<Route> routes, HttpHeader _header);
 
     private:
 
