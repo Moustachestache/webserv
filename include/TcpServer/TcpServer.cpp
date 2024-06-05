@@ -115,16 +115,13 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
 
-	(void) header;
-	//path.erase(0, _root.size() + 1); // do not remove + 1 risk to delete one more char
-	path.erase(0, _root.size()); // nul we need the real path and the client one, to handle redirections
 	if (openDir == NULL)
 	{
 		ServerAnswerError(500);
 		return ;
 	}
 	output.append("<!DOCTYPE html><html data-theme=\"dark\"><head><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\"/><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\" /><link href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\" rel=\"stylesheet\"><title>");
-	output.append(_serverName + "/" + path + " folder listing</title></head><body><div class=\"container\"><h1 class=\"grid\">index of " + path + "</h1><table><th></th><th>type</th><th>name</th><th>mime/type</th>");
+	output.append(_serverName + header.getFile() + " folder listing</title></head><body><div class=\"container\"><h1 class=\"grid\">index of " + header.getFile() + "</h1><table><th></th><th>type</th><th>name</th><th>mime/type</th>");
 	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
 	{
 		output.append("<tr class=\"pico-background-grey-850\">");
@@ -208,33 +205,16 @@ void	TcpServer::ServerAnswerError(int id)
 
 void	TcpServer::deleteFile( std::string &res )
 {
-	int	err = 0;
-	char **args = new char*[3];
-	args[0] = new char[4];
-	args[0][0] = '-';
-	args[0][1] = 'r';
-	args[0][2] = 'f';
-	args[0][3] = '\0';
-	args[1] = new char[res.size() + 1];
-	for (size_t i = 0; i < res.size(); i++)
-		args[1][i] = res.at(i);
-	args[1][res.size()] = '\0';
-	args[2] = NULL;
-	int pid = fork();
-	if (!pid)
+	if (std::remove( res.c_str() ))
 	{
-		int retVal = execve("/bin/rm", args, NULL); /*	no env apparently useless with rm	*/
-		exit (retVal);
-	}
-	addLog( "File: " + res + " has been deleted.");
-	waitpid(pid, &err, 0);
-	err >>= 8;
-	if (!err)
-		ServerAnswerError(200);
-	else
+		addLog( "File: " + res + " can't be deleted, no such file or directory.");
 		ServerAnswerError(204);
-	delete args[0], args[1];
-	delete[] args;
+	}
+	else
+	{
+		addLog( "File: " + res + " has been deleted.");
+		ServerAnswerError(200);
+	}
 }
 
 void	TcpServer::ServerAnswerDelete( HttpHeader &header )
