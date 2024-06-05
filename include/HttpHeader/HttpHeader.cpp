@@ -40,7 +40,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _socket(socket), _ptrS
         processBodyGet(bodyData);
  }
 
-int     HttpHeader::processBodyPost(std::string &body)
+void     HttpHeader::processBodyPost(std::string &body)
 {
     std::string buffer;
     std::string key;
@@ -94,33 +94,46 @@ int     HttpHeader::processBodyPost(std::string &body)
             _post[key] = value;
         }
     }
-    return 0;
 }
 
 
-int     HttpHeader::processBodyGet(std::string &body)
+void     HttpHeader::processBodyGet(std::string &body)
 {
     (void) body;
     size_t i = _ressource.find("?");
+    size_t j;
     std::string key;
     std::string data;
     std::string buffer(_ressource.substr(i, _ressource.size() - i));
-    while (!buffer.empty())
-    {
-        i = buffer.find('&') + 1;
-        key = buffer.substr(0, i);
-        buffer.erase(0, i);
-        // set
-        std::cout << "key       :" << key << std::endl;
-        std::cout << "buffer    :" << buffer << std::endl;
-/*         key = ;     //  before =
-        data = ;    //  after = */
-        // delete
-    }
-
     _ressource.erase(i, std::string::npos);
     std::cout << _ressource << " : " << buffer << std::endl;
-    return 1;
+    for (i = buffer.rfind('&'); i != std::string::npos; i = buffer.rfind('&', i))
+    {
+        //  load
+        key = buffer.substr(i, std::string::npos);
+        buffer.erase(i, std::string::npos);
+        //  handle
+        j = key.find("=");
+        if (j == std::string::npos)
+        {
+            getStringSanitize(key);
+            _get[key] =  "";
+        }
+        else
+        {
+            data = key.substr(0, j);
+            key.erase(0, j);
+            getStringSanitize(data);
+            getStringSanitize(key);
+            _get[data] = key;
+        }
+    }
+    //  if buffer has lengthbuffer;
+    if (buffer.size())
+    {
+        getStringSanitize(buffer);
+        _get[buffer] = "";
+    }
 }
 
 void    HttpHeader::stringSanitize(std::string &str)
@@ -130,6 +143,20 @@ void    HttpHeader::stringSanitize(std::string &str)
         begin++;
     int end = str.size() - 1;
     while (str[end] && isspace(str[end]))
+        end--;
+    if (begin > end)
+        str = "";
+    else
+        str = str.substr(begin, end - begin + 1);
+}
+
+void    HttpHeader::getStringSanitize(std::string &str)
+{
+    int begin = 0;
+    while (str[begin] && (isspace(str[begin]) || str[begin] == '&' || str[begin] == '?' || str[begin] == '='))
+        begin++;
+    int end = str.size() - 1;
+    while (str[end] && (isspace(str[begin]) || str[begin] == '&' || str[begin] == '?' || str[begin] == '='))
         end--;
     if (begin > end)
         str = "";

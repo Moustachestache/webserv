@@ -23,9 +23,10 @@ class HttpHeader {
         std::string &getFile();
         int &getError();
         void    stringSanitize(std::string &str);
+        void    getStringSanitize(std::string &str);
         void    processHeader(std::istringstream &iss, std::string &bodyData);
-        int     processBodyPost(std::string &body);
-        int     processBodyGet(std::string &body);
+        void     processBodyPost(std::string &body);
+        void     processBodyGet(std::string &body);
 
         //  map getters
         std::map < std::string, std::string >   &getArgs();
