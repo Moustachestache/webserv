@@ -19,3 +19,767 @@
 [2024/06/04 16:41:28] test
 [2024/06/04 16:41:30] test
 [2024/06/04 16:41:30] test
+[2024/06/05 15:03:49 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:03:49 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:04:02 UTC+2] New incoming connection on server pickleemporium.pkl: GET /
+[2024/06/05 15:04:02 UTC+2] Server answer: 200
+[2024/06/05 15:04:02 UTC+2] New incoming connection on server pickleemporium.pkl: GET /pico.green.css
+[2024/06/05 15:04:02 UTC+2] Server answer: 200
+[2024/06/05 15:04:02 UTC+2] New incoming connection on server pickleemporium.pkl: GET /style.css
+[2024/06/05 15:04:02 UTC+2] Server answer: 200
+[2024/06/05 15:04:02 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/blueberrypickles.png
+[2024/06/05 15:04:02 UTC+2] Server answer: 200
+[2024/06/05 15:04:02 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/coffeepickles.png
+[2024/06/05 15:04:02 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/lavenderpickles.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/pineapplepickles.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /pickles.gif
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/massimo.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /pickleman.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/chocolatepickle.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/jasper.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:03 UTC+2] New incoming connection on server pickleemporium.pkl: GET /images/cabin.png
+[2024/06/05 15:04:03 UTC+2] Server answer: 200
+[2024/06/05 15:04:04 UTC+2] New incoming connection on server pickleemporium.pkl: GET /favicon.ico
+[2024/06/05 15:04:04 UTC+2] Server answer: 200
+[2024/06/05 15:04:07 UTC+2] New incoming connection on server CAT.cat: GET /
+[2024/06/05 15:04:07 UTC+2] Server answer: 200
+[2024/06/05 15:04:07 UTC+2] New incoming connection on server CAT.cat: GET /favicon.ico
+[2024/06/05 15:04:07 UTC+2] Server answer: 404
+[2024/06/05 15:04:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:04:09 UTC+2] Server answer: 200
+[2024/06/05 15:04:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:04:23 UTC+2] Server answer: 200
+[2024/06/05 15:04:31 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:04:31 UTC+2] Server answer: 200
+[2024/06/05 15:05:14 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:14 UTC+2] Server answer: 200
+[2024/06/05 15:05:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:15 UTC+2] Server answer: 200
+[2024/06/05 15:05:52 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:52 UTC+2] Server answer: 200
+[2024/06/05 15:05:52 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:52 UTC+2] Server answer: 200
+[2024/06/05 15:05:52 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:52 UTC+2] Server answer: 200
+[2024/06/05 15:05:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:53 UTC+2] Server answer: 200
+[2024/06/05 15:05:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:53 UTC+2] Server answer: 200
+[2024/06/05 15:05:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:05:53 UTC+2] Server answer: 200
+[2024/06/05 15:06:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:32 UTC+2] Server answer: 200
+[2024/06/05 15:06:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:51 UTC+2] Server answer: 200
+[2024/06/05 15:06:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:51 UTC+2] Server answer: 200
+[2024/06/05 15:06:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:51 UTC+2] Server answer: 200
+[2024/06/05 15:06:52 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:52 UTC+2] Server answer: 200
+[2024/06/05 15:06:52 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:06:52 UTC+2] Server answer: 200
+[2024/06/05 15:07:14 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:14 UTC+2] Server answer: 200
+[2024/06/05 15:07:28 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:28 UTC+2] Server answer: 200
+[2024/06/05 15:07:29 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:29 UTC+2] Server answer: 200
+[2024/06/05 15:07:29 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:29 UTC+2] Server answer: 200
+[2024/06/05 15:07:29 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:29 UTC+2] Server answer: 200
+[2024/06/05 15:07:29 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:29 UTC+2] Server answer: 200
+[2024/06/05 15:07:29 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:07:29 UTC+2] Server answer: 200
+[2024/06/05 15:11:17 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:11:17 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:11:19 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:11:19 UTC+2] Server answer: 200
+[2024/06/05 15:11:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:11:44 UTC+2] Server answer: 200
+[2024/06/05 15:15:10 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:15:10 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:15:13 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:15:13 UTC+2] Server answer: 200
+[2024/06/05 15:15:14 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:15:14 UTC+2] Server answer: 200
+[2024/06/05 15:15:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:15:32 UTC+2] Server answer: 200
+[2024/06/05 15:15:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:15:36 UTC+2] Server answer: 200
+[2024/06/05 15:18:23 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:18:23 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:18:27 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:18:27 UTC+2] Server answer: 200
+[2024/06/05 15:18:31 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:18:31 UTC+2] Server answer: 200
+[2024/06/05 15:19:10 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.wanadoo.fr/
+[2024/06/05 15:19:10 UTC+2] Server answer: 200
+[2024/06/05 15:20:42 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:20:42 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:20:44 UTC+2] New incoming connection on server CAT.cat: GET /
+[2024/06/05 15:20:44 UTC+2] Server answer: 200
+[2024/06/05 15:20:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:20:49 UTC+2] Server answer: 200
+[2024/06/05 15:21:02 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:02 UTC+2] Server answer: 200
+[2024/06/05 15:21:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:23 UTC+2] Server answer: 200
+[2024/06/05 15:21:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:26 UTC+2] Server answer: 200
+[2024/06/05 15:21:28 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:28 UTC+2] Server answer: 200
+[2024/06/05 15:21:48 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:48 UTC+2] Server answer: 200
+[2024/06/05 15:21:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:21:49 UTC+2] Server answer: 200
+[2024/06/05 15:30:13 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:30:13 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:30:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:30:18 UTC+2] Server answer: 200
+[2024/06/05 15:30:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 15:30:18 UTC+2] Server answer: 200
+[2024/06/05 15:30:19 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:30:19 UTC+2] Server answer: 200
+[2024/06/05 15:30:19 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 15:30:19 UTC+2] Server answer: 200
+[2024/06/05 15:33:23 UTC+2] Closing server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:33:23 UTC+2] Closing server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:37:00 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 15:37:00 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 15:37:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/
+[2024/06/05 15:37:05 UTC+2] Server answer: 200
+[2024/06/05 15:37:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 15:37:05 UTC+2] Server answer: 200
+[2024/06/05 16:16:58 UTC+2] Starting server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 16:16:58 UTC+2] Starting server: pickleemporium.pkl at 0.0.0.0 on port 8181
+[2024/06/05 16:17:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:17:05 UTC+2] Server answer: 200
+[2024/06/05 16:17:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:17:05 UTC+2] Server answer: 200
+[2024/06/05 16:17:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:17:05 UTC+2] Server answer: 200
+[2024/06/05 16:17:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:17:05 UTC+2] Server answer: 200
+[2024/06/05 16:20:13 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:20:13 UTC+2] Server answer: 200
+[2024/06/05 16:20:13 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:20:13 UTC+2] Server answer: 200
+[2024/06/05 16:20:13 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:20:13 UTC+2] Server answer: 200
+[2024/06/05 16:20:13 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:20:13 UTC+2] Server answer: 200
+[2024/06/05 16:20:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:20:30 UTC+2] Server answer: 200
+[2024/06/05 16:20:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:20:30 UTC+2] Server answer: 200
+[2024/06/05 16:20:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:20:30 UTC+2] Server answer: 200
+[2024/06/05 16:20:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:20:30 UTC+2] Server answer: 200
+[2024/06/05 16:21:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:21:32 UTC+2] Server answer: 200
+[2024/06/05 16:21:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:21:32 UTC+2] Server answer: 200
+[2024/06/05 16:21:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:21:32 UTC+2] Server answer: 200
+[2024/06/05 16:21:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:21:32 UTC+2] Server answer: 200
+[2024/06/05 16:22:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:22:09 UTC+2] Server answer: 200
+[2024/06/05 16:22:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:22:09 UTC+2] Server answer: 200
+[2024/06/05 16:22:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:22:09 UTC+2] Server answer: 200
+[2024/06/05 16:22:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:22:09 UTC+2] Server answer: 200
+[2024/06/05 16:22:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:22:18 UTC+2] Server answer: 200
+[2024/06/05 16:22:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:22:18 UTC+2] Server answer: 200
+[2024/06/05 16:22:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:22:18 UTC+2] Server answer: 200
+[2024/06/05 16:22:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:22:18 UTC+2] Server answer: 200
+[2024/06/05 16:22:27 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:22:27 UTC+2] Server answer: 200
+[2024/06/05 16:22:27 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:22:27 UTC+2] Server answer: 200
+[2024/06/05 16:22:27 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:22:27 UTC+2] Server answer: 200
+[2024/06/05 16:22:28 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:22:28 UTC+2] Server answer: 200
+[2024/06/05 16:22:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:22:40 UTC+2] Server answer: 200
+[2024/06/05 16:22:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:22:40 UTC+2] Server answer: 200
+[2024/06/05 16:22:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:22:40 UTC+2] Server answer: 200
+[2024/06/05 16:22:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:22:40 UTC+2] Server answer: 200
+[2024/06/05 16:22:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:22:57 UTC+2] Server answer: 200
+[2024/06/05 16:22:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:22:57 UTC+2] Server answer: 200
+[2024/06/05 16:22:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:22:57 UTC+2] Server answer: 200
+[2024/06/05 16:22:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:22:57 UTC+2] Server answer: 200
+[2024/06/05 16:23:04 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:23:04 UTC+2] Server answer: 200
+[2024/06/05 16:23:04 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:23:04 UTC+2] Server answer: 200
+[2024/06/05 16:23:04 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:23:04 UTC+2] Server answer: 200
+[2024/06/05 16:23:04 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:23:04 UTC+2] Server answer: 200
+[2024/06/05 16:23:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:23:16 UTC+2] Server answer: 200
+[2024/06/05 16:23:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:23:17 UTC+2] Server answer: 200
+[2024/06/05 16:23:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:23:17 UTC+2] Server answer: 200
+[2024/06/05 16:23:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:23:17 UTC+2] Server answer: 200
+[2024/06/05 16:23:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:23:44 UTC+2] Server answer: 200
+[2024/06/05 16:23:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:23:44 UTC+2] Server answer: 200
+[2024/06/05 16:23:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:23:44 UTC+2] Server answer: 200
+[2024/06/05 16:23:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:23:44 UTC+2] Server answer: 200
+[2024/06/05 16:23:56 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:23:56 UTC+2] Server answer: 200
+[2024/06/05 16:23:56 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:23:56 UTC+2] Server answer: 200
+[2024/06/05 16:23:56 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:23:56 UTC+2] Server answer: 200
+[2024/06/05 16:23:56 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:23:56 UTC+2] Server answer: 200
+[2024/06/05 16:24:04 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:24:04 UTC+2] Server answer: 200
+[2024/06/05 16:24:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:24:05 UTC+2] Server answer: 200
+[2024/06/05 16:24:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:24:05 UTC+2] Server answer: 200
+[2024/06/05 16:24:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:24:05 UTC+2] Server answer: 200
+[2024/06/05 16:25:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:16 UTC+2] Server answer: 200
+[2024/06/05 16:25:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:16 UTC+2] Server answer: 200
+[2024/06/05 16:25:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:16 UTC+2] Server answer: 200
+[2024/06/05 16:25:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:16 UTC+2] Server answer: 200
+[2024/06/05 16:25:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:35 UTC+2] Server answer: 200
+[2024/06/05 16:25:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:35 UTC+2] Server answer: 200
+[2024/06/05 16:25:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:35 UTC+2] Server answer: 200
+[2024/06/05 16:25:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:35 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:45 UTC+2] Server answer: 200
+[2024/06/05 16:25:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:51 UTC+2] Server answer: 200
+[2024/06/05 16:25:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:51 UTC+2] Server answer: 200
+[2024/06/05 16:25:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:51 UTC+2] Server answer: 200
+[2024/06/05 16:25:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:51 UTC+2] Server answer: 200
+[2024/06/05 16:25:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:25:57 UTC+2] Server answer: 200
+[2024/06/05 16:25:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:25:57 UTC+2] Server answer: 200
+[2024/06/05 16:25:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:25:57 UTC+2] Server answer: 200
+[2024/06/05 16:25:57 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:25:57 UTC+2] Server answer: 200
+[2024/06/05 16:26:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:26:39 UTC+2] Server answer: 200
+[2024/06/05 16:26:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:26:39 UTC+2] Server answer: 200
+[2024/06/05 16:26:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:26:39 UTC+2] Server answer: 200
+[2024/06/05 16:26:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:26:39 UTC+2] Server answer: 200
+[2024/06/05 16:27:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:27:30 UTC+2] Server answer: 200
+[2024/06/05 16:27:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:27:30 UTC+2] Server answer: 200
+[2024/06/05 16:27:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:27:30 UTC+2] Server answer: 200
+[2024/06/05 16:27:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:27:30 UTC+2] Server answer: 200
+[2024/06/05 16:27:41 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:27:41 UTC+2] Server answer: 200
+[2024/06/05 16:27:41 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:27:41 UTC+2] Server answer: 200
+[2024/06/05 16:27:41 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:27:41 UTC+2] Server answer: 200
+[2024/06/05 16:27:41 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:27:41 UTC+2] Server answer: 200
+[2024/06/05 16:39:10 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:39:10 UTC+2] Server answer: 200
+[2024/06/05 16:39:10 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:39:10 UTC+2] Server answer: 200
+[2024/06/05 16:39:10 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:39:10 UTC+2] Server answer: 200
+[2024/06/05 16:39:10 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:39:10 UTC+2] Server answer: 200
+[2024/06/05 16:39:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:39:15 UTC+2] Server answer: 200
+[2024/06/05 16:39:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:39:15 UTC+2] Server answer: 200
+[2024/06/05 16:39:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:39:15 UTC+2] Server answer: 200
+[2024/06/05 16:39:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:39:15 UTC+2] Server answer: 200
+[2024/06/05 16:39:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:39:30 UTC+2] Server answer: 200
+[2024/06/05 16:39:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:39:30 UTC+2] Server answer: 200
+[2024/06/05 16:39:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:39:30 UTC+2] Server answer: 200
+[2024/06/05 16:39:30 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:39:30 UTC+2] Server answer: 200
+[2024/06/05 16:40:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:40:18 UTC+2] Server answer: 200
+[2024/06/05 16:40:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:40:18 UTC+2] Server answer: 200
+[2024/06/05 16:40:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:40:18 UTC+2] Server answer: 200
+[2024/06/05 16:40:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:40:18 UTC+2] Server answer: 200
+[2024/06/05 16:40:34 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:40:34 UTC+2] Server answer: 200
+[2024/06/05 16:40:34 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:40:34 UTC+2] Server answer: 200
+[2024/06/05 16:40:34 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:40:34 UTC+2] Server answer: 200
+[2024/06/05 16:40:34 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:40:34 UTC+2] Server answer: 200
+[2024/06/05 16:40:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:40:49 UTC+2] Server answer: 200
+[2024/06/05 16:40:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:40:49 UTC+2] Server answer: 200
+[2024/06/05 16:40:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:40:49 UTC+2] Server answer: 200
+[2024/06/05 16:40:49 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:40:49 UTC+2] Server answer: 200
+[2024/06/05 16:42:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:42:16 UTC+2] Server answer: 200
+[2024/06/05 16:42:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:42:16 UTC+2] Server answer: 200
+[2024/06/05 16:42:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:42:16 UTC+2] Server answer: 200
+[2024/06/05 16:42:16 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:42:16 UTC+2] Server answer: 200
+[2024/06/05 16:42:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:42:26 UTC+2] Server answer: 200
+[2024/06/05 16:42:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:42:26 UTC+2] Server answer: 200
+[2024/06/05 16:42:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:42:26 UTC+2] Server answer: 200
+[2024/06/05 16:42:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:42:26 UTC+2] Server answer: 200
+[2024/06/05 16:46:59 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:46:59 UTC+2] Server answer: 200
+[2024/06/05 16:46:59 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:46:59 UTC+2] Server answer: 200
+[2024/06/05 16:46:59 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:46:59 UTC+2] Server answer: 200
+[2024/06/05 16:46:59 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:46:59 UTC+2] Server answer: 200
+[2024/06/05 16:47:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:47:17 UTC+2] Server answer: 200
+[2024/06/05 16:47:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:47:17 UTC+2] Server answer: 200
+[2024/06/05 16:47:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:47:17 UTC+2] Server answer: 200
+[2024/06/05 16:47:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:47:17 UTC+2] Server answer: 200
+[2024/06/05 16:47:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:47:40 UTC+2] Server answer: 200
+[2024/06/05 16:47:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:47:40 UTC+2] Server answer: 200
+[2024/06/05 16:47:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:47:40 UTC+2] Server answer: 200
+[2024/06/05 16:47:40 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:47:40 UTC+2] Server answer: 200
+[2024/06/05 16:48:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:48:09 UTC+2] Server answer: 200
+[2024/06/05 16:48:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:48:09 UTC+2] Server answer: 200
+[2024/06/05 16:48:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:48:09 UTC+2] Server answer: 200
+[2024/06/05 16:48:09 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:48:09 UTC+2] Server answer: 200
+[2024/06/05 16:49:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:49:23 UTC+2] Server answer: 200
+[2024/06/05 16:49:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:49:23 UTC+2] Server answer: 200
+[2024/06/05 16:49:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:49:23 UTC+2] Server answer: 200
+[2024/06/05 16:49:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:49:23 UTC+2] Server answer: 200
+[2024/06/05 16:49:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:49:32 UTC+2] Server answer: 200
+[2024/06/05 16:49:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:49:32 UTC+2] Server answer: 200
+[2024/06/05 16:49:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:49:32 UTC+2] Server answer: 200
+[2024/06/05 16:49:32 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:49:32 UTC+2] Server answer: 200
+[2024/06/05 16:49:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:49:44 UTC+2] Server answer: 200
+[2024/06/05 16:49:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:49:45 UTC+2] Server answer: 200
+[2024/06/05 16:49:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:49:45 UTC+2] Server answer: 200
+[2024/06/05 16:49:45 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:49:45 UTC+2] Server answer: 200
+[2024/06/05 16:50:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:50:07 UTC+2] Server answer: 200
+[2024/06/05 16:50:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:50:07 UTC+2] Server answer: 200
+[2024/06/05 16:50:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:50:07 UTC+2] Server answer: 200
+[2024/06/05 16:50:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:50:07 UTC+2] Server answer: 200
+[2024/06/05 16:50:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:50:36 UTC+2] Server answer: 200
+[2024/06/05 16:50:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:50:36 UTC+2] Server answer: 200
+[2024/06/05 16:50:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:50:36 UTC+2] Server answer: 200
+[2024/06/05 16:50:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:50:36 UTC+2] Server answer: 200
+[2024/06/05 16:50:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:50:51 UTC+2] Server answer: 200
+[2024/06/05 16:50:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:50:51 UTC+2] Server answer: 200
+[2024/06/05 16:50:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:50:51 UTC+2] Server answer: 200
+[2024/06/05 16:50:51 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:50:51 UTC+2] Server answer: 200
+[2024/06/05 16:51:00 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:51:00 UTC+2] Server answer: 200
+[2024/06/05 16:51:00 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:51:00 UTC+2] Server answer: 200
+[2024/06/05 16:51:00 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:51:00 UTC+2] Server answer: 200
+[2024/06/05 16:51:00 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:51:00 UTC+2] Server answer: 200
+[2024/06/05 16:51:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:51:05 UTC+2] Server answer: 200
+[2024/06/05 16:51:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:51:05 UTC+2] Server answer: 200
+[2024/06/05 16:51:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:51:05 UTC+2] Server answer: 200
+[2024/06/05 16:51:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:51:05 UTC+2] Server answer: 200
+[2024/06/05 16:51:11 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:51:11 UTC+2] Server answer: 200
+[2024/06/05 16:51:11 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:51:11 UTC+2] Server answer: 200
+[2024/06/05 16:51:11 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:51:11 UTC+2] Server answer: 200
+[2024/06/05 16:51:11 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:51:11 UTC+2] Server answer: 200
+[2024/06/05 16:51:25 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:51:25 UTC+2] Server answer: 200
+[2024/06/05 16:51:25 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:51:25 UTC+2] Server answer: 200
+[2024/06/05 16:51:25 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:51:25 UTC+2] Server answer: 200
+[2024/06/05 16:51:25 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:51:25 UTC+2] Server answer: 200
+[2024/06/05 16:51:55 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:51:55 UTC+2] Server answer: 200
+[2024/06/05 16:51:55 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:51:55 UTC+2] Server answer: 200
+[2024/06/05 16:51:55 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:51:55 UTC+2] Server answer: 200
+[2024/06/05 16:51:55 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:51:55 UTC+2] Server answer: 200
+[2024/06/05 16:52:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:52:15 UTC+2] Server answer: 200
+[2024/06/05 16:52:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:52:15 UTC+2] Server answer: 200
+[2024/06/05 16:52:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:52:15 UTC+2] Server answer: 200
+[2024/06/05 16:52:15 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:52:15 UTC+2] Server answer: 200
+[2024/06/05 16:52:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:52:26 UTC+2] Server answer: 200
+[2024/06/05 16:52:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:52:26 UTC+2] Server answer: 200
+[2024/06/05 16:52:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:52:26 UTC+2] Server answer: 200
+[2024/06/05 16:52:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:52:26 UTC+2] Server answer: 200
+[2024/06/05 16:52:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:52:39 UTC+2] Server answer: 200
+[2024/06/05 16:52:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:52:39 UTC+2] Server answer: 200
+[2024/06/05 16:52:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:52:39 UTC+2] Server answer: 200
+[2024/06/05 16:52:39 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:52:39 UTC+2] Server answer: 200
+[2024/06/05 16:52:48 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:52:48 UTC+2] Server answer: 200
+[2024/06/05 16:52:48 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:52:48 UTC+2] Server answer: 200
+[2024/06/05 16:52:48 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:52:48 UTC+2] Server answer: 200
+[2024/06/05 16:52:48 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:52:48 UTC+2] Server answer: 200
+[2024/06/05 16:52:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:52:53 UTC+2] Server answer: 200
+[2024/06/05 16:52:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:52:53 UTC+2] Server answer: 200
+[2024/06/05 16:52:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:52:53 UTC+2] Server answer: 200
+[2024/06/05 16:52:53 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:52:53 UTC+2] Server answer: 200
+[2024/06/05 16:53:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:53:18 UTC+2] Server answer: 200
+[2024/06/05 16:53:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:53:18 UTC+2] Server answer: 200
+[2024/06/05 16:53:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:53:18 UTC+2] Server answer: 200
+[2024/06/05 16:53:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:53:18 UTC+2] Server answer: 200
+[2024/06/05 16:53:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:53:37 UTC+2] Server answer: 200
+[2024/06/05 16:53:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:53:37 UTC+2] Server answer: 200
+[2024/06/05 16:53:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:53:37 UTC+2] Server answer: 200
+[2024/06/05 16:53:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:53:37 UTC+2] Server answer: 200
+[2024/06/05 16:53:42 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:53:42 UTC+2] Server answer: 200
+[2024/06/05 16:53:42 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:53:42 UTC+2] Server answer: 200
+[2024/06/05 16:53:42 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:53:42 UTC+2] Server answer: 200
+[2024/06/05 16:53:42 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:53:42 UTC+2] Server answer: 200
+[2024/06/05 16:58:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:58:22 UTC+2] Server answer: 200
+[2024/06/05 16:58:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:58:22 UTC+2] Server answer: 200
+[2024/06/05 16:58:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:58:22 UTC+2] Server answer: 200
+[2024/06/05 16:58:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:58:22 UTC+2] Server answer: 200
+[2024/06/05 16:58:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:58:35 UTC+2] Server answer: 200
+[2024/06/05 16:58:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:58:35 UTC+2] Server answer: 200
+[2024/06/05 16:58:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:58:35 UTC+2] Server answer: 200
+[2024/06/05 16:58:35 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:58:35 UTC+2] Server answer: 200
+[2024/06/05 16:58:50 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:58:50 UTC+2] Server answer: 200
+[2024/06/05 16:58:50 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:58:50 UTC+2] Server answer: 200
+[2024/06/05 16:58:50 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:58:50 UTC+2] Server answer: 200
+[2024/06/05 16:58:50 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:58:50 UTC+2] Server answer: 200
+[2024/06/05 16:59:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 16:59:26 UTC+2] Server answer: 200
+[2024/06/05 16:59:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 16:59:26 UTC+2] Server answer: 200
+[2024/06/05 16:59:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 16:59:26 UTC+2] Server answer: 200
+[2024/06/05 16:59:26 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 16:59:26 UTC+2] Server answer: 200
+[2024/06/05 17:00:33 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:00:33 UTC+2] Server answer: 200
+[2024/06/05 17:00:33 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:00:33 UTC+2] Server answer: 200
+[2024/06/05 17:00:33 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:00:33 UTC+2] Server answer: 200
+[2024/06/05 17:00:33 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:00:33 UTC+2] Server answer: 200
+[2024/06/05 17:00:43 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:00:43 UTC+2] Server answer: 200
+[2024/06/05 17:00:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:00:44 UTC+2] Server answer: 200
+[2024/06/05 17:00:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:00:44 UTC+2] Server answer: 200
+[2024/06/05 17:00:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:00:44 UTC+2] Server answer: 200
+[2024/06/05 17:01:02 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:01:02 UTC+2] Server answer: 200
+[2024/06/05 17:01:02 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:01:02 UTC+2] Server answer: 200
+[2024/06/05 17:01:02 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:01:02 UTC+2] Server answer: 200
+[2024/06/05 17:01:02 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:01:02 UTC+2] Server answer: 200
+[2024/06/05 17:01:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:01:05 UTC+2] Server answer: 200
+[2024/06/05 17:01:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:01:05 UTC+2] Server answer: 200
+[2024/06/05 17:01:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:01:05 UTC+2] Server answer: 200
+[2024/06/05 17:01:05 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:01:05 UTC+2] Server answer: 200
+[2024/06/05 17:01:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:01:17 UTC+2] Server answer: 200
+[2024/06/05 17:01:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:01:17 UTC+2] Server answer: 200
+[2024/06/05 17:01:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:01:17 UTC+2] Server answer: 200
+[2024/06/05 17:01:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:01:17 UTC+2] Server answer: 200
+[2024/06/05 17:01:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:01:23 UTC+2] Server answer: 200
+[2024/06/05 17:01:23 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:01:23 UTC+2] Server answer: 200
+[2024/06/05 17:01:24 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:01:24 UTC+2] Server answer: 200
+[2024/06/05 17:01:24 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:01:24 UTC+2] Server answer: 200
+[2024/06/05 17:01:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:01:44 UTC+2] Server answer: 200
+[2024/06/05 17:01:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:01:44 UTC+2] Server answer: 200
+[2024/06/05 17:01:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:01:44 UTC+2] Server answer: 200
+[2024/06/05 17:01:44 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:01:44 UTC+2] Server answer: 200
+[2024/06/05 17:02:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:02:18 UTC+2] Server answer: 200
+[2024/06/05 17:02:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:02:18 UTC+2] Server answer: 200
+[2024/06/05 17:02:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:02:18 UTC+2] Server answer: 200
+[2024/06/05 17:02:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:02:18 UTC+2] Server answer: 200
+[2024/06/05 17:02:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:02:36 UTC+2] Server answer: 200
+[2024/06/05 17:02:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:02:36 UTC+2] Server answer: 200
+[2024/06/05 17:02:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:02:36 UTC+2] Server answer: 200
+[2024/06/05 17:02:36 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:02:36 UTC+2] Server answer: 200
+[2024/06/05 17:13:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:13:08 UTC+2] Server answer: 200
+[2024/06/05 17:13:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:13:08 UTC+2] Server answer: 200
+[2024/06/05 17:13:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:13:08 UTC+2] Server answer: 200
+[2024/06/05 17:13:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:13:08 UTC+2] Server answer: 200
+[2024/06/05 17:13:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:13:08 UTC+2] Server answer: 200
+[2024/06/05 17:16:21 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:16:21 UTC+2] Server answer: 200
+[2024/06/05 17:16:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:16:22 UTC+2] Server answer: 200
+[2024/06/05 17:16:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:16:22 UTC+2] Server answer: 200
+[2024/06/05 17:16:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:16:22 UTC+2] Server answer: 200
+[2024/06/05 17:16:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:16:22 UTC+2] Server answer: 200
+[2024/06/05 17:16:22 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/background.gif
+[2024/06/05 17:16:22 UTC+2] Server answer: 404
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:17:17 UTC+2] Server answer: 200
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:17:17 UTC+2] Server answer: 200
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:17:17 UTC+2] Server answer: 200
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:17:17 UTC+2] Server answer: 200
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:17:17 UTC+2] Server answer: 200
+[2024/06/05 17:17:17 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/background.gif
+[2024/06/05 17:17:17 UTC+2] Server answer: 404
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:17:18 UTC+2] Server answer: 200
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:17:18 UTC+2] Server answer: 200
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:17:18 UTC+2] Server answer: 200
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:17:18 UTC+2] Server answer: 200
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:17:18 UTC+2] Server answer: 200
+[2024/06/05 17:17:18 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/background.gif
+[2024/06/05 17:17:18 UTC+2] Server answer: 404
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:17:37 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/waterborder.gif
+[2024/06/05 17:17:37 UTC+2] Server answer: 200
+[2024/06/05 17:19:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:19:07 UTC+2] Server answer: 200
+[2024/06/05 17:19:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:19:07 UTC+2] Server answer: 200
+[2024/06/05 17:19:07 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:19:07 UTC+2] Server answer: 200
+[2024/06/05 17:19:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:19:08 UTC+2] Server answer: 200
+[2024/06/05 17:19:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:19:08 UTC+2] Server answer: 200
+[2024/06/05 17:19:08 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/waterborder.gif
+[2024/06/05 17:19:08 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/index.html
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/ve2.gif
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/CatalansDragons.jpg
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/profile.gif
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/m_log_free.gif
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:03 UTC+2] New incoming connection on server CAT.cat: GET /42perpignan.free.fr/waterborder.gif
+[2024/06/05 17:23:03 UTC+2] Server answer: 200
+[2024/06/05 17:23:27 UTC+2] Closing server: CAT.cat at 0.0.0.0 on port 8080
+[2024/06/05 17:23:27 UTC+2] Closing server: pickleemporium.pkl at 0.0.0.0 on port 8181
