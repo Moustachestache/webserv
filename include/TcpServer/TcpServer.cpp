@@ -14,7 +14,7 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 													_addressLen(sizeof(_address))
 {
 	std::cout << "Starting server: " << _serverName <<  " at " << _ipStr << " on port " << _port << std::endl;
-	addLog("test");
+	addLog("Starting server: " + _serverName + " at " + _ipStr + " on port " + ft_itoa(_port));
 }
 
 // Copy constructor
@@ -57,6 +57,7 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 		fullPath.append(*it);
 		if (!access( fullPath.c_str() , R_OK))
 		{
+			addLog( "Server answer: 200" );
 			std::string	awnser = returnFileStr(fullPath);
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
 				200, awnser.size(), getRoute()));
@@ -116,7 +117,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 
 	(void) header;
 	//path.erase(0, _root.size() + 1); // do not remove + 1 risk to delete one more char
-	path.erase(0, _root.size());
+	path.erase(0, _root.size()); // nul we need the real path and the client one, to handle redirections
 	if (openDir == NULL)
 	{
 		ServerAnswerError(500);
@@ -133,7 +134,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 			output.append("<td><i class=\"bx bxs-file\"></i></td><td>file</td>");
 		else if (folderScan->d_type == DT_UNKNOWN)
 			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
-		output.append("<td><a href=\"" + path);
+		output.append("<td><a href=\"./");
 		output.append(folderScan->d_name);
 		if (folderScan->d_type == DT_DIR)
 			output.append("/");
@@ -149,6 +150,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	}
 	output.append("</table></div></body>");
 	closedir(openDir);
+	addLog( "Server answer: 200" );
 	output.insert(0, buildHeader(".html", 200, output.size(), getRoute()));
 	send(_newSocket, output.c_str(), output.size(), 0);
 }
@@ -173,6 +175,7 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				}
 				else // path is file
 				{
+					addLog( "Server answer: 200" );
 					std::string	awnser = returnFileStr(res);
 					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
 						200, awnser.size(), getRoute()));
@@ -195,6 +198,7 @@ void	TcpServer::ServerAnswerError(int id)
 	unsigned long		sent;
 	std::string			output(outputErrorPage(id));
 
+	addLog( "Server answer: " + ft_itoa(id) );
 	output.insert(0, buildHeader(".html", id, output.size(), getRoute()));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
@@ -214,7 +218,7 @@ void	TcpServer::deleteFile( std::string &res )
 	args[1] = new char[res.size() + 1];
 	for (size_t i = 0; i < res.size(); i++)
 		args[1][i] = res.at(i);
-	args[1][res.size() + 1] = '\0';
+	args[1][res.size()] = '\0';
 	args[2] = NULL;
 	int pid = fork();
 	if (!pid)
@@ -222,7 +226,7 @@ void	TcpServer::deleteFile( std::string &res )
 		int retVal = execve("/bin/rm", args, NULL); /*	no env apparently useless with rm	*/
 		exit (retVal);
 	}
-	//std::cout << "Deleting: " << args[1] << std::endl; // debug
+	addLog( "File: " + res + " has been deleted.");
 	waitpid(pid, &err, 0);
 	err >>= 8;
 	if (!err)
@@ -271,6 +275,7 @@ void	TcpServer::ServerListen()
 	if (_newSocket < 0)
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
+	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
 	else if (isCgi(getRoute(), header) == true)
@@ -289,6 +294,7 @@ void	TcpServer::ServerListen()
 
 TcpServer::~TcpServer()
 {
+	addLog("Closing server: " + _serverName + " at " + _ipStr + " on port " + ft_itoa(_port));
 	if (_newSocket)
 		close(_newSocket);
 }

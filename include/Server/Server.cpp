@@ -209,7 +209,7 @@ void	Server::addLog( std::string text )
 	std::sprintf(str, "%04d/%02d/%02d %02d:%02d:%02d",
 		timeinfo->tm_year + 1900, timeinfo->tm_mon + 1, timeinfo->tm_mday,
 		timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-	file << "[" << str << "] " << text << "\n";
+	file << "[" << str << " UTC+2] " << text << "\n";
 	file.close();
 }
 
