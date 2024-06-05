@@ -206,7 +206,10 @@ void	TcpServer::ServerAnswerError(int id)
 void	TcpServer::deleteFile( std::string &res )
 {
 	if (std::remove( res.c_str() ))
+	{
+		addLog( "File: " + res + " can't be deleted, no such file or directory.");
 		ServerAnswerError(204);
+	}
 	else
 	{
 		addLog( "File: " + res + " has been deleted.");
