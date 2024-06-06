@@ -28,8 +28,8 @@ class HttpHeader {
         void    stringSanitize(std::string &str);
         void    getStringSanitize(std::string &str);
         void    processHeader(std::istringstream &iss, std::string &bodyData);
-        void     processBodyPost(std::string &body);
-        void     processBodyGet(std::string &body);
+        void    processBodyPost(std::string &body);
+        void    processBodyGet(std::string &body);
 
         //  map getters
         std::map < std::string, std::string >   &getArgs();
