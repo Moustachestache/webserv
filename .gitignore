@@ -6,3 +6,4 @@ test
 /www/logs
 log
 errorlog.txt
+ubuntu_cgi_tester

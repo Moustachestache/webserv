@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/06/02 14:20:51 by gbricot          ###   ########.fr        #
+#    Updated: 2024/06/06 16:53:42 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,11 @@ WHITE = "\033[0;37m"
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
 
-all: $(NAME)
-
 $(NAME): $(OBJ)
 	@$(CXX) $(CPPFLAGS) $(OBJ) -o $(NAME)
 	@echo $(GREEN)[$(NAME)] Successfully compilated !$(WHITE)
+
+all: $(NAME)
 
 debug:
 	$(CXX) $(CPPFLAGS_DEBUG) $(SRC) -o $(NAME)

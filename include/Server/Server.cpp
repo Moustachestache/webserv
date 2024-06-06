@@ -7,7 +7,7 @@ Server::Server( void )
 
 Server::Server( std::string &serverStr ) :	_contact("postmaster@"), _port(80), _serverName(""), _root(""), \
 											_maxHeaderSize(8192), _requestSize(128), \
-											_maxConnections(48), _errorLog("log/errorlog.txt")
+											_maxConnections(48), _errorLog("")
 					/*	Init all members to avoid memory errors while reading them.
 
 	!! Need to check with the team wich value we set in default for each !!	*/
@@ -34,10 +34,10 @@ void	Server::checkInfo( void )
 {
 	/*	Implement all the variable checks here	
 		if wrong throw an exception	*/
-	if (!isPathRelative(_root))
-		throw WrongPath();
 	if (_route.empty())
 		throw NoRouteDefined();
+	if (!isPathRelative(_root))
+		throw WrongPath();
 	//IP 
 	//Port //done in the checkHeaderServer()
 }
@@ -74,7 +74,6 @@ void	Server::processError( std::string &line )
 	else if (!(iss >> word))
 		throw WrongVariableAssignment();
 	_httpError.addErrorPage(ft_atoi(id), word);
-	//std::cout << "[DEBUG] Custom error page added : id=" << id << " - path=" << word << std::endl; /*	DEBUG	*/
 	if (iss >> word)
 		throw WrongVariableAssignment();
 }
@@ -96,7 +95,6 @@ void	Server::getAllErrors( std::string &serverStr, std::string name )
 		std::string	errorStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(errorStr, 0);
 		errorStr.resize(endPos);
-		//std::cout << errorStr << std::endl;
 		addError(errorStr);
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
@@ -111,7 +109,6 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 		std::string	routeStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(routeStr, 0);
 		routeStr.resize(endPos);
-		//std::cout << routeStr << std::endl;
 		_route.push_back( Route(routeStr) );
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
@@ -197,11 +194,13 @@ std::string Server::outputErrorPage(int id)
 
 void	Server::addLog( std::string text )
 {
-	std::fstream file(_errorLog.c_str(), std::ios::app);
+	std::fstream	file;
+	file.open(_errorLog.c_str(), std::ios::app);
 	if (!file.is_open())
 	{
-		std::cerr << "Error: the log file: " << _errorLog << "can't be opened." << std::endl;
-		return ;
+		file.open( std::string("log/" + _serverName + ".log").c_str(), std::ios::app);
+		if (!file.is_open())
+			return ;
 	}
 	std::time_t currentTime = std::time(NULL);
 	std::tm* timeinfo = std::localtime(&currentTime);
@@ -213,12 +212,12 @@ void	Server::addLog( std::string text )
 	file.close();
 }
 
-size_t     Server::getMaxHeaderSize()
+size_t	Server::getMaxHeaderSize()
 {
-	return _maxHeaderSize;       
+	return _maxHeaderSize;
 }
 
-size_t     Server::getMaxRequestSize()
+size_t	Server::getMaxRequestSize()
 {
 	return _requestSize;
 }
