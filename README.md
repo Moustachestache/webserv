@@ -114,6 +114,8 @@ get and post: https://www.ionos.fr/digitalguide/sites-internet/developpement-web
 
 practical to fetch mime types:      https://mimetype.io/all-types
 
+regardeing CGI variables:      https://www6.uniovi.es/~antonio/ncsa_httpd/cgi/env.html
+
 ##  .conf file components
 - Chose port and host of each server.
 - Setup server name or not.
