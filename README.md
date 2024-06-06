@@ -6,6 +6,7 @@
 [les nous du futur]
 - [ ] Server &ptrServer into _ptrServer;
 - [ ] formes canonique svp quelquun
+- [ ] add ftnl with flag: O_NONBLOCK, to make sure the read will not block
 
 [MAX]
 - [x] how to get a good, clean, scalable buffer for request reception?
@@ -27,16 +28,16 @@
 easy todo
 - [x] make server send back info
 - [x] make server answer any GET request
-- [ ] process other requests
+- [x] process other requests
       
 from HTTP The definitive guide by Oreilly:
 - [x] 1. Set up connection—accept a client connection, or close if the client is unwanted.
 - [x] 2. Receive request—read an HTTP request message from the network.
-- [ ] 3. Process request—interpret the request message and take action.
-- [ ] 4. Access resource—access the resource specified in the message.
-- [ ] 5. Construct response—create the HTTP response message with the right headers.
-- [ ] 6. Send response—send the response back to the client.
-- [ ] 7. Log transaction—place notes about the completed transaction in a log file.
+- [x] 3. Process request—interpret the request message and take action.
+- [x] 4. Access resource—access the resource specified in the message.
+- [x] 5. Construct response—create the HTTP response message with the right headers.
+- [x] 6. Send response—send the response back to the client.
+- [x] 7. Log transaction—place notes about the completed transaction in a log file.
 
 [GREG]
 - [x] decide in team the default values for each unset variable (see Server and Route constructors)

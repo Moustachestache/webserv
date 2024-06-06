@@ -4,3 +4,5 @@ webserv
 PostData.txt
 test
 /www/logs
+log
+errorlog.txt
