@@ -34,7 +34,7 @@ class HttpHeader {
         //  map getters
         std::map < std::string, std::string >   &getArgs();
         std::map < std::string, std::string >   &getPost();
-        std::map < std::string, fileInfo >   &getFiles();
+        std::map < std::string, fileInfo >      &getFiles();
         std::map < std::string, std::string >   &getGet();
 
     private:

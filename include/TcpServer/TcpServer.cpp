@@ -246,7 +246,21 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
 		(void) header;
-		ServerAnswerError(200);
+		//	for now: execve into py script
+		//	name.struct()
+		int	pid = fork();
+		if (pid == 0)
+		{
+			char pythonVer[] = "/bin/python3";
+			char scriptPath[] = "cgi-bin/upload.py";
+			char *array[5] = {pythonVer, scriptPath, const_cast<char *>(header.getFiles()["filename"].fileName.c_str()), const_cast<char *>(header.getFiles()["filename"].mimeType.c_str()), const_cast<char *>(header.getFiles()["filename"].rawData.c_str())};
+			execve("pythonVer", array, NULL);
+		}
+		else
+		{
+			waitpid(pid, NULL, 0);
+		}
+	ServerAnswerError(200);
 }
 
 void	TcpServer::ServerListen()

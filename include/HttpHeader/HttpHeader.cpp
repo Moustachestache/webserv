@@ -33,13 +33,12 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _socket(socket), _ptrS
 
     if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
         _error = 431;
-
+    std::cout << headerData << std::endl;
     processHeader(iss, bodyData);
 
     if (_ressource.find("?") != std::string::npos)
         processBodyGet(bodyData);
  }
-
 
 void    HttpHeader::processHeader(std::istringstream &iss, std::string &bodyData)
 {

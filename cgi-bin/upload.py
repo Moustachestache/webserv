@@ -1,14 +1,15 @@
-#   parse incoming data (post)
-#   we assume we made the form and so we retreive the data
-#   _postfiles is the array of uploaded files
-#   struct in pstfiles is
-#       //  name of the uploaded file
-#       std::string fileName;
-#       //  mime type as told by the browser
-#       std::string mimeType;
-#       //  file data
-#       std::string rawData;
+#!/usr/bin/env python3
+import sys
 
-with open(fileName, "wb") as binary_file:
-    # Write bytes to file
-    binary_file.write(rawData)
+__author__ = "Jean Michel Labaise"
+__version__ = "0.69.420"
+__license__ = "MIT"
+
+
+def main():
+    print("executing python script ...")
+
+
+if __name__ == "__main__":
+    print ("Number of arguments:", len(sys.argv), "arguments")
+    print ("Argument List:", str(sys.argv))
