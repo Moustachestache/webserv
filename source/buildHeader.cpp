@@ -27,14 +27,15 @@ std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
 	returnStr.append(" " + ft_itoa(errorcode));
 	returnStr.append(" " + error.getInfo(errorcode).type);
 	returnStr.append("\r\n");
-	returnStr.append("content-type: " + getMimeType(extension) + "\r\n");
+	returnStr.append("content-type: " + getMimeType(extension) + "; charset=utf-8\r\n");
 	returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
+	returnStr.append("accept-encoding: identity\r\n");
 	if (errorcode == 405)
 	{
 		returnStr.append("Allow:");
 		returnStr.append(getAllUsedMethods(allRoutes));
 	}
-	returnStr.append("connection: keep-alive\r\n");
-	returnStr.append("\n");
+	returnStr.append("connection: close\r\n");
+	returnStr.append("\r\n");
 	return returnStr;
 }

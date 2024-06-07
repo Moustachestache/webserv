@@ -1,12 +1,13 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-size_t HttpHeader::_bufferSize = 70;
+size_t HttpHeader::_bufferSize = 40; 
 
 HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _socket(socket), _ptrServer(ptrServer), _bytesReceived(0), _error(0)
 {
     (void) ptrServer;
-    char    buffer[_bufferSize];
+    char    buffer[_bufferSize + 1];
+    bzero(buffer, _bufferSize + 1);
 
     _bytesReceived = recv(socket, buffer, _bufferSize, 0);
     std::string headerData(buffer);
@@ -16,34 +17,35 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _socket(socket), _ptrS
         headerData.append(buffer);
         bzero(buffer, _bufferSize);
     }
+    headerData.append(buffer);
     //  stash leftover body info
     std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
-
+std::cout << headerData << std::endl;
     //  process header Request-Line
     std::istringstream      iss;
     iss.str(headerData);
     if (!(iss >> _method))
         _error = 400;
-    if (!(iss >> _ressource))
+    else if (!(iss >> _ressource))
         _error = 400;
-    if (!(iss >> _version))
+    else if (!(iss >> _version))
         _error = 400;
-    if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0") && _error == 0)
+    else if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0"))
         _error = 505;
-
-    if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
+    else if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
         _error = 431;
-    std::cout << headerData << std::endl;
-    processHeader(iss, bodyData);
+    processHeader(iss);
+
+    if (!_method.compare("POST") && _error == 0)
+        processBodyPost(bodyData);
 
     if (_ressource.find("?") != std::string::npos)
-        processBodyGet(bodyData);
+        processBodyGet();
  }
 
-void    HttpHeader::processHeader(std::istringstream &iss, std::string &bodyData)
+void    HttpHeader::processHeader(std::istringstream &iss)
 {
     size_t i;
-    char    buffer[_bufferSize];
     std::string line;
     std::string index;
     std::string strBuffer;
@@ -73,7 +75,6 @@ void    HttpHeader::processHeader(std::istringstream &iss, std::string &bodyData
         //  return error 411
         if (_args["Content-Length"].size() == 0)
             _error = 411;
-            
         //  only working with data/multipart
         //  because fuck you thats why
         else if (_args["Content-Type"].find("multipart/form-data") == std::string::npos)
@@ -87,87 +88,16 @@ void    HttpHeader::processHeader(std::istringstream &iss, std::string &bodyData
             else
                 _boundary = _args["Content-Type"].substr(i + 1, _args["Content-Type"].size());
         }
-        _bytesReceived = recv(_socket, buffer, _bufferSize, 0);
-        i = _bytesReceived;
-        while (_bytesReceived == _bufferSize && _bytesReceived < _ptrServer.getMaxRequestSize())
-        {
-            bodyData.append(buffer);
-            bzero(buffer, _bufferSize);
-            _bytesReceived = recv(_socket, buffer, _bufferSize, 0);
-            i += _bytesReceived;
-        }
-        bodyData.append(buffer);
-        processBodyPost(bodyData);
     }
 }
 
 void     HttpHeader::processBodyPost(std::string &body)
 {
-    std::string buffer;
-    std::string key;
-    std::string value;
-    size_t  j;
-
-    //  helps normalize boundary
-    _boundary.insert(0, "--");
-
-    //  delete last iteration of _boundary
-    j = body.rfind(_boundary);
-    body.erase(j, std::string::npos);
-
-    //  anyway ...
-    for (size_t i = body.rfind(_boundary); i != std::string::npos; i = body.rfind(_boundary, i))
-    {
-        buffer = body.substr(i, std::string::npos);
-        body.erase(i, std::string::npos);
-        j = buffer.find("filename");
-        std::cout << body << std::endl;
-        if (j != std::string::npos)
-        {
-            j = buffer.find("name=\"") + 6;
-            buffer.erase(0, j);
-            key = buffer.substr(0, buffer.find("\""));
-            stringSanitize(key);
-            //
-            j = buffer.find("filename=\"") + 10;
-            buffer.erase(0, j);
-            std::string fileName = buffer.substr(0, buffer.find("\""));
-            stringSanitize(fileName);
-            //
-            j = buffer.find("Content-Type:") + 14;
-            buffer.erase(0, j);
-            std::string mimeType = buffer.substr(0, buffer.find("\n"));
-            stringSanitize(mimeType);
-            //  
-            j = buffer.find("\r\n\r\n") + 4;
-            buffer.erase(0, j);
-
-            std::string     filePath("cgi-bin/upload/" + fileName);
-            std::ofstream    file(filePath.c_str(), std::ios_base::out | std::ios_base::binary);
-            std::cout << "              setting up file " << filePath << " with status: " << file.good() << std::endl;
-                std::cout << "              writing to file" << std::endl;
-                file << buffer.substr(0, buffer.size() - 2);
-                _postFiles[key].filePath = filePath;
-                _postFiles[key].mimeType = mimeType;
-                _postFiles[key].fileName = fileName;
-            file.close();
-        }
-        else if (buffer.size())
-        {
-            j = buffer.find("name=\"") + 6;
-            buffer.erase(0, j);
-            j = buffer.find("\"");
-            key = buffer.substr(0, j);
-            value = buffer.substr(buffer.find("\r\n\r\n"), buffer.rfind("\r\n"));
-            stringSanitize(value);
-            _post[key] = value;
-        }
-    }
+    std::cout << body << std::endl;
 }
 
-void     HttpHeader::processBodyGet(std::string &body)
+void     HttpHeader::processBodyGet( void )
 {
-    (void) body;
     size_t i = _ressource.find("?");
     size_t j;
     std::string key;

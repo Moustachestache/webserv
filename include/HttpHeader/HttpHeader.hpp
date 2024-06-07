@@ -27,9 +27,9 @@ class HttpHeader {
         int &getError();
         void    stringSanitize(std::string &str);
         void    getStringSanitize(std::string &str);
-        void    processHeader(std::istringstream &iss, std::string &bodyData);
+        void    processHeader(std::istringstream &iss);
         void    processBodyPost(std::string &body);
-        void    processBodyGet(std::string &body);
+        void    processBodyGet( void );
 
         //  **env for cgi
         void			outputEnv(char **dest);
