@@ -33,7 +33,7 @@ void	stopServer( int sig )
 	ServerRunning = 0;
 }
 
-int	main( int ac, char **av )
+int	main( int ac, char **av, char **env)
 {
 	if (ac != 2)
 	{

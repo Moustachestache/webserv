@@ -14,7 +14,7 @@ struct fileInfo {
     //  mime type as told by the browser
     std::string mimeType;
     //  file data
-    std::string rawData;
+    std::string filePath;
 };
 
 
@@ -30,6 +30,9 @@ class HttpHeader {
         void    processHeader(std::istringstream &iss, std::string &bodyData);
         void    processBodyPost(std::string &body);
         void    processBodyGet(std::string &body);
+
+        //  **env for cgi
+        void			outputEnv(char **dest);
 
         //  map getters
         std::map < std::string, std::string >   &getArgs();

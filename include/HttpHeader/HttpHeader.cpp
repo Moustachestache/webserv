@@ -121,6 +121,7 @@ void     HttpHeader::processBodyPost(std::string &body)
         buffer = body.substr(i, std::string::npos);
         body.erase(i, std::string::npos);
         j = buffer.find("filename");
+        std::cout << body << std::endl;
         if (j != std::string::npos)
         {
             j = buffer.find("name=\"") + 6;
@@ -140,9 +141,16 @@ void     HttpHeader::processBodyPost(std::string &body)
             //  
             j = buffer.find("\r\n\r\n") + 4;
             buffer.erase(0, j);
-            _postFiles[key].rawData = buffer.substr(0, buffer.size() - 2);
-            _postFiles[key].mimeType = mimeType;
-            _postFiles[key].fileName = fileName;
+
+            std::string     filePath("cgi-bin/upload/" + fileName);
+            std::ofstream    file(filePath.c_str(), std::ios_base::out | std::ios_base::binary);
+            std::cout << "              setting up file " << filePath << " with status: " << file.good() << std::endl;
+                std::cout << "              writing to file" << std::endl;
+                file << buffer.substr(0, buffer.size() - 2);
+                _postFiles[key].filePath = filePath;
+                _postFiles[key].mimeType = mimeType;
+                _postFiles[key].fileName = fileName;
+            file.close();
         }
         else if (buffer.size())
         {
@@ -221,6 +229,33 @@ void    HttpHeader::getStringSanitize(std::string &str)
         str = "";
     else
         str = str.substr(begin, end - begin + 1);
+}
+
+void    HttpHeader::outputEnv(char **dest)
+{
+    (void)  dest;
+ /*    std::cout << "start output env" << std::endl;
+    std::cout << "_post data:" << std::endl;
+    for (std::map < std::string, std::string > ::iterator it = _post.begin(); it != _post.end(); it++)
+    {
+        std::cout << "      " << it->first << " - " << it->second << std::endl;
+    }
+    std::cout << "_get data:" << std::endl;
+    for (std::map < std::string, std::string > ::iterator it = _get.begin(); it != _get.end(); it++)
+    {
+        std::cout << "      " << it->first << " - " << it->second << std::endl;
+    }
+    std::cout << "_args data:" << std::endl;
+    for (std::map < std::string, std::string > ::iterator it = _args.begin(); it != _args.end(); it++)
+    {
+        std::cout << "      " << it->first << " - " << it->second << std::endl;
+    }
+    std::cout << "_fileData data:" << std::endl;
+    for (std::map < std::string, fileInfo > ::iterator it = _postFiles.begin(); it != _postFiles.end(); it++)
+    {
+        std::cout << "      " << "file:" << it->first << " { " << it->second.fileName << ", " << it->second.mimeType << ", " << it->second.filePath << "}" << std::endl;
+    }
+    std::cout << "end output env" << std::endl; */
 }
 
 HttpHeader::~HttpHeader()

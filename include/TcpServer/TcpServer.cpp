@@ -246,7 +246,7 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
 		(void) header;
-		//	for now: execve into py script
+/* 		//	for now: execve into py script
 		//	name.struct()
 		int	pid = fork();
 		if (pid == 0)
@@ -259,7 +259,7 @@ void	TcpServer::ServerAnswerPost( HttpHeader &header )
 		else
 		{
 			waitpid(pid, NULL, 0);
-		}
+		} */
 	ServerAnswerError(200);
 }
 
@@ -269,6 +269,7 @@ void	TcpServer::ServerListen()
 	if (_newSocket < 0)
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
+	header.outputEnv(NULL);
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
