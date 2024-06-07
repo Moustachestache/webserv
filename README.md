@@ -10,6 +10,7 @@
 - [ ] Check memory errors (Conditional jumps) in HttpHeader.
 - [ ] Implement CGI arguments as env in the execve.
 - [ ] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
+- [ ] retrieve correct upload path for post files
 
 
 [MAX]
