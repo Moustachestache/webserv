@@ -76,6 +76,8 @@ HTTP Headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 
 HTTP response headers:	https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages#http_responses
 
+HTTP Multiform/data upload:      https://www.rfc-editor.org/rfc/rfc7578
+
 HTTP/1.1 reference:	https://datatracker.ietf.org/doc/html/rfc9112
 
 HTTP caching (2022):	https://datatracker.ietf.org/doc/html/rfc9111
