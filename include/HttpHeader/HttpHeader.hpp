@@ -24,7 +24,7 @@ class HttpHeader {
         ~HttpHeader();
         std::string &getMethod();
         std::string &getFile();
-        int &getError();
+        int     &getError();
         void    stringSanitize(std::string &str);
         void    getStringSanitize(std::string &str);
         void    processHeader(std::istringstream &iss);

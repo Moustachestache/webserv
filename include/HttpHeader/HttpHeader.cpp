@@ -40,7 +40,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) :
     else if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
         _error = 431;
     processHeader(iss);
-    std::cout << "header data:" << std::endl << headerData << std::endl;
     if (!_method.compare("POST") && _error == 0)
     {
         receiveBodyPost(bodyData);
@@ -168,7 +167,7 @@ void    HttpHeader::getStringSanitize(std::string &str)
 void    HttpHeader::outputEnv(char **dest)
 {
     (void)  dest;
- /*    std::cout << "start output env" << std::endl;
+    std::cout << "start output env" << std::endl;
     std::cout << "_post data:" << std::endl;
     for (std::map < std::string, std::string > ::iterator it = _post.begin(); it != _post.end(); it++)
     {
@@ -189,7 +188,7 @@ void    HttpHeader::outputEnv(char **dest)
     {
         std::cout << "      " << "file:" << it->first << " { " << it->second.fileName << ", " << it->second.mimeType << ", " << it->second.filePath << "}" << std::endl;
     }
-    std::cout << "end output env" << std::endl; */
+    std::cout << "end output env" << std::endl;
 }
 
 HttpHeader::~HttpHeader()
