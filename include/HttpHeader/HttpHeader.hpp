@@ -28,13 +28,19 @@ class HttpHeader {
         void    stringSanitize(std::string &str);
         void    getStringSanitize(std::string &str);
         void    processHeader(std::istringstream &iss);
-        void    processBodyPost(std::string &body);
         void    processBodyGet( void );
 
-        //  **env for cgi
-        void			outputEnv(char **dest);
+    //  env** for cgi
+        void	outputEnv(char **dest);
 
-        //  map getters
+    /** see HttpheaderPost.cpp **/
+    /**/void    receiveBodyPost(std::string &body);
+    /**/void    processBodyPost(std::string &body);
+    /**/void    appendCStr(char *src, std::string &dest, size_t i);
+    /**/void    processFile(std::string &buffer);
+    /**/void    processArg(std::string &buffer);
+
+    //  map getters
         std::map < std::string, std::string >   &getArgs();
         std::map < std::string, std::string >   &getPost();
         std::map < std::string, fileInfo >      &getFiles();
@@ -43,20 +49,20 @@ class HttpHeader {
     private:
         int             _socket;
         Server&         _ptrServer;
-        static size_t   _bufferSize;
-        size_t          _bytesReceived;
+        static const  size_t   _bufferSize;
+        size_t          _headerBytesReceived;
+        size_t          _bodyBytesReceived;
         int             _error;
         std::string     _method;
         std::string     _ressource;
         std::string     _version;
         std::string     _boundary;
-
-        //  stores header fields
+    //  stores header fields
         std::map < std::string, std::string >   _args;
-        //  stores all post info
+    //  stores all post info
         std::map < std::string, std::string >   _post;
-        //  stores FILES uploaded through post
+    //  stores FILES uploaded through post
         std::map < std::string, fileInfo >      _postFiles;
-        //  stores potential get data
+    //  stores potential get data
         std::map < std::string, std::string >   _get;
 };

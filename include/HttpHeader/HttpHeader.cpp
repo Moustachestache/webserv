@@ -1,26 +1,31 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-size_t HttpHeader::_bufferSize = 40; 
+const size_t HttpHeader::_bufferSize = 40;
 
-HttpHeader::HttpHeader( int socket, Server &ptrServer ) : _socket(socket), _ptrServer(ptrServer), _bytesReceived(0), _error(0)
+HttpHeader::HttpHeader( int socket, Server &ptrServer ) : 
+        _socket(socket), 
+        _ptrServer(ptrServer), 
+        _headerBytesReceived(0),
+        _bodyBytesReceived(0),
+        _error(0)
 {
     (void) ptrServer;
     char    buffer[_bufferSize + 1];
     bzero(buffer, _bufferSize + 1);
 
-    _bytesReceived = recv(socket, buffer, _bufferSize, 0);
-    std::string headerData(buffer);
-    while (headerData.find("\r\n\r\n") == std::string::npos /* && bytesReceived > 0 */)
+    std::string headerData;
+    size_t i = _bufferSize;
+    while (i == _bufferSize)
     {
-        _bytesReceived = recv(socket, buffer, _bufferSize, 0);
-        headerData.append(buffer);
-        bzero(buffer, _bufferSize);
+        i = recv(_socket, buffer, _bufferSize, 0);
+        _headerBytesReceived += i;
+        appendCStr(buffer, headerData, i);
     }
-    headerData.append(buffer);
+
     //  stash leftover body info
     std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
-std::cout << headerData << std::endl;
+
     //  process header Request-Line
     std::istringstream      iss;
     iss.str(headerData);
@@ -35,9 +40,13 @@ std::cout << headerData << std::endl;
     else if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
         _error = 431;
     processHeader(iss);
-
+    std::cout << "header data:" << std::endl << headerData << std::endl;
     if (!_method.compare("POST") && _error == 0)
-        processBodyPost(bodyData);
+    {
+        receiveBodyPost(bodyData);
+        if (_bodyBytesReceived > 0)
+            processBodyPost(bodyData);
+    }
 
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
@@ -68,7 +77,7 @@ void    HttpHeader::processHeader(std::istringstream &iss)
     if ((size_t)std::atol(_args["Content-Size"].c_str()) > _ptrServer.getMaxRequestSize())
         _error = 413;
 
-    //  Process POST body
+    //  Process POST header info
     if (!_method.compare("POST") && _error == 0)
     {
         //  if "content-length" undefined or empty as a field (0 and above accepted)
@@ -89,11 +98,6 @@ void    HttpHeader::processHeader(std::istringstream &iss)
                 _boundary = _args["Content-Type"].substr(i + 1, _args["Content-Type"].size());
         }
     }
-}
-
-void     HttpHeader::processBodyPost(std::string &body)
-{
-    std::cout << body << std::endl;
 }
 
 void     HttpHeader::processBodyGet( void )

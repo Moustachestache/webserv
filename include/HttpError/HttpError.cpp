@@ -4,7 +4,7 @@
 int HttpError::ErrNumArray[] = { 100, 101, \
                             200, 201, 202, 203, 203, 205, 206, \
                             300, 301, 302, 303, 304, 305, 306, 307, \
-                            400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, \
+                            400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 422,\
                             500, 501, 502, 503, 504, 505, -1};
 
 HttpError::HttpError()
@@ -44,6 +44,7 @@ HttpError::HttpError()
     _errorList[415] = (errorinfo){415, "Unsuported Media Type", "The entity of the request is in a format not supported by the requested method.", ""};
     _errorList[416] = (errorinfo){416, "Requested Range Not Satisfiable", "", ""};
     _errorList[417] = (errorinfo){417, "Expectations Failed", "Header requests field could not be met.", ""};
+    _errorList[422] = (errorinfo){422, "Unprocessable Entity", "The demands of the entity are unprocessable ... for some reason?", ""};
     _errorList[500] = (errorinfo){500, "Internal Server Error", "The server encountered an unexpected condition which prevented it from fulfilling the request.", ""};
     _errorList[501] = (errorinfo){501, "Not Implemented", "The server does not support the functionality required to fulfill the request method.", ""};
     _errorList[502] = (errorinfo){502, "Bad Gateway", "Invalid upstream response.", ""};
