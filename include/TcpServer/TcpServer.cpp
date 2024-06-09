@@ -269,7 +269,10 @@ void	TcpServer::ServerListen()
 	if (_newSocket < 0)
 		throw NewSocketError();
 	HttpHeader		header(_newSocket, *this);
-	header.outputEnv(NULL);
+
+	//	env generation
+    char	returnEnv[_POSIX_ARG_MAX][1024];
+
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());

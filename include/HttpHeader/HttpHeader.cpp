@@ -164,14 +164,16 @@ void    HttpHeader::getStringSanitize(std::string &str)
         str = str.substr(begin, end - begin + 1);
 }
 
+//  char **returnEnv[_POSIX_ARG_MAX][1024];
 void    HttpHeader::outputEnv(char **dest)
 {
-    (void)  dest;
-    std::cout << "start output env" << std::endl;
-    std::cout << "_post data:" << std::endl;
+    int i = 0;
+    std::string line;
     for (std::map < std::string, std::string > ::iterator it = _post.begin(); it != _post.end(); it++)
     {
-        std::cout << "      " << it->first << " - " << it->second << std::endl;
+        line = it->first + "=" + it->second;
+        writeToStr(dest[i], 1024, line.c_str(), line.size());
+        std::cout << dest[i] << std::endl;
     }
     std::cout << "_get data:" << std::endl;
     for (std::map < std::string, std::string > ::iterator it = _get.begin(); it != _get.end(); it++)

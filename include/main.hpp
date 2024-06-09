@@ -74,6 +74,7 @@ std::string		getMimeType(std::string extension);
 
 std::string		buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
 
+void 			writeToStr(char *dest, int destMaxSize, const char *src, int srcSize);
 
 /*          CGI          */
 bool            isCgi(Route route, std::string filename);
