@@ -35,7 +35,7 @@ std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
 		returnStr.append("Allow:");
 		returnStr.append(getAllUsedMethods(allRoutes));
 	}
-	returnStr.append("connection: close\r\n");
+	returnStr.append("connection: keep-alive\r\n");
 	returnStr.append("\r\n");
 	return returnStr;
 }

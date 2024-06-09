@@ -25,6 +25,7 @@ SRC =		source/main.cpp \
 			source/debug.cpp \
 			source/getMimeType.cpp \
 			source/buildHeader.cpp \
+			source/writeToStr.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
 			include/HttpHeader/HttpHeader.cpp \

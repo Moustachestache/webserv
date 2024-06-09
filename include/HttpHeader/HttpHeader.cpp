@@ -4,6 +4,7 @@
 const size_t HttpHeader::_bufferSize = 40;
 
 HttpHeader::HttpHeader( int socket, Server &ptrServer ) : 
+        _returnEnv(0),
         _socket(socket), 
         _ptrServer(ptrServer), 
         _headerBytesReceived(0),
@@ -49,6 +50,8 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) :
 
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
+
+    outputEnv();
  }
 
 void    HttpHeader::processHeader(std::istringstream &iss)
@@ -165,36 +168,46 @@ void    HttpHeader::getStringSanitize(std::string &str)
 }
 
 //  char **returnEnv[_POSIX_ARG_MAX][1024];
-void    HttpHeader::outputEnv(char **dest)
+void    HttpHeader::outputEnv( void )
 {
+    char    **ptr = new char*[_POSIX_ARG_MAX];
     int i = 0;
     std::string line;
     for (std::map < std::string, std::string > ::iterator it = _post.begin(); it != _post.end(); it++)
     {
         line = it->first + "=" + it->second;
-        writeToStr(dest[i], 1024, line.c_str(), line.size());
-        std::cout << dest[i] << std::endl;
+        writeToStr(ptr[i], 1024, line.c_str(), line.size());
+        i++;
     }
-    std::cout << "_get data:" << std::endl;
     for (std::map < std::string, std::string > ::iterator it = _get.begin(); it != _get.end(); it++)
     {
-        std::cout << "      " << it->first << " - " << it->second << std::endl;
+        line = it->first + "=" + it->second;
+        writeToStr(ptr[i], 1024, line.c_str(), line.size());
+        i++;
     }
-    std::cout << "_args data:" << std::endl;
     for (std::map < std::string, std::string > ::iterator it = _args.begin(); it != _args.end(); it++)
     {
-        std::cout << "      " << it->first << " - " << it->second << std::endl;
+        line = it->first + "=" + it->second;
+        writeToStr(ptr[i], 1024, line.c_str(), line.size());
+        i++;
     }
-    std::cout << "_fileData data:" << std::endl;
     for (std::map < std::string, fileInfo > ::iterator it = _postFiles.begin(); it != _postFiles.end(); it++)
     {
-        std::cout << "      " << "file:" << it->first << " { " << it->second.fileName << ", " << it->second.mimeType << ", " << it->second.filePath << "}" << std::endl;
+        line = it->first + "=" + it->second.mimeType + ";" + it->second.fileName + ";" + it->second.filePath;
+        writeToStr(ptr[i], 1024, line.c_str(), line.size());
+        i++;
     }
-    std::cout << "end output env" << std::endl;
+    ptr[i] = NULL;
+    _returnEnv = ptr;
 }
 
 HttpHeader::~HttpHeader()
 {
+    for (int i = 0; _returnEnv[i]; i++)
+    {
+        delete[] _returnEnv[i];
+    }
+    delete[] _returnEnv;
 }
 
 std::string &HttpHeader::getMethod()
