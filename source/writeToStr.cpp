@@ -1,11 +1,13 @@
 
 //  write src to dest. dont go over maxsize.
-void    writeToStr(char *dest, int destMaxSize, const char *src, int srcSize)
+void    writeToStr(char *dest, const char *src, int srcSize)
 {
+    dest = new char[srcSize + 1]();
     int i = 0;
-    for (dest = new char[destMaxSize]; i < destMaxSize && i < srcSize; i++)
+    while(i < srcSize)
     {
         dest[i] = src[i];
+        i++;
     }
     dest[i] = '\0';
 }
