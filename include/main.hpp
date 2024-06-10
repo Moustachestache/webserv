@@ -12,12 +12,14 @@
 # include <map>
 # include <cstdlib>
 # include <cstdio>
+# include <cstring>
 /* # include <chrono> */
 
 
 /*		C	LIBRAIRIES		*/
 
 # include <sys/socket.h>
+# include <limits.h>
 # include <arpa/inet.h>
 # include <netinet/in.h>
 # include <unistd.h>
@@ -59,19 +61,20 @@ struct Bracket
 
 /*		FUNCTIONS		*/
 
-std::string	returnFileStr( std::string fileName );
+std::string		returnFileStr( std::string fileName );
 
-size_t	getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
-size_t	getNextBracket( std::string &fileContent, size_t pos);
-size_t	getChunkEnd( std::string &fileContent, size_t pos );
+size_t			getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
+size_t			getNextBracket( std::string &fileContent, size_t pos);
+size_t			getChunkEnd( std::string &fileContent, size_t pos );
 
-std::string	getHeaderStr( std::string &chunkStr );
-std::string ft_itoa( int val );
+std::string		getHeaderStr( std::string &chunkStr );
+std::string 	ft_itoa( int val );
 
-std::string     getMimeType(std::string extension);
+std::string		getMimeType(std::string extension);
 
-std::string     buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
+std::string		buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
 
+void 			writeToStr(char *dest, const char *src, int srcSize);
 
 /*          CGI          */
 bool            isCgi(Route route, std::string filename);

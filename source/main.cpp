@@ -29,7 +29,7 @@ std::string	returnFileStr( std::string fileName )
 void	stopServer( int sig )
 {
 	(void) sig;
-	std::cout << "\nStoping server..." << std::endl;
+	std::cout << "\r\nStopping server..." << std::endl;
 	ServerRunning = 0;
 }
 

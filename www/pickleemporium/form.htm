@@ -1,6 +1,12 @@
-<form action="sending.htm" method="post" enctype="multipart/form-data">
-    <input id="file" name="file" type="file" />
-    <input id="text" name="text" type="text" />
-    <input name="color" type="color" value="#338613" />
-    <button action="send">Upload</button>
+<h1>multipart/form-data</h1>
+<form action="sending.htm?var1=1&var2=2&var3" 
+    method="post"
+    enctype="multipart/form-data"
+    accept-charset="UTF-8">
+        <br /><input id="file" name="file" type="file" />
+        <br /><input id="1" name="1" type="text" value="caca"/>
+        <br /><input id="2" name="2" type="text" value="2caca"/>
+        <br /><input id="3" name="3" type="text" value="kikou kirikou"/>
+        <br /><input id="4" name="4" type="text" value="anus"/>
+        <br /><button action="send">send</button>
 </form>

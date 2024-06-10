@@ -14,7 +14,7 @@ struct fileInfo {
     //  mime type as told by the browser
     std::string mimeType;
     //  file data
-    std::string rawData;
+    std::string filePath;
 };
 
 
@@ -24,35 +24,46 @@ class HttpHeader {
         ~HttpHeader();
         std::string &getMethod();
         std::string &getFile();
-        int &getError();
+        int     &getError();
         void    stringSanitize(std::string &str);
-        void    processHeader(std::istringstream &iss, std::string &bodyData);
-        int     processBodyPost(std::string &body);
-        int     processBodyGet(std::string &body);
+        void    getStringSanitize(std::string &str);
+        void    processHeader(std::istringstream &iss);
+        void    processBodyGet( void );
 
-        //  map getters
+    //  env** for cgi
+        void	outputEnv( void );
+
+    /** see HttpheaderPost.cpp **/
+    /**/void    receiveBodyPost(std::string &body);
+    /**/void    processBodyPost(std::string &body);
+    /**/void    appendCStr(char *src, std::string &dest, size_t i);
+    /**/void    processFile(std::string &buffer);
+    /**/void    processArg(std::string &buffer);
+
+    //  map getters
         std::map < std::string, std::string >   &getArgs();
         std::map < std::string, std::string >   &getPost();
-        std::map < std::string, fileInfo >   &getFiles();
+        std::map < std::string, fileInfo >      &getFiles();
         std::map < std::string, std::string >   &getGet();
 
     private:
+        char**          _returnEnv;
         int             _socket;
         Server&         _ptrServer;
-        static size_t   _bufferSize;
-        size_t          _bytesReceived;
+        static const size_t     _bufferSize;
+        size_t          _headerBytesReceived;
+        size_t          _bodyBytesReceived;
         int             _error;
         std::string     _method;
         std::string     _ressource;
         std::string     _version;
         std::string     _boundary;
-
-        //  stores header fields
+    //  stores header fields
         std::map < std::string, std::string >   _args;
-        //  stores all post info
+    //  stores all post info
         std::map < std::string, std::string >   _post;
-        //  stores FILES uploaded through post
+    //  stores FILES uploaded through post
         std::map < std::string, fileInfo >      _postFiles;
-        //  stores potential get data
+    //  stores potential get data
         std::map < std::string, std::string >   _get;
 };
