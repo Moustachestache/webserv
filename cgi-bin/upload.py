@@ -12,7 +12,7 @@ def main():
 
 
 if __name__ == "__main__":
-    print ("Number of arguments:", len(sys.argv), "arguments")
+    print ("Numbe r of arguments:", len(sys.argv), "arguments")
     print ("Argument List:", str(sys.argv))
     
     for name, value in os.environ.items():

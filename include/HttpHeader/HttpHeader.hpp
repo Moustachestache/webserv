@@ -31,7 +31,7 @@ class HttpHeader {
         void    processBodyGet( void );
 
     //  env** for cgi
-        void	outputEnv( void );
+        size_t      outputEnv( void );
 
     /** see HttpheaderPost.cpp **/
     /**/void    receiveBodyPost(std::string &body);
@@ -46,8 +46,11 @@ class HttpHeader {
         std::map < std::string, fileInfo >      &getFiles();
         std::map < std::string, std::string >   &getGet();
 
+    //  argv getter
+
+        std::string*    &getArgv() {return _argv;};
+
     private:
-        char**          _returnEnv;
         int             _socket;
         Server&         _ptrServer;
         static const size_t     _bufferSize;
@@ -66,4 +69,7 @@ class HttpHeader {
         std::map < std::string, fileInfo >      _postFiles;
     //  stores potential get data
         std::map < std::string, std::string >   _get;
+
+    //  output args;
+        std::string*    _argv;
 };

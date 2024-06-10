@@ -1,10 +1,9 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-const size_t HttpHeader::_bufferSize = 40;
+const size_t HttpHeader::_bufferSize = 256;
 
-HttpHeader::HttpHeader( int socket, Server &ptrServer ) : 
-        _returnEnv(0),
+HttpHeader::HttpHeader( int socket, Server &ptrServer ): 
         _socket(socket), 
         _ptrServer(ptrServer), 
         _headerBytesReceived(0),
@@ -50,8 +49,6 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ) :
 
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-
-    outputEnv();
  }
 
 void    HttpHeader::processHeader(std::istringstream &iss)
@@ -71,6 +68,7 @@ void    HttpHeader::processHeader(std::istringstream &iss)
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
+            std::cout << "      " << index << "=" << strBuffer << std::endl;
         }
         std::getline(iss, line);
     }
@@ -168,54 +166,14 @@ void    HttpHeader::getStringSanitize(std::string &str)
 }
 
 //  char **returnEnv[_POSIX_ARG_MAX][1024];
-void    HttpHeader::outputEnv( void )
+size_t    HttpHeader::outputEnv( void )
 {
-/*     size_t  arraySizes = _get.size() + _post.size() + _args.size() + _postFiles.size();
-    char**  ptr = new char*[arraySizes];
-    int i = 0;
-    std::string line;
-    std::cout << "size: " << arraySizes << std::endl;
-    std::cout << "1" << std::endl;
-    for (std::map < std::string, std::string > ::iterator it = _post.begin(); it != _post.end(); it++)
-    {
-        line = it->first + "=" + it->second;
-        writeToStr(ptr[i], line.c_str(), line.size());
-        i++;
-    }
-    std::cout << "2" << std::endl;
-    for (std::map < std::string, std::string > ::iterator it = _get.begin(); it != _get.end(); it++)
-    {
-        line = it->first + "=" + it->second;
-        writeToStr(ptr[i], line.c_str(), line.size());
-        i++;
-    }
-    std::cout << "3" << std::endl;
-    for (std::map < std::string, std::string > ::iterator it = _args.begin(); it != _args.end(); it++)
-    {
-        line = it->first + "=" + it->second;
-        writeToStr(ptr[i], line.c_str(), line.size());
-        i++;
-    }
-    std::cout << "4" << std::endl;
-    for (std::map < std::string, fileInfo > ::iterator it = _postFiles.begin(); it != _postFiles.end(); it++)
-    {
-        line = it->first + "=" + it->second.mimeType + ";" + it->second.fileName + ";" + it->second.filePath;
-        writeToStr(ptr[i], line.c_str(), line.size());
-        i++;
-    }
-    for (int j = 0; ptr[j]; j++)
-        std::cout << "ptr[" << j << "]::" << ptr[j] << std::endl;
-    _returnEnv = ptr; */
+    //caca
+    return 1;
 }
 
 HttpHeader::~HttpHeader()
 {
-/*     std::cout << "5" << std::endl;
-    for (int i = 0; _returnEnv[i]; i++)
-    {
-        std::cout << "cacou" << std::endl;
-    }
-    std::cout << "6" << std::endl; */
 }
 
 std::string &HttpHeader::getMethod()
