@@ -170,7 +170,7 @@ void    HttpHeader::getStringSanitize(std::string &str)
 //  char **returnEnv[_POSIX_ARG_MAX][1024];
 void    HttpHeader::outputEnv( void )
 {
-    size_t  arraySizes = _get.size() + _post.size() + _args.size() + _postFiles.size();
+/*     size_t  arraySizes = _get.size() + _post.size() + _args.size() + _postFiles.size();
     char**  ptr = new char*[arraySizes];
     int i = 0;
     std::string line;
@@ -194,7 +194,6 @@ void    HttpHeader::outputEnv( void )
     {
         line = it->first + "=" + it->second;
         writeToStr(ptr[i], line.c_str(), line.size());
-        std::cout << "ptr args::" << ptr[i] << std::endl;
         i++;
     }
     std::cout << "4" << std::endl;
@@ -206,19 +205,17 @@ void    HttpHeader::outputEnv( void )
     }
     for (int j = 0; ptr[j]; j++)
         std::cout << "ptr[" << j << "]::" << ptr[j] << std::endl;
-    _returnEnv = ptr;
+    _returnEnv = ptr; */
 }
 
 HttpHeader::~HttpHeader()
 {
-    std::cout << "5" << std::endl;
+/*     std::cout << "5" << std::endl;
     for (int i = 0; _returnEnv[i]; i++)
     {
         std::cout << "cacou" << std::endl;
-        delete[] _returnEnv[i];
     }
-    delete _returnEnv;
-    std::cout << "6" << std::endl;
+    std::cout << "6" << std::endl; */
 }
 
 std::string &HttpHeader::getMethod()
