@@ -139,7 +139,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 	}
 	else if (pid == 0)
 	{
-		
+
 		close(pipe_fd[0]);
         dup2(pipe_fd[1], STDOUT_FILENO); 
         close(pipe_fd[1]);
@@ -163,7 +163,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 			for(std::map<std::string, std::string>::iterator it = _header.getPost().begin(); it != _header.getPost().end(); it++)
 				argv.push_back(it->second);
 		}
-	
+
 	    std::vector<char*> args;
         for (size_t i = 0; i < argv.size(); i++)
         {
