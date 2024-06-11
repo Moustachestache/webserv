@@ -1,33 +1,49 @@
 #!/bin/bash
+#./Rubis.sh "description="lol"" "name=Toto"
+# Fonction pour parser les arguments sous forme clé=valeur
+parse_args() {
+  for arg in "$@"
+  do
+    case $arg in
+      name=*)
+        NAME="${arg#*=}"
+        shift
+        ;;
+      description=*)
+        DESCRIPTION="${arg#*=}"
+        shift
+        ;;
+      *)
+        # On ignore les arguments non reconnus
+        ;;
+    esac
+  done
+}
 
-# Envoyer l'en-tête de type de contenu
+# Lire les arguments de la requête (QUERY_STRING)
+if [ -n "$QUERY_STRING" ]; then
+  oldIFS=$IFS
+  IFS='&'
+  set -- $QUERY_STRING
+  IFS=$oldIFS
+
+  params=("$@")
+else
+  params=("$@")
+fi
+
+parse_args "${params[@]}"
+
+# Début de la réponse HTTP
 echo "Content-Type: text/html"
+echo ""  # Ligne vide pour indiquer la fin des en-têtes HTTP
 
-echo ""# Début du contenu HTML
+# Début du contenu HTML
 echo "<html>"
 echo "<head><title>CGI Script</title></head>"
 echo "<body>"
-echo "<h1>CGI Script en Shell</h1>"
-
-# Afficher les variables d'environnement CGI
-echo "<h2>Variables d'environnement CGI</h2>"
-echo "<table border='1'>"
-echo "<tr><th>Variable</th><th>Valeur</th></tr>"
-for var in REQUEST_METHOD QUERY_STRING CONTENT_TYPE CONTENT_LENGTH; do
-    echo "<tr><td>$var</td><td>${!var}</td></tr>"
-done
-echo "</table>"
-
-# Afficher les paramètres de la requête GET
-if [ "$REQUEST_METHOD" == "GET" ]; then
-    echo "<h2>Paramètres de la requête GET</h2>"
-    echo "<ul>"
-    IFS='&' read -r -a params <<< "$QUERY_STRING"
-    for param in "${params[@]}"; do
-        echo "<li>$param</li>"
-    done
-    echo "</ul>"
-fi # Fin du contenu HTML
+echo "<h1>CGI Script en Shell de ${NAME:-Inconnue}</h1>"
+echo "<p>${DESCRIPTION:-Pas de description}</p>"
 echo "</body>"
 echo "</html>"
 
