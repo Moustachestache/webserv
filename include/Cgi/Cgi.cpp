@@ -1,6 +1,7 @@
 //#include "Cgi.hpp"
 
 #include "../TcpServer/TcpServer.hpp"
+#include <algorithm>
 /*char **make_arg(HttpHeader _header)
 {
 	char *arg[_header.getArgs().size() + 2];
@@ -13,6 +14,14 @@
 	return arg;
 }*/
 
+// void display_args(std::vector<std::string> tab)
+// {
+
+// 	for(map<std::string , std::string >::iterator it =tab.begin() ;i < tab.size(); i++)
+// 	{
+// 		std::cout << tab[i] << std::endl;
+// 	}
+// }
 
 
 std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
@@ -98,7 +107,7 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 
 	_path = cgiPath(routes, _header);
 
-	
+	//display_args(_header.getArgv())
 	if (_header.getMethod() == "GET"  || _header.getMethod() == "POST") 
 	{
 		answer = (execCgiGet(_header, true_path, _path));
@@ -139,7 +148,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 	}
 	else if (pid == 0)
 	{
-		
+
 		close(pipe_fd[0]);
         dup2(pipe_fd[1], STDOUT_FILENO); 
         close(pipe_fd[1]);
@@ -149,12 +158,36 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		char *script_path = const_cast<char *>(file.c_str());
 		char *_pat = const_cast<char *>(_path.c_str());
 
-		char *argv[] = { _pat, script_path, NULL };
+		std::vector<std::string> argv = _header.getArgv();
+        argv.push_back(script_path);
+		argv.push_back(_pat);
+		std::swap(argv[0], argv[argv.size()-1]);
+		std::swap(argv[1], argv[argv.size()-2]);
+
+/* 		if(_header.getMethod() == "GET" && !_header.getGet().empty())
+		{
+			for(std::map<std::string, std::string>::iterator it = _header.getGet().begin(); it != _header.getGet().end(); it++)
+				argv.push_back(it->second);			
+		}
+		else if (_header.getMethod() == "POST" && !_header.getPost().empty())
+		{
+			for(std::map<std::string, std::string>::iterator it = _header.getPost().begin(); it != _header.getPost().end(); it++)
+				argv.push_back(it->second);
+		} */
+
+	    std::vector<char*> args;
+        for (size_t i = 0; i < argv.size(); i++)
+        {
+            args.push_back(const_cast<char*>(argv[i].c_str()));
+        }
+        args.push_back(NULL);
+
 		char *envp[] = { NULL };
 
-		if (execve(_pat, argv, envp) == -1)
+		if (execve(_pat, args.data(), envp) == -1)
 			std::cerr << "execve failed" << std::endl;
 		exit(0);
+
 	}
 	else
 	{

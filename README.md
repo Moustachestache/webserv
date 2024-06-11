@@ -6,12 +6,12 @@
 [les nous du futur]
 - [ ] Server &ptrServer into _ptrServer;
 - [ ] formes canonique svp quelquun
-- [ ] add ftnl with flag: O_NONBLOCK, to make sure the read will not block
 - [ ] Check memory errors (Conditional jumps) in HttpHeader.
 - [ ] Implement CGI arguments as env in the execve.
 - [ ] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
 - [ ] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
+- [ ] add upload size verification
 
 
 [MAX]
