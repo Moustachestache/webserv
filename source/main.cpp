@@ -31,6 +31,7 @@ void	stopServer( int sig )
 	(void) sig;
 	std::cout << "\r\nStopping server..." << std::endl;
 	ServerRunning = 0;
+	//exit(1);
 }
 
 int	main( int ac, char **av )
