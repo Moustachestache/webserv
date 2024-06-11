@@ -12,6 +12,7 @@
 - [ ] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
 - [ ] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
+- [ ] add upload size verification
 
 
 [MAX]
