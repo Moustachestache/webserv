@@ -139,7 +139,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 	}
 	else if (pid == 0)
 	{
-		
+
 		close(pipe_fd[0]);
         dup2(pipe_fd[1], STDOUT_FILENO); 
         close(pipe_fd[1]);
@@ -149,12 +149,34 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		char *script_path = const_cast<char *>(file.c_str());
 		char *_pat = const_cast<char *>(_path.c_str());
 
-		char *argv[] = { _pat, script_path, NULL };
+		std::vector<std::string> argv;
+		argv.push_back(_pat);
+        argv.push_back(script_path);
+
+		if(_header.getMethod() == "GET" && !_header.getGet().empty())
+		{
+			for(std::map<std::string, std::string>::iterator it = _header.getGet().begin(); it != _header.getGet().end(); it++)
+				argv.push_back(it->second);			
+		}
+		else if (_header.getMethod() == "POST" && !_header.getPost().empty())
+		{
+			for(std::map<std::string, std::string>::iterator it = _header.getPost().begin(); it != _header.getPost().end(); it++)
+				argv.push_back(it->second);
+		}
+
+	    std::vector<char*> args;
+        for (size_t i = 0; i < argv.size(); i++)
+        {
+            args.push_back(const_cast<char*>(argv[i].c_str()));
+        }
+        args.push_back(NULL);
+
 		char *envp[] = { NULL };
 
-		if (execve(_pat, argv, envp) == -1)
+		if (execve(_pat, args.data(), envp) == -1)
 			std::cerr << "execve failed" << std::endl;
 		exit(0);
+
 	}
 	else
 	{
