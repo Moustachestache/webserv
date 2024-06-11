@@ -1,6 +1,7 @@
 //#include "Cgi.hpp"
 
 #include "../TcpServer/TcpServer.hpp"
+#include <algorithm>
 /*char **make_arg(HttpHeader _header)
 {
 	char *arg[_header.getArgs().size() + 2];
@@ -13,6 +14,14 @@
 	return arg;
 }*/
 
+// void display_args(std::vector<std::string> tab)
+// {
+
+// 	for(map<std::string , std::string >::iterator it =tab.begin() ;i < tab.size(); i++)
+// 	{
+// 		std::cout << tab[i] << std::endl;
+// 	}
+// }
 
 
 std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
@@ -98,7 +107,7 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 
 	_path = cgiPath(routes, _header);
 
-	
+	//display_args(_header.getArgv())
 	if (_header.getMethod() == "GET"  || _header.getMethod() == "POST") 
 	{
 		answer = (execCgiGet(_header, true_path, _path));
@@ -149,11 +158,13 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		char *script_path = const_cast<char *>(file.c_str());
 		char *_pat = const_cast<char *>(_path.c_str());
 
-		std::vector<std::string> argv;
-		argv.push_back(_pat);
+		std::vector<std::string> argv = _header.getArgv();
         argv.push_back(script_path);
+		argv.push_back(_pat);
+		std::swap(argv[0], argv[argv.size()-1]);
+		std::swap(argv[1], argv[argv.size()-2]);
 
-		if(_header.getMethod() == "GET" && !_header.getGet().empty())
+/* 		if(_header.getMethod() == "GET" && !_header.getGet().empty())
 		{
 			for(std::map<std::string, std::string>::iterator it = _header.getGet().begin(); it != _header.getGet().end(); it++)
 				argv.push_back(it->second);			
@@ -162,7 +173,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		{
 			for(std::map<std::string, std::string>::iterator it = _header.getPost().begin(); it != _header.getPost().end(); it++)
 				argv.push_back(it->second);
-		}
+		} */
 
 	    std::vector<char*> args;
         for (size_t i = 0; i < argv.size(); i++)

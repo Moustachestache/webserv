@@ -152,6 +152,14 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	send(_newSocket, output.c_str(), output.size(), 0);
 }
 
+void	TcpServer::ServerAnswerPost( HttpHeader &header )
+{
+//	rien
+	std::cout << header.getArgs()["Referer"] << std::endl;
+	(void) header;
+	ServerAnswerError(200);
+}
+
 void	TcpServer::ServerAnswerGet( HttpHeader &header )
 {
 	std::vector< Route >	route = getRoute();
@@ -241,13 +249,6 @@ void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 		}
 	}
 	ServerAnswerError(404);
-}
-
-void	TcpServer::ServerAnswerPost( HttpHeader &header )
-{
-//	rien
-	(void) header;
-	ServerAnswerError(200);
 }
 
 void	TcpServer::ServerListen()

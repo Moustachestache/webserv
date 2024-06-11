@@ -24,6 +24,7 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ):
     }
 
     //  stash leftover body info
+//    if (headerData.find("\r\n\r\n") == )
     std::string bodyData(headerData.substr(headerData.find("\r\n\r\n")), headerData.size() - headerData.find("\r\n\r\n"));
 
     //  process header Request-Line
