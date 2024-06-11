@@ -196,6 +196,7 @@ void    HttpHeader::buildEnvVector( void )
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
+    std::cout << _ressource << std::endl;
 //  hehe
 }
 
