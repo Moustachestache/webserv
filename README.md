@@ -12,6 +12,7 @@
 - [ ] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
 - [ ] add upload size verification
+- [ ] Implement a check for allow listing, when accessing route.
 
 
 [MAX]
