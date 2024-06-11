@@ -49,6 +49,8 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ):
 
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
+
+    buildEnvVector();
  }
 
 void    HttpHeader::processHeader(std::istringstream &iss)
@@ -68,7 +70,6 @@ void    HttpHeader::processHeader(std::istringstream &iss)
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
-            std::cout << "      " << index << "=" << strBuffer << std::endl;
         }
         std::getline(iss, line);
     }
@@ -166,10 +167,36 @@ void    HttpHeader::getStringSanitize(std::string &str)
 }
 
 //  char **returnEnv[_POSIX_ARG_MAX][1024];
-size_t    HttpHeader::outputEnv( void )
+void    HttpHeader::buildEnvVector( void )
 {
-    //caca
-    return 1;
+    std::string line;
+    for (std::map < std::string, std::string >::iterator it = _args.begin(); it != _args.end(); it++ )
+	{
+        line = "HTTP_" + it->first + "=" + it->second;
+        _argv.push_back(line);
+	}
+    for (std::map < std::string, std::string >::iterator it = _post.begin(); it != _post.end(); it++ )
+	{
+        line = "POST_" + it->first + "=" + it->second;
+        _argv.push_back(line);
+	}
+    for (std::map < std::string, std::string >::iterator it = _get.begin(); it != _get.end(); it++ )
+	{
+        line = "GET_" + it->first + "=" + it->second;
+        _argv.push_back(line);
+	}
+    for (std::map < std::string, fileInfo >::iterator it = _postFiles.begin(); it != _postFiles.end(); it++ )
+	{
+        line = "FILE_" + it->first + "=" + it->second.mimeType + ";" + it->second.fileName + ";" + it->second.filePath;
+        _argv.push_back(line);
+	}
+//  debugance
+    std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
+    for (size_t i = 0; i < _argv.size(); i++)
+	{
+        std::cout << "      " << _argv[i] << std::endl;
+	}
+//  hehe
 }
 
 HttpHeader::~HttpHeader()
@@ -211,4 +238,9 @@ std::map < std::string, fileInfo >    &HttpHeader::getFiles()
 std::map < std::string, std::string >    &HttpHeader::getGet()
 {
     return _get;
+}
+
+std::vector < std::string >    &HttpHeader::getArgv()
+{
+    return _argv;
 }
