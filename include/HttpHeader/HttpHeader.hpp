@@ -65,10 +65,10 @@ class HttpHeader {
         std::map < std::string, std::string >   _args;
     //  stores all post info
         std::map < std::string, std::string >   _post;
-    //  stores FILES uploaded through post
-        std::map < std::string, fileInfo >      _postFiles;
     //  stores potential get data
         std::map < std::string, std::string >   _get;
+    //  stores FILES uploaded through post
+        std::map < std::string, fileInfo >      _postFiles;
 
     //  output args;
         std::string*    _argv;
