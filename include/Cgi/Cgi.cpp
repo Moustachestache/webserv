@@ -89,13 +89,13 @@ bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
 				}
 				else
 				{
-					addLog("CGI Not implemented");
+					addLog("CGI Not implemented"); // sometimes printed for a simple GET
 					return false;
 				}
 			}
 		}
 	}
-	addLog("Route CGI Not implemented");
+	addLog("Route CGI Not implemented"); // sometimes printed for a simple GET
 	return false;
 }
 

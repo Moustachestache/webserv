@@ -11,6 +11,8 @@ CPPFLAGS_YOSHI = -Wall -Wextra -std=c++98 -g
 
 SRC =		source/main.cpp \
 			source/parsing.cpp \
+			source/utilsConvert.cpp \
+			source/utilsCheck.cpp \
 			source/debug.cpp \
 			source/getMimeType.cpp \
 			source/buildHeader.cpp \
