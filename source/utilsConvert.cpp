@@ -50,3 +50,15 @@ std::string	BuildRelativePath( std::string first, std::string second, std::strin
 		res.replace( res.find("//"), sizeof("//") - 1, "/");
 	return (res);
 }
+
+std::string	returnFileStr( std::string fileName )
+{
+	std::ifstream	file;
+
+	file.open(fileName.c_str(), std::ifstream::in);
+	if (!file.is_open())
+		return ("");
+	std::string fileContent((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	file.close();
+	return (fileContent);
+}
