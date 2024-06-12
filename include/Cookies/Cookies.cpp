@@ -1,6 +1,6 @@
 #include "Cookies.hpp"
 
-void    addCookie(HttpHeader _header)
+void    Generate_Cookie(HttpHeader& _header)
 {
-    std::cout << 
+    
 }
