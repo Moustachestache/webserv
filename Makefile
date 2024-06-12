@@ -21,6 +21,8 @@ SRC =		source/main.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
 			include/Socket/Socket.cpp \
 			include/TcpServer/TcpServer.cpp \
+			include/TcpServer/TcpServerGet.cpp \
+			include/TcpServer/TcpServerDelete.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp \
