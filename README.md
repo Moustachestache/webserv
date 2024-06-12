@@ -13,6 +13,8 @@
 - [ ] (see above) create folders when checking upload paths.
 - [ ] add upload size verification
 - [x] Implement a check for allow listing, when accessing route.
+- [ ] Cgi.cpp line 92 and 98. Some log lines printed on a regular GET, without Cgi call. Do we remove them ?
+- [ ] In execCgiGet() if pipe, fork fail or any other error -> ServerAnswer(500) (Internal server error) and a log with the error. no std::cerr or exit() :  )
 
 
 [MAX]
