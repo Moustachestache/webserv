@@ -18,6 +18,24 @@
     html{
         background-image: url("waterborder.gif");
     }
+    #hoveranim  {
+        background: #1abc9c;
+    }
+    #hoveranim  img { 
+
+        outline: 0px solid white;
+        outline-offset: 0px;
+        border: black 1px solid; 
+        display:block; 
+        width: 100%;
+        opacity: 1;
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+    #hoveranim:hover img {
+        outline: 20px solid #ff0000;
+        outline-offset: -20px;
+    }
   </style>
 </head>
 <body>
@@ -69,10 +87,10 @@ cette semaine: 5heures
 <hr />
 <a href="#">cookies</a> - <a href="#">politique de confidentialite</a> - <a href="#">infos legales</a>
 <hr />
-<div font-size="10px" align="right">(c) copyright Xavier "xavou bebou" Niel, 2004 :)</div>
+<div font-size="10px" text-align="right">(c) copyright Xavier "xavou bebou" Niel, 2004 <3</div>
 
 <div style="line-height: 30px;padding: 10px;background-color: lightgray;width: 200px; margin-top: -800px; margin-left: -325px; border: black 1px solid;">
-<img style="border: black 1px solid; display:block; width: 100%;" src="profile.gif" />
+<a id="hoveranim" href="./form.htm"><img src="profile.gif" /></a>
 Student Name:   <b>mjochum</b>
 <br/>Wallet:    142 ₳
 <br/>Evaluation points: 15

@@ -76,12 +76,14 @@ void	Prog::getServerStr( std::string &fileContent )
 		size_t	endPos = getChunkEnd(fileContent, startPos);
 		if (startPos == 0)
 			endPos++;
+		std::cout << "getServerStr" << std::endl;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
 		TcpServer	*nServer = new TcpServer(serverStr);
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server[");
+		std::cout << "getServerStr" << std::endl;
 	}
 }
 

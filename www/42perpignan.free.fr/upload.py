@@ -1,19 +1,36 @@
 #!/usr/bin/env python3
 import sys
 import os
+import shutil
 
-__author__ = "Jean Michel Labaise"
-__version__ = "0.69.420"
-__license__ = "MIT"
-
-
-def main():
-    print("executing python script ...")
-
+buffer = ""
+answer = ""
 
 if __name__ == "__main__":
-    print ("Number of arguments:", len(sys.argv), "arguments")
-    print ("\r\nArgument List:", str(sys.argv))
     
-    for name, value in os.environ.items():
-        print("{0}: {1}".format(name, value))
+    for line in sys.argv:
+        if line.find("FILE_file") > -1:
+            pos = line.rfind(";")
+            if pos > 0:
+                buffer = line[pos + 1:]
+                break
+
+
+    if buffer == "":
+        print("incorrect execution. Use form.<br/>")
+        sys.exit()
+
+
+    answer = "<meta http-equiv=\"refresh\" content=\"4; URL=./index.html?upload=success\"\">"
+
+    if os.path.exists(buffer) == False:
+        answer += "cant find file<br/>"
+    else:
+        answer += "found file: " + buffer + "<br />"
+
+    if shutil.copyfile(buffer, "www/42perpignan.free.fr/profile.gif"):
+        answer += "profile picture changed<br /><h1>redirecting ...</h1>"
+    else:
+        answer += "error changing profile pic<br />"
+
+    print(answer)
