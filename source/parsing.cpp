@@ -23,7 +23,9 @@ std::string	getHeaderStr( std::string &chunkStr ) /*	get chunk header returns it
 {
 	size_t	startPos = chunkStr.find("[");
 	size_t	endPos = chunkStr.find("]");
+	std::cout << "getHeaderStr" << std::endl;
 	std::string res = chunkStr.substr(startPos + 1, endPos - startPos - 1);
+	std::cout << "getHeaderStr" << std::endl;
 	startPos = chunkStr.find("{");
 	if (startPos == std::string::npos)
 		throw WrongHeader();

@@ -59,9 +59,11 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 		{
 			addLog( "Server answer: 200" );
 			std::string	awnser = returnFileStr(fullPath);
+	std::cout << "checkAllDEfaultPages" << std::endl;
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
 				200, awnser.size(), getRoute()));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
+	std::cout << "checkAllDEfaultPages" << std::endl;
 			return (true);
 		}
 		fullPath.resize(fullPath.size() - ((*it).size()));
@@ -182,9 +184,11 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				{
 					addLog( "Server answer: 200" );
 					std::string	awnser = returnFileStr(res);
+	std::cout << "serverandswergaet" << std::endl;
 					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
 						200, awnser.size(), getRoute()));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
+	std::cout << "serverandswergaet" << std::endl;
 				}
 				return ;
 			}
