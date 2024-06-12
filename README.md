@@ -27,8 +27,8 @@
 - [x] what to do with the keepalive / persistent connection header?
 - [x] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [x] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
-- [ ] re-build httpheader object that parses incoming header
-- [ ] add Allow header to response that lists allowed ehaders
+- [x] re-build httpheader object that parses incoming header
+- [x] add Allow header to response whiich lists allowed ehaders
 - [x] add error 411 see httpHeader object
 - [ ] if it crashes in the header initialisation its the math at line 52 -> 58 but if it dont disregard
       
