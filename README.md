@@ -6,13 +6,16 @@
 [les nous du futur]
 - [ ] Server &ptrServer into _ptrServer;
 - [ ] formes canonique svp quelquun
-- [ ] add ftnl with flag: O_NONBLOCK, to make sure the read will not block
-- [ ] Check memory errors (Conditional jumps) in HttpHeader.
-- [ ] Implement CGI arguments as env in the execve.
-- [ ] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
+- [x] Check memory errors (Conditional jumps) in HttpHeader.
+- [x] Implement CGI arguments as env in the execve. >> done as ARGV
+- [x] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
 - [ ] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
 - [ ] add upload size verification
+- [x] Implement a check for allow listing, when accessing route.
+- [ ] Cgi.cpp line 92 and 98. Some log lines printed on a regular GET, without Cgi call. Do we remove them ?
+- [ ] In execCgiGet() if pipe, fork fail or any other error -> ServerAnswer(500) (Internal server error) and a log with the error. no std::cerr or exit() :  )
+- [ ] Check each parsed variable (server, route or struct cgi), make sure we are using them. If not implement a logic with them or remove them (in the parsing too)
 
 
 [MAX]
@@ -27,8 +30,8 @@
 - [x] what to do with the keepalive / persistent connection header?
 - [x] setup full docroot path at parsing -- for safety: refuse /../ or /./ or ./ etc. only a folder othewise error
 - [x] create folder render if no default index exists. ie access folder and it shows html page with the files in folder
-- [ ] re-build httpheader object that parses incoming header
-- [ ] add Allow header to response that lists allowed ehaders
+- [x] re-build httpheader object that parses incoming header
+- [x] add Allow header to response whiich lists allowed ehaders
 - [x] add error 411 see httpHeader object
 - [ ] if it crashes in the header initialisation its the math at line 52 -> 58 but if it dont disregard
       

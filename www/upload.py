@@ -12,8 +12,6 @@ def main():
 
 
 if __name__ == "__main__":
-    print ("Number of arguments:", len(sys.argv), "arguments")
-    print ("Argument List:", str(sys.argv))
     
-    for name, value in os.environ.items():
-        print("{0}: {1}".format(name, value))
+    for line in sys.argv:
+        print(line)

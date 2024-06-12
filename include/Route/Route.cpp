@@ -161,3 +161,8 @@ std::vector< Cgi >			&Route::getCgi( void )
 {
 	return (_cgi);
 }
+
+bool	Route::getAllowListing( void )
+{
+	return (_listing);
+}

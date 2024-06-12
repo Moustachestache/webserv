@@ -126,6 +126,7 @@ void	Server::checkServerHeader( std::string &serverStr )
 		throw	WrongHeader();
 	_ipStr = serverStr.substr(0, pos);
 	checkValidIp(_ipStr);
+	_ip = strIpToUint(_ipStr);
 	serverStr.erase(0, pos + 1);
 	std::istringstream	iss(serverStr);
 	if (!(iss >> _port))

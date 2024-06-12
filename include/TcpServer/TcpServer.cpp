@@ -9,7 +9,7 @@
 } */
 
 TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
-													_socket(_ipStr, _port), \
+													_socket(_ip, _port), \
 													_newSocket(), \
 													_addressLen(sizeof(_address))
 {
@@ -19,17 +19,12 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 
 // Copy constructor
 TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
-											_socket(_ipStr, _port), \
+											_socket(_ip, _port), \
 											_newSocket(val._newSocket), \
 											_address(val._address), \
 											_addressLen(val._addressLen)
 {
 
-}
-
-void	TcpServer::ServerStart()
-{
-	ServerListen();
 }
 
 /* void	TcpServer::ServerAnswer(std::string incoming)
@@ -49,27 +44,6 @@ void	TcpServer::ServerStart()
 	if (sent != output.size())
 		throw	AnswerFailure();
 } */
-
-bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath )
-{
-	for (std::vector < std::string >::iterator it = pages.begin(); it != pages.end(); it++)
-	{
-		fullPath.append(*it);
-		if (!access( fullPath.c_str() , R_OK))
-		{
-			addLog( "Server answer: 200" );
-			std::string	awnser = returnFileStr(fullPath);
-			Generate_Cookie(awnser);
-			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
-				200, awnser.size(), getRoute()));
-			Generate_Cookie(awnser);
-			send(_newSocket, awnser.c_str(), awnser.size(), 0);
-			return (true);
-		}
-		fullPath.resize(fullPath.size() - ((*it).size()));
-	}
-	return (false);
-}
 
 void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res )
 {
@@ -109,10 +83,9 @@ void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &
 	}
 }
 
-//	build webpage that lists folder
-//	struct dirent *readdir(DIR *dirp);
-void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
+void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
+<<<<<<< HEAD
 	//unsigned long		sent;
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
@@ -191,6 +164,12 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 		}
 	}
 	ServerAnswerError(404);
+=======
+//	rien
+	std::cout << header.getArgs()["Referer"] << std::endl;
+	(void) header;
+	ServerAnswerError(200);
+>>>>>>> f0f6fadf2666c389dfde8587980d1c2e80613828
 }
 
 void	TcpServer::ServerAnswerError(int id)
@@ -206,71 +185,12 @@ void	TcpServer::ServerAnswerError(int id)
 	return ;
 }
 
-void	TcpServer::deleteFile( std::string &res )
-{
-	if (std::remove( res.c_str() ))
-	{
-		addLog( "File: " + res + " can't be deleted, no such file or directory.");
-		ServerAnswerError(204);
-	}
-	else
-	{
-		addLog( "File: " + res + " has been deleted.");
-		ServerAnswerError(200);
-	}
-}
-
-void	TcpServer::ServerAnswerDelete( HttpHeader &header )
-{
-	std::vector< Route >	route = getRoute();
-	std::string	res;
-
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
-	{
-		if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), header.getMethod())\
-			!= (*it).getMethods().end())
-		{
-			checkValidRoute(header, *it, res);
-			if (!res.empty())
-			{
-				deleteFile( res);
-				return ;
-			}
-		}
-		else if (it + 1 == route.end())
-		{
-			ServerAnswerError(405);
-			return ;
-		}
-	}
-	ServerAnswerError(404);
-}
-
-void	TcpServer::ServerAnswerPost( HttpHeader &header )
-{
-		(void) header;
-/* 		//	for now: execve into py script
-		//	name.struct()
-		int	pid = fork();
-		if (pid == 0)
-		{
-			char pythonVer[] = "/bin/python3";
-			char scriptPath[] = "cgi-bin/upload.py";
-			char *array[5] = {pythonVer, scriptPath, const_cast<char *>(header.getFiles()["filename"].fileName.c_str()), const_cast<char *>(header.getFiles()["filename"].mimeType.c_str()), const_cast<char *>(header.getFiles()["filename"].rawData.c_str())};
-			execve("pythonVer", array, NULL);
-		}
-		else
-		{
-			waitpid(pid, NULL, 0);
-		} */
-	ServerAnswerError(200);
-}
-
 void	TcpServer::ServerListen()
 {
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
+	
 	HttpHeader		header(_newSocket, *this);
 
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
@@ -285,7 +205,7 @@ void	TcpServer::ServerListen()
 	else if (!header.getMethod().compare("POST"))
 		ServerAnswerPost(header);
 	else
-		ServerAnswerError(405);	// !! add header that lists allowed as answer (bc err 405)
+		ServerAnswerError(405); /*	Returns all allowed methods	*/
 	close(_newSocket);
 	_newSocket = 0;
 }

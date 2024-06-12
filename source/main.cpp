@@ -1,30 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/12 09:03:05 by gbricot           #+#    #+#             */
-/*   Updated: 2024/06/03 14:48:50 by gbricot          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/main.hpp"
 
 bool	ServerRunning = 1;
-
-std::string	returnFileStr( std::string fileName )
-{
-	std::ifstream	file;
-
-	file.open(fileName.c_str(), std::ifstream::in);
-	if (!file.is_open())
-		return ("");
-	std::string fileContent((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-	file.close();
-	return (fileContent);
-}
 
 void	stopServer( int sig )
 {
@@ -45,8 +22,7 @@ int	main( int ac, char **av )
 	try
 	{
 		data.parseFile( av[1] );
-		//std::cout << "Parsing OK" << std::endl;
-		//std::cout << data.getServerStrDebug() << std::flush;
+		std::cout << data.getServerStrDebug() << std::flush; // debug: print the parsed values
 		data.startAllServers();
 	}
 	catch(const std::exception& e)

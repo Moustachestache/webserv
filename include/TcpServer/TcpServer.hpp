@@ -42,7 +42,6 @@ class TcpServer : public Server
         void    deleteFile( std::string &res );
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
-        void	ServerStart();
         int     getSocket( void ) { return _socket.getSocket(); }
 
 

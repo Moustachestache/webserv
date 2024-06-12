@@ -8,10 +8,10 @@ DESCRIPTION="Pas de description"
 parse_args() {
     for arg in "$@"; do
         case $arg in
-            name=*)
+            GET_name=*)
                 NAME="${arg#*=}"
                 ;;
-            description=*)
+            GET_description=*)
                 DESCRIPTION="${arg#*=}"
                 ;;
             *)

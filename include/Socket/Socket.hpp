@@ -17,7 +17,7 @@ class Socket
 
 	public:
 
-		Socket( std::string ip, int port );
+		Socket( unsigned int ip, int port );
 		Socket( Socket &val );
 		~Socket();
 

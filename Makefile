@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/12 09:03:02 by gbricot           #+#    #+#              #
-#    Updated: 2024/06/06 16:53:42 by gbricot          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = webserv
 
@@ -22,6 +11,8 @@ CPPFLAGS_YOSHI = -Wall -Wextra -std=c++98 -g
 
 SRC =		source/main.cpp \
 			source/parsing.cpp \
+			source/utilsConvert.cpp \
+			source/utilsCheck.cpp \
 			source/debug.cpp \
 			source/getMimeType.cpp \
 			source/buildHeader.cpp \
@@ -32,6 +23,8 @@ SRC =		source/main.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
 			include/Socket/Socket.cpp \
 			include/TcpServer/TcpServer.cpp \
+			include/TcpServer/TcpServerGet.cpp \
+			include/TcpServer/TcpServerDelete.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp \

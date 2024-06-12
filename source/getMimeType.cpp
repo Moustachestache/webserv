@@ -14,6 +14,7 @@ static std::string  extensionSanitize(std::string &extension)
 
     if (dotPos != std::string::npos) //found a dot then we change
         sanitized = extension.substr(extension.find_last_of("."), std::string::npos);
+
     return sanitized;
 }
 

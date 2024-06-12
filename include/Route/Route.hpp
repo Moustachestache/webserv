@@ -21,6 +21,7 @@ std::string	ft_itoa( int val );
 int	ft_atoi( std::string &nb );
 void	checkValidIp( std::string &ip );
 bool	isPathRelative( std::string &path );
+unsigned int	strIpToUint( std::string &ip );
 std::string	BuildRelativePath( std::string first, std::string second, std::string third );
 
 struct Cgi
@@ -48,6 +49,8 @@ class Route
 		std::string	&getRedirection( void );
 		std::vector<std::string>	&getDefaultPages( void );
 		std::vector< Cgi >			&getCgi( void );
+		bool	getAllowListing( void );
+
 	private:
 
 		void	checkInfo( void );
