@@ -25,11 +25,8 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ):
 
     //  stash leftover body info
     std::string bodyData;
-	std::cout << "bodydata" << std::endl;
     if (headerData.find("\r\n\r\n") != std::string::npos)
         bodyData = headerData.substr(headerData.find("\r\n\r\n"), std::string::npos);
-
-std::cout << "bodydata" << std::endl;
 
     //  process header Request-Line
     std::istringstream      iss;
@@ -70,13 +67,11 @@ void    HttpHeader::processHeader(std::istringstream &iss)
         i = line.find_first_of(":");
         if (!line.empty() && line.size() != 0 && i != std::string::npos)
         {
-							std::cout << "processHeader" << std::endl;
             index = line.substr(0, i);
             strBuffer = line.substr(i + 2, line.size() - i);
             stringSanitize(index);
             stringSanitize(strBuffer);
             _args[index] = strBuffer;
-							std::cout << "processHeader" << std::endl;
         }
         std::getline(iss, line);
     }
@@ -98,14 +93,12 @@ void    HttpHeader::processHeader(std::istringstream &iss)
             _error = 501;
         else    //retrieve boundary
         {
-			std::cout << "retrieve boundary httpheader" << std::endl;
             i = 0;
             i = _args["Content-Type"].find_last_of("=");
             if (i == std::string::npos)
                 _error = 400;
             else
                 _boundary = _args["Content-Type"].substr(i + 1, _args["Content-Type"].size());
-			std::cout << "retrieve boundary httpheader" << std::endl;
         }
     }
 }
@@ -116,7 +109,6 @@ void     HttpHeader::processBodyGet( void )
     size_t j;
     std::string key;
     std::string data;
-							std::cout << "processbodyGet" << std::endl;
     std::string buffer(_ressource.substr(i, _ressource.size() - i));
     _ressource.erase(i, std::string::npos);
     for (i = buffer.rfind('&'); i != std::string::npos; i = buffer.rfind('&', i))
@@ -139,7 +131,6 @@ void     HttpHeader::processBodyGet( void )
             getStringSanitize(key);
             _get[data] = key;
         }
-							std::cout << "processbodyGet" << std::endl;
     }
     //  if buffer has lengthbuffer;
     if (buffer.size())
@@ -152,7 +143,6 @@ void     HttpHeader::processBodyGet( void )
 void    HttpHeader::stringSanitize(std::string &str)
 {
     int begin = 0;
-							std::cout << "stringSanitize" << std::endl;
     while (str[begin] && isspace(str[begin]))
         begin++;
     int end = str.size() - 1;
@@ -162,12 +152,10 @@ void    HttpHeader::stringSanitize(std::string &str)
         str = "";
     else
         str = str.substr(begin, end - begin + 1);
-							std::cout << "stringSanitize" << std::endl;
 }
 
 void    HttpHeader::getStringSanitize(std::string &str)
 {
-							std::cout << "GETstringSanitize" << std::endl;
     int begin = 0;
     while (str[begin] && (isspace(str[begin]) || str[begin] == '&' || str[begin] == '?' || str[begin] == '='))
         begin++;
@@ -178,7 +166,6 @@ void    HttpHeader::getStringSanitize(std::string &str)
         str = "";
     else
         str = str.substr(begin, end - begin + 1);
-							std::cout << "GETstringSanitize" << std::endl;
 }
 
 //  char **returnEnv[_POSIX_ARG_MAX][1024];

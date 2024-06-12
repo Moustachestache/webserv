@@ -146,7 +146,6 @@ void	Route::getAllCgi( std::string &routeStr )
 	size_t	startPos = routeStr.find("CGI");
 	while (startPos != std::string::npos)
 	{
-		std::cout << "getAllCgi" << std::endl;
 		std::string	cgiStr = routeStr.substr(startPos);
 		size_t	endPos = getChunkEnd(cgiStr, 0);
 		cgiStr.resize(endPos);
@@ -154,7 +153,6 @@ void	Route::getAllCgi( std::string &routeStr )
 		processCgi(cgiStr);
 		routeStr.erase(startPos, endPos);
 		startPos = routeStr.find("CGI");
-		std::cout << "getAllCgi" << std::endl;
 	}
 }
 

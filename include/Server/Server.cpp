@@ -92,14 +92,12 @@ void	Server::getAllErrors( std::string &serverStr, std::string name )
 	size_t	startPos = serverStr.find(name);
 	while (startPos != std::string::npos)
 	{
-		std::cout << "getAllErrors" << std::endl;
 		std::string	errorStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(errorStr, 0);
 		errorStr.resize(endPos);
 		addError(errorStr);
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
-		std::cout << "getAllErrors" << std::endl;
 	}
 }
 
@@ -108,14 +106,12 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 	size_t	startPos = serverStr.find(name);
 	while (startPos != std::string::npos)
 	{
-		std::cout << "getAllRoutes" << std::endl;
 		std::string	routeStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(routeStr, 0);
 		routeStr.resize(endPos);
 		_route.push_back( Route(routeStr) );
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
-		std::cout << "getAllRoutes" << std::endl;
 	}
 }
 
@@ -128,7 +124,6 @@ void	Server::checkServerHeader( std::string &serverStr )
 	pos = serverStr.find(":");
 	if (pos == std::string::npos)
 		throw	WrongHeader();
-	std::cout << "checkServerHeader" << std::endl;
 	_ipStr = serverStr.substr(0, pos);
 	checkValidIp(_ipStr);
 	serverStr.erase(0, pos + 1);
@@ -136,7 +131,6 @@ void	Server::checkServerHeader( std::string &serverStr )
 	if (!(iss >> _port))
 		throw WrongHeader();
 	serverStr.erase(0, (serverStr.find("{") + 1));
-	std::cout << "checkServerHeader" << std::endl;
 }
 
 void	Server::getVarContentServer( std::string &line )

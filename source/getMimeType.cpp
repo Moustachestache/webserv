@@ -12,11 +12,9 @@ static std::string  extensionSanitize(std::string &extension)
     size_t  dotPos = extension.find_last_of(".");
     std::string sanitized;
 
-	std::cout << "extensionSanitize" << std::endl;
     if (dotPos != std::string::npos) //found a dot then we change
         sanitized = extension.substr(extension.find_last_of("."), std::string::npos);
 
-std::cout << "extensionSanitize" << std::endl;
     return sanitized;
 }
 

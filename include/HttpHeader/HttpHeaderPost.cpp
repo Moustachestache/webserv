@@ -23,7 +23,6 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     size_t          i = bodyData.rfind(boundary + "--");
     while (i != std::string::npos && _error == 0)
     {
-							std::cout << "processBodyPost" << std::endl;
         chunk = bodyData.substr(i, std::string::npos);
         bodyData.erase(i, std::string::npos);
 
@@ -39,7 +38,6 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
                 processArg(chunk);
         }
         i = bodyData.rfind(boundary);
-							std::cout << "processBodyPost" << std::endl;
     }
 }
 /* Content-Disposition: form-data; name="picture"; filename="1500x500.jpeg"
@@ -49,7 +47,6 @@ void    HttpHeader::processFile(std::string &buffer)
     int i = buffer.find("name=\"") + 6;
     buffer.erase(0, i);
     i = buffer.find("\"");
-							std::cout << "processfile" << std::endl;
     std::string     key = buffer.substr(0, i);
     i = buffer.find("filename=\"") + 10;
     buffer.erase(0, i);
@@ -72,12 +69,10 @@ void    HttpHeader::processFile(std::string &buffer)
     fileStream << buffer;
     _postFiles[key] = (fileInfo){fileName, mimeType, path};
     fileStream.close();
-							std::cout << "processfile" << std::endl;
 }
 
 void    HttpHeader::processArg(std::string &buffer)
 {
-							std::cout << "processArg" << std::endl;
     int i = buffer.find("name=\"") + 6;
     buffer.erase(0, i);
     i = buffer.find("\"");
@@ -88,7 +83,6 @@ void    HttpHeader::processArg(std::string &buffer)
     stringSanitize(key);
     stringSanitize(value);
     _post[key] = value;
-							std::cout << "processArg" << std::endl;
 }
 
 void    HttpHeader::appendCStr(char *src, std::string &dest, size_t j)

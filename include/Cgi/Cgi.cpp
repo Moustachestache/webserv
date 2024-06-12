@@ -40,10 +40,8 @@ std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
 					{
 						for (std::size_t j = 0; j < (*it).getCgi()[i].extention.size(); j++)
 						{
-							std::cout << "cgiPath" << std::endl;
 							if(file_verif.substr(file_verif.find_last_of(".")) == (*it).getCgi()[i].extention[j])
 								return (*it).getCgi()[i].path;
-							std::cout << "cgiPath" << std::endl;
 						}
 					}
 				}
@@ -83,10 +81,8 @@ bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
 					{
 						for (std::size_t j = 0; j < (*it).getCgi()[i].extention.size(); j++)
 						{
-							std::cout << "iscgi" << std::endl;
 							if(file_verif.find(".") != std::string::npos && file_verif.substr(file_verif.find_last_of(".")) == (*it).getCgi()[i].extention[j])
 								return true;
-							std::cout << "iscgi" << std::endl;
 						}
 					}
 					return false;
