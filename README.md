@@ -6,9 +6,9 @@
 [les nous du futur]
 - [ ] Server &ptrServer into _ptrServer;
 - [ ] formes canonique svp quelquun
-- [ ] Check memory errors (Conditional jumps) in HttpHeader.
+- [x] Check memory errors (Conditional jumps) in HttpHeader.
 - [x] Implement CGI arguments as env in the execve. >> done as ARGV
-- [ ] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
+- [x] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
 - [ ] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
 - [ ] add upload size verification
