@@ -45,6 +45,7 @@
 # include "HttpHeader/HttpHeader.hpp"
 # include "confKeywords.hpp"
 # include  "Cgi/Cgi.hpp"
+# include  "Cookies/Cookies.hpp"
 
 /*		TEMPLATES		*/
 
