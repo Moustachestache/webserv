@@ -7,7 +7,7 @@ class HttpHeader;
 # include "../HttpHeader/HttpHeader.hpp"
 
 
-void            Generate_Cookie(HttpHeader& _header);
+void            Generate_Cookie(std::string& _header);
 /*std::string     getCookie(HttpHeader& _header);
 std::string     Session_id();
 std::string     generateSession();

@@ -59,8 +59,10 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 		{
 			addLog( "Server answer: 200" );
 			std::string	awnser = returnFileStr(fullPath);
+			Generate_Cookie(awnser);
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
 				200, awnser.size(), getRoute()));
+			Generate_Cookie(awnser);
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
 			return (true);
 		}
@@ -173,6 +175,7 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				else // path is file
 				{
 					addLog( "Server answer: 200" );
+
 					std::string	awnser = returnFileStr(res);
 					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
 						200, awnser.size(), getRoute()));
