@@ -92,8 +92,11 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 				{
 					addLog( "Server answer: 200" );
 					std::string	awnser = returnFileStr(res);
-					awnser.insert(0,  buildHeader(res.substr(res.find_last_of("."), std::string::npos),\
-						200, awnser.size(), getRoute()));
+					std::string	extension;
+					if (res.find_last_of(".") != std::string::npos)
+						extension = res.substr(res.find_last_of("."));
+					awnser.insert(0,  buildHeader(extension, 200,\
+						awnser.size(), getRoute()));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
 				}
 				return ;

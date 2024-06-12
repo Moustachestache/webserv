@@ -124,7 +124,7 @@ void	TcpServer::ServerListen()
 	else if (!header.getMethod().compare("POST"))
 		ServerAnswerPost(header);
 	else
-		ServerAnswerError(405);	// !! add header that lists allowed as answer (bc err 405)
+		ServerAnswerError(405); /*	Returns all allowed methods	*/
 	close(_newSocket);
 	_newSocket = 0;
 }
