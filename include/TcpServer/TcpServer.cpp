@@ -85,7 +85,6 @@ void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &
 
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
-<<<<<<< HEAD
 	//unsigned long		sent;
 	std::string			output;
 	DIR					*openDir = opendir(path.c_str());
@@ -164,12 +163,6 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 		}
 	}
 	ServerAnswerError(404);
-=======
-//	rien
-	std::cout << header.getArgs()["Referer"] << std::endl;
-	(void) header;
-	ServerAnswerError(200);
->>>>>>> f0f6fadf2666c389dfde8587980d1c2e80613828
 }
 
 void	TcpServer::ServerAnswerError(int id)
