@@ -18,6 +18,24 @@ int	ft_atoi( std::string &nb )	/*	if no number found it will return 0	*/
 	return (res);
 }
 
+unsigned int	strIpToUint( std::string &ip )
+{
+	unsigned int	res = 0;
+	unsigned int	temp;
+	char			sep;
+
+	std::istringstream	iss(ip);
+	for (int i = 0; i < 4; i++)
+	{
+		temp = 0;
+		iss >> temp;
+		res += temp;
+		res <<= 8;
+		iss >> sep;
+	}
+	return (res);
+}
+
 std::string	getHeaderStr( std::string &chunkStr ) /*	get chunk header returns it as a std::string,
 													and delete it in the base str		*/
 {

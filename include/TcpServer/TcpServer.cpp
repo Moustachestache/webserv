@@ -9,7 +9,7 @@
 } */
 
 TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
-													_socket(_ipStr, _port), \
+													_socket(_ip, _port), \
 													_newSocket(), \
 													_addressLen(sizeof(_address))
 {
@@ -19,7 +19,7 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 
 // Copy constructor
 TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
-											_socket(_ipStr, _port), \
+											_socket(_ip, _port), \
 											_newSocket(val._newSocket), \
 											_address(val._address), \
 											_addressLen(val._addressLen)

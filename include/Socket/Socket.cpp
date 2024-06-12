@@ -1,7 +1,7 @@
 
 #include "Socket.hpp"
 
-Socket::Socket( std::string ip, int port )
+Socket::Socket( unsigned int ip, int port )
 {
 	// Creating IPv4 socket
 	_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -12,7 +12,7 @@ Socket::Socket( std::string ip, int port )
 
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(port);
-	addr.sin_addr.s_addr = inet_addr(ip.c_str()); /*	not allowed to use inet_addr()	*/
+	addr.sin_addr.s_addr = ip;
 
 	// Binding ip and port
 	if (bind(_socket, (struct sockaddr*) &addr, sizeof(addr)) < 0)
