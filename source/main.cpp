@@ -22,7 +22,7 @@ int	main( int ac, char **av )
 	try
 	{
 		data.parseFile( av[1] );
-		std::cout << data.getServerStrDebug() << std::flush; // debug: print the parsed values
+		//std::cout << data.getServerStrDebug() << std::flush; // debug: print the parsed values
 		data.startAllServers();
 	}
 	catch(const std::exception& e)
