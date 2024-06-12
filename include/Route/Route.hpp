@@ -48,6 +48,8 @@ class Route
 		std::string	&getRedirection( void );
 		std::vector<std::string>	&getDefaultPages( void );
 		std::vector< Cgi >			&getCgi( void );
+		bool	getAllowListing( void );
+
 	private:
 
 		void	checkInfo( void );
