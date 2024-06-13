@@ -37,7 +37,7 @@ This was not a perfect approach, and we had to go back and some aspects that wer
 | https://datatracker.ietf.org/doc/html/rfc2616 | The absolute number 1 ressource. This is the base document defining everything there is to know about HTTP/1.1. |
 | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers | A very easy-to-digest writeup by the mozilla foundation regarding the content of a header.<br />The website also references all the headers that could be used. |
 | https://www.rfc-editor.org/rfc/rfc3875.txt | A good reference document regarding the CGI. |
-| https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf | The single greatest piece of reading you can find. The first 5 chapters teach you 80% of what you have to code. |
+| [Oreilly's definitive guide to HTTP](https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf) | The single greatest piece of reading you can find. The first 5 chapters teach you 80% of what you have to code. |
 |  |  |
 
 # <i>knowledge base and links</i>
