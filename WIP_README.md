@@ -32,6 +32,8 @@ This was not a perfect approach, and we had to go back and some aspects that wer
 | im sure there is more | hehe |
 
 # <i>what the code does</i>
+
+# <i>knowledge base and links</i>
 | links |  |
 | --- | --- |
 | https://datatracker.ietf.org/doc/html/rfc2616 | The absolute number 1 ressource. This is the base document defining everything there is to know about HTTP/1.1. |
@@ -39,10 +41,6 @@ This was not a perfect approach, and we had to go back and some aspects that wer
 | https://www.rfc-editor.org/rfc/rfc3875.txt | A good reference document regarding the CGI. |
 | [Oreilly's definitive guide to HTTP](https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf) | The single greatest piece of reading you can find. The first 5 chapters teach you 80% of what you have to code. |
 |  |  |
-
-# <i>knowledge base and links</i>
-
-
 
 
 
