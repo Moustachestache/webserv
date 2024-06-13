@@ -2,7 +2,7 @@
 > work in progress readme
 
 ![](https://i.imgur.com/IuhbEAr.png)
-> Mjochum, Gbricot and Yoshi posing after having finished Webserv.
+> Mjochum, Gbricot and Yoshi posing after having finished Webserv. Groovy hot babes!
 
 
 1. introduction
@@ -50,7 +50,7 @@ what does a default .conf look like? what do we expect from it?
 There is a convention on what an HTTP request is like, and it is all defined in a document that defines most modern HTTP behavior.
 The HTTP reauest's HEAD consists of a PHRASE and then HEADERS.
 The Phrase has the METHOD followed by the RESSOURCE and the HTTP-VERSION
-After a "\r\n" carriage return, we find the HEADERS in the form of "header-name" "value" separated by a colon.
+After a `\r\n` carriage return, we find the HEADERS in the form of `header-name` `value` separated by a colon. ie `content-size: 12345\r\n`
 
 > [!NOTE]
 > what path does data take from A to Z.
