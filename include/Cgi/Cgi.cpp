@@ -89,13 +89,11 @@ bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
 				}
 				else
 				{
-					addLog("CGI Not implemented"); // sometimes printed for a simple GET
 					return false;
 				}
 			}
 		}
 	}
-	addLog("Route CGI Not implemented"); // sometimes printed for a simple GET
 	return false;
 }
 
@@ -120,7 +118,7 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 	}
 	else
 	{
-		//page d'erreur;
+		//page d'erreur; Serven awnser error 500
 	}
 	
 	//envoyer une page d'erreur
@@ -186,7 +184,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 
 		if (execve(_pat, args.data(), envp) == -1)
 			std::cerr << "execve failed" << std::endl;
-		exit(0);
+		exit(1);
 
 	}
 	else

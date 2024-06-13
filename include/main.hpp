@@ -44,6 +44,7 @@
 # include "Route/Route.hpp"
 # include "HttpHeader/HttpHeader.hpp"
 # include  "Cgi/Cgi.hpp"
+# include "Cookies/Cookies.hpp"
 
 /*		TEMPLATES		*/
 
