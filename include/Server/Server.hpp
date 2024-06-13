@@ -56,8 +56,8 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
-		size_t					_maxHeaderSize;
-		size_t					_requestSize;
+		size_t					_maxHeaderSize; /*	Bytes	*/
+		size_t					_requestSize; /*	Bytes	*/
 		std::vector< Route >	_route;
 		std::string				_errorLog;
 };
