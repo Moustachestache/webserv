@@ -1,86 +1,47 @@
-> [!WARNING]
+> [!CAUTION]
 > work in progress readme
+ # TL;DR
+big project
+<br />very very interesting, much was learned
+<br />found many links, at page bottom
+<br />we are very hireable now
 
 ![](https://i.imgur.com/IuhbEAr.png)
-> Mjochum, Gbricot and Yoshi posing after having finished Webserv. Groovy hot babes!
+> Gbricot, Yoshi and Odiachen posing after having finished Webserv. Groovy hot babes!
 
-
-1. introduction
-2. Process
-3. knowledge base and links
-4. building blocks and elements
-5. challenges
-6. general qs to ourselves
-7. closing words
-
-
-# introduction:
+# <i>introduction</i>
 "Webserv" is the penultimate group project for the common core of 42. 
-In it you use C++98 to implement an HTTP server that manages POST, GET and DELETE methods, as well as a CGI (common gateway interface) and cookies.
+<br />In it you use C++98 to implement an HTTP server that manages POST, GET and DELETE methods, as well as a CGI (common gateway interface) and cookies.
 
-# process:
-We struggled to approach the project. 
-As a group that usually dives in head first, it was daunting. 
-We ended up circling back and looking for as much information as possible to build a roadmap, and generate questions for further research.
-The roadmap ended up being a series of MVP (minimum viable product) that went as follow:
-1. setup basic sockets you can ping by connecting to 0.0.0.0:8080
-> Create a socket and uses basic parsing to get the server information.
-> Initiate basic dialogue between client and server.
-2. add an intelligible HTTP response
-> understand HTTP queries and answers.
-> initiates basic HTTP parsing in server.
-3. send back correct GET request
-> understanding METHODS
-> finalising good parsing of HTTP requests
-> creating of basic ressources (websites and images) to send back.
-4. implement remaining methods (POST and DELETE)
-> more parsing of POST methods (forms!! AHHHH)
-> undertanding the body of a request and when to receive it.
-> undertanding safe and unsafe requests.
-> setting up the uploading of files and how a file is transferred and saved
-5. executable python script on server
-> setup of cgi
-> how to pass arguments to cgi
+# <i>process</i>
+This project isn't difficult but it does require q lot of reading and preparation.
+<br />This lead us to a week of research and self reflective questions, after which we managed to output a simplistic roadmap of MVPs with the goal of ushering ourselves forward. The roadmap went as follows:
+0. Read up documentation and interview other students on their approach and the pitfalls they encountered.
+1. Setup basic sockets you can ping by connecting to 0.0.0.0:8080
+2. Add an intelligible HTTP response
+3. Send back correct GET request
+4. Implement remaining methods (POST and DELETE)
+5. Executable python and bash script on server
+6. Cookies and sessions? sure let's just hammer them in.
 
-# knowledge base and links
-This previous month long discovery roadmap helped us raise questions and find ressources. I have linked the ressources as links at the bottom of this readme. Here arem, in short the questions we wrote to ourselves.
+This was not a perfect approach, and we had to go back and some aspects that were too simplistic. Some others were overengineered and should have been scaled down.
+</br>For the sake of self reflection and posterity, here here:
+| overengineered | too naive |
+| ---  | ---  |
+| <b>http error as an object</b> with the idea that it would be accessible everywhere.<br />This turned into a great example of an object that could just be a set of functions, because instead we end up creating the HttpError object in different places. |  <b>Receiving the http header into a simple string.</b><br />This was later changed into an HttpHeader object that receives and parses the header, but also the request body (in our case, any POST form request) and creates a vector with all the DATA to be passed to the CGI. |
+| im sure there is more | hehe |
 
-> [!NOTE]
-> what path does data take from A to Z.what does a default .conf look like? what do we expect from it?
-nginx and apache are good examples.
-for us it was a matter of walking backwards from what we needed, and translate it into its implementation, following nginx/apache/lighttpd
+# <i>what the code does</i>
+| links |  |
+| --- | --- |
+| https://datatracker.ietf.org/doc/html/rfc2616 | The absolute number 1 ressource. This is the base document defining everything there is to know about HTTP/1.1. |
+| https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers | A very easy-to-digest writeup by the mozilla foundation regarding the content of a header.<br />The website also references all the headers that could be used. |
+| https://www.rfc-editor.org/rfc/rfc3875.txt | A good reference document regarding the CGI. |
+| https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf | The single greatest piece of reading you can find. The first 5 chapters teach you 80% of what you have to code. |
+|  |  |
 
-> [!NOTE]
-> hows an HTTP request built. how do we process it?
-There is a convention on what an HTTP request is like, and it is all defined in a document that defines most modern HTTP behavior.
-The HTTP reauest's HEAD consists of a PHRASE and then HEADERS.
-The Phrase has the METHOD followed by the RESSOURCE and the HTTP-VERSION
-After a `\r\n` carriage return, we find the HEADERS in the form of `header-name` `:` `value` separated by a colon. ie `content-size: 12345\r\n`
-There are more case specific http headers, but that's a problem for future you.
+# <i>knowledge base and links</i>
 
-> [!NOTE]
-> what path does data take from A to Z.
-abstraction layer
-we receive a string. we dont have to worry about it. bu you can, checkout tcp packet etc
-
-> [!NOTE]
-> how is data uploaded? how do you send a form?
-> 
-
-> [!NOTE]
-> where does CGI fit into this? what even is it?
-
-> [!NOTE]
-> why do we use select() or poll()?
-
-> [!NOTE]
-> Pipelinin? What is it? why? Do we need to implement it?
-
-> [!NOTE]
-> who is EOF
-
-> [!NOTE]
-> what is chunked request? How to unchunk?
 
 
 
