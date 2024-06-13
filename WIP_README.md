@@ -44,19 +44,28 @@ The roadmap ended up being a series of MVP (minimum viable product) that went as
 
 # knowledge base and links
 This previous month long discovery roadmap helped us raise questions and find ressources. I have linked the ressources as links at the bottom of this readme. Here arem, in short the questions we wrote to ourselves.
-what does a default .conf look like? what do we expect from it?
+
+> [!NOTE]
+> what path does data take from A to Z.what does a default .conf look like? what do we expect from it?
+nginx and apache are good examples.
+for us it was a matter of walking backwards from what we needed, and translate it into its implementation, following nginx/apache/lighttpd
+
 > [!NOTE]
 > hows an HTTP request built. how do we process it?
 There is a convention on what an HTTP request is like, and it is all defined in a document that defines most modern HTTP behavior.
 The HTTP reauest's HEAD consists of a PHRASE and then HEADERS.
 The Phrase has the METHOD followed by the RESSOURCE and the HTTP-VERSION
-After a `\r\n` carriage return, we find the HEADERS in the form of `header-name` `value` separated by a colon. ie `content-size: 12345\r\n`
+After a `\r\n` carriage return, we find the HEADERS in the form of `header-name` `:` `value` separated by a colon. ie `content-size: 12345\r\n`
+There are more case specific http headers, but that's a problem for future you.
 
 > [!NOTE]
 > what path does data take from A to Z.
+abstraction layer
+we receive a string. we dont have to worry about it. bu you can, checkout tcp packet etc
 
 > [!NOTE]
 > how is data uploaded? how do you send a form?
+> 
 
 > [!NOTE]
 > where does CGI fit into this? what even is it?
