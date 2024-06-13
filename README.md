@@ -4,7 +4,7 @@
 # TODO
 
 [les nous du futur]
-- [ ] Server &ptrServer into _ptrServer;
+- [x] Server &ptrServer into _ptrServer; (seen, and ignored -max)
 - [ ] formes canonique svp quelquun
 - [x] Check memory errors (Conditional jumps) in HttpHeader.
 - [x] Implement CGI arguments as env in the execve. >> done as ARGV
