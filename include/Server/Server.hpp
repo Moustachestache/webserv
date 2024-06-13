@@ -59,6 +59,5 @@ class	Server
 		size_t					_maxHeaderSize;
 		size_t					_requestSize;
 		std::vector< Route >	_route;
-		int						_maxConnections;
-		std::string				_errorLog; //lol
+		std::string				_errorLog;
 };
