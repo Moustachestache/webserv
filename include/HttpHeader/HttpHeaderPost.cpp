@@ -112,7 +112,6 @@ void    HttpHeader::processFile(std::string &buffer)
         return ;
     }
     uploadPath.append(fileName);
-    std::cout << "Trying to open :" << uploadPath << std::endl;
     fileStream.open(uploadPath.c_str(), std::ofstream::binary);
     if (fileStream.is_open() == false)
         _error = 500;
