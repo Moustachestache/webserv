@@ -3,7 +3,7 @@
 //  set buffer size
 const size_t HttpHeader::_bufferSize = 256;
 
-HttpHeader::HttpHeader( int socket, Server &ptrServer ): 
+HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ): 
         _socket(socket), 
         _ptrServer(ptrServer), 
         _headerBytesReceived(0),
@@ -26,7 +26,10 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ):
     //  stash leftover body info
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)
+    {
         bodyData = headerData.substr(headerData.find("\r\n\r\n"), std::string::npos);
+        headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
+    }
 
     //  process header Request-Line
     std::istringstream      iss;
@@ -42,16 +45,15 @@ HttpHeader::HttpHeader( int socket, Server &ptrServer ):
     else if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
         _error = 431;
     processHeader(iss);
+    if (_ressource.find("?") != std::string::npos)
+        processBodyGet();
     if (!_method.compare("POST") && _error == 0)
     {
+        _bodyBytesReceived = bodyData.size();
         receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
             processBodyPost(bodyData);
     }
-
-    if (_ressource.find("?") != std::string::npos)
-        processBodyGet();
-
     buildEnvVector();
  }
 
@@ -193,12 +195,12 @@ void    HttpHeader::buildEnvVector( void )
         _argv.push_back(line);
 	}
 //  debugance
-    std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
+     std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
     for (size_t i = 0; i < _argv.size(); i++)
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
-    std::cout << _ressource << std::endl;
+    std::cout << _ressource << std::endl; 
 //  hehe
 }
 
