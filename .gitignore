@@ -8,3 +8,5 @@ log
 errorlog.txt
 ubuntu_cgi_tester
 *.log
+upload/
+upload_2/
