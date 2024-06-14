@@ -112,17 +112,15 @@ void    HttpHeader::processFile(std::string &buffer)
 //  change to dynamic,. gregou stp
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    std::cout << "passed" << std::endl;
     if (uploadPath.empty())
     {
-        _error = 500;
+        _error = 510;
         return ;
     }
     uploadPath.append(fileName);
-    std::cout << "Trying to open :" << uploadPath << std::endl;
     fileStream.open(uploadPath.c_str(), std::ofstream::binary);
     if (fileStream.is_open() == false)
-        _error = 500;
+        _error = 510;
     fileStream << buffer;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
