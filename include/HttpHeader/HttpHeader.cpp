@@ -195,12 +195,12 @@ void    HttpHeader::buildEnvVector( void )
         _argv.push_back(line);
 	}
 //  debugance
-     std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
+/*      std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
     for (size_t i = 0; i < _argv.size(); i++)
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
-    std::cout << _ressource << std::endl; 
+    std::cout << _ressource << std::endl;  */
 //  hehe
 }
 

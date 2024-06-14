@@ -33,15 +33,9 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
             chunk.erase(0, i);
             line = chunk.substr(0, chunk.find("\r\n"));
             if (line.find("filename") != std::string::npos)
-            {
-                std::cout << "Processfile!" << std::endl;
                 processFile(chunk);
-            }
             else
-            {
                 processArg(chunk);
-                std::cout << "Process arg!" << std::endl;
-            }
         }
         i = bodyData.rfind(boundary);
     }
@@ -112,7 +106,6 @@ void    HttpHeader::processFile(std::string &buffer)
 //  change to dynamic,. gregou stp
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    std::cout << "passed" << std::endl;
     if (uploadPath.empty())
     {
         _error = 500;
