@@ -33,13 +33,62 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
             chunk.erase(0, i);
             line = chunk.substr(0, chunk.find("\r\n"));
             if (line.find("filename") != std::string::npos)
+            {
+                std::cout << "Processfile!" << std::endl;
                 processFile(chunk);
+            }
             else
+            {
                 processArg(chunk);
+                std::cout << "Process arg!" << std::endl;
+            }
         }
         i = bodyData.rfind(boundary);
     }
 }
+
+std::string HttpHeader::getUploadPath( std::vector< Route > &routes )
+{
+    std::string res;
+    for ( std::vector< Route >::iterator it = routes.begin(); \
+        it != routes.end(); it++)
+    {
+        if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), "POST")\
+			!= (*it).getMethods().end())
+        {
+            _ptrServer.checkValidRoute((*this), *it, res);
+            if (!res.empty())
+            {
+                if (res.at(res.size() - 1) == '/') /*	path is directory	*/
+                {
+                    std::string temp = res;
+                    for (std::vector< std::string >::iterator itPages = (*it).getDefaultPages().begin(); \
+                        itPages != (*it).getDefaultPages().end(); itPages++)
+                    {
+                        temp.append(*itPages);
+                        if (!access( temp.c_str() , R_OK))
+                        {
+                            if ((*it).getAllowUpload())
+                                return ((*it).getUploadPath());
+                        }
+                    }
+                }
+                else /*	path is file	*/
+                {
+                    if ((*it).getAllowUpload())
+                        return ((*it).getUploadPath());
+                }
+            }
+        }
+        else if (it + 1 == routes.end())
+        {
+            _error = 405;
+            return ("");
+        }
+    }
+    return ("");
+}
+
 /* Content-Disposition: form-data; name="picture"; filename="1500x500.jpeg"
 Content-Type: image/jpeg */
 void    HttpHeader::processFile(std::string &buffer)
@@ -61,13 +110,21 @@ void    HttpHeader::processFile(std::string &buffer)
 //  hardcoded path
 //  if we push and we can read this we fucked up!
 //  change to dynamic,. gregou stp
-    std::string     path = "cgi-bin/upload" + fileName;
+    std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    fileStream.open(path.c_str(), std::ofstream::binary);
+    std::cout << "passed" << std::endl;
+    if (uploadPath.empty())
+    {
+        _error = 500;
+        return ;
+    }
+    uploadPath.append(fileName);
+    std::cout << "Trying to open :" << uploadPath << std::endl;
+    fileStream.open(uploadPath.c_str(), std::ofstream::binary);
     if (fileStream.is_open() == false)
         _error = 500;
     fileStream << buffer;
-    _postFiles[key] = (fileInfo){fileName, mimeType, path};
+    _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
 }
 

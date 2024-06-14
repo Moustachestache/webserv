@@ -50,6 +50,8 @@ class Route
 		std::vector<std::string>	&getDefaultPages( void );
 		std::vector< Cgi >			&getCgi( void );
 		bool	getAllowListing( void );
+		bool	getAllowUpload( void );
+		std::string	getUploadPath( void );
 
 	private:
 
