@@ -16,8 +16,12 @@ class	Server
 
 		Server( void );
 		Server( std::string &serverStr );
+		Server( Server &cpy );
 		~Server();
 
+		/*		OPERATOR OVERLOADING		*/
+
+		Server	&operator=( Server &cpy );
 
 		std::string	outputErrorPage(int id);
 

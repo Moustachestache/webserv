@@ -22,9 +22,43 @@ Server::Server( std::string &serverStr ) :	_contact(""), _port(0), _serverName("
 		_contact = "postmaster@" + _serverName;
 }
 
+Server::Server( Server &cpy )
+{
+	_httpError = cpy._httpError;
+	_ipStr = cpy._ipStr;
+	_ip = cpy._ip;
+	_contact = cpy._contact;
+	_port = cpy._port;
+	_serverName = cpy._serverName;
+	_root = cpy._root;
+	_maxHeaderSize = cpy._maxHeaderSize;
+	_requestSize = cpy._requestSize;
+	_route = cpy._route;
+	_errorLog = cpy._errorLog;
+}
+
 Server::~Server( )
 {
 	
+}
+
+Server	&Server::operator=( Server &cpy )
+{
+	if (&cpy != this)
+	{
+		_httpError = cpy._httpError;
+		_ipStr = cpy._ipStr;
+		_ip = cpy._ip;
+		_contact = cpy._contact;
+		_port = cpy._port;
+		_serverName = cpy._serverName;
+		_root = cpy._root;
+		_maxHeaderSize = cpy._maxHeaderSize;
+		_requestSize = cpy._requestSize;
+		_route = cpy._route;
+		_errorLog = cpy._errorLog;
+	}
+	return (*this);
 }
 
 std::vector< Route >	&Server::getRoute( void )
