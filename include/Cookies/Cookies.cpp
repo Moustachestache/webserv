@@ -18,15 +18,16 @@ Session createNewSession(std::string username) {
     return session;
 }
 
+
 std::string getSessionData(const std::string& sessionId) {
 
-    std::map<std::string, Session>::const_iterator jt;
+    /*std::map<std::string, Session>::const_iterator jt;
     for (jt = sessionStore.begin(); jt != sessionStore.end(); ++jt) {
         std::cout << "Key: " << jt->first << "\n";
         std::cout << "Session ID: " << jt->second.sessionId << "\n";
         std::cout << "Username: " << jt->second.username << "\n";
         std::cout << "-----------------------\n";
-    }
+    }*/
 
     std::string data = "";
     std::string post_cookies = "GET_Cookie_name=";
