@@ -42,14 +42,18 @@ class TcpServer : public Server
         bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
 
         /*      SERVER LOGIC        */
+        /**/void	ServerListen();
+        /**/void    ServerAnswerPost( HttpHeader &header );
+        /**/void	ServerAnswerError(int id);
+            /*      TcpServerGet.cpp        */
+            /**/void    ServerAnswerGet( HttpHeader &header );
+            /**/void    ServerAnswerLs(HttpHeader &header, std::string path);
+            /*      TcpServerDelete.cpp     */
+            /**/void    ServerAnswerDelete( HttpHeader &header );
+            /**/void    deleteFile( std::string &res );
 
-        void	ServerListen();
-        void    ServerAnswerGet( HttpHeader &header );
-        void    ServerAnswerDelete( HttpHeader &header );
-        void    ServerAnswerPost( HttpHeader &header );
-        void    deleteFile( std::string &res );
-        void	ServerAnswerError(int id);
-        void    ServerAnswerLs(HttpHeader &header, std::string path);
+        /*      GETTER      */
+
         int     getSocket( void );
 
         /*      CGI     */

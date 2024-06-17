@@ -13,7 +13,6 @@
 # include <cstdlib>
 # include <cstdio>
 # include <cstring>
-/* # include <chrono> */
 
 
 /*		C	LIBRAIRIES		*/
