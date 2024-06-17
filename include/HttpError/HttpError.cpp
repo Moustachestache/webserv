@@ -72,6 +72,13 @@ HttpError::~HttpError()
     } */
 }
 
+HttpError   &HttpError::operator=( HttpError &cpy )
+{
+    if (&cpy != this)
+        _errorList = cpy._errorList;
+    return (*this);
+}
+
 void    HttpError::addErrorPage(int id, std::string page)
 {
     for (size_t i = 0; ErrNumArray[i] != -1; i++)

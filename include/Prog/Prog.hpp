@@ -9,8 +9,15 @@ class Prog
 {
 	public:
 
+		/*		CONSTRUCTORS/DESTRUCTOR		*/
+
 		Prog( bool &ServerRunning );
+		Prog( Prog &cpy );
 		~Prog();
+
+		/*		OPERATOR OVERLOADING		*/
+
+		Prog	&operator=( Prog &cpy );
 
 		void	parseFile( char *filePath );
 

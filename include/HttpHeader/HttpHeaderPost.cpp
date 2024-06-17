@@ -101,9 +101,6 @@ void    HttpHeader::processFile(std::string &buffer)
     std::string     mimeType = buffer.substr(0, i);
     i = buffer.find("\r\n\r\n") + 4;
     buffer.erase(0, i);
-//  hardcoded path
-//  if we push and we can read this we fucked up!
-//  change to dynamic,. gregou stp
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
     if (uploadPath.empty())

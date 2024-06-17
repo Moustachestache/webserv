@@ -29,6 +29,8 @@ class TcpServer : public Server
         TcpServer( TcpServer &val );
         ~TcpServer();
 
+        TcpServer   &operator=( TcpServer &cpy );
+
         void    checkValidRoute( HttpHeader &header, Route &route, std::string &res );
         void	ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res );
         bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );

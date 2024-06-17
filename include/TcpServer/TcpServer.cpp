@@ -27,23 +27,28 @@ TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
 
 }
 
-/* void	TcpServer::ServerAnswer(std::string incoming)
+TcpServer	&TcpServer::operator=( TcpServer &cpy )
 {
-	unsigned long		sent;
-	std::string			output;
-
-    //  build output answer
-	(void) incoming;
-    //  build header based on answer
-	HttpHeader			header(output);
-	output.insert(0, "\n\n");
-	output.insert(0, header.buildHeader());
-
-
-	sent = write(_newSocket, output.c_str(), output.size());
-	if (sent != output.size())
-		throw	AnswerFailure();
-} */
+	if (&cpy != this)
+	{
+		_socket = cpy._socket;
+		_newSocket = cpy._newSocket;
+		_address = cpy._address;
+		_addressLen = cpy._addressLen;
+		_httpError = cpy._httpError;
+		_ipStr = cpy._ipStr;
+		_ip = cpy._ip;
+		_contact = cpy._contact;
+		_port = cpy._port;
+		_serverName = cpy._serverName;
+		_root = cpy._root;
+		_maxHeaderSize = cpy._maxHeaderSize;
+		_requestSize = cpy._requestSize;
+		_route = cpy._route;
+		_errorLog = cpy._errorLog;
+	}
+	return (*this);
+}
 
 void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res )
 {
