@@ -166,3 +166,13 @@ bool	Route::getAllowListing( void )
 {
 	return (_listing);
 }
+
+bool	Route::getAllowUpload( void )
+{
+	return (_allowUpload);
+}
+
+std::string	Route::getUploadPath( void )
+{
+	return (_uploadPath);
+}

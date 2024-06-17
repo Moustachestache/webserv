@@ -73,8 +73,6 @@ std::string	Server::getVarStr( void )	/*	DEBUG PRINT FUNCTION	*/
 	res.append(ft_itoa(_requestSize));
 	for (std::vector< Route >::iterator it = _route.begin(); it != _route.end(); it++ )
 		res.append(it->getVarStr());
-	res.append("\n\tMAX_CONNECTIONS = ");
-	res.append(ft_itoa(_maxConnections));
 	res.append("\n\tERROR_LOG = ");
 	res.append(_errorLog);
 	res.append("\n}\n");

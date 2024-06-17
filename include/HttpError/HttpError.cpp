@@ -5,7 +5,7 @@ int HttpError::ErrNumArray[] = { 100, 101, \
                             200, 201, 202, 203, 203, 205, 206, \
                             300, 301, 302, 303, 304, 305, 306, 307, \
                             400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 422,\
-                            500, 501, 502, 503, 504, 505, -1};
+                            500, 501, 502, 503, 504, 505, 510, -1};
 
 HttpError::HttpError()
 {
@@ -51,6 +51,7 @@ HttpError::HttpError()
     _errorList[503] = (errorinfo){503, "Service Unavailable", "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server. Our server hamster possible passed away.", ""};
     _errorList[504] = (errorinfo){504, "Gateway Timeout", "Upstream response was too slow.", ""};
     _errorList[505] = (errorinfo){505, "HTTP Version Not Supported", "The server does not support the requested HTTP protocol version.", ""};
+    _errorList[510] = (errorinfo){510, "Upload Folder Doesn\'t exist", "Processing upload is impossible because the folder does not exist.", ""};
     _errorList[0] = (errorinfo){0, "woopsie", "this should not have happened", ""};
 /*    for (int i = 0; ErrNumArray[i] != -1; i++)
     {

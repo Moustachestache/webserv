@@ -68,6 +68,7 @@ void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &
 	if (route.getRedirection().empty())
 	{
 		std::string filename = header.getFile();
+		
 		if (filename.find(route.getPath()) == std::string::npos)
 			return ;
 		filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
@@ -86,7 +87,7 @@ void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &
 void	TcpServer::ServerAnswerPost( HttpHeader &header )
 {
 //	rien
-	std::cout << header.getArgs()["Referer"] << std::endl;
+	//std::cout << header.getArgs()["Referer"] << std::endl;
 	(void) header;
 	ServerAnswerError(200);
 }

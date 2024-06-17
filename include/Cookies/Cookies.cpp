@@ -19,6 +19,7 @@ Session createNewSession(std::string username) {
 }
 
 
+
 std::string getSessionData(const std::string& sessionId) {
 
     /*std::map<std::string, Session>::const_iterator jt;

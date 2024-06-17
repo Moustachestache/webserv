@@ -1,23 +1,25 @@
 
 #include "Server.hpp"
 
+
+
 Server::Server( void )
 {
 }
 
-Server::Server( std::string &serverStr ) :	_contact("postmaster@"), _port(80), _serverName(""), _root(""), \
-											_maxHeaderSize(8192), _requestSize(128), \
-											_maxConnections(48), _errorLog("")
+Server::Server( std::string &serverStr ) :	_contact(""), _port(0), _serverName(""), _root(""), \
+											_maxHeaderSize(8192), _requestSize(128), _errorLog("")
 					/*	Init all members to avoid memory errors while reading them.
 
 	!! Need to check with the team wich value we set in default for each !!	*/
 {
-	checkServerHeader( serverStr ); // if not port set 80
+	checkServerHeader( serverStr );
 	getAllRoutes( serverStr, "ROUTE" );
 	getAllErrors( serverStr, "ERROR_STATUS" );
 	getAllVariables( serverStr );
-	_contact.append(_serverName);
 	checkInfo();
+	if (_contact.empty()) /*	Need testing	*/
+		_contact = "postmaster@" + _serverName;
 }
 
 Server::~Server( )
@@ -38,6 +40,10 @@ void	Server::checkInfo( void )
 		throw NoRouteDefined();
 	if (!isPathRelative(_root))
 		throw WrongPath();
+	if (_requestSize > 2048) /*	2048 MB = 2 GO, so the max autorized	*/
+		_requestSize = 2147483648; /*	This value is 2 GO in Bytes	*/
+	else
+		_requestSize = _requestSize * 2048; /*	Convert the value from MB to Bytes	*/
 	//IP 
 	//Port //done in the checkHeaderServer()
 }
@@ -152,8 +158,6 @@ void	Server::getVarContentServer( std::string &line )
 		assignSingleValue(iss, _contact);
 	else if (!word.compare("REQUEST_SIZE"))
 		assignSingleValue(iss, _requestSize);
-	else if (!word.compare("MAX_CONNECTIONS"))
-		assignSingleValue(iss, _maxConnections);
 	else if (!word.compare("ERROR_LOG"))
 		assignSingleValue(iss, _errorLog);
 	else if (!word.compare("}"))

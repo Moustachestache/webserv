@@ -1,9 +1,8 @@
 #pragma once
 #include "../main.hpp"
-//#include "../Server/Server.hpp"
 
 
-class Server;
+class TcpServer;
 //  note:
 //  this structure is contained in _postFiles
 //  the map is accessed with the name of the field as key.
@@ -20,7 +19,7 @@ struct fileInfo {
 
 class HttpHeader {
     public:
-        HttpHeader( int socket, Server &ptrServer );
+        HttpHeader( int socket, TcpServer &ptrServer );
         ~HttpHeader();
         std::string &getMethod();
         std::string &getFile();
@@ -48,8 +47,11 @@ class HttpHeader {
         std::vector < std::string >             &getArgv();
 
     private:
+
+        std::string getUploadPath( std::vector< Route > &routes );
+
         int             _socket;
-        Server&         _ptrServer;
+        TcpServer&         _ptrServer;
         static const size_t     _bufferSize;
         size_t          _headerBytesReceived;
         size_t          _bodyBytesReceived;

@@ -1,0 +1,31 @@
+<head>
+    <style>
+    @keyframes animate
+    {
+        from{
+            /* transform: rotate(0deg); */
+            background-color: black;
+            filter: invert(100%);
+        }
+        to{
+            /* transform: rotate(360deg); */
+            background-color: red;
+            filter: invert(0);
+        }
+    }
+    .pipou{ 
+        height: 100%;
+        width: 100%;
+        animation: animate 500s linear infinite;
+    }
+    img{
+        width: 400px;
+        height: 300px;
+    }
+    </style>
+</head>
+<html>
+    <center>
+        <img class="pipou" src="../deadfolder.png">
+    </center>
+</html>
