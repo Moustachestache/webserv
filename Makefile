@@ -28,7 +28,8 @@ SRC =		source/main.cpp \
 			include/HttpError/HttpError.cpp \
 			include/HttpHeader/HttpHeader.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
-			include/Cgi/Cgi.cpp 
+			include/Cgi/Cgi.cpp \
+			include/Cookies/Cookies.cpp
 			
 
 OBJ = $(SRC:.cpp=.o)

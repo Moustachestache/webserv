@@ -11,7 +11,7 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 			addLog( "Server answer: 200" );
 			std::string	awnser = returnFileStr(fullPath);
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
-				200, awnser.size(), getRoute()));
+				200, awnser.size(), getRoute(), _cookieHeader));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
 			return (true);
 		}
@@ -61,7 +61,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	output.append("</table></div></body>");
 	closedir(openDir);
 	addLog( "Server answer: 200" );
-	output.insert(0, buildHeader(".html", 200, output.size(), getRoute()));
+	output.insert(0, buildHeader(".html", 200, output.size(), getRoute(), _cookieHeader));
 	send(_newSocket, output.c_str(), output.size(), 0);
 }
 
@@ -96,7 +96,7 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 					if (res.find_last_of(".") != std::string::npos)
 						extension = res.substr(res.find_last_of("."));
 					awnser.insert(0,  buildHeader(extension, 200,\
-						awnser.size(), getRoute()));
+						awnser.size(), getRoute(), _cookieHeader));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
 				}
 				return ;

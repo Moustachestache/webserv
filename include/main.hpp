@@ -43,7 +43,8 @@
 # include "Server/Server.hpp"
 # include "Route/Route.hpp"
 # include "HttpHeader/HttpHeader.hpp"
-# include  "Cgi/Cgi.hpp"
+# include "Cgi/Cgi.hpp"
+# include "Cookies/Cookies.hpp"
 
 /*		TEMPLATES		*/
 
@@ -71,7 +72,7 @@ std::string 	ft_itoa( int val );
 
 std::string		getMimeType(std::string extension);
 
-std::string		buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
+std::string		buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes, std::string cookieHeader);
 
 void 			writeToStr(char *dest, const char *src, int srcSize);
 

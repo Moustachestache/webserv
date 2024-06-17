@@ -19,7 +19,7 @@ static std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
 }
 
 std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
-												std::vector< Route > &allRoutes)
+												std::vector< Route > &allRoutes , std::string cookieHeader)
 {
 	HttpError	error;
 	std::string returnStr("HTTP/1.1 ");
@@ -27,6 +27,7 @@ std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
 	returnStr.append(" " + ft_itoa(errorcode));
 	returnStr.append(" " + error.getInfo(errorcode).type);
 	returnStr.append("\r\n");
+	returnStr.append(cookieHeader);
 	returnStr.append("content-type: " + getMimeType(extension) + "; charset=utf-8\r\n");
 	returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
 	returnStr.append("accept-encoding: identity\r\n");

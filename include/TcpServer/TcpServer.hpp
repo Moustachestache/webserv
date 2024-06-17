@@ -5,6 +5,8 @@
 # include "../Socket/Socket.hpp"
 # include "../HttpHeader/HttpHeader.hpp"
 # include "../Cgi/Cgi.hpp"
+# include "../Cookies/Cookies.hpp"
+
 /*#include <netinet/in.h>
 
 struct sockaddr_in {
@@ -56,4 +58,5 @@ class TcpServer : public Server
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;
+        std::string         _cookieHeader;
 };

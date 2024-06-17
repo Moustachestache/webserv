@@ -22,7 +22,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
-
+    
     //  stash leftover body info
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)

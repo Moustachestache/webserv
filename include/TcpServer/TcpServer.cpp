@@ -98,7 +98,7 @@ void	TcpServer::ServerAnswerError(int id)
 	std::string			output(outputErrorPage(id));
 
 	addLog( "Server answer: " + ft_itoa(id) );
-	output.insert(0, buildHeader(".html", id, output.size(), getRoute()));
+	output.insert(0, buildHeader(".html", id, output.size(), getRoute(), _cookieHeader));
 	sent = write(_newSocket, output.c_str(), output.size());
 	if (sent != output.size())
 		throw	AnswerFailure();
@@ -110,8 +110,10 @@ void	TcpServer::ServerListen()
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
 		throw NewSocketError();
-	
+
 	HttpHeader		header(_newSocket, *this);
+	_cookieHeader = generateCookieHeader(header.getArgs()["Cookie"]);
+	header.getArgv().push_back(getSessionData(header.getArgs()["Cookie"]));
 
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
