@@ -14,6 +14,9 @@ class   HttpError
 {
 
     public:
+
+        /*      CONSTRUCTOR/DESTRUCTOR      */
+
         HttpError();
         HttpError(HttpError &obj);
         ~HttpError();

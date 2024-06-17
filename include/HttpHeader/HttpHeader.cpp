@@ -3,6 +3,39 @@
 //  set buffer size
 const size_t HttpHeader::_bufferSize = 256;
 
+HttpHeader::HttpHeader( HttpHeader &cpy ) : _socket(cpy._socket), _ptrServer(cpy._ptrServer),\
+                                            _headerBytesReceived(cpy._headerBytesReceived),\
+                                            _bodyBytesReceived(cpy._bodyBytesReceived),\
+                                            _error(cpy._error), _method(cpy._method),\
+                                            _ressource(cpy._ressource), _version(cpy._version),\
+                                            _boundary(cpy._boundary), _args(cpy._args),\
+                                            _post(cpy._post), _postFiles(cpy._postFiles),\
+                                            _argv(cpy._argv) //jpp
+{
+
+}
+
+HttpHeader  &HttpHeader::operator=( HttpHeader &cpy )
+{
+    if (&cpy != this)
+    {
+        _socket = cpy._socket;
+        _ptrServer = cpy._ptrServer;
+        _headerBytesReceived = cpy._headerBytesReceived;
+        _bodyBytesReceived = cpy._bodyBytesReceived;
+        _error = cpy._error;
+        _method = cpy._method;
+        _ressource = cpy._ressource;
+        _version = cpy._version;
+        _boundary = cpy._boundary;
+        _args = cpy._args;
+        _post = cpy._post;
+        _postFiles = cpy._postFiles;
+        _argv = cpy._argv;
+    }
+    return (*this);
+}
+
 HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ): 
         _socket(socket), 
         _ptrServer(ptrServer), 

@@ -45,40 +45,30 @@
 # include "HttpHeader/HttpHeader.hpp"
 # include  "Cgi/Cgi.hpp"
 
-/*		TEMPLATES		*/
+/*		TEMPLATE		*/
 
 # include "../source/assignSingleValue.tpp"
 
-
-/*		STRUCTURE		*/
-
-struct Bracket
-{
-	size_t	nb;
-	size_t	pos;
-};
-
-/*		FUNCTIONS		*/
+/*		PARSING		*/
 
 std::string		returnFileStr( std::string fileName );
-
 size_t			getChunkStart( std::istringstream &iss, std::string &fileContent, std::string chunkName );
 size_t			getNextBracket( std::string &fileContent, size_t pos);
 size_t			getChunkEnd( std::string &fileContent, size_t pos );
-
 std::string		getHeaderStr( std::string &chunkStr );
+
+/*		CGI		*/
+
+bool		isCgi(Route route, std::string filename);
+std::string	true_path(std::vector<Route> _routes, HttpHeader _header);
+
+std::string	execCgiPost(HttpHeader _header);
+std::string	execCgiGet(HttpHeader _header);
+std::string	execCgi(HttpHeader _header);
+
+/*		UTILS		*/
+
 std::string 	ft_itoa( int val );
-
 std::string		getMimeType(std::string extension);
-
 std::string		buildHeader(std::string extension, int errorcode, int contentSize, std::vector< Route > &allRoutes );
-
 void 			writeToStr(char *dest, const char *src, int srcSize);
-
-/*          CGI          */
-bool            isCgi(Route route, std::string filename);
-std::string	    true_path(std::vector<Route> _routes, HttpHeader _header);
-
-std::string    execCgiPost(HttpHeader _header);
-std::string    execCgiGet(HttpHeader _header);
-std::string    execCgi(HttpHeader _header);

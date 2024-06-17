@@ -19,11 +19,17 @@ class Prog
 
 		Prog	&operator=( Prog &cpy );
 
+		/*		PARSING		*/
+
 		void	parseFile( char *filePath );
 
-		std::string	getServerStrDebug( void );
+		/*		SERVER ROUTINE		*/
 
 		void	startAllServers( void );
+
+		/*		DEBUG		*/
+
+		std::string	getServerStrDebug( void );
 
 	private:
 
