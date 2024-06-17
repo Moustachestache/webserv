@@ -5,7 +5,7 @@
 
 [les nous du futur]
 - [x] Server &ptrServer into _ptrServer; (seen, and ignored -max)
-- [ ] formes canonique svp quelquun
+- [x] formes canonique svp quelquun
 - [x] Check memory errors (Conditional jumps) in HttpHeader.
 - [x] Implement CGI arguments as env in the execve. >> done as ARGV
 - [x] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
