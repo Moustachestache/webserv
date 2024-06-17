@@ -17,13 +17,13 @@ void	TcpServer::deleteFile( std::string &res )
 
 void	TcpServer::ServerAnswerDelete( HttpHeader &header )
 {
-	std::vector< Route >	route = getRoute();
+	std::vector< Route * >	route = getRoute();
 	std::string	res;
 
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
+	for (std::vector<Route * >::iterator it = route.begin(); it != route.end(); it++)
 	{
-		if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), header.getMethod())\
-			!= (*it).getMethods().end())
+		if (std::find((*it)->getMethods().begin(), (*it)->getMethods().end(), header.getMethod())\
+			!= (*it)->getMethods().end())
 		{
 			checkValidRoute(header, *it, res);
 			if (!res.empty())

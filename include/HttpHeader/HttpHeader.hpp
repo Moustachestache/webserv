@@ -53,7 +53,7 @@ class HttpHeader {
 
     private:
 
-        std::string getUploadPath( std::vector< Route > &routes );
+        std::string getUploadPath( std::vector< Route * > &routes );
 
         int             _socket;
         TcpServer&         _ptrServer;

@@ -67,22 +67,22 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 
 void	TcpServer::ServerAnswerGet( HttpHeader &header )
 {
-	std::vector< Route >	route = getRoute();
+	std::vector< Route * >	route = getRoute();
 	std::string	res;
 
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
+	for (std::vector<Route *>::iterator it = route.begin(); it != route.end(); it++)
 	{
-		if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), header.getMethod())\
-			!= (*it).getMethods().end())
+		if (std::find((*it)->getMethods().begin(), (*it)->getMethods().end(), header.getMethod())\
+			!= (*it)->getMethods().end())
 		{
 			checkValidRoute(header, *it, res);
 			if (!res.empty())
 			{
 				if (res.at(res.size() - 1) == '/') /*	path is directory	*/
 				{
-					if (!checkAllDefaultPages( (*it).getDefaultPages(), res))
+					if (!checkAllDefaultPages( (*it)->getDefaultPages(), res))
 					{
-						if ((*it).getAllowListing())
+						if ((*it)->getAllowListing())
 							ServerAnswerLs( header, res );
 						else
 							ServerAnswerError(404); /*	Unauthorized listing	*/ 

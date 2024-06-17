@@ -39,7 +39,8 @@ Server::Server( Server &cpy )
 
 Server::~Server( )
 {
-	
+	for (std::vector< Route * >::iterator it = _route.begin(); it != _route.end(); it++)
+		delete (*it);
 }
 
 Server	&Server::operator=( Server &cpy )
@@ -61,7 +62,7 @@ Server	&Server::operator=( Server &cpy )
 	return (*this);
 }
 
-std::vector< Route >	&Server::getRoute( void )
+std::vector< Route * >	&Server::getRoute( void )
 {
 	return (_route);
 }
@@ -149,7 +150,8 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 		std::string	routeStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(routeStr, 0);
 		routeStr.resize(endPos);
-		_route.push_back( Route(routeStr) );
+		Route	*nRoute = new Route(routeStr);
+		_route.push_back( nRoute );
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
 	}

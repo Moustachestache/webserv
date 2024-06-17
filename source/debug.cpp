@@ -71,8 +71,8 @@ std::string	Server::getVarStr( void )	/*	DEBUG PRINT FUNCTION	*/
 	res.append(ft_itoa(_maxHeaderSize));
 	res.append("\n\tREQUEST_SIZE = ");
 	res.append(ft_itoa(_requestSize));
-	for (std::vector< Route >::iterator it = _route.begin(); it != _route.end(); it++ )
-		res.append(it->getVarStr());
+	for (std::vector< Route * >::iterator it = _route.begin(); it != _route.end(); it++ )
+		res.append((*it)->getVarStr());
 	res.append("\n\tERROR_LOG = ");
 	res.append(_errorLog);
 	res.append("\n}\n");

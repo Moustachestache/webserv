@@ -32,7 +32,7 @@ class	Server
 		//	accessors
 		size_t		getMaxHeaderSize();
 		size_t		getMaxRequestSize();
-		std::vector< Route >	&getRoute( void );
+		std::vector< Route * >	&getRoute( void );
 	
 	protected:
 
@@ -62,6 +62,6 @@ class	Server
 		std::string				_root;
 		size_t					_maxHeaderSize;	/*	Bytes	*/
 		size_t					_requestSize;	/*	Bytes	*/
-		std::vector< Route >	_route;
+		std::vector< Route * >	_route;
 		std::string				_errorLog;
 };

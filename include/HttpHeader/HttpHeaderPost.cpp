@@ -41,14 +41,14 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     }
 }
 
-std::string HttpHeader::getUploadPath( std::vector< Route > &routes )
+std::string HttpHeader::getUploadPath( std::vector< Route * > &routes )
 {
     std::string res;
-    for ( std::vector< Route >::iterator it = routes.begin(); \
+    for ( std::vector< Route * >::iterator it = routes.begin(); \
         it != routes.end(); it++)
     {
-        if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), "POST")\
-			!= (*it).getMethods().end())
+        if (std::find((*it)->getMethods().begin(), (*it)->getMethods().end(), "POST")\
+			!= (*it)->getMethods().end())
         {
             _ptrServer.checkValidRoute((*this), *it, res);
             if (!res.empty())
@@ -56,21 +56,21 @@ std::string HttpHeader::getUploadPath( std::vector< Route > &routes )
                 if (res.at(res.size() - 1) == '/') /*	path is directory	*/
                 {
                     std::string temp = res;
-                    for (std::vector< std::string >::iterator itPages = (*it).getDefaultPages().begin(); \
-                        itPages != (*it).getDefaultPages().end(); itPages++)
+                    for (std::vector< std::string >::iterator itPages = (*it)->getDefaultPages().begin(); \
+                        itPages != (*it)->getDefaultPages().end(); itPages++)
                     {
                         temp.append(*itPages);
                         if (!access( temp.c_str() , R_OK))
                         {
-                            if ((*it).getAllowUpload())
-                                return ((*it).getUploadPath());
+                            if ((*it)->getAllowUpload())
+                                return ((*it)->getUploadPath());
                         }
                     }
                 }
                 else /*	path is file	*/
                 {
-                    if ((*it).getAllowUpload())
-                        return ((*it).getUploadPath());
+                    if ((*it)->getAllowUpload())
+                        return ((*it)->getUploadPath());
                 }
             }
         }

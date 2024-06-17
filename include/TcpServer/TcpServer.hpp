@@ -39,8 +39,8 @@ class TcpServer : public Server
 
         /*      PARSING     */
 
-        void    checkValidRoute( HttpHeader &header, Route &route, std::string &res );
-        void	ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res );
+        void    checkValidRoute( HttpHeader &header, Route *route, std::string &res );
+        void	ifExistSend( Route *route, std::string &filename, HttpHeader &header, std::string &res );
         bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
 
         /*      SERVER LOGIC        */
@@ -60,11 +60,11 @@ class TcpServer : public Server
 
         /*      CGI     */
 
-        std::string	    true_path(std::vector<Route> _routes, HttpHeader _header);
-        bool            isCgi(std::vector<Route> route, HttpHeader &_header);
-        void            execCgi(HttpHeader _header, std::string true_path, std::vector<Route> routes);
+        std::string	    true_path(std::vector<Route*> _routes, HttpHeader _header);
+        bool            isCgi(std::vector<Route*> route, HttpHeader &_header);
+        void            execCgi(HttpHeader _header, std::string true_path, std::vector<Route*> routes);
         std::string     execCgiGet(HttpHeader _header, std::string true_path, std::string _path);
-        std::string     cgiPath(std::vector<Route> routes, HttpHeader _header);
+        std::string     cgiPath(std::vector<Route *> routes, HttpHeader _header);
 
     private:
 

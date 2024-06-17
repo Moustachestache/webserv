@@ -50,9 +50,9 @@ TcpServer	&TcpServer::operator=( TcpServer &cpy )
 	return (*this);
 }
 
-void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res )
+void	TcpServer::ifExistSend( Route *route, std::string &filename, HttpHeader &header, std::string &res )
 {
-	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
+	std::string	fullPath = BuildRelativePath(_root, route->getPath(), filename);
 	// add check of "../"
 	DIR					*openDir = opendir(fullPath.c_str());
 
@@ -68,23 +68,23 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &he
 		closedir(openDir);
 }
 
-void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &res ) // 
+void	TcpServer::checkValidRoute( HttpHeader &header, Route *route, std::string &res ) // 
 {
-	if (route.getRedirection().empty())
+	if (route->getRedirection().empty())
 	{
 		std::string filename = header.getFile();
 		
-		if (filename.find(route.getPath()) == std::string::npos)
+		if (filename.find(route->getPath()) == std::string::npos)
 			return ;
-		filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
+		filename.erase(filename.find(route->getPath()), route->getPath().size() - 1);
 		ifExistSend( route, filename, header, res );
 	}
 	else
 	{
 		std::string filename = header.getFile();
-		if (filename.find(route.getRedirection()) == std::string::npos)
+		if (filename.find(route->getRedirection()) == std::string::npos)
 			return ;
-		filename.erase(filename.find(route.getRedirection()), route.getRedirection().size() - 1);
+		filename.erase(filename.find(route->getRedirection()), route->getRedirection().size() - 1);
 		ifExistSend( route, filename, header, res );
 	}
 }
