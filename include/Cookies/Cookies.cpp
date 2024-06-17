@@ -1,41 +1,56 @@
 #include "Cookies.hpp"
 
+std::map<std::string, Session> sessionStore;
+
 std::string generateSessionId() {
     std::stringstream ss;
-    ss << std::time(nullptr) << rand();
+    ss << std::time(NULL) << rand();
     return ss.str();
 }
 
-std::string createSession() {
-    std::string sessionId = generateSessionId();
-    std::ofstream sessionFile("sessions/" + sessionId);
-    if (sessionFile.is_open()) {
-        // Stocke des données de session (par exemple, une chaîne vide)
-        sessionFile << "";
-        sessionFile.close();
-    }
-    return sessionId;
+Session createNewSession(std::string username) {
+    Session session;
+    session.sessionId = generateSessionId();
+    if(username == "")
+        session.username = "Guest";
+    else
+        session.username = username;
+    return session;
 }
 
 std::string getSessionData(const std::string& sessionId) {
-    std::ifstream sessionFile("sessions/" + sessionId);
-    std::string data;
-    if (sessionFile.is_open()) {
-        std::getline(sessionFile, data);
-        sessionFile.close();
+
+    std::map<std::string, Session>::const_iterator jt;
+    for (jt = sessionStore.begin(); jt != sessionStore.end(); ++jt) {
+        std::cout << "Key: " << jt->first << "\n";
+        std::cout << "Session ID: " << jt->second.sessionId << "\n";
+        std::cout << "Username: " << jt->second.username << "\n";
+        std::cout << "-----------------------\n";
     }
-    return data;
+
+    std::string data = "";
+    std::string post_cookies = "GET_Cookie_name=";
+    
+    std::string id = sessionId.substr( sessionId.find('=') + 1);
+    std::map<std::string, Session >::iterator it = sessionStore.find(id);
+    std::cout << "Rubis 3 :" << it->first << "FinRUbis3" <<std::endl;
+
+    if (it != sessionStore.end()) 
+    {
+        data  = it->second.username;
+    }
+    else
+        return "";
+    post_cookies.append(data);
+    //post_cookies.append("\r\n");
+
+    std::cout << "Rubis : data::" << data << " post_cookies:" << post_cookies << std::endl; 
+    
+    return post_cookies;
 }
 
-void updateSessionData(const std::string& sessionId, const std::string& data) {
-    std::ofstream sessionFile("sessions/" + sessionId);
-    if (sessionFile.is_open()) {
-        sessionFile << data;
-        sessionFile.close();
-    }
-}
-
-std::string getCookieValue(const std::string& headers, const std::string& cookieName) {
+std::string getCookieValue(const std::string& headers, const std::string& cookieName)
+{
     size_t pos = headers.find("Cookie: ");
     if (pos == std::string::npos) {
         return "";
@@ -48,7 +63,7 @@ std::string getCookieValue(const std::string& headers, const std::string& cookie
     if (pos == std::string::npos) {
         return "";
     }
-    pos += cookieName.length() + 1; // Length of cookieName + "="
+    pos += cookieName.length() + 1; 
     end = cookies.find(";", pos);
     if (end == std::string::npos) {
         end = cookies.length();
@@ -56,10 +71,20 @@ std::string getCookieValue(const std::string& headers, const std::string& cookie
     return cookies.substr(pos, end - pos);
 }
 
+std::string generateCookieHeader(const std::string& requestHeaders) {
+    std::string cookieName = "sessionid";
+    std::string cookieValue = getCookieValue(requestHeaders, cookieName);
+    std::string cookieHeader;
 
+    if (!cookieValue.empty())
+        if (sessionStore.find(cookieValue) != sessionStore.end()) 
+            return "";
 
-std::string    Generate_Cookie(std::string& _header)
-{
+    Session newSession = createNewSession();
+    sessionStore[newSession.sessionId] = newSession;
     
-     /*response += "Set-Cookie: " + cookieName + "=" + cookieValue + "; Path=/; HttpOnly\r\n";*/    
+    cookieHeader = "Set-Cookie: " + cookieName + "=" + newSession.sessionId + "; Path=/; HttpOnly\r\n";
+    //cookieHeader.append(getSessionData(requestHeaders));
+    return cookieHeader;
 }
+

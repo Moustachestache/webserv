@@ -2,17 +2,20 @@
 
 #pragma once
 
-class HttpHeader;
-
-# include "../HttpHeader/HttpHeader.hpp"
+# include "../main.hpp"
 
 
-std::string            Generate_Cookie(std::string& _header);
-/*std::string     getCookie(HttpHeader& _header);
-std::string     Session_id();
-std::string     generateSession();
-std::string     createSession();
-std::string     getSessionData(std::string& sessionId);
-void            updateSessionData(const std::string& sessionId, const std::string& data);
-*/
+struct Session {
+    std::string sessionId;
+    std::string username;
+};
 
+//extern std::map<std::string, Session> sessionStore;
+
+
+std::string     generateSessionId();
+Session         createNewSession(std::string username="");
+std::string     getCookieValue(const std::string& headers, const std::string& cookieName);
+std::string getSessionData(const std::string& sessionId) ;
+std::string     generateCookieHeader(const std::string& requestHeaders);
+//std::string     generateCookieHeader(const int socket);

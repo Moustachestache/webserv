@@ -2,26 +2,7 @@
 
 #include "../TcpServer/TcpServer.hpp"
 #include <algorithm>
-/*char **make_arg(HttpHeader _header)
-{
-	char *arg[_header.getArgs().size() + 2];
-	arg[0] = strdup(_header.getFile().c_str());
-	for (size_t i = 1; i < _header.getArgs().size(); i++)
-	{
-		arg[i] = strdup(_header.getArgs()[i].c_str());
-	}
-	arg[_header.getArgs().size() + 1] = NULL;
-	return arg;
-}*/
 
-// void display_args(std::vector<std::string> tab)
-// {
-
-// 	for(map<std::string , std::string >::iterator it =tab.begin() ;i < tab.size(); i++)
-// 	{
-// 		std::cout << tab[i] << std::endl;
-// 	}
-// }
 
 
 std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
@@ -113,14 +94,15 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 
 	if (!answer.empty())
 	{
-		answer.insert(0,  buildHeader(".html" , 200, answer.size(), routes));
+		answer.insert(0,  buildHeader(".html" , 200, answer.size(), routes , ""));
 		send(_newSocket, answer.c_str(), answer.size(), 0);
 	}
 	else
 	{
 		//page d'erreur; Serven awnser error 500
+		ServerAnswerError(500);
 	}
-	
+	ServerAnswerError(500);
 	//envoyer une page d'erreur
 	//return (0);
 }
@@ -133,16 +115,18 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 	(void) _header;
 	if (pipe(pipe_fd) == -1) {
         std::cerr << "pipe failed" << std::endl;
-        exit(1);
+		ServerAnswerError(500);
+        return (0);
+		//exit(1);
     }
 
-	std::cout << "Lapis Lazuli" << std::endl;
 	pid = fork();
 
 	if (pid == -1)
 	{
 		std::cerr << "fork failed" << std::endl;
-		exit(1);
+		return (0);
+		//exit(1);
 	}
 	else if (pid == 0)
 	{
@@ -162,17 +146,6 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		std::swap(argv[0], argv[argv.size()-1]);
 		std::swap(argv[1], argv[argv.size()-2]);
 
-/* 		if(_header.getMethod() == "GET" && !_header.getGet().empty())
-		{
-			for(std::map<std::string, std::string>::iterator it = _header.getGet().begin(); it != _header.getGet().end(); it++)
-				argv.push_back(it->second);			
-		}
-		else if (_header.getMethod() == "POST" && !_header.getPost().empty())
-		{
-			for(std::map<std::string, std::string>::iterator it = _header.getPost().begin(); it != _header.getPost().end(); it++)
-				argv.push_back(it->second);
-		} */
-
 	    std::vector<char*> args;
         for (size_t i = 0; i < argv.size(); i++)
         {
@@ -189,9 +162,14 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 	}
 	else
 	{
+		int status;
 		close(pipe_fd[1]);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 
+		if(status != 0)
+		{
+			return (0);
+		}
 		char buffer[1024];
 		int ret;
 
