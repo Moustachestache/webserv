@@ -66,23 +66,23 @@ size_t	getFirstBracket( std::string &fileContent, size_t pos )
 
 size_t	getChunkEnd( std::string &fileContent, size_t pos )
 {
-	Bracket	open = { 0, 0 };
-	Bracket close = { 0, 0 };
+	int	open = 0;
+	int	close = 0;
 
 	pos = getFirstBracket( fileContent, pos);
 	if (fileContent.at(pos) == '}' || pos == std::string::npos)
 		throw BracketsError();
-	open.nb++;
+	open++;
 	pos++;
-	while (open.nb != close.nb)
+	while (open != close)
 	{
 		pos = getNextBracket( fileContent, pos );
 		if (pos == std::string::npos)
 			throw BracketsError();
 		if (fileContent.at(pos) == '}')
-			close.nb++;
+			close++;
 		else if (fileContent.at(pos) == '{')
-			open.nb++;
+			open++;
 		pos++;
 	}
 	if (pos == std::string::npos)

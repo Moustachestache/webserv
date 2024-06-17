@@ -6,10 +6,27 @@ Prog::Prog( bool &serverRunning ) : _serverRunning(serverRunning)
 
 }
 
+Prog::Prog( Prog &cpy ) : _serverRunning(cpy._serverRunning)
+{
+	_servers = cpy._servers;
+	fdSet = cpy.fdSet;
+}
+
 Prog::~Prog()
 {
 	for (std::vector< TcpServer * >::iterator it = _servers.begin(); it != _servers.end(); it++)
 		delete *it;
+}
+
+Prog	&Prog::operator=( Prog &cpy )
+{
+	if (&cpy != this)
+	{
+		_servers = cpy._servers;
+		fdSet = cpy.fdSet;
+		_serverRunning = cpy._serverRunning;
+	}
+	return (*this);
 }
 
 void	Prog::startAllServers( void )

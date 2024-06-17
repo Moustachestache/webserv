@@ -14,9 +14,16 @@ class   HttpError
 {
 
     public:
+
+        /*      CONSTRUCTOR/DESTRUCTOR      */
+
         HttpError();
         HttpError(HttpError &obj);
         ~HttpError();
+
+        /*      OPERATOR OVERLOADING        */
+
+        HttpError  &operator=( HttpError &cpy );
 
         //      getters and setters
         const errorinfo getInfo(int id);
