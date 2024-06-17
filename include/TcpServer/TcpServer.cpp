@@ -135,6 +135,11 @@ void	TcpServer::ServerListen()
 	_newSocket = 0;
 }
 
+int	TcpServer::getSocket( void )
+{
+	return (_socket.getSocket());
+}
+
 TcpServer::~TcpServer()
 {
 	addLog("Closing server: " + _serverName + " at " + _ipStr + " on port " + ft_itoa(_port));

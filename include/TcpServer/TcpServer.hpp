@@ -24,27 +24,35 @@ class TcpServer : public Server
 {
     public:
 
+        /*      CONSTRUCTOR/DESTRUCTOR      */
+
         //TcpServer();
         TcpServer( std::string &serverStr );
         TcpServer( TcpServer &val );
         ~TcpServer();
 
+        /*      OPERATOR OVERLOADING        */
+
         TcpServer   &operator=( TcpServer &cpy );
+
+        /*      PARSING     */
 
         void    checkValidRoute( HttpHeader &header, Route &route, std::string &res );
         void	ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res );
         bool    checkAllDefaultPages( std::vector< std::string > &pages, std::string &fullPath );
 
+        /*      SERVER LOGIC        */
+
         void	ServerListen();
-/* 		void	ServerAnswer(std::string incoming); */
         void    ServerAnswerGet( HttpHeader &header );
         void    ServerAnswerDelete( HttpHeader &header );
         void    ServerAnswerPost( HttpHeader &header );
         void    deleteFile( std::string &res );
         void	ServerAnswerError(int id);
         void    ServerAnswerLs(HttpHeader &header, std::string path);
-        int     getSocket( void ) { return _socket.getSocket(); }
+        int     getSocket( void );
 
+        /*      CGI     */
 
         std::string	    true_path(std::vector<Route> _routes, HttpHeader _header);
         bool            isCgi(std::vector<Route> route, HttpHeader &_header);

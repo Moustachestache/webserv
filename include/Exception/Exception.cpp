@@ -11,11 +11,6 @@ const char	*NoServerFound::what( void ) const throw()
 	return ("Error: no server found in config file.");
 }
 
-const char	*WrongWord::what( void ) const throw()
-{
-	return ("");
-}
-
 const char	*BracketsError::what( void ) const throw()
 {
 	return ("Error: unable to parse brackets in config file.");
