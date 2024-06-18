@@ -52,6 +52,8 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
+        if (i <= 0)
+            return ;
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
