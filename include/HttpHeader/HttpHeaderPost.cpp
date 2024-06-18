@@ -5,7 +5,7 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
     char    buffer[_bufferSize + 1];
     bzero(buffer, _bufferSize + 1);
 
-    size_t i = _bufferSize;
+    std::size_t i = _bufferSize;
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
@@ -20,7 +20,7 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     std::string     chunk;
     std::string     line;
 
-    size_t          i = bodyData.rfind(boundary + "--");
+    std::size_t          i = bodyData.rfind(boundary + "--");
     while (i != std::string::npos && _error == 0)
     {
         chunk = bodyData.substr(i, std::string::npos);
@@ -132,9 +132,9 @@ void    HttpHeader::processArg(std::string &buffer)
     _post[key] = value;
 }
 
-void    HttpHeader::appendCStr(char *src, std::string &dest, size_t j)
+void    HttpHeader::appendCStr(char *src, std::string &dest, std::size_t j)
 {
-    for (size_t i = 0; i < j; i++)
+    for (std::size_t i = 0; i < j; i++)
     {
         dest.push_back((char)src[i]);
         src[i] = 0;

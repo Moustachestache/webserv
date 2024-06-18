@@ -40,7 +40,7 @@ class HttpHeader {
     /** see HttpheaderPost.cpp **/
     /**/void    receiveBodyPost(std::string &body);
     /**/void    processBodyPost(std::string &body);
-    /**/void    appendCStr(char *src, std::string &dest, size_t i);
+    /**/void    appendCStr(char *src, std::string &dest, std::size_t i);
     /**/void    processFile(std::string &buffer);
     /**/void    processArg(std::string &buffer);
 
@@ -57,9 +57,9 @@ class HttpHeader {
 
         int             _socket;
         TcpServer&         _ptrServer;
-        static const size_t     _bufferSize;
-        size_t          _headerBytesReceived;
-        size_t          _bodyBytesReceived;
+        static const std::size_t     _bufferSize;
+        std::size_t          _headerBytesReceived;
+        std::size_t          _bodyBytesReceived;
         int             _error;
         std::string     _method;
         std::string     _ressource;

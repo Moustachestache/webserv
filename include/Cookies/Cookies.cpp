@@ -18,8 +18,6 @@ Session createNewSession(std::string username) {
     return session;
 }
 
-
-
 std::string getSessionData(const std::string& sessionId) {
 
     /*std::map<std::string, Session>::const_iterator jt;
@@ -53,12 +51,12 @@ std::string getSessionData(const std::string& sessionId) {
 
 std::string getCookieValue(const std::string& headers, const std::string& cookieName)
 {
-    size_t pos = headers.find("Cookie: ");
+    std::size_t pos = headers.find("Cookie: ");
     if (pos == std::string::npos) {
         return "";
     }
     pos += 8; // Length of "Cookie: "
-    size_t end = headers.find("\r\n", pos);
+    std::size_t end = headers.find("\r\n", pos);
     std::string cookies = headers.substr(pos, end - pos);
     
     pos = cookies.find(cookieName + "=");

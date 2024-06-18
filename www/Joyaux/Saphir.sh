@@ -25,7 +25,7 @@ cat <<EOF
 </head>
 <body>
     <h1>Hello, $COOKIE_NAME!</h1>
-    <form method="post" action="./rien.htm" enctype="multipart/form-data">
+    <form method="POST" action="./rien.htm" enctype="multipart/form-data">
         <label for="picklename">Enter your name:</label>
         <input type="text" id="picklename" name="picklename">
         <button action="send">Submit</button>

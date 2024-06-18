@@ -112,14 +112,18 @@ void	TcpServer::ServerAnswerError(int id)
 
 void	TcpServer::ServerListen()
 {
+	std::cout << "Opale0" << std::endl;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
+	std::cout << "Opale1" << std::endl;
 	if (_newSocket < 0)
 		throw NewSocketError();
-
+	std::cout << "Opale2" << std::endl;
 	HttpHeader		header(_newSocket, *this);
+	std::cout << "Opale3" << std::endl;
 	_cookieHeader = generateCookieHeader(header.getArgs()["Cookie"]);
 	header.getArgv().push_back(getSessionData(header.getArgs()["Cookie"]));
-
+	std::cout << "Jais:" << header.getMethod() << std::endl;
+	
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());
