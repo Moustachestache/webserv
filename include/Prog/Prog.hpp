@@ -9,14 +9,27 @@ class Prog
 {
 	public:
 
+		/*		CONSTRUCTORS/DESTRUCTOR		*/
+
 		Prog( bool &ServerRunning );
+		Prog( Prog &cpy );
 		~Prog();
+
+		/*		OPERATOR OVERLOADING		*/
+
+		Prog	&operator=( Prog &cpy );
+
+		/*		PARSING		*/
 
 		void	parseFile( char *filePath );
 
-		std::string	getServerStrDebug( void );
+		/*		SERVER ROUTINE		*/
 
 		void	startAllServers( void );
+
+		/*		DEBUG		*/
+
+		std::string	getServerStrDebug( void );
 
 	private:
 

@@ -19,8 +19,13 @@ struct fileInfo {
 
 class HttpHeader {
     public:
+
         HttpHeader( int socket, TcpServer &ptrServer );
+        HttpHeader( HttpHeader &cpy );
         ~HttpHeader();
+
+        HttpHeader  &operator=( HttpHeader &cpy );
+
         std::string &getMethod();
         std::string &getFile();
         int     &getError();
@@ -48,7 +53,7 @@ class HttpHeader {
 
     private:
 
-        std::string getUploadPath( std::vector< Route > &routes );
+        std::string getUploadPath( std::vector< Route * > &routes );
 
         int             _socket;
         TcpServer&         _ptrServer;

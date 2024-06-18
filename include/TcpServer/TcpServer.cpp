@@ -27,27 +27,32 @@ TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
 
 }
 
-/* void	TcpServer::ServerAnswer(std::string incoming)
+TcpServer	&TcpServer::operator=( TcpServer &cpy )
 {
-	unsigned long		sent;
-	std::string			output;
+	if (&cpy != this)
+	{
+		_socket = cpy._socket;
+		_newSocket = cpy._newSocket;
+		_address = cpy._address;
+		_addressLen = cpy._addressLen;
+		_httpError = cpy._httpError;
+		_ipStr = cpy._ipStr;
+		_ip = cpy._ip;
+		_contact = cpy._contact;
+		_port = cpy._port;
+		_serverName = cpy._serverName;
+		_root = cpy._root;
+		_maxHeaderSize = cpy._maxHeaderSize;
+		_requestSize = cpy._requestSize;
+		_route = cpy._route;
+		_errorLog = cpy._errorLog;
+	}
+	return (*this);
+}
 
-    //  build output answer
-	(void) incoming;
-    //  build header based on answer
-	HttpHeader			header(output);
-	output.insert(0, "\n\n");
-	output.insert(0, header.buildHeader());
-
-
-	sent = write(_newSocket, output.c_str(), output.size());
-	if (sent != output.size())
-		throw	AnswerFailure();
-} */
-
-void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &header, std::string &res )
+void	TcpServer::ifExistSend( Route *route, std::string &filename, HttpHeader &header, std::string &res )
 {
-	std::string	fullPath = BuildRelativePath(_root, route.getPath(), filename);
+	std::string	fullPath = BuildRelativePath(_root, route->getPath(), filename);
 	// add check of "../"
 	DIR					*openDir = opendir(fullPath.c_str());
 
@@ -63,23 +68,23 @@ void	TcpServer::ifExistSend( Route &route, std::string &filename, HttpHeader &he
 		closedir(openDir);
 }
 
-void	TcpServer::checkValidRoute( HttpHeader &header, Route &route, std::string &res ) // 
+void	TcpServer::checkValidRoute( HttpHeader &header, Route *route, std::string &res ) // 
 {
-	if (route.getRedirection().empty())
+	if (route->getRedirection().empty())
 	{
 		std::string filename = header.getFile();
 		
-		if (filename.find(route.getPath()) == std::string::npos)
+		if (filename.find(route->getPath()) == std::string::npos)
 			return ;
-		filename.erase(filename.find(route.getPath()), route.getPath().size() - 1);
+		filename.erase(filename.find(route->getPath()), route->getPath().size() - 1);
 		ifExistSend( route, filename, header, res );
 	}
 	else
 	{
 		std::string filename = header.getFile();
-		if (filename.find(route.getRedirection()) == std::string::npos)
+		if (filename.find(route->getRedirection()) == std::string::npos)
 			return ;
-		filename.erase(filename.find(route.getRedirection()), route.getRedirection().size() - 1);
+		filename.erase(filename.find(route->getRedirection()), route->getRedirection().size() - 1);
 		ifExistSend( route, filename, header, res );
 	}
 }
@@ -130,6 +135,11 @@ void	TcpServer::ServerListen()
 		ServerAnswerError(405); /*	Returns all allowed methods	*/
 	close(_newSocket);
 	_newSocket = 0;
+}
+
+int	TcpServer::getSocket( void )
+{
+	return (_socket.getSocket());
 }
 
 TcpServer::~TcpServer()

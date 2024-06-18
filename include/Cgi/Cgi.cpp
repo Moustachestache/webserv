@@ -5,24 +5,24 @@
 
 
 
-std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
+std::string TcpServer::cgiPath(std::vector<Route *> routes, HttpHeader _header)
 {
 	std::string file_verif;
-	for (std::vector<Route>::iterator it = routes.begin(); it != routes.end(); ++it)
+	for (std::vector<Route *>::iterator it = routes.begin(); it != routes.end(); ++it)
 	{
 		checkValidRoute(_header, *it, file_verif);
 		if (!file_verif.empty())
 		{
 			if (file_verif.at(file_verif.size() -1) != '/')
 			{
-				if (!(*it).getCgi().empty())
+				if (!(*it)->getCgi().empty())
 				{
-					for(std::size_t i = 0; i < (*it).getCgi().size(); i++ )
+					for(std::size_t i = 0; i < (*it)->getCgi().size(); i++ )
 					{
-						for (std::size_t j = 0; j < (*it).getCgi()[i].extention.size(); j++)
+						for (std::size_t j = 0; j < (*it)->getCgi()[i].extention.size(); j++)
 						{
-							if(file_verif.substr(file_verif.find_last_of(".")) == (*it).getCgi()[i].extention[j])
-								return (*it).getCgi()[i].path;
+							if(file_verif.substr(file_verif.find_last_of(".")) == (*it)->getCgi()[i].extention[j])
+								return (*it)->getCgi()[i].path;
 						}
 					}
 				}
@@ -33,10 +33,10 @@ std::string TcpServer::cgiPath(std::vector<Route> routes, HttpHeader _header)
 	return 0;
 } 
 
-std::string	TcpServer::true_path(std::vector<Route> _routes, HttpHeader _header)
+std::string	TcpServer::true_path(std::vector<Route*> _routes, HttpHeader _header)
 {
 	std::string file_verif;
-	for (std::vector<Route>::iterator it = _routes.begin(); it != _routes.end(); ++it)
+	for (std::vector<Route*>::iterator it = _routes.begin(); it != _routes.end(); ++it)
 	{
 		checkValidRoute(_header, *it, file_verif);
 		if(!file_verif.empty())
@@ -46,23 +46,23 @@ std::string	TcpServer::true_path(std::vector<Route> _routes, HttpHeader _header)
 }
 
 
-bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
+bool TcpServer::isCgi(std::vector<Route*> route, HttpHeader &_header)
 {
 	std::string file_verif;
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); ++it)
+	for (std::vector<Route*>::iterator it = route.begin(); it != route.end(); ++it)
 	{
 		checkValidRoute(_header, *it, file_verif);
 		if (!file_verif.empty())
 		{
 			if (file_verif.at(file_verif.size() -1) != '/')
 			{
-				if (!(*it).getCgi().empty())
+				if (!(*it)->getCgi().empty())
 				{
-					for(std::size_t i = 0; i < (*it).getCgi().size(); i++ )
+					for(std::size_t i = 0; i < (*it)->getCgi().size(); i++ )
 					{
-						for (std::size_t j = 0; j < (*it).getCgi()[i].extention.size(); j++)
+						for (std::size_t j = 0; j < (*it)->getCgi()[i].extention.size(); j++)
 						{
-							if(file_verif.find(".") != std::string::npos && file_verif.substr(file_verif.find_last_of(".")) == (*it).getCgi()[i].extention[j])
+							if(file_verif.find(".") != std::string::npos && file_verif.substr(file_verif.find_last_of(".")) == (*it)->getCgi()[i].extention[j])
 								return true;
 						}
 					}
@@ -79,7 +79,7 @@ bool TcpServer::isCgi(std::vector<Route> route, HttpHeader &_header)
 }
 
 
-void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<Route> routes)
+void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<Route*> routes)
 {
 	std::string answer;
 	std::string _path;

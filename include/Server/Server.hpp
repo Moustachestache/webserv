@@ -16,20 +16,23 @@ class	Server
 
 		Server( void );
 		Server( std::string &serverStr );
+		Server( Server &cpy );
 		~Server();
 
+		/*		OPERATOR OVERLOADING		*/
 
-		std::string	outputErrorPage(int id);
-
-		std::vector< Route >	&getRoute( void );
+		Server	&operator=( Server &cpy );
 
 		/*		DEBUG		*/
+
+		std::string	outputErrorPage(int id);
 		std::string	getVarStr( void );
 		void	processError( std::string &line );
 		
 		//	accessors
 		size_t		getMaxHeaderSize();
 		size_t		getMaxRequestSize();
+		std::vector< Route * >	&getRoute( void );
 	
 	protected:
 
@@ -42,8 +45,9 @@ class	Server
 		void	getAllErrors( std::string &serverStr, std::string name );
 		void	addError( std::string &errorStr );
 		void	assignError( std::istringstream &iss );
-
 		void	checkInfo( void );
+
+		/*		LOG		*/
 
 		void	addLog( std::string text );
 
@@ -56,8 +60,8 @@ class	Server
 		int						_port;
 		std::string				_serverName;
 		std::string				_root;
-		size_t					_maxHeaderSize; /*	Bytes	*/
-		size_t					_requestSize; /*	Bytes	*/
-		std::vector< Route >	_route;
+		size_t					_maxHeaderSize;	/*	Bytes	*/
+		size_t					_requestSize;	/*	Bytes	*/
+		std::vector< Route * >	_route;
 		std::string				_errorLog;
 };
