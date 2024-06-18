@@ -26,7 +26,7 @@ SRC =		source/main.cpp \
 			include/Route/Route.cpp \
 			include/Exception/Exception.cpp \
 			include/HttpError/HttpError.cpp \
-			include/Cookies/Cookies.cpp
+			include/Cookies/Cookies.cpp \
 			include/HttpHeader/HttpHeader.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
 			include/Cgi/Cgi.cpp 
