@@ -105,7 +105,7 @@ void    HttpHeader::processFile(std::string &buffer)
     buffer.erase(0, i);
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    if (uploadPath.empty())
+    if (uploadPath.empty() || fileName.empty())
     {
         _error = 500;
         return ;
