@@ -5,10 +5,12 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
     char    buffer[_bufferSize + 1];
     bzero(buffer, _bufferSize + 1);
 
-    std::size_t i = _bufferSize;
-    while (i == _bufferSize)
+    int i = _bufferSize;
+    while (i == static_cast< int >(_bufferSize))
     {
-        i = recv(_socket, buffer, _bufferSize, 0);
+        i = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
+        if (i <= 0)
+            return ;
         _bodyBytesReceived += i;
         appendCStr(buffer, bodyData, i);
     }
@@ -132,9 +134,9 @@ void    HttpHeader::processArg(std::string &buffer)
     _post[key] = value;
 }
 
-void    HttpHeader::appendCStr(char *src, std::string &dest, std::size_t j)
+void    HttpHeader::appendCStr(char *src, std::string &dest, int j)
 {
-    for (std::size_t i = 0; i < j; i++)
+    for (int i = 0; i < j; i++)
     {
         dest.push_back((char)src[i]);
         src[i] = 0;

@@ -53,6 +53,8 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
+        if (i <= 0)
+            return ;
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
@@ -83,6 +85,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         processBodyGet();
     if (!_method.compare("POST") && _error == 0)
     {
+		
         _bodyBytesReceived = bodyData.size();
         receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)

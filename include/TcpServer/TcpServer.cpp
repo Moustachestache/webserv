@@ -118,12 +118,29 @@ void	TcpServer::ServerListen()
 	if (_newSocket < 0)
 		throw NewSocketError();
 	std::cout << "Opale2" << std::endl;
+	
 	HttpHeader		header(_newSocket, *this);
+	
 	std::cout << "Opale3" << std::endl;
+	
 	_cookieHeader = generateCookieHeader(header.getArgs()["Cookie"]);
 	header.getArgv().push_back(getSessionData(header.getArgs()["Cookie"]));
+
 	std::cout << "Jais:" << header.getMethod() << std::endl;
-	
+
+
+	std::cout << "post :" << std::endl;
+	for (std::map<std::string, std::string>::iterator it = header.getPost().begin(); it != header.getPost().end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+	std::cout << "Args : " << std::endl;
+	for (std::map<std::string, std::string>::iterator it = header.getArgs().begin(); it != header.getArgs().end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+	std::cout << "Fin Jais" << std::endl;
+
+	setSessionData(header.getArgs()["Cookie"], header.getPost()["picklename"]);
+	//cgi args picklename
 	addLog( "New incoming connection on server " + _serverName + ": " + header.getMethod() + " " + header.getFile() );
 	if (header.getError() > 0)
 		ServerAnswerError(header.getError());

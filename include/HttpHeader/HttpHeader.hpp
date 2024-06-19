@@ -40,7 +40,7 @@ class HttpHeader {
     /** see HttpheaderPost.cpp **/
     /**/void    receiveBodyPost(std::string &body);
     /**/void    processBodyPost(std::string &body);
-    /**/void    appendCStr(char *src, std::string &dest, std::size_t i);
+    /**/void    appendCStr(char *src, std::string &dest, int i);
     /**/void    processFile(std::string &buffer);
     /**/void    processArg(std::string &buffer);
 
