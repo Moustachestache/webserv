@@ -147,7 +147,7 @@ std::string TcpServer::execCgiGet(HttpHeader _header, std::string true_path, std
 		std::swap(argv[1], argv[argv.size()-2]);
 
 	    std::vector<char*> args;
-        for (size_t i = 0; i < argv.size(); i++)
+        for (std::size_t i = 0; i < argv.size(); i++)
         {
             args.push_back(const_cast<char*>(argv[i].c_str()));
         }

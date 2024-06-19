@@ -112,32 +112,15 @@ void	TcpServer::ServerAnswerError(int id)
 
 void	TcpServer::ServerListen()
 {
-	std::cout << "Opale0" << std::endl;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
-	std::cout << "Opale1" << std::endl;
 	if (_newSocket < 0)
 		throw NewSocketError();
-	std::cout << "Opale2" << std::endl;
 	
 	HttpHeader		header(_newSocket, *this);
 	
-	std::cout << "Opale3" << std::endl;
 	
 	_cookieHeader = generateCookieHeader(header.getArgs()["Cookie"]);
 	header.getArgv().push_back(getSessionData(header.getArgs()["Cookie"]));
-
-	std::cout << "Jais:" << header.getMethod() << std::endl;
-
-
-	std::cout << "post :" << std::endl;
-	for (std::map<std::string, std::string>::iterator it = header.getPost().begin(); it != header.getPost().end(); ++it) {
-        std::cout << it->first << ": " << it->second << std::endl;
-    }
-	std::cout << "Args : " << std::endl;
-	for (std::map<std::string, std::string>::iterator it = header.getArgs().begin(); it != header.getArgs().end(); ++it) {
-        std::cout << it->first << ": " << it->second << std::endl;
-    }
-	std::cout << "Fin Jais" << std::endl;
 
 	setSessionData(header.getArgs()["Cookie"], header.getPost()["picklename"]);
 	//cgi args picklename
