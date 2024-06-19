@@ -112,7 +112,6 @@ void	TcpServer::ServerAnswerError(int id)
 
 void	TcpServer::ServerListen()
 {
-	std::cout << "Opale0" << std::endl;
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	std::cout << "Opale1" << std::endl;
 	if (_newSocket < 0)
