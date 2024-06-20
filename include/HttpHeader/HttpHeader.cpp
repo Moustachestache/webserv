@@ -1,7 +1,7 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-const size_t HttpHeader::_bufferSize = 65536;
+const size_t HttpHeader::_bufferSize = 256;
 
 HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ): 
         _socket(socket), 

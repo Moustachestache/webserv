@@ -17,13 +17,11 @@ if __name__ == "__main__":
                 buffer = line[pos + 1:]
                 break
 
-
     if buffer == "":
         print("incorrect execution. Use form.<br/>")
         sys.exit()
 
-
-    answer = "<meta http-equiv=\"refresh\" content=\"4; URL=./index.html?upload=success\"\">"
+    answer = "<meta http-equiv=\"refresh\" content=\"10s; URL=./index.html?upload=success\"\">"
 
     if os.path.exists(buffer) == False:
         answer += "cant find file<br/>"
@@ -32,7 +30,7 @@ if __name__ == "__main__":
 
     if shutil.copyfile(buffer, "www/42perpignan.free.fr/profile.gif"):
         os.remove(buffer)
-        answer += "profile picture changed<br /><h1>redirecting ...</h1>"
+        answer += "profile picture changed<br /><h1>redirecting ... in 10s</h1>"
     else:
         answer += "error changing profile pic<br />"
 
