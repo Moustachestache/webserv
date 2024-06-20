@@ -1,7 +1,7 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-const size_t HttpHeader::_bufferSize = 256;
+const size_t HttpHeader::_bufferSize = 65536;
 
 HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ): 
         _socket(socket), 
@@ -79,7 +79,7 @@ void    HttpHeader::processHeader(std::istringstream &iss)
     }
 
     //  if body size too big output error 413
-    if ((size_t)std::atol(_args["Content-Size"].c_str()) > _ptrServer.getMaxRequestSize())
+    if (_args["Content-Size"].size() && (size_t)std::atol(_args["Content-Size"].c_str()) > _ptrServer.getMaxRequestSize())
         _error = 413;
 
     //  Process POST header info
@@ -194,14 +194,14 @@ void    HttpHeader::buildEnvVector( void )
         line = "FILE_" + it->first + "=" + it->second.mimeType + ";" + it->second.fileName + ";" + it->second.filePath;
         _argv.push_back(line);
 	}
-//  debugance
-/*      std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
+/* //  debugance
+    std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
     for (size_t i = 0; i < _argv.size(); i++)
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
-    std::cout << _ressource << std::endl;  */
-//  hehe
+    std::cout << _ressource << std::endl;
+//  hehe */
 }
 
 HttpHeader::~HttpHeader()

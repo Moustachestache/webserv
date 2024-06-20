@@ -19,8 +19,8 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     std::string     boundary("--" + _boundary);
     std::string     chunk;
     std::string     line;
-
     size_t          i = bodyData.rfind(boundary + "--");
+
     while (i != std::string::npos && _error == 0)
     {
         chunk = bodyData.substr(i, std::string::npos);
@@ -31,9 +31,13 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
         if (i != std::string::npos)
         {
             chunk.erase(0, i);
-            line = chunk.substr(0, chunk.find("\r\n"));
+            line = chunk.substr(0, chunk.find("\r\n\r\n"));
+            std::cout << "processing bodypost!" << std::endl;
             if (line.find("filename") != std::string::npos)
+            {
+                std::cout << "found file!!!" << std::endl;
                 processFile(chunk);
+            }
             else
                 processArg(chunk);
         }
@@ -112,10 +116,11 @@ void    HttpHeader::processFile(std::string &buffer)
         return ;
     }
     uploadPath.append(fileName);
-    fileStream.open(uploadPath.c_str(), std::ofstream::binary);
+    fileStream.open(uploadPath.c_str(), std::ofstream::binary | std::ofstream::trunc);
     if (fileStream.is_open() == false)
         _error = 510;
-    fileStream << buffer;
+    fileStream.write(buffer.c_str(), buffer.size());
+std::cout << "debug::processfile\nkey: " << key << "\nfilename: " << fileName << "\nmimetype: " << mimeType << "\npath: " << uploadPath << std::endl;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
 }

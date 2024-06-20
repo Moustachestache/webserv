@@ -9,8 +9,10 @@ answer = ""
 if __name__ == "__main__":
     
     for line in sys.argv:
+        print("DEBUG" + line + "<br />")
         if line.find("FILE_file") > -1:
             pos = line.rfind(";")
+            print("     EUREKA!     >>>>>     " + line + "<br />")
             if pos > 0:
                 buffer = line[pos + 1:]
                 break
@@ -29,6 +31,7 @@ if __name__ == "__main__":
         answer += "found file: " + buffer + "<br />"
 
     if shutil.copyfile(buffer, "www/42perpignan.free.fr/profile.gif"):
+        os.remove(buffer)
         answer += "profile picture changed<br /><h1>redirecting ...</h1>"
     else:
         answer += "error changing profile pic<br />"
