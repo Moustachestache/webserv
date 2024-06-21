@@ -27,7 +27,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)
     {
-        bodyData = headerData.substr(headerData.find("\r\n\r\n"), std::string::npos);
+        bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
         headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
     }
 
@@ -50,7 +50,10 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     if (!_method.compare("POST") && _error == 0)
     {
         _bodyBytesReceived = bodyData.size();
-        receiveBodyPost(bodyData);
+        std::cout << headerData << std::endl;
+        std::cout << "body data: " << bodyData.size() << std::endl << bodyData << std::endl;
+        if (_bodyBytesReceived < ft_atoi(_args["Content-Length"]))
+            receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
             processBodyPost(bodyData);
     }

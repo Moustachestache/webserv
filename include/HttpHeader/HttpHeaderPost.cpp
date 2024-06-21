@@ -119,8 +119,8 @@ void    HttpHeader::processFile(std::string &buffer)
     fileStream.open(uploadPath.c_str(), std:: ofstream::binary | std::ofstream::trunc);
     if (fileStream.is_open() == false)
         _error = 510;
-    //fileStream.write(buffer.c_str(), buffer.length());
-    fileStream << buffer;
+    fileStream.write(buffer.c_str(), buffer.length());
+    //fileStream << buffer;
 std::cout << "debug::processfile\nkey: " << key << "\nfilename: " << fileName << "\nmimetype: " << mimeType << "\npath: " << uploadPath << std::endl;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
