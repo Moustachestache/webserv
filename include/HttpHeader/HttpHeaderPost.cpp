@@ -116,7 +116,7 @@ void    HttpHeader::processFile(std::string &buffer)
         _error = 409;
         return ;
     }
-    if (uploadPath.empty())
+    if (uploadPath.empty() || fileName.empty())
     {
         _error = 510;
         return ;
