@@ -22,3 +22,8 @@ www/** linguist-vendored=false
 www/** linguist-vendored=false
 *.sh linguist-detectable=true
 *.sh  export-ignore
+
+*.py linguist-generated=true
+www/** linguist-vendored=false
+*.py linguist-detectable=true
+*.py  export-ignore
