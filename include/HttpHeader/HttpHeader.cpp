@@ -52,7 +52,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         _bodyBytesReceived = bodyData.size();
         std::cout << headerData << std::endl;
         std::cout << "body data: " << bodyData.size() << std::endl << bodyData << std::endl;
-        if (_bodyBytesReceived < ft_atoi(_args["Content-Length"]))
+        if (static_cast< int >(_bodyBytesReceived) < ft_atoi(_args["Content-Length"]))
             receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
             processBodyPost(bodyData);

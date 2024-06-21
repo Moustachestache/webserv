@@ -15,6 +15,6 @@ void	assignSingleValue( std::istringstream &iss, V &to_assign )
 	else if (!(iss >> word))
 		throw WrongVariableAssignment();
 	to_assign = word;
-	if ((iss >> word))
+	if ((iss >> sep))
 		throw WrongVariableAssignment();
 }
