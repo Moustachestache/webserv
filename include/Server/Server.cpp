@@ -43,7 +43,7 @@ void	Server::checkInfo( void )
 	if (_requestSize > 2048) /*	2048 MB = 2 GO, so the max autorized	*/
 		_requestSize = 2147483648; /*	This value is 2 GO in Bytes	*/
 	else
-		_requestSize = _requestSize * 2048; /*	Convert the value from MB to Bytes	*/
+		_requestSize = _requestSize * (1024 * 1024); /*	Convert the value from MB to Bytes	*/
 	//IP 
 	//Port //done in the checkHeaderServer()
 }

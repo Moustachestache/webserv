@@ -47,11 +47,12 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     processHeader(iss);
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-    if (!_method.compare("POST") && _error == 0)
+    std::cout << ptrServer.getMaxRequestSize() << "::" << ft_atoi(_args["Content-Length"]) << std::endl;
+    if (ft_atoi(_args["Content-Length"]) > static_cast< int >(ptrServer.getMaxRequestSize()))
+        _error = 413;
+    else if (!_method.compare("POST") && _error == 0)
     {
         _bodyBytesReceived = bodyData.size();
-        std::cout << headerData << std::endl;
-        std::cout << "body data: " << bodyData.size() << std::endl << bodyData << std::endl;
         if (static_cast< int >(_bodyBytesReceived) < ft_atoi(_args["Content-Length"]))
             receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
