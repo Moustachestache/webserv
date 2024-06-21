@@ -20,6 +20,8 @@
 - [ ] Pickleemporium POST (televersement) infinite loading if no file is set
 - [ ] What do we do with symbolic links ? + fix Ls index, if types are not file of folder
 
+[Last fix]
+- [ ] If the uploaded file if greater than REQUEST_SIZE, if will create a file with a smaller size. And no error page
 
 [MAX]
 - [x] how to get a good, clean, scalable buffer for request reception?
