@@ -53,8 +53,6 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
-        if (i <= 0)
-            return ;
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
@@ -63,7 +61,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)
     {
-        bodyData = headerData.substr(headerData.find("\r\n\r\n"), std::string::npos);
+        bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
         headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
     }
         std::cout << "OBscidienne2" << std::endl;
@@ -83,11 +81,14 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     processHeader(iss);
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-    if (!_method.compare("POST") && _error == 0)
+    if (static_cast< unsigned long int >(ft_atoi(_args["Content-Length"])) > (ptrServer.getMaxRequestSize()))
+        _error = 413;
+    else if (!_method.compare("POST") && _error == 0)
     {
 		
         _bodyBytesReceived = bodyData.size();
-        receiveBodyPost(bodyData);
+        if (static_cast< int >(_bodyBytesReceived) < ft_atoi(_args["Content-Length"]))
+            receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
             processBodyPost(bodyData);
     }
@@ -115,12 +116,8 @@ void    HttpHeader::processHeader(std::istringstream &iss)
         }
         std::getline(iss, line);
     }
-
-    //  if body size too big output error 413
-    if ((std::size_t)std::atol(_args["Content-Size"].c_str()) > _ptrServer.getMaxRequestSize())
-        _error = 413;
-
     //  Process POST header info
+    //  checking for input error from client
     if (!_method.compare("POST") && _error == 0)
     {
         //  if "content-length" undefined or empty as a field (0 and above accepted)
@@ -238,8 +235,8 @@ void    HttpHeader::buildEnvVector( void )
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
-    std::cout << _ressource << std::endl;  */
-//  hehe
+    std::cout << _ressource << std::endl;
+//  hehe */
 }
 
 HttpHeader::~HttpHeader()

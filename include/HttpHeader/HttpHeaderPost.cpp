@@ -21,21 +21,25 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     std::string     boundary("--" + _boundary);
     std::string     chunk;
     std::string     line;
+    size_t          i = bodyData.rfind(boundary + "--");
 
-    std::size_t          i = bodyData.rfind(boundary + "--");
+    if (i == std::string::npos)
+        i = bodyData.rfind(boundary);
     while (i != std::string::npos && _error == 0)
     {
-        chunk = bodyData.substr(i, std::string::npos);
-        bodyData.erase(i, std::string::npos);
+        chunk = bodyData.substr(i, bodyData.size() - i);
+        bodyData.erase(i, bodyData.size() - i);
 
         //  retrieve line
         i = chunk.find("Content-Disposition");
         if (i != std::string::npos)
         {
             chunk.erase(0, i);
-            line = chunk.substr(0, chunk.find("\r\n"));
+            line = chunk.substr(0, chunk.find("\r\n\r\n"));
             if (line.find("filename") != std::string::npos)
+            {
                 processFile(chunk);
+            }
             else
                 processArg(chunk);
         }
@@ -105,16 +109,22 @@ void    HttpHeader::processFile(std::string &buffer)
     buffer.erase(0, i);
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    if (uploadPath.empty())
+    if (buffer.size() <= 2)
+    {
+        _error = 409;
+        return ;
+    }
+    if (uploadPath.empty() || fileName.empty())
     {
         _error = 510;
         return ;
     }
     uploadPath.append(fileName);
-    fileStream.open(uploadPath.c_str(), std::ofstream::binary);
+    fileStream.open(uploadPath.c_str(), std:: ofstream::binary | std::ofstream::trunc);
     if (fileStream.is_open() == false)
         _error = 510;
-    fileStream << buffer;
+    fileStream.write(buffer.c_str(), buffer.length());
+    //fileStream << buffer;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
 }
