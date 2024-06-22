@@ -47,7 +47,6 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     processHeader(iss);
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-    std::cout << ptrServer.getMaxRequestSize() << "::" << ft_atoi(_args["Content-Length"]) << std::endl;
     if (ft_atoi(_args["Content-Length"]) > static_cast< int >(ptrServer.getMaxRequestSize()))
         _error = 413;
     else if (!_method.compare("POST") && _error == 0)

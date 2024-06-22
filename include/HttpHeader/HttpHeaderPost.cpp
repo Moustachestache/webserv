@@ -110,7 +110,6 @@ void    HttpHeader::processFile(std::string &buffer)
 //  change to dynamic,. gregou stp
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
-    std::cout << "buffer value::" << buffer << "::endvalue\nsize::" << buffer.size() << "::endsize" << std::endl;
     if (buffer.size() <= 2)
     {
         _error = 409;
@@ -127,7 +126,6 @@ void    HttpHeader::processFile(std::string &buffer)
         _error = 510;
     fileStream.write(buffer.c_str(), buffer.length());
     //fileStream << buffer;
-std::cout << "debug::processfile\nkey: " << key << "\nfilename: " << fileName << "\nmimetype: " << mimeType << "\npath: " << uploadPath << std::endl;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
     fileStream.close();
 }
