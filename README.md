@@ -10,18 +10,18 @@
 - [x] Implement CGI arguments as env in the execve. >> done as ARGV
 - [x] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
 - [x] retrieve correct upload path for post files
-- [ ] (see above) create folders when checking upload paths.
-- [ ] add upload size verification
+- [x] (see above) create folders when checking upload paths.
+- [x] add upload size verification
 - [x] Implement a check for allow listing, when accessing route.
 - [x] Cgi.cpp line 92 and 98. Some log lines printed on a regular GET, without Cgi call. Do we remove them ?
 - [x] In execCgiGet() if pipe, fork fail or any other error -> ServerAnswer(500) (Internal server error) and a log with the error. no std::cerr or exit() :  )
 - [x] Check each parsed variable (server, route or struct cgi), make sure we are using them. If not implement a logic with them or remove them (in the parsing too)
 - [x] What if cgi is infinite loop script ? How do we quit ? do we set a timer ? or just get good user ? GET GOOD
-- [ ] Pickleemporium POST (televersement) infinite loading if no file is set
-- [ ] What do we do with symbolic links ? + fix Ls index, if types are not file of folder
+- [x] Pickleemporium POST (televersement) infinite loading if no file is set
+- [x] What do we do with symbolic links ? + fix Ls index, if types are not file of folder
 
 [Last fix]
-- [ ] If the uploaded file if greater than REQUEST_SIZE, if will create a file with a smaller size. And no error page
+- [x] If the uploaded file if greater than REQUEST_SIZE, if will create a file with a smaller size. And no error page
 
 [MAX]
 - [x] how to get a good, clean, scalable buffer for request reception?
