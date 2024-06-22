@@ -29,7 +29,6 @@ std::string TcpServer::cgiPath(std::vector<Route *> routes, HttpHeader _header)
 			}
 		}
 	}
-	addLog("Not Path implemented for this extension");
 	return 0;
 } 
 
