@@ -49,14 +49,12 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
 
     std::string headerData;
     std::size_t i = _bufferSize;
-    std::cout << "OBscidienne" << std::endl;
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
-        std::cout << "OBscidienne1" << std::endl;
     //  stash leftover body info
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)
@@ -64,7 +62,6 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
         headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
     }
-        std::cout << "OBscidienne2" << std::endl;
     //  process header Request-Line
     std::istringstream      iss;
     iss.str(headerData);
@@ -93,7 +90,6 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
             processBodyPost(bodyData);
     }
     buildEnvVector();
-    std::cout << "OBscidienne3" << std::endl;
  }
 
 void    HttpHeader::processHeader(std::istringstream &iss)
