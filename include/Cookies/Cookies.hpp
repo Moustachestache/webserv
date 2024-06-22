@@ -15,7 +15,9 @@ struct Session {
 
 std::string     generateSessionId();
 Session         createNewSession(std::string username="");
-std::string     getCookieValue(const std::string& headers, const std::string& cookieName);
-std::string getSessionData(const std::string& sessionId) ;
+bool     getCookieValue(const std::string& headers, const std::string& cookieName);
+std::string     getSessionData(const std::string& sessionId) ;
 std::string     generateCookieHeader(const std::string& requestHeaders);
+void            setSessionData(const std::string sessionId, const std::string userName);
+
 //std::string     generateCookieHeader(const int socket);

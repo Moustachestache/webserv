@@ -57,9 +57,9 @@ class HttpHeader {
 
         int             _socket;
         TcpServer&         _ptrServer;
-        static const size_t     _bufferSize;
-        size_t          _headerBytesReceived;
-        size_t          _bodyBytesReceived;
+        static const std::size_t     _bufferSize;
+        std::size_t          _headerBytesReceived;
+        std::size_t          _bodyBytesReceived;
         int             _error;
         std::string     _method;
         std::string     _ressource;

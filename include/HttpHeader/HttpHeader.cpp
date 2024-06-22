@@ -1,7 +1,7 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-const size_t HttpHeader::_bufferSize = 256;
+const std::size_t HttpHeader::_bufferSize = 256;
 
 HttpHeader::HttpHeader( HttpHeader &cpy ) : _socket(cpy._socket), _ptrServer(cpy._ptrServer),\
                                             _headerBytesReceived(cpy._headerBytesReceived),\
@@ -48,14 +48,15 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     bzero(buffer, _bufferSize + 1);
 
     std::string headerData;
-    size_t i = _bufferSize;
+    std::size_t i = _bufferSize;
+    std::cout << "OBscidienne" << std::endl;
     while (i == _bufferSize)
     {
         i = recv(_socket, buffer, _bufferSize, 0);
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
-    
+        std::cout << "OBscidienne1" << std::endl;
     //  stash leftover body info
     std::string bodyData;
     if (headerData.find("\r\n\r\n") != std::string::npos)
@@ -63,7 +64,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
         headerData.erase(headerData.find("\r\n\r\n"), std::string::npos);
     }
-
+        std::cout << "OBscidienne2" << std::endl;
     //  process header Request-Line
     std::istringstream      iss;
     iss.str(headerData);
@@ -84,6 +85,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         _error = 413;
     else if (!_method.compare("POST") && _error == 0)
     {
+		
         _bodyBytesReceived = bodyData.size();
         if (static_cast< int >(_bodyBytesReceived) < ft_atoi(_args["Content-Length"]))
             receiveBodyPost(bodyData);
@@ -91,11 +93,12 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
             processBodyPost(bodyData);
     }
     buildEnvVector();
+    std::cout << "OBscidienne3" << std::endl;
  }
 
 void    HttpHeader::processHeader(std::istringstream &iss)
 {
-    size_t i;
+    std::size_t i;
     std::string line;
     std::string index;
     std::string strBuffer;
@@ -139,8 +142,8 @@ void    HttpHeader::processHeader(std::istringstream &iss)
 
 void     HttpHeader::processBodyGet( void )
 {
-    size_t i = _ressource.find("?");
-    size_t j;
+    std::size_t i = _ressource.find("?");
+    std::size_t j;
     std::string key;
     std::string data;
     std::string buffer(_ressource.substr(i, _ressource.size() - i));
@@ -226,9 +229,9 @@ void    HttpHeader::buildEnvVector( void )
         line = "FILE_" + it->first + "=" + it->second.mimeType + ";" + it->second.fileName + ";" + it->second.filePath;
         _argv.push_back(line);
 	}
-/* //  debugance
-    std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
-    for (size_t i = 0; i < _argv.size(); i++)
+//  debugance
+/*      std::cout << "debug::HttpHeader::buildEnvVector( void ):" << std::endl;
+    for (std::size_t i = 0; i < _argv.size(); i++)
 	{
         std::cout << "      " << _argv[i] << std::endl;
 	}
