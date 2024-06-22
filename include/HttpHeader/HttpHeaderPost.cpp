@@ -5,10 +5,12 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
     char    buffer[_bufferSize + 1];
     bzero(buffer, _bufferSize + 1);
 
-    size_t i = _bufferSize;
-    while (i == _bufferSize)
+    int i = _bufferSize;
+    while (i == static_cast< int >(_bufferSize))
     {
-        i = recv(_socket, buffer, _bufferSize, 0);
+        i = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
+        if (i <= 0)
+            return ;
         _bodyBytesReceived += i;
         appendCStr(buffer, bodyData, i);
     }
@@ -45,14 +47,14 @@ void     HttpHeader::processBodyPost(std::string &bodyData)
     }
 }
 
-std::string HttpHeader::getUploadPath( std::vector< Route > &routes )
+std::string HttpHeader::getUploadPath( std::vector< Route * > &routes )
 {
     std::string res;
-    for ( std::vector< Route >::iterator it = routes.begin(); \
+    for ( std::vector< Route * >::iterator it = routes.begin(); \
         it != routes.end(); it++)
     {
-        if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), "POST")\
-			!= (*it).getMethods().end())
+        if (std::find((*it)->getMethods().begin(), (*it)->getMethods().end(), "POST")\
+			!= (*it)->getMethods().end())
         {
             _ptrServer.checkValidRoute((*this), *it, res);
             if (!res.empty())
@@ -60,21 +62,21 @@ std::string HttpHeader::getUploadPath( std::vector< Route > &routes )
                 if (res.at(res.size() - 1) == '/') /*	path is directory	*/
                 {
                     std::string temp = res;
-                    for (std::vector< std::string >::iterator itPages = (*it).getDefaultPages().begin(); \
-                        itPages != (*it).getDefaultPages().end(); itPages++)
+                    for (std::vector< std::string >::iterator itPages = (*it)->getDefaultPages().begin(); \
+                        itPages != (*it)->getDefaultPages().end(); itPages++)
                     {
                         temp.append(*itPages);
                         if (!access( temp.c_str() , R_OK))
                         {
-                            if ((*it).getAllowUpload())
-                                return ((*it).getUploadPath());
+                            if ((*it)->getAllowUpload())
+                                return ((*it)->getUploadPath());
                         }
                     }
                 }
                 else /*	path is file	*/
                 {
-                    if ((*it).getAllowUpload())
-                        return ((*it).getUploadPath());
+                    if ((*it)->getAllowUpload())
+                        return ((*it)->getUploadPath());
                 }
             }
         }
@@ -105,9 +107,6 @@ void    HttpHeader::processFile(std::string &buffer)
     std::string     mimeType = buffer.substr(0, i);
     i = buffer.find("\r\n\r\n") + 4;
     buffer.erase(0, i);
-//  hardcoded path
-//  if we push and we can read this we fucked up!
-//  change to dynamic,. gregou stp
     std::string     uploadPath = getUploadPath(_ptrServer.getRoute());
     std::ofstream    fileStream;
     if (buffer.size() <= 2)
@@ -144,9 +143,9 @@ void    HttpHeader::processArg(std::string &buffer)
     _post[key] = value;
 }
 
-void    HttpHeader::appendCStr(char *src, std::string &dest, size_t j)
+void    HttpHeader::appendCStr(char *src, std::string &dest, int j)
 {
-    for (size_t i = 0; i < j; i++)
+    for (int i = 0; i < j; i++)
     {
         dest.push_back((char)src[i]);
         src[i] = 0;

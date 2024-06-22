@@ -5,18 +5,19 @@
 
 [les nous du futur]
 - [x] Server &ptrServer into _ptrServer; (seen, and ignored -max)
-- [ ] formes canonique svp quelquun
+- [x] formes canonique svp quelquun
 - [x] Check memory errors (Conditional jumps) in HttpHeader.
 - [x] Implement CGI arguments as env in the execve. >> done as ARGV
 - [x] Socket.cpp line 15: recode the inet_addr(), unavalible in the subject.
-- [ ] retrieve correct upload path for post files
+- [x] retrieve correct upload path for post files
 - [ ] (see above) create folders when checking upload paths.
 - [ ] add upload size verification
 - [x] Implement a check for allow listing, when accessing route.
-- [ ] Cgi.cpp line 92 and 98. Some log lines printed on a regular GET, without Cgi call. Do we remove them ?
-- [ ] In execCgiGet() if pipe, fork fail or any other error -> ServerAnswer(500) (Internal server error) and a log with the error. no std::cerr or exit() :  )
-- [ ] Check each parsed variable (server, route or struct cgi), make sure we are using them. If not implement a logic with them or remove them (in the parsing too)
+- [x] Cgi.cpp line 92 and 98. Some log lines printed on a regular GET, without Cgi call. Do we remove them ?
+- [x] In execCgiGet() if pipe, fork fail or any other error -> ServerAnswer(500) (Internal server error) and a log with the error. no std::cerr or exit() :  )
+- [x] Check each parsed variable (server, route or struct cgi), make sure we are using them. If not implement a logic with them or remove them (in the parsing too)
 - [x] What if cgi is infinite loop script ? How do we quit ? do we set a timer ? or just get good user ? GET GOOD
+- [ ] Pickleemporium POST (televersement) infinite loading if no file is set
 
 
 [MAX]

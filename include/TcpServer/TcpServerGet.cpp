@@ -11,7 +11,7 @@ bool	TcpServer::checkAllDefaultPages( std::vector< std::string > &pages, std::st
 			addLog( "Server answer: 200" );
 			std::string	awnser = returnFileStr(fullPath);
 			awnser.insert(0,  buildHeader((*it).substr((*it).find_last_of("."), std::string::npos),\
-				200, awnser.size(), getRoute()));
+				200, awnser.size(), getRoute(), _cookieHeader));
 			send(_newSocket, awnser.c_str(), awnser.size(), 0);
 			return (true);
 		}
@@ -38,7 +38,7 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	for (dirent	*folderScan = readdir(openDir); openDir != NULL && folderScan != NULL; folderScan = readdir(openDir))
 	{
 		output.append("<tr class=\"pico-background-grey-850\">");
-		if (folderScan->d_type == DT_DIR)
+		if (folderScan->d_type == DT_DIR || folderScan->d_type == DT_LNK)
 			output.append("<td><i class=\"bx bx-folder\"></i></td><td>folder</td>");
 		else if (folderScan->d_type == DT_REG)
 			output.append("<td><i class=\"bx bxs-file\"></i></td><td>file</td>");
@@ -46,12 +46,12 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 			output.append("<td><i class=\"bx bx-meh-blank\"></i></td><td>thing</td>");
 		output.append("<td><a href=\"./");
 		output.append(folderScan->d_name);
-		if (folderScan->d_type == DT_DIR)
+		if (folderScan->d_type == DT_DIR || folderScan->d_type == DT_LNK)
 			output.append("/");
 		output.append("\">");
 		output.append(folderScan->d_name);
 		output.append("</a></td><td>");
-		if (folderScan->d_type == DT_DIR)
+		if (folderScan->d_type == DT_DIR || folderScan->d_type == DT_LNK)
 			output.append("folder");
 		else
 			output.append(getMimeType(folderScan->d_name));
@@ -61,28 +61,28 @@ void	TcpServer::ServerAnswerLs(HttpHeader &header, std::string path)
 	output.append("</table></div></body>");
 	closedir(openDir);
 	addLog( "Server answer: 200" );
-	output.insert(0, buildHeader(".html", 200, output.size(), getRoute()));
+	output.insert(0, buildHeader(".html", 200, output.size(), getRoute(), _cookieHeader));
 	send(_newSocket, output.c_str(), output.size(), 0);
 }
 
 void	TcpServer::ServerAnswerGet( HttpHeader &header )
 {
-	std::vector< Route >	route = getRoute();
+	std::vector< Route * >	route = getRoute();
 	std::string	res;
 
-	for (std::vector<Route>::iterator it = route.begin(); it != route.end(); it++)
+	for (std::vector<Route *>::iterator it = route.begin(); it != route.end(); it++)
 	{
-		if (std::find((*it).getMethods().begin(), (*it).getMethods().end(), header.getMethod())\
-			!= (*it).getMethods().end())
+		if (std::find((*it)->getMethods().begin(), (*it)->getMethods().end(), header.getMethod())\
+			!= (*it)->getMethods().end())
 		{
 			checkValidRoute(header, *it, res);
 			if (!res.empty())
 			{
 				if (res.at(res.size() - 1) == '/') /*	path is directory	*/
 				{
-					if (!checkAllDefaultPages( (*it).getDefaultPages(), res))
+					if (!checkAllDefaultPages( (*it)->getDefaultPages(), res))
 					{
-						if ((*it).getAllowListing())
+						if ((*it)->getAllowListing())
 							ServerAnswerLs( header, res );
 						else
 							ServerAnswerError(404); /*	Unauthorized listing	*/ 
@@ -96,7 +96,7 @@ void	TcpServer::ServerAnswerGet( HttpHeader &header )
 					if (res.find_last_of(".") != std::string::npos)
 						extension = res.substr(res.find_last_of("."));
 					awnser.insert(0,  buildHeader(extension, 200,\
-						awnser.size(), getRoute()));
+						awnser.size(), getRoute(), _cookieHeader));
 					send(_newSocket, awnser.c_str(), awnser.size(), 0);
 				}
 				return ;

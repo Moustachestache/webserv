@@ -11,17 +11,23 @@
 // Create and bind a socket
 class Socket
 {
-	protected:
+	private:
 
 		int	_socket;
 
 	public:
 
+		/*		CONSTRUCTORS/DESTRUCTOR		*/
+
 		Socket( unsigned int ip, int port );
 		Socket( Socket &val );
 		~Socket();
 
+		/*		OPERATOR OVERLOADING		*/
+
 		Socket	&operator=( Socket &val );
+
+		/*		GETTER		*/
 
 		int	getSocket( void ) { return _socket; }
 };

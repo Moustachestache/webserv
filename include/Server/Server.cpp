@@ -22,12 +22,47 @@ Server::Server( std::string &serverStr ) :	_contact(""), _port(0), _serverName("
 		_contact = "postmaster@" + _serverName;
 }
 
-Server::~Server( )
+Server::Server( Server &cpy )
 {
-	
+	_httpError = cpy._httpError;
+	_ipStr = cpy._ipStr;
+	_ip = cpy._ip;
+	_contact = cpy._contact;
+	_port = cpy._port;
+	_serverName = cpy._serverName;
+	_root = cpy._root;
+	_maxHeaderSize = cpy._maxHeaderSize;
+	_requestSize = cpy._requestSize;
+	_route = cpy._route;
+	_errorLog = cpy._errorLog;
 }
 
-std::vector< Route >	&Server::getRoute( void )
+Server::~Server( )
+{
+	for (std::vector< Route * >::iterator it = _route.begin(); it != _route.end(); it++)
+		delete (*it);
+}
+
+Server	&Server::operator=( Server &cpy )
+{
+	if (&cpy != this)
+	{
+		_httpError = cpy._httpError;
+		_ipStr = cpy._ipStr;
+		_ip = cpy._ip;
+		_contact = cpy._contact;
+		_port = cpy._port;
+		_serverName = cpy._serverName;
+		_root = cpy._root;
+		_maxHeaderSize = cpy._maxHeaderSize;
+		_requestSize = cpy._requestSize;
+		_route = cpy._route;
+		_errorLog = cpy._errorLog;
+	}
+	return (*this);
+}
+
+std::vector< Route * >	&Server::getRoute( void )
 {
 	return (_route);
 }
@@ -115,7 +150,8 @@ void	Server::getAllRoutes( std::string &serverStr, std::string name )
 		std::string	routeStr = serverStr.substr(startPos);
 		size_t	endPos = getChunkEnd(routeStr, 0);
 		routeStr.resize(endPos);
-		_route.push_back( Route(routeStr) );
+		Route	*nRoute = new Route(routeStr);
+		_route.push_back( nRoute );
 		serverStr.erase(startPos, endPos);
 		startPos = serverStr.find(name);
 	}

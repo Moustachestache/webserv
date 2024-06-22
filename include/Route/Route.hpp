@@ -36,14 +36,23 @@ class Route
 {
 	public:
 
+		/*		CONSTRUCTORS/DESTRUCTOR		*/
+
 		Route( void );
+		Route( Route &cpy );
 		Route( std::string &routeStr );
 		~Route();
 
+		/*		OPERATOR OVERLOADING		*/
+
+		Route	&operator=( Route &cpy );
+
 		/*		DEBUG		*/
+
 		std::string	getVarStr( void );
 
 		/*		GETTERS		*/
+
 		std::vector< std::string >	&getMethods( void );
 		std::string	&getPath( void );
 		std::string	&getRedirection( void );
@@ -55,8 +64,9 @@ class Route
 
 	private:
 
-		void	checkInfo( void );
+		/*		PARSING		*/
 
+		void	checkInfo( void );
 		void	processCgi( std::string &cgi );
 		void	getVarContentRoute( std::string &line, Cgi &nCgi );
 		void	assignMultipleValue( std::istringstream &iss, std::vector< std::string > &vec );

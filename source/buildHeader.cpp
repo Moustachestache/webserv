@@ -1,12 +1,12 @@
 #include "../include/main.hpp"
 
-static std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
+static std::string	getAllUsedMethods( std::vector< Route * > &allRoutes )
 {
 	std::string res;
-	for (std::vector< Route >::iterator it = allRoutes.begin(); it  != allRoutes.end(); it++ )
+	for (std::vector< Route * >::iterator it = allRoutes.begin(); it  != allRoutes.end(); it++ )
 	{
-		for (std::vector< std::string >::iterator itMethods = (*it).getMethods().begin(); \
-					itMethods != (*it).getMethods().end(); itMethods++ )
+		for (std::vector< std::string >::iterator itMethods = (*it)->getMethods().begin(); \
+					itMethods != (*it)->getMethods().end(); itMethods++ )
 		{
 			if (res.find(*itMethods) == std::string::npos)
 				res.append(" " + *itMethods + ",");
@@ -19,7 +19,7 @@ static std::string	getAllUsedMethods( std::vector< Route > &allRoutes )
 }
 
 std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
-												std::vector< Route > &allRoutes)
+												std::vector< Route * > &allRoutes , std::string cookieHeader)
 {
 	HttpError	error;
 	std::string returnStr("HTTP/1.1 ");
@@ -27,6 +27,7 @@ std::string	buildHeader(std::string extension, int errorcode, int contentSize, \
 	returnStr.append(" " + ft_itoa(errorcode));
 	returnStr.append(" " + error.getInfo(errorcode).type);
 	returnStr.append("\r\n");
+	returnStr.append(cookieHeader);
 	returnStr.append("content-type: " + getMimeType(extension) + "; charset=utf-8\r\n");
 	returnStr.append("content-length: " + ft_itoa(contentSize) + "\r\n");
 	returnStr.append("accept-encoding: identity\r\n");

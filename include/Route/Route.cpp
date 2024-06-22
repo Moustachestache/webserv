@@ -6,6 +6,14 @@ Route::Route( void )
 	
 }
 
+Route::Route( Route &cpy ) : _path(cpy._path), _methods(cpy._methods), _redirection(cpy._redirection),\
+							_listing(cpy._listing), _defaultPages(cpy._defaultPages),\
+							_allowUpload(cpy._allowUpload), _uploadPath(cpy._uploadPath),\
+							_sessionTimeout(cpy._sessionTimeout), _cgi(cpy._cgi)
+{
+
+}
+
 Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), _allowUpload(false), \
 										_uploadPath(""), _sessionTimeout(600)
 					/*	Init all members to avoid memory errors while reading them.
@@ -21,7 +29,24 @@ Route::Route( std::string &routeStr ) :	_redirection(""), _listing(false), _allo
 
 Route::~Route( )
 {
-	
+
+}
+
+Route	&Route::operator=( Route &cpy )
+{
+	if (&cpy != this)
+	{
+		_path = cpy._path;
+		_methods = cpy._methods;
+		_redirection = cpy._redirection;
+		_listing = cpy._listing;
+		_defaultPages = cpy._defaultPages;
+		_allowUpload = cpy._allowUpload;
+		_uploadPath = cpy._uploadPath;
+		_sessionTimeout = cpy._sessionTimeout;
+		_cgi = cpy._cgi;
+	}
+	return (*this);
 }
 
 std::vector< std::string >	&Route::getMethods( void )

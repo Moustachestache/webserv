@@ -16,7 +16,6 @@ SRC =		source/main.cpp \
 			source/debug.cpp \
 			source/getMimeType.cpp \
 			source/buildHeader.cpp \
-			source/writeToStr.cpp \
 			include/Prog/Prog.cpp \
 			include/Server/Server.cpp \
 			include/Socket/Socket.cpp \
@@ -28,7 +27,8 @@ SRC =		source/main.cpp \
 			include/HttpError/HttpError.cpp \
 			include/HttpHeader/HttpHeader.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
-			include/Cgi/Cgi.cpp 
+			include/Cgi/Cgi.cpp \
+			include/Cookies/Cookies.cpp
 			
 
 OBJ = $(SRC:.cpp=.o)
