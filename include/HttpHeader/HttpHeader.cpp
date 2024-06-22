@@ -80,7 +80,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     processHeader(iss);
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-    if (ft_atoi(_args["Content-Length"]) > static_cast< int >(ptrServer.getMaxRequestSize()))
+    if (static_cast< unsigned long int >(ft_atoi(_args["Content-Length"])) > (ptrServer.getMaxRequestSize()))
         _error = 413;
     else if (!_method.compare("POST") && _error == 0)
     {
@@ -113,12 +113,8 @@ void    HttpHeader::processHeader(std::istringstream &iss)
         }
         std::getline(iss, line);
     }
-
-    //  if body size too big output error 413
-    if (_args["Content-Size"].size() && (size_t)std::atol(_args["Content-Size"].c_str()) > _ptrServer.getMaxRequestSize())
-        _error = 413;
-
     //  Process POST header info
+    //  checking for input error from client
     if (!_method.compare("POST") && _error == 0)
     {
         //  if "content-length" undefined or empty as a field (0 and above accepted)
