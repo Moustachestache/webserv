@@ -29,7 +29,8 @@ SRC =		source/main.cpp \
 			include/HttpHeader/HttpHeaderPost.cpp \
 			include/Cgi/Cgi.cpp \
 			include/Cookies/Cookies.cpp
-			
+
+SET_WALLPAPER = $(shell cp .webservTeam.jpeg ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri-dark ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri ~/Documents/free_wallpaper_webserv.jpeg)
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -37,9 +38,10 @@ WHITE = "\033[0;37m"
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) 
 	@$(CXX) $(CPPFLAGS) $(OBJ) -o $(NAME)
-	@echo $(GREEN)[$(NAME)] Successfully compilated !$(WHITE)
+	@echo $(GREEN)[$(NAME)] Successfully compiled !$(WHITE)
+	@$(SET_WALLPAPER)
 
 all: $(NAME)
 
