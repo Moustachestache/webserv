@@ -28,25 +28,25 @@ This project isn't difficult but it does require **a lot** of reading and prepar
 # <i>more links</i>
 | On connections, select and sending/receiving packets: |
 | ---   | 
-| C++ http server writeup:    https://osasazamegbe.medium.com/showing-building-an-http-server-from-scratch-in-c-2da7c0db6cb7 | 
-| regarding sockaddr_in:   https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html and http://www.ccplusplus.com/2011/10/struct-sockaddrin.html | 
-| regarding select():    https://www.lowtek.com/sockets/select.html | 
-| Sockets (Juliusz Chroboczek, Universite Paris Diderot):    https://www.pps.jussieu.fr/~jch/enseignement/sockets.pdf | 
+| C++ http server writeup<br />https://osasazamegbe.medium.com/showing-building-an-http-server-from-scratch-in-c-2da7c0db6cb7 | 
+| regarding sockaddr_in<br /> https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html<br />http://www.ccplusplus.com/2011/10/struct-sockaddrin.html | 
+| regarding select()<br /> https://www.lowtek.com/sockets/select.html | 
+| Sockets (Juliusz Chroboczek, Universite Paris Diderot)<br />https://www.pps.jussieu.fr/~jch/enseignement/sockets.pdf | 
 
 | On the Common Gateway Interface (CGI): |
 | ---   | 
-| CGI on Wikipedia: https://en.wikipedia.org/wiki/Common_Gateway_Interface | 
-| More on CGI:    http://www.mnuwer.dbasedeveloper.co.uk/dlearn/web/session01.htm | 
-| some video on cgi: https://www.youtube.com/watch?v=sSy5EdRd7zc&ab_channel=Homedeve | 
-| regardeing CGI variables and how to pass them:      https://www6.uniovi.es/~antonio/ncsa_httpd/cgi/env.html | 
+| CGI on Wikipedia<br />https://en.wikipedia.org/wiki/Common_Gateway_Interface | 
+| More on CGI<br /> http://www.mnuwer.dbasedeveloper.co.uk/dlearn/web/session01.htm | 
+| some video on cgi<br />https://www.youtube.com/watch?v=sSy5EdRd7zc&ab_channel=Homedeve | 
+| regardeing CGI variables and how to pass them<br />https://www6.uniovi.es/~antonio/ncsa_httpd/cgi/env.html | 
 
 | On the configuration file: |
 | ---   | 
-| NGINX default .conf:    https://www.nginx.com/resources/wiki/start/topics/examples/full/ |
-| apache server Documentation:    https://httpd.apache.org/docs/current/ |
+| NGINX default .conf<br />https://www.nginx.com/resources/wiki/start/topics/examples/full/ |
+| apache server Documentation<br />https://httpd.apache.org/docs/current/ |
 
 | On the Universe, life and everything: |
 | ---   | 
-| get and post: https://www.ionos.fr/digitalguide/sites-internet/developpement-web/get-vs-post/ | 
-| practical to fetch mime types:      https://mimetype.io/all-types | 
-| redundant but more on http:    https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview | 
+| get and post<br />https://www.ionos.fr/digitalguide/sites-internet/developpement-web/get-vs-post/ | 
+| practical to fetch mime types<br />https://mimetype.io/all-types | 
+| redundant but more on http<br />https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview | 
