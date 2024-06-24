@@ -50,3 +50,5 @@ This project isn't difficult but it does require **a lot** of reading and prepar
 | get and post<br />https://www.ionos.fr/digitalguide/sites-internet/developpement-web/get-vs-post/ | 
 | practical to fetch mime types<br />https://mimetype.io/all-types | 
 | redundant but more on http<br />https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview | 
+
+![](https://i.imgur.com/AJKcUCu.png)
