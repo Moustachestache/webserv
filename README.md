@@ -1,5 +1,5 @@
 ![](https://i.imgur.com/IuhbEAr.png)
-> Gbricot, Yoshi and Odiachen posing after having finished Webserv. Groovy hot babes!
+> Gbricot, Yoshi and Odiachen posing after having finished Webserv. Mjochum not pictured.
 
 # <i>introduction</i>
 "Webserv" is the penultimate group project for the common core of 42. 
