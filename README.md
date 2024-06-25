@@ -17,6 +17,17 @@ This project isn't difficult but it does require **a lot** of reading and prepar
 6. Cookies and sessions? sure let's just hammer them in.
 
 # <i>what the code does</i>
+| function | what it do |
+| --- | --- |
+| Cgi.cpp | Handles executing CGI scripts. Passes the HttpReaquests' variables (http, post, get and files) to the executable program. |
+| Httpheader | Receives HttpRequests. Processes it into an object for use later by parsing the incoming message from the client, and then if there is a need parses the body (if POST and Content-Size is relevant).<br />Creates a vector with the header variables to pass to the CGI for the program's argv. |
+| Socket | Object that handles the connection information. |
+| Prog | Runs the program. High level logic of server. |
+| Route | Each defined route is stored here and retreive when needed for redirections. |
+| Server<br />& TcpServer | Class and its inherited class. Used to identify each server and have the run independantly. |
+| Cookies | Part of TcpServer. Handles cookies. |
+| HttpError | Probably the dumbest thing in this code. Mjochum decided early that HttpErrors had to be an object. This allows for storing custom error pages and creating error messages to return to the server. |
+| exception | Exception handler. |
 
 # <i>4 links that'll get you there</i>
 | links |  |
