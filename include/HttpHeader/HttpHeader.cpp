@@ -57,6 +57,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     }
     //  stash leftover body info
     std::string bodyData;
+    std::cout << "header::" << headerData << std::endl;
     if (headerData.find("\r\n\r\n") != std::string::npos)
     {
         bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
@@ -175,6 +176,10 @@ void     HttpHeader::processBodyGet( void )
 
 void    HttpHeader::stringSanitize(std::string &str)
 {
+/*     while (str.at(0) && isspace(str.at(0)))
+        str.erase(0);
+    while (str.at(str.size() - 1) && isspace(str.at(str.size() - 1)))
+        str.erase(str.size() - 1);
     int begin = 0;
     while (str[begin] && isspace(str[begin]))
         begin++;
@@ -184,7 +189,8 @@ void    HttpHeader::stringSanitize(std::string &str)
     if (begin > end)
         str = "";
     else
-        str = str.substr(begin, end - begin + 1);
+        str = str.substr(begin, end - begin + 1); */
+    (void) str;
 }
 
 void    HttpHeader::getStringSanitize(std::string &str)

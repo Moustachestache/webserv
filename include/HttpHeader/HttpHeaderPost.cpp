@@ -8,9 +8,10 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
     size_t i = _bufferSize;
     while (i == _bufferSize)
     {
-        i = recv(_socket, buffer, _bufferSize, 0);
+        i = read(_socket, buffer, _bufferSize);
         _bodyBytesReceived += i;
         appendCStr(buffer, bodyData, i);
+        bzero(buffer, _bufferSize + 1);
     }
 }
 
@@ -118,9 +119,12 @@ void    HttpHeader::processFile(std::string &buffer)
         return ;
     }
     uploadPath.append(fileName);
-    fileStream.open(uploadPath.c_str(), std:: ofstream::binary | std::ofstream::trunc);
+    fileStream.open(uploadPath.c_str(), std::ofstream::binary | std::ofstream::trunc);
     if (fileStream.is_open() == false)
+    {
         _error = 510;
+        return ;
+    }
     fileStream.write(buffer.c_str(), buffer.length());
     //fileStream << buffer;
     _postFiles[key] = (fileInfo){fileName, mimeType, uploadPath};
