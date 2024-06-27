@@ -3,7 +3,7 @@ NAME = webserv
 
 CXX = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused -o3
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused
 
 CPPFLAGS_DEBUG =  -std=c++98 -g
 
