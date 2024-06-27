@@ -29,7 +29,7 @@ if __name__ == "__main__":
         answer += "found file: " + buffer + "<br />"
 
     if shutil.copyfile(buffer, "www/42perpignan.free.fr/profile.gif"):
-        os.remove(buffer)
+        # os.remove(buffer)
         answer += "profile picture changed<br /><h1>redirecting ... in 3s</h1>"
     else:
         answer += "error changing profile pic<br />"

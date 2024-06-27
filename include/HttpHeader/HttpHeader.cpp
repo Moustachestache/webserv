@@ -1,7 +1,7 @@
 # include "HttpHeader.hpp"
 
 //  set buffer size
-const std::size_t HttpHeader::_bufferSize = 256;
+const std::size_t HttpHeader::_bufferSize = 4096;
 
 HttpHeader::HttpHeader( HttpHeader &cpy ) : _socket(cpy._socket), _ptrServer(cpy._ptrServer),\
                                             _headerBytesReceived(cpy._headerBytesReceived),\
