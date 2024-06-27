@@ -1,3 +1,7 @@
+> [!CAUTION]
+> THIS SERVER DOES NOT IMPLEMENT RFC 1149 DUE TO LACK OF AVAILABILITY
+> <br />**more info**:  https://datatracker.ietf.org/doc/html/rfc1149
+
 ![](https://i.imgur.com/IuhbEAr.png)
 > Gbricot, Yoshi and Odiachen posing after having finished Webserv. Mjochum not pictured.
 
