@@ -16,12 +16,10 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
             {
                 if (errno == EAGAIN || errno == EWOULDBLOCK)
                 {
-                    std::cout << "Recv failed, in body recv" << std::endl;
                     continue ;
                 }
                 else
                 {
-                    std::cout << "Recv failed, body end of transmision" << std::endl;
                     return ;
                 }
             }

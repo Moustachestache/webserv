@@ -29,7 +29,7 @@ class TcpServer : public Server
         /*      CONSTRUCTOR/DESTRUCTOR      */
 
         //TcpServer();
-        TcpServer( std::string &serverStr );
+        TcpServer( std::string &serverStr, bool &serverRunning );
         TcpServer( TcpServer &val );
         ~TcpServer();
 
@@ -57,6 +57,7 @@ class TcpServer : public Server
         /*      GETTER      */
 
         int     getSocket( void );
+        bool    &getServerRunning( void ) {return _serverRunning; }
 
         /*      CGI     */
 
@@ -69,6 +70,7 @@ class TcpServer : public Server
     private:
 
         Socket              _socket;
+        bool                &_serverRunning;
         int                 _newSocket;
         struct sockaddr_in  _address;
         unsigned int        _addressLen;

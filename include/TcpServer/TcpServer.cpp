@@ -8,8 +8,9 @@
 //  but really this should never happen lol
 } */
 
-TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
+TcpServer::TcpServer( std::string &serverStr, bool &serverRunning ) :	Server(serverStr), \
 													_socket(_ip, _port), \
+													_serverRunning(serverRunning), \
 													_newSocket(), \
 													_addressLen(sizeof(_address))
 {
@@ -20,6 +21,7 @@ TcpServer::TcpServer( std::string &serverStr ) :	Server(serverStr), \
 // Copy constructor
 TcpServer::TcpServer( TcpServer &val ) :	Server(val), \
 											_socket(_ip, _port), \
+											_serverRunning(val._serverRunning), \
 											_newSocket(val._newSocket), \
 											_address(val._address), \
 											_addressLen(val._addressLen)
@@ -31,6 +33,7 @@ TcpServer	&TcpServer::operator=( TcpServer &cpy )
 {
 	if (&cpy != this)
 	{
+		_serverRunning = cpy._serverRunning;
 		_socket = cpy._socket;
 		_newSocket = cpy._newSocket;
 		_address = cpy._address;

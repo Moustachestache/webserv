@@ -95,7 +95,7 @@ void	Prog::getServerStr( std::string &fileContent )
 			endPos++;
 		std::string	serverStr = fileContent.substr(startPos, endPos);
 		fileContent.erase(startPos, endPos);
-		TcpServer	*nServer = new TcpServer(serverStr);
+		TcpServer	*nServer = new TcpServer(serverStr, _serverRunning);
 		_servers.push_back(nServer);
 		std::istringstream niss(fileContent);
 		startPos = getChunkStart(niss, fileContent, "server[");

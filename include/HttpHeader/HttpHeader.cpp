@@ -50,19 +50,17 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     std::string headerData;
     std::size_t i = _bufferSize;
     int j;
-    while (i == _bufferSize)
+    while (i == _bufferSize && _ptrServer.getServerRunning())
     {
         j = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
         if (j < 0)
         {
             if (errno == EAGAIN || errno == EWOULDBLOCK)
             {
-                std::cout << "Recv failed, in header recv" << std::endl;
                 continue ;
             }
             else
             {
-                std::cout << "Recv failed, header end of transmision" << std::endl;
                 return ;
             }
         }
@@ -72,7 +70,7 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
     }
     //  stash leftover body info
     std::string bodyData;
-    std::cout << "header::" << headerData << std::endl;
+/*     std::cout << "header::" << headerData << std::endl; */
     if (headerData.find("\r\n\r\n") != std::string::npos)
     {
         bodyData = headerData.substr(headerData.find("\r\n\r\n") + 4, std::string::npos);
