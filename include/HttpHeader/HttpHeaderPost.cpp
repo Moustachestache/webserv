@@ -6,12 +6,30 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
     bzero(buffer, _bufferSize + 1);
 
     size_t i = _bufferSize;
+    int j;
     while (i == _bufferSize)
     {
-        i = read(_socket, buffer, _bufferSize);
-        _bodyBytesReceived += i;
-        appendCStr(buffer, bodyData, i);
-        bzero(buffer, _bufferSize + 1);
+/*         if (recv(_socket, buffer, _bufferSize, MSG_PEEK) != -1)
+        { */
+            j = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
+            if (j <= 0)
+            {
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                {
+                    std::cout << "Recv failed, in body recv" << std::endl;
+                    continue ;
+                }
+                else
+                {
+                    std::cout << "Recv failed, body end of transmision" << std::endl;
+                    return ;
+                }
+            }
+            i = j;
+            _bodyBytesReceived += i;
+            appendCStr(buffer, bodyData, i);
+            bzero(buffer, _bufferSize + 1);
+/*         } */
     }
 }
 

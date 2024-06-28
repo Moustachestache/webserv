@@ -104,9 +104,9 @@ void	TcpServer::ServerAnswerError(int id)
 
 	addLog( "Server answer: " + ft_itoa(id) );
 	output.insert(0, buildHeader(".html", id, output.size(), getRoute(), _cookieHeader));
-	sent = write(_newSocket, output.c_str(), output.size());
+	sent = send(_newSocket, output.c_str(), output.size(), 0);
 	if (sent != output.size())
-		throw	AnswerFailure();
+		addLog("Error while sending the error page.");
 	return ;
 }
 
@@ -114,10 +114,12 @@ void	TcpServer::ServerListen()
 {
 	_newSocket = accept(getSocket(), (sockaddr *)&_address, &_addressLen);
 	if (_newSocket < 0)
-		throw NewSocketError();
-	
+	{	// We had throw ....
+		addLog("New incoming connection on server " + _serverName + ": " + "error the client have closed the socket.");
+		return ;
+	}
 	HttpHeader		header(_newSocket, *this);
-	
+
 	_cookieHeader = generateCookieHeader(header.getArgs()["Cookie"]);
 	header.getArgv().push_back(getSessionData(header.getArgs()["Cookie"]));
 
@@ -137,6 +139,8 @@ void	TcpServer::ServerListen()
 	else
 		ServerAnswerError(405); /*	Returns all allowed methods	*/
 	close(_newSocket);
+	bzero(&_address, sizeof(_address));
+	_addressLen = 0;
 	_newSocket = 0;
 }
 

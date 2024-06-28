@@ -10,9 +10,9 @@ std::string	ft_itoa( int val )
 	return (res);
 }
 
-int	ft_atoi( std::string &nb )	/*	if no number found it will return 0	*/
+long int	ft_atoi( std::string &nb )	/*	if no number found it will return 0	*/
 {
-	int res = 0;
+	long int	res = 0;
 	std::istringstream	iss(nb);
 	iss >> res;
 	return (res);

@@ -18,7 +18,7 @@ size_t	getNextBracket( std::string &fileContent, size_t pos);
 size_t	getChunkEnd( std::string &fileContent, size_t pos );
 std::string	getHeaderStr( std::string &chunkStr );
 std::string	ft_itoa( int val );
-int	ft_atoi( std::string &nb );
+long int	ft_atoi( std::string &nb );
 void	checkValidIp( std::string &ip );
 bool	isPathRelative( std::string &path );
 unsigned int	strIpToUint( std::string &ip );

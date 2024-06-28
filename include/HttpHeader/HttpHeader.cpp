@@ -49,9 +49,24 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
 
     std::string headerData;
     std::size_t i = _bufferSize;
+    int j;
     while (i == _bufferSize)
     {
-        i = recv(_socket, buffer, _bufferSize, 0);
+        j = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
+        if (j < 0)
+        {
+            if (errno == EAGAIN || errno == EWOULDBLOCK)
+            {
+                std::cout << "Recv failed, in header recv" << std::endl;
+                continue ;
+            }
+            else
+            {
+                std::cout << "Recv failed, header end of transmision" << std::endl;
+                return ;
+            }
+        }
+        i = j;
         _headerBytesReceived += i;
         appendCStr(buffer, headerData, i);
     }
@@ -74,18 +89,18 @@ HttpHeader::HttpHeader( int socket, TcpServer &ptrServer ):
         _error = 400;
     else if (_version.compare("HTTP/1.1") && _version.compare("HTTP/1.0"))
         _error = 505;
-    else if (headerData.size() > (long unsigned int)ptrServer.getMaxHeaderSize())
+    else if (headerData.size() > ptrServer.getMaxHeaderSize())
         _error = 431;
     processHeader(iss);
     if (_ressource.find("?") != std::string::npos)
         processBodyGet();
-    if (static_cast< unsigned long int >(ft_atoi(_args["Content-Length"])) > (ptrServer.getMaxRequestSize()))
+    if (ft_atoi(_args["Content-Length"]) > static_cast< long int >(ptrServer.getMaxRequestSize()))
         _error = 413;
     else if (!_method.compare("POST") && _error == 0)
     {
 		
         _bodyBytesReceived = bodyData.size();
-        if (static_cast< int >(_bodyBytesReceived) < ft_atoi(_args["Content-Length"]))
+        if (_bodyBytesReceived < static_cast< unsigned long int >(ft_atoi(_args["Content-Length"])))
             receiveBodyPost(bodyData);
         if (_bodyBytesReceived > 0)
             processBodyPost(bodyData);
