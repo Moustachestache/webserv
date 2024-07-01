@@ -149,7 +149,6 @@ void    HttpHeader::processFile(std::string &buffer)
 
 void    HttpHeader::processArg(std::string &buffer)
 {
-    std::cout << buffer << std::endl;
     int i = buffer.find("name=\"") + 6;
     //Changement de cookies
     buffer.erase(0, i);
