@@ -189,21 +189,10 @@ void     HttpHeader::processBodyGet( void )
 
 void    HttpHeader::stringSanitize(std::string &str)
 {
-/*     while (str.at(0) && isspace(str.at(0)))
+    while (!str.empty() && str.at(0) && isspace(str.at(0)))
         str.erase(0);
-    while (str.at(str.size() - 1) && isspace(str.at(str.size() - 1)))
+    while (!str.empty() && str.at(str.size() - 1) && isspace(str.at(str.size() - 1)))
         str.erase(str.size() - 1);
-    int begin = 0;
-    while (str[begin] && isspace(str[begin]))
-        begin++;
-    int end = str.size() - 1;
-    while (str[end] && isspace(str[end]))
-        end--;
-    if (begin > end)
-        str = "";
-    else
-        str = str.substr(begin, end - begin + 1); */
-    (void) str;
 }
 
 void    HttpHeader::getStringSanitize(std::string &str)

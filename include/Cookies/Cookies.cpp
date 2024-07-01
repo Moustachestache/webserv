@@ -49,8 +49,9 @@ std::string getSessionData(const std::string& sessionId) {
     std::string post_cookies = "GET_Cookie_name=";
     
     std::string id = sessionId.substr( sessionId.find('=') + 1);
+    if(id.find("\r") != std::string::npos)
+        id.erase(id.size() - 1);
     std::map<std::string, Session >::iterator it = sessionStore.find(id);
-
     if (it != sessionStore.end()) 
     {
         data  = it->second.username;
@@ -73,7 +74,7 @@ bool getCookieValue(const std::string& headers, const std::string& cookieName)
 
     //si il y  a un cookie mais qu'il y a déjà la session existante renvoyer aussi une chaine vide
     pos += 10 ;
-    std::size_t end = headers.find("\r\n", pos);
+    std::size_t end = headers.find("\r", pos);
     std::string cookies = headers.substr(pos, end - pos);
     if (sessionStore.find(cookies) ==  sessionStore.end())//si il y  a un cookie mais qu'il y a déjà la session existante renvoyer aussi une chaine vide
         return true;
@@ -95,7 +96,7 @@ std::string generateCookieHeader(const std::string& requestHeaders) {
     Session newSession = createNewSession();
     sessionStore[newSession.sessionId] = newSession;
     
-    cookieHeader = "Set-Cookie: " + cookieName + "=" + newSession.sessionId + "; Path=/; HttpOnly\r\n";
+    cookieHeader = "Set-Cookie: " + cookieName + "" + newSession.sessionId + "; Path=/; HttpOnly\r\n";
     //cookieHeader.append(getSessionData(requestHeaders));
     return cookieHeader;
 }
