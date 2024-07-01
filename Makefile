@@ -5,7 +5,7 @@ CXX = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-unused
 
-CPPFLAGS_DEBUG =  -std=c++98 -g
+CPPFLAGS_DEBUG =  -std=c++98 -g -fstandalone-debug
 
 CPPFLAGS_YOSHI = -Wall -Wextra -std=c++98 -g -fstandalone-debug
 

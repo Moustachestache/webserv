@@ -149,6 +149,7 @@ void    HttpHeader::processFile(std::string &buffer)
 
 void    HttpHeader::processArg(std::string &buffer)
 {
+    std::cout << buffer << std::endl;
     int i = buffer.find("name=\"") + 6;
     //Changement de cookies
     buffer.erase(0, i);
@@ -156,7 +157,8 @@ void    HttpHeader::processArg(std::string &buffer)
     std::string     key = buffer.substr(0, i);
     i = buffer.find("\r\n\r\n") + 4;
     buffer.erase(0, i);
-    std::string     value = buffer.substr(0, std::string::npos);
+    i = buffer.find("\"");
+    std::string     value = buffer.substr(0, i);
     stringSanitize(key);
     stringSanitize(value);
     _post[key] = value;
