@@ -95,13 +95,14 @@ void TcpServer::execCgi(HttpHeader _header, std::string true_path, std::vector<R
 	{
 		answer.insert(0,  buildHeader(".html" , 200, answer.size(), routes , ""));
 		send(_newSocket, answer.c_str(), answer.size(), 0);
+		addLog( "Server answer: 200" );
 	}
 	else
 	{
 		//page d'erreur; Serven awnser error 500
 		ServerAnswerError(500);
 	}
-	ServerAnswerError(500);
+	//ServerAnswerError(500);
 	//envoyer une page d'erreur
 	//return (0);
 }

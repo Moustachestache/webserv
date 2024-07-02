@@ -12,7 +12,7 @@ void     HttpHeader::receiveBodyPost(std::string &bodyData)
 /*         if (recv(_socket, buffer, _bufferSize, MSG_PEEK) != -1)
         { */
             j = recv(_socket, buffer, _bufferSize, MSG_DONTWAIT);
-            if (j <= 0)
+            if (j < 0)
             {
                 if (errno == EAGAIN || errno == EWOULDBLOCK)
                 {
