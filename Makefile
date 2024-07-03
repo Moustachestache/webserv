@@ -63,3 +63,6 @@ re: fclean all
 
 yoshi:
 	$(CXX) $(CPPFLAGS_YOSHI) $(SRC) -o $(NAME)
+
+rien:
+	@echo Il ne se passe rien
