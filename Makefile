@@ -1,4 +1,3 @@
-
 NAME = webserv
 
 CXX = c++
@@ -30,7 +29,7 @@ SRC =		source/main.cpp \
 			include/Cgi/Cgi.cpp \
 			include/Cookies/Cookies.cpp
 
-SET_FOLDER = $(shell cp .webservTeam.jpeg ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri-dark ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri ~/Documents/free_wallpaper_webserv.jpeg ; mkdir -p upload log)
+SET_FOLDER = $(shell mkdir -p upload log; cp .webservTeam.jpeg ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri-dark ~/Documents/free_wallpaper_webserv.jpeg ; gsettings set org.gnome.desktop.background picture-uri ~/Documents/free_wallpaper_webserv.jpeg)
 
 OBJ = $(SRC:.cpp=.o)
 
