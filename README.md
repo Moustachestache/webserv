@@ -10,8 +10,9 @@
 <br />In it you use C++98 to implement an HTTP server that manages POST, GET and DELETE methods, as well as a CGI (common gateway interface) and cookies.
 
 # <i>process</i>
-This project isn't difficult but it does require **a lot** of reading and preparation.
-<br />This lead us to a week's worth of research and self reflective questions, after which we managed to output a simplistic roadmap of MVPs with the goal of ushering ourselves forward. The roadmap went as follows:
+This project required **a lot** of reading and preparation.
+<br />After a week of researching, we got a simplistic roadmap of goals. The roadmap went as follows:
+
 0. Read up documentation and interview other students on their approach and the pitfalls they encountered.
 1. Setup basic sockets you can ping by connecting to 0.0.0.0:8080
 2. Add an intelligible HTTP response
